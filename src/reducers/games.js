@@ -12,7 +12,8 @@ const games = (state=[], action) => {
 export default games
 
 // const initialState = {
-    //     reviews: [],
+    //     rev
+    // iews: [],
     //     users: [],
     //     games: [],
     //     gamePhotos: []
