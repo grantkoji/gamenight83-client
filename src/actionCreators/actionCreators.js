@@ -1,0 +1,26 @@
+let setCurrentUser = user => ({type: 'SET_CURRENT_USER', payload: {value: user}})
+let setCurrentGamePhoto = photo => ({type: 'SET_CURRENT_GAME_PHOTO', payload: {value: photo}})
+let setCurrentGame = game => ({type: 'SET_CURRENT_GAME', payload: {value: game}})
+let setCurrentReview = review => ({type: 'SET_CURRENT_REVIEW', payload: {value: review}})
+let setCurrentPlayedGame = playedGame => ({type: 'SET_CURRENT_PLAYED_GAME', payload: {value: playedGame}})
+let logoutUser = () => ({type: 'LOGOUT_USER'})
+let fetchReviews = reviews => ({type: 'FETCH_REVIEWS', payload: {value: reviews}})
+let fetchUsers = users => ({type: 'FETCH_USERS', payload: {value: users}})
+let fetchGames = games => ({type: 'FETCH_GAMES', payload: {value: games}})
+let fetchGamePhotos = gamePhotos => ({type: 'FETCH_GAME_PHOTOS', payload: {value: gamePhotos}})
+
+
+
+     
+export {
+    setCurrentGame,
+    setCurrentUser,
+    setCurrentPlayedGame,
+    setCurrentGamePhoto,
+    setCurrentReview,
+    logoutUser, 
+    fetchReviews,
+    fetchUsers,
+    fetchGames,
+    fetchGamePhotos
+}
