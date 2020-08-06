@@ -34,9 +34,10 @@ import {connect} from 'react-redux'
 function App(props) {
 
   useEffect(() => {
+    console.log(props.games, props.users)
     requests.fetchAllGames()
-    .then(gameData => console.log(gameData))
-      // props.fetchGames(gameData))
+    .then(gameData => props.fetchGames(gameData))
+
     requests.fetchAllUsers()
     .then(userData => props.fetchUsers(userData))
 
@@ -49,23 +50,31 @@ function App(props) {
   },[])
 
 
+  // <Navbar class="container" />
+  // <Switch>
+  //   <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+  //   <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
+  //   <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
+  //   <Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
+  //   <Route exact path='/login' render={(routerprops) => <Auth {...routerprops} />}/>
+  //   <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
+  //   <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
+  //   <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
+  // </Switch>
 
 
   //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
       <h1>This is where we're at.</h1>
-      <Navbar class="container" />
-        <Switch>
-          <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
-          <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
-          <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
-          <Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
-          <Route exact path='/login' render={(routerprops) => <Auth {...routerprops} />}/>
-          <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
-          <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
-          <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
-        </Switch>
+      <ul>
+        {props.games
+        ?
+        props.games.map(game => <li>{game.title}</li>)
+        : <div>Loading...</div>
+        }
+      </ul>
+    
     </div>
   );
 }
@@ -79,7 +88,13 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    games: state.games
+  }
+}
 
 
 
-export default connect(null, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

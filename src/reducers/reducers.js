@@ -1,13 +1,17 @@
-import fetchIndexesReducer from './fetchIndexesReducer'
-import setCurrentReducer from './setCurrentReducer'
-
+import games from './games'
+import currentUser from './currentUser'
+import reviews from './reviews'
+import gamePhotos from './gamePhotos'
+import users from './users'
 
 import {combineReducers} from 'redux'
 
 const rootReducer = combineReducers({
-    fetchIndexesReducer,
-    setCurrentReducer
-
+    games,
+    users,
+    currentUser,
+    reviews,
+    gamePhotos
 })
 
 export default rootReducer

@@ -1,6 +1,6 @@
 
 
-const localHost = 'http://localhost:3001'
+const localHost = 'http://localhost:3001/api/v1'
 const gamesURL = `${localHost}/games`
 const reviewsURL = `${localHost}/reviews`
 const usersURL = `${localHost}/users`

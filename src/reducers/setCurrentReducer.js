@@ -12,14 +12,16 @@ const setCurrentReducer = (prevState=initialState, action) => {
          return {...prevState, currentUser: action.payload.value}
         case 'SET_CURRENT_GAME_PHOTO': 
          return {...prevState, currentGamePhoto: action.payload.value}
-         case 'SET_CURRENT_GAME': 
+        case 'SET_CURRENT_GAME': 
          return {...prevState, currentGame: action.payload.value}
-         case 'SET_CURRENT_REVIEW': 
+        case 'SET_CURRENT_REVIEW': 
          return {...prevState, currentReview: action.payload.value}
-         case 'SET_CURRENT_PLAYED_GAME': 
+        case 'SET_CURRENT_PLAYED_GAME': 
          return {...prevState, currentPlayedGame: action.payload.value}
-         case 'LOGOUT_USER':
-             return {...prevState, currentUser: {}}
+        case 'LOGOUT_USER':
+            return {...prevState, currentUser: {}}
+        default:
+            return prevState
     }
 
 }
