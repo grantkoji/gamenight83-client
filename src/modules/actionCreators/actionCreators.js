@@ -8,7 +8,7 @@ let fetchReviews = reviews => ({type: 'FETCH_REVIEWS', payload: {value: reviews}
 let fetchUsers = users => ({type: 'FETCH_USERS', payload: {value: users}})
 let fetchGames = games => ({type: 'FETCH_GAMES', payload: {value: games}})
 let fetchGamePhotos = gamePhotos => ({type: 'FETCH_GAME_PHOTOS', payload: {value: gamePhotos}})
-let setCurrentToken = token => ({type: 'SET_CURRENT_TOKEN', payload: {value}: token})
+let setCurrentToken = token => ({type: 'SET_CURRENT_TOKEN', payload: {value: token}})
 
      
 export {

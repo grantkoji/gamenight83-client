@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
 class SignUp extends Component {
 
   state = {
@@ -38,10 +39,11 @@ class SignUp extends Component {
         this.props.setCurrentUser(resp.user)
         this.props.history.push(`users/${resp.user.username}`)
         }
-      }
     }
+    
 
   render() {
+    console.log(this.state)
 
     let {username, password} = this.state
 
@@ -59,4 +61,24 @@ class SignUp extends Component {
 
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+  return {
+    token: state.token,
+    games: state.games,
+    currentUser: state.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchReviews: (reviews) => dispatch(action.fetchReviews(reviews)),
+    fetchUsers: (users) => dispatch(action.fetchUsers(users)),
+    fetchGames: (games) => dispatch(action.fetchGames(games)),
+    fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
+    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

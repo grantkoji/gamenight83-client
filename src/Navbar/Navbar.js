@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
 {/* <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
 <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
 <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
@@ -44,17 +45,6 @@ import { Link } from 'react-router-dom'
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchReviews: (reviews) => dispatch(action.fetchReviews(reviews)),
-    fetchUsers: (users) => dispatch(action.fetchUsers(users)),
-    fetchGames: (games) => dispatch(action.fetchGames(games)),
-    fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
-    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
-    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
 
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps)(Navbar);
 

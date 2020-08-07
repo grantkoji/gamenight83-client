@@ -6,9 +6,10 @@ import Navbar from './Navbar/Navbar'
 import * as requests from './requests'
 import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-import Login from './Auth/Login'
-import SignUp from './Auth/SignUp'
-import Navbar from './Navbar/Navbar'
+import Login from './pages/Auth/Login'
+import SignUp from './pages/Auth/SignUp'
+import UserPage from './pages/User/UserPage'
+import HomeGames from './pages/Game/HomeGames'
 
 //  / => games
 // /reviews => reviews page
@@ -37,7 +38,6 @@ import Navbar from './Navbar/Navbar'
 function App(props) {
 
   useEffect(() => {
-    console.log(props.games, props.users)
     requests.fetchAllGames()
     .then(gameData => props.fetchGames(gameData))
 
@@ -118,7 +118,7 @@ function App(props) {
   
   //   <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
   //   <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
-  //   <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
+  
   // </Switch>
   // <ul>
   //       {props.games
@@ -131,12 +131,12 @@ function App(props) {
   //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
-      <h1>This is where we're at.</h1>
       <Navbar />
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>
         <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} />}/>
+        <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
       </Switch>
     </div>
   );
@@ -146,6 +146,9 @@ const mapStateToProps = state => {
   return {
     token: state.token,
     games: state.games,
+    users: state.users,
+    reviews: state.reviews,
+    gamePhotos: state.gamePhotos,
     currentUser: state.currentUser
   }
 }

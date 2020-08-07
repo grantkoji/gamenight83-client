@@ -1,20 +1,12 @@
 
 import React, { Component } from 'react';
-
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
 class Login extends Component {
 
   state = {
     username: "",
     password: ""
-  }
-
-  state = {
-    user: {
-      id: 0,
-      username: "",
-      snacks: []
-    }
-
   }
 
   handleChange = (e) => {
@@ -47,13 +39,11 @@ class Login extends Component {
       alert(resp.message)
     } else {
       localStorage.token = resp.token
-      props.setCurrentUser(resp.user)
-      props.history.push(`users/${resp.user.username}`)
+      this.props.setCurrentUser(resp.user)
+      this.props.history.push(`users/${resp.user.username}`)
     }
   }
   
-  
-
   
 
 
@@ -63,7 +53,7 @@ class Login extends Component {
 
   render() {
     let {username, password} = this.state
-
+    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Login</h1>
@@ -78,6 +68,26 @@ class Login extends Component {
 
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    token: state.token,
+    games: state.games,
+    currentUser: state.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchReviews: (reviews) => dispatch(action.fetchReviews(reviews)),
+    fetchUsers: (users) => dispatch(action.fetchUsers(users)),
+    fetchGames: (games) => dispatch(action.fetchGames(games)),
+    fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
+    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 
