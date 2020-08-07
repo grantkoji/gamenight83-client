@@ -4,7 +4,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar/Navbar'
 import * as requests from './requests'
-import * as action from './actionCreators/actionCreators'
+import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 
 //  / => games
