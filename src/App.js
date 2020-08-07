@@ -10,6 +10,8 @@ import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
 import UserPage from './pages/User/UserPage'
 import HomeGames from './pages/Game/HomeGames'
+import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
+import ReviewsIndex from './pages/Review/ReviewsIndex'
 
 //  / => games
 // /reviews => reviews page
@@ -114,7 +116,7 @@ function App(props) {
  
   //   <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
   //   <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
-  //   <Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
+  
   
   //   <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
   //   <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
@@ -134,6 +136,8 @@ function App(props) {
       <Navbar />
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+        <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
+        <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 
         <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>
         <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} />}/>
         <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>

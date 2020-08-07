@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-class HomeGames extends Component {
+class GamePhotosIndex extends Component {
 
     render() {
-        const {games} = this.props
+        const {gamePhotos} = this.props
         return (
             <>
                 <h1>Welcome</h1>
                 
                 <div>
                     {  
-                    games 
-                    ? games.map(game => {
+                    gamePhotos 
+                    ? gamePhotos.map(photo => {
                         return (
                             <div>
-                            <img src={game["image_url"]} alt={game.title} />
-                            <div>{game.title}</div>
+                            <img src={photo["image_url"]} alt={photo.game_title} />
+                            <div>{photo.caption}</div>
                             </div>
                         )
                     })
@@ -29,11 +30,11 @@ class HomeGames extends Component {
 
 const mapStateToProps = state => {
     return {    
-      games: state.games
+      gamePhotos: state.gamePhotos
     }
   }
   
   
   
-  export default connect(mapStateToProps)(HomeGames);
+  export default connect(mapStateToProps)(GamePhotosIndex);
   
