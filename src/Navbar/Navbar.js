@@ -27,7 +27,7 @@ import {connect} from 'react-redux'
          <Link to='/gamegram'>GameGram</Link>
          <Link to='/users'>Users</Link>
          <Link to='/signup'>Sign Up</Link>
-         {props.currentToken && <Link to='/users/:username'>Users</Link>}
+         {props.currentUser && <Link to='/profile'>{currentUser.username} Page</Link>}
          {props.currentToken
          ? <Link to='/logout'>Logout</Link>
          : <Link to='/login'>Login</Link>} 

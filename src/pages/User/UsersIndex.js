@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-class ReviewsIndex extends Component {
+class UsersIndex extends Component {
 
     render() {
         const {reviews} = this.props
@@ -32,11 +32,11 @@ class ReviewsIndex extends Component {
 
 const mapStateToProps = state => {
     return {    
-      reviews: state.reviews
+      users: state.users
     }
   }
   
   
   
-  export default connect(mapStateToProps)(ReviewsIndex);
+  export default connect(mapStateToProps)(UsersIndex);
   

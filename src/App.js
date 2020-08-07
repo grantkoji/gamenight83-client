@@ -12,6 +12,8 @@ import UserPage from './pages/User/UserPage'
 import HomeGames from './pages/Game/HomeGames'
 import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
+import UsersIndex from './pages/User/UsersIndex'
+import UserPage from './pages/User/UserPage'
 
 //  / => games
 // /reviews => reviews page
@@ -129,13 +131,14 @@ function App(props) {
   //       : <div>Loading...</div>
   //       }
   //     </ul>
-
+  '/profile'>
   //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+        <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
+        <Route exact path='/profile' render={(routerprops) => <UserPage {...routerprops}  />}/>
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 
         <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>

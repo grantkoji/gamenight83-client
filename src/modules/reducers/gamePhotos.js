@@ -10,4 +10,3 @@ const gamePhotos = (state=[], action) => {
 }
 
 export default gamePhotos
-
