@@ -6,6 +6,9 @@ import Navbar from './Navbar/Navbar'
 import * as requests from './requests'
 import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import Login from './Auth/Login'
+import SignUp from './Auth/SignUp'
+import Navbar from './Navbar/Navbar'
 
 //  / => games
 // /reviews => reviews page
@@ -47,34 +50,94 @@ function App(props) {
     requests.fetchAllGamePhotos()
     .then(gamePhotoData => props.fetchGamePhotos(gamePhotoData))
     
+    if (localStorage.token) {
+
+      fetch("http://localhost:3001/users/stay_logged_in", {
+        headers: {
+          "Authorization": localStorage.token
+        }
+      })
+      .then(r => r.json())
+      .then(resp => handleResponse(resp))
+
+    }
   },[])
+
+  // state = {
+  //   user: {
+  //     id: 0,
+  //     username: "",
+  //     snacks: []
+  //   },
+  //   token: ""
+  // }
+
+  const handleResponse = (resp) => {
+    if (resp.message) {
+      alert(resp.message)
+    } else {
+      localStorage.token = resp.token
+      props.setCurrentUser(resp.user)
+      this.setState(resp, () => {
+        this.props.history.push(`users/${resp.user.username}`)
+      })
+    }
+  }
+
+
+  // renderForm = (routerProps) => {
+  //   if(routerProps.location.pathname === "/login"){
+  //     return <Login
+  //      handleResponse={this.handleResponse}
+  //     />
+  //   } else if (routerProps.location.pathname === "/register") {
+  //     return <SignUp
+  //        handleResponse={this.handleResponse}
+  //     />
+  //   }
+  // }
+
+
+  state = {
+    user: {
+      id: 0,
+      username: "",
+      snacks: []
+    },
+    token: ""
+  }
+
+
 
 
   // <Navbar class="container" />
   // <Switch>
-  //   <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+  //   <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
   //   <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
   //   <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
   //   <Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
-  //   <Route exact path='/login' render={(routerprops) => <Auth {...routerprops} />}/>
+  
   //   <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
   //   <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
   //   <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
   // </Switch>
-
+  // <ul>
+  //       {props.games
+  //       ?
+  //       props.games.map(game => <li>{game.title}</li>)
+  //       : <div>Loading...</div>
+  //       }
+  //     </ul>
 
   //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
       <h1>This is where we're at.</h1>
-      <ul>
-        {props.games
-        ?
-        props.games.map(game => <li>{game.title}</li>)
-        : <div>Loading...</div>
-        }
-      </ul>
-    
+      <Navbar />
+      <Switch>
+        <Route exact path='/login' render={(routerprops) => <Login {...routerprops} handleResponse={handleResponse} />}/>
+        <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} handleResponse={handleResponse}/>}/>
+      </Switch>
     </div>
   );
 }
@@ -85,12 +148,15 @@ const mapDispatchToProps = dispatch => {
     fetchUsers: (users) => dispatch(action.fetchUsers(users)),
     fetchGames: (games) => dispatch(action.fetchGames(games)),
     fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
+    setCurrentUser = (user) => dispatch(action.setCurrentUser(user))
+
   }
 }
 
 const mapStateToProps = state => {
   return {
-    games: state.games
+    games: state.games,
+    currentUser: state.currentUser
   }
 }
 

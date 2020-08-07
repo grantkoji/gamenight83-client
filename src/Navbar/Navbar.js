@@ -20,13 +20,13 @@ import { Link } from 'react-router-dom'
     //     : <Link to='/login'>Login</Link>}
      return (
        <div className="navbar">
-          <Link to='/'>Games</Link>
-          <Link to='/games/new'>Create Game</Link>
-          <Link to='/reviews'>Reviews</Link>
-          <Link to='/gamegram'>GameGram</Link>
-          <Link to='/users'>Users</Link>
-       
-        
+         <Link to='/'>Games</Link>
+         <Link to='/games/new'>Create Game</Link>
+         <Link to='/reviews'>Reviews</Link>
+         <Link to='/gamegram'>GameGram</Link>
+         <Link to='/users'>Users</Link>
+         <Link to='/signup'>Sign Up</Link>
+         <Link to='/login'>Login</Link> 
        </div>
      )
    
