@@ -39,10 +39,18 @@ class Login extends Component {
       body: JSON.stringify(userInfo)
     })
     .then(r => r.json())
-    .then(this.props.handleResponse)
+    .then(resp => this.handleResponse(resp))
   }
 
-
+  handleResponse = (resp) => {
+    if (resp.message) {
+      alert(resp.message)
+    } else {
+      localStorage.token = resp.token
+      props.setCurrentUser(resp.user)
+      props.history.push(`users/${resp.user.username}`)
+    }
+  }
   
   
 

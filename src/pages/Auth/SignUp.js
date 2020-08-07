@@ -27,21 +27,19 @@ class SignUp extends Component {
       body: JSON.stringify(userInfo)
     })
       .then(r => r.json())
-      .then(this.props.handleResponse)
-  }
-
-
-  handleResponse = (resp) => {
-    if (resp.message) {
-      alert(resp.message)
-    } else {
-      localStorage.token = resp.token
-      this.setState(resp, () => {
-        this.props.history.push("/profile")
-      })
+      .then(resp => this.handleResponse(resp))
     }
-  }
- 
+  
+    handleResponse = (resp) => {
+      if (resp.message) {
+        alert(resp.message)
+      } else {
+        localStorage.token = resp.token
+        this.props.setCurrentUser(resp.user)
+        this.props.history.push(`users/${resp.user.username}`)
+        }
+      }
+    }
 
   render() {
 

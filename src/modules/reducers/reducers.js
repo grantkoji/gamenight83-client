@@ -3,6 +3,7 @@ import currentUser from './currentUser'
 import reviews from './reviews'
 import gamePhotos from './gamePhotos'
 import users from './users'
+import currentToken from './currentToken'
 
 import {combineReducers} from 'redux'
 
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     users,
     currentUser,
     reviews,
-    gamePhotos
+    gamePhotos,
+    token: currentToken
 })
 
 export default rootReducer

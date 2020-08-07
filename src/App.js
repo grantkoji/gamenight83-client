@@ -59,9 +59,21 @@ function App(props) {
       })
       .then(r => r.json())
       .then(resp => handleResponse(resp))
-
     }
   },[])
+
+
+
+  const handleResponse = (resp) => {
+    if (resp.message) {
+      alert(resp.message)
+    } else {
+      localStorage.token = resp.token
+      props.setCurrentUser(resp.user)
+      props.history.push(`users/${resp.user.username}`)
+   
+    }
+  }
 
   // state = {
   //   user: {
@@ -72,17 +84,7 @@ function App(props) {
   //   token: ""
   // }
 
-  const handleResponse = (resp) => {
-    if (resp.message) {
-      alert(resp.message)
-    } else {
-      localStorage.token = resp.token
-      props.setCurrentUser(resp.user)
-      this.setState(resp, () => {
-        this.props.history.push(`users/${resp.user.username}`)
-      })
-    }
-  }
+
 
 
   // renderForm = (routerProps) => {
@@ -98,21 +100,18 @@ function App(props) {
   // }
 
 
-  state = {
-    user: {
-      id: 0,
-      username: "",
-      snacks: []
-    },
-    token: ""
-  }
 
-
-
+  // const renderProfile = (routerProps) => {
+  //   if (this.state.token) {
+  //     return <UserPage user={this.state.user} token={this.state.token} addNewSnack={this.addNewSnack}/>
+  //   } else {
+  //     this.props.history.push("/login")
+  //   }
+  // }
 
   // <Navbar class="container" />
   // <Switch>
-  //   <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+ 
   //   <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
   //   <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
   //   <Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
@@ -123,7 +122,7 @@ function App(props) {
   // </Switch>
   // <ul>
   //       {props.games
-  //       ?
+
   //       props.games.map(game => <li>{game.title}</li>)
   //       : <div>Loading...</div>
   //       }
@@ -135,11 +134,20 @@ function App(props) {
       <h1>This is where we're at.</h1>
       <Navbar />
       <Switch>
-        <Route exact path='/login' render={(routerprops) => <Login {...routerprops} handleResponse={handleResponse} />}/>
-        <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} handleResponse={handleResponse}/>}/>
+        <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+        <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>
+        <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} />}/>
       </Switch>
     </div>
   );
+}
+
+const mapStateToProps = state => {
+  return {
+    token: state.token,
+    games: state.games,
+    currentUser: state.currentUser
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -148,19 +156,10 @@ const mapDispatchToProps = dispatch => {
     fetchUsers: (users) => dispatch(action.fetchUsers(users)),
     fetchGames: (games) => dispatch(action.fetchGames(games)),
     fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
-    setCurrentUser = (user) => dispatch(action.setCurrentUser(user))
+    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
 
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    games: state.games,
-    currentUser: state.currentUser
-  }
-}
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

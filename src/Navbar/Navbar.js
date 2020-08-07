@@ -26,10 +26,35 @@ import { Link } from 'react-router-dom'
          <Link to='/gamegram'>GameGram</Link>
          <Link to='/users'>Users</Link>
          <Link to='/signup'>Sign Up</Link>
-         <Link to='/login'>Login</Link> 
+         {props.currentToken && <Link to='/users/:username'>Users</Link>}
+         {props.currentToken
+         ? <Link to='/logout'>Logout</Link>
+         : <Link to='/login'>Login</Link>} 
        </div>
      )
    
  }
  
- export default Navbar;
+
+ const mapStateToProps = state => {
+  return {
+    token: state.token,
+    games: state.games,
+    currentUser: state.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchReviews: (reviews) => dispatch(action.fetchReviews(reviews)),
+    fetchUsers: (users) => dispatch(action.fetchUsers(users)),
+    fetchGames: (games) => dispatch(action.fetchGames(games)),
+    fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
+    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
