@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 
-class ReviewsIndex extends Component {
+const ReviewsIndex = props => {
 
-    render() {
-        const {reviews} = this.props
+ 
+        const {reviews} = props
         return (
             <>
                 <h1>Game Reviews</h1>
@@ -14,11 +14,7 @@ class ReviewsIndex extends Component {
                     ? reviews.map(review => {
                         return (
                             <div>
-                                <img src={review.game_photo} alt={review.game_title}/>
-                                <div>Game: {review.game_title}</div>
-                                <div>by {review.user_name}</div>
-                                <div>{review.num_stars}</div>
-                                <div>{review.content}</div>
+                               <ReviewCard key={review.id} {...review}/>
                             </div>
                         )
                     })
@@ -26,8 +22,6 @@ class ReviewsIndex extends Component {
                 </div>
             </>
         )
-    }
-
 }
 
 const mapStateToProps = state => {

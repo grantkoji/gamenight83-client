@@ -1,32 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
+import UserCard from './UserCard'
+import UserPage from './UserPage'
 
-class UsersIndex extends Component {
+const UsersIndex = props => {
 
-    render() {
-        const {reviews} = this.props
+
+        const {users} = props
         return (
             <>
-                <h1>Game Reviews</h1>
+                <h1>User Profiles:</h1>
                 <div>
                     {  
-                    reviews 
-                    ? reviews.map(review => {
-                        return (
-                            <div>
-                                <img src={review.game_photo} alt={review.game_title}/>
-                                <div>Game: {review.game_title}</div>
-                                <div>by {review.user_name}</div>
-                                <div>{review.num_stars}</div>
-                                <div>{review.content}</div>
-                            </div>
-                        )
+                    users && users.length
+                    ? users.map(user => {
+                        <UserPage key={user.id} {...user}/>
                     })
                     : "Loading..."}
                 </div>
             </>
         )
-    }
+    
 
 }
 

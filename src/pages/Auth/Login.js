@@ -1,71 +1,58 @@
 
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-class Login extends Component {
 
-  state = {
-    username: "",
-    password: ""
-  }
+const Login = props => {
+  let [username, setUsername] = useState('');
+  let [password, setPassword] = useState('');
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    this.handleSubmit(this.state)
+    handleLoginSubmit()
   }
 
 
-  handleLoginSubmit = (userInfo) => {
+  const handleLoginSubmit = () => {
     console.log("Login form has been submitted")
-    fetch("http://localhost:api/v1/3001/users/login", {
+    fetch("http://localhost:3001/api/v1/user/login", {
       method: "POST",
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify({
+        username,
+        password
+      })
     })
     .then(r => r.json())
-    .then(resp => this.handleResponse(resp))
+    .then(resp => handleResponse(resp))
   }
 
-  handleResponse = (resp) => {
+  const handleResponse = (resp) => {
     if (resp.message) {
       alert(resp.message)
     } else {
       localStorage.token = resp.token
-      this.props.setCurrentUser(resp.user)
-      this.props.history.push('/')
+      props.setCurrentToken(resp.token)
+      props.setCurrentUser(resp.user)
+      props.history.push('/')
       // this.props.history.push(`users/${resp.user.username}`)
     }
   }
   
-  
 
-
-
-
-
-
-  render() {
-    let {username, password} = this.state
-    console.log(this.state)
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <label htmlFor="username">Username:</label>
-        <input type="text" autoComplete="off" name="username" value={username} onChange={this.handleChange}/>
+        <input type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
         <label htmlFor="password">Password:</label>
-        <input type="password" autoComplete="off" name="password" value={password} onChange={this.handleChange}/>
-        <input type="submit" value="Submit"/>
+        <input type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <button type="Submit">Submit</button>
       </form>
     );
-  }
+  
 
 }
 
@@ -79,13 +66,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchReviews: (reviews) => dispatch(action.fetchReviews(reviews)),
-    fetchUsers: (users) => dispatch(action.fetchUsers(users)),
-    fetchGames: (games) => dispatch(action.fetchGames(games)),
-    fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
     setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
-
   }
 }
 

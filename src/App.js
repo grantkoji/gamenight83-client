@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Navbar from './Navbar/Navbar'
 import * as requests from './requests'
 import * as action from './modules/actionCreators/actionCreators'
@@ -56,7 +56,7 @@ function App(props) {
     
     if (localStorage.token) {
 
-      fetch("http://localhost:3001/users/stay_logged_in", {
+      fetch("http://localhost:3001/api/v1/users/stay_logged_in", {
         headers: {
           "Authorization": localStorage.token
         }
@@ -74,7 +74,8 @@ function App(props) {
     } else {
       localStorage.token = resp.token
       props.setCurrentUser(resp.user)
-      props.history.push(`/`)
+      props.setCurrentToken(resp.token)
+      props.history.push(`/users/${resp.user.id}`)
       // props.history.push(`users/${resp.user.username}`)
     }
   }
@@ -137,7 +138,7 @@ function App(props) {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+        <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 
@@ -172,4 +173,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

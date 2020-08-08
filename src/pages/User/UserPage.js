@@ -4,7 +4,7 @@ const UserPage = props => {
 
 
     const mutualFriends = () => {
-        if (props.total_friends && props.currentUser.total_friends) {
+        if (props.total_friends && props.currentUser.total_friends && props.id !== props.currentUser.id) {
             let matchingArray = []
             for (let i = 0; i < props.total_friends; i++) {           
                 if (props.currentUser.total_friends.includes(props.total_friends[i])) {

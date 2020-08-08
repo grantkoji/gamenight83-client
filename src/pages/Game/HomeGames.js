@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
-class HomeGames extends Component {
+import GameCard from './GameCard'
 
-    render() {
-        const {games} = this.props
+const HomeGames = props => {
+    
+  
+    
+        const {games} = props
         return (
             <>
                 <h1>Welcome</h1>
                 
                 <div>
                     {  
-                    games 
+                    games && games.length
                     ? games.map(game => {
                         return (
                             <div>
-                            <img src={game["image_url"]} alt={game.title} />
-                            <div>{game.title}</div>
+                                <GameCard key={game.id} {...game} />
                             </div>
                         )
                     })
@@ -23,7 +25,7 @@ class HomeGames extends Component {
                 </div>
             </>
         )
-    }
+    
 
 }
 
