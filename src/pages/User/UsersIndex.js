@@ -14,7 +14,11 @@ const UsersIndex = props => {
                     {  
                     users && users.length
                     ? users.map(user => {
-                        <UserPage key={user.id} {...user}/>
+                        return (
+                            <div>
+                                <UserCard key={user.id} {...user}/>
+                            </div>
+                        )       
                     })
                     : "Loading..."}
                 </div>

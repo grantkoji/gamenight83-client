@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import * as action from '../../modules/actionCreators/actionCreators'
+import React from 'react';
 import {connect} from 'react-redux'
-class GamePhotosIndex extends Component {
+import GamePhotoCard from './GamePhotoCard'
 
-    render() {
-        const {gamePhotos} = this.props
+const GamePhotosIndex = props => {
+
+ 
+        const {gamePhotos} = props
         return (
             <>
-                <h1>Welcome</h1>
+                <h1>Welcome To Photos</h1>
                 
                 <div>
                     {  
@@ -15,8 +16,7 @@ class GamePhotosIndex extends Component {
                     ? gamePhotos.map(photo => {
                         return (
                             <div>
-                            <img src={photo["image_url"]} alt={photo.game_title} />
-                            <div>{photo.caption}</div>
+                                <GamePhotoCard key={photo.id} {...photo} />
                             </div>
                         )
                     })
@@ -24,7 +24,7 @@ class GamePhotosIndex extends Component {
                 </div>
             </>
         )
-    }
+    
 
 }
 
