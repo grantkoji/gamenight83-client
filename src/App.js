@@ -14,6 +14,7 @@ import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
 import UserPage from './pages/User/UserPage'
+// import UsersProfileIndex from '/pages/User/UsersProfileIndex'
 
 //  / => games
 // /reviews => reviews page

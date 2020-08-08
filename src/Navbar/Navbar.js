@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as action from '../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 {/* <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
 <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
@@ -13,25 +14,30 @@ import {connect} from 'react-redux'
  
  const Navbar = props => {
 
-    // {props.currentUser &&
-    //     <Link to='/users/:id'>Username Page</Link>
-    //     }
-    //     {props.userInfo.userId 
-    //     ? <Link to='/login' onClick={props.logoutUser}>Logout</Link>
-    //     : <Link to='/login'>Login</Link>}
+    const logoutAction = () => {
+      props.logoutUser()
+      props.removeCurrentToken()
+      localStorage.removeItem("token")
+    }
+    
+
      return (
-       <div className="navbar">
-         <Link to='/'>Games</Link>
-         <Link to='/games/new'>Create Game</Link>
-         <Link to='/reviews'>Reviews</Link>
-         <Link to='/gamegram'>GameGram</Link>
-         <Link to='/users'>Users</Link>
-         <Link to='/signup'>Sign Up</Link>
-         {props.currentUser && <Link to='/profile'>{props.currentUser.username} Page</Link>}
-         {props.currentToken
-         ? <Link to='/logout'>Logout</Link>
-         : <Link to='/login'>Login</Link>} 
+       <>
+        <div className="navbar">
+          <Link to='/'>Games</Link>
+          <Link to='/games/new'>Create Game</Link>
+          <Link to='/reviews'>Reviews</Link>
+          <Link to='/gamegram'>GameGram</Link>
+          <Link to='/users'>Users</Link>
+          <Link to='/signup'>Sign Up</Link>
+          {props.token && <Link to='/profile'>{props.currentUser.username} Page</Link>}
+          {
+            props.token
+            ? <Link to='/login' onClick={logoutAction}>Logout</Link>
+            : <Link to='/login'>Login</Link>
+          } 
        </div>
+       </>
      )
    
  }
@@ -45,6 +51,14 @@ import {connect} from 'react-redux'
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+    logoutUser: () => dispatch(action.logoutUser()),
+    removeCurrentToken: () => dispatch(action.removeCurrentToken())
+  }
+}
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
