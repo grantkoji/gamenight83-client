@@ -23,7 +23,7 @@ class Login extends Component {
 
   handleLoginSubmit = (userInfo) => {
     console.log("Login form has been submitted")
-    fetch("http://localhost:4000/users/login", {
+    fetch("http://localhost:api/v1/3001/users/login", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -40,7 +40,8 @@ class Login extends Component {
     } else {
       localStorage.token = resp.token
       this.props.setCurrentUser(resp.user)
-      this.props.history.push(`users/${resp.user.username}`)
+      this.props.history.push('/')
+      // this.props.history.push(`users/${resp.user.username}`)
     }
   }
   

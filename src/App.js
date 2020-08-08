@@ -8,7 +8,7 @@ import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
-import UserPage from './pages/User/UserPage'
+// import UserPage from './pages/User/UserPage'
 import HomeGames from './pages/Game/HomeGames'
 import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
@@ -74,8 +74,8 @@ function App(props) {
     } else {
       localStorage.token = resp.token
       props.setCurrentUser(resp.user)
-      props.history.push(`users/${resp.user.username}`)
-   
+      props.history.push(`/`)
+      // props.history.push(`users/${resp.user.username}`)
     }
   }
 
@@ -131,14 +131,14 @@ function App(props) {
   //       : <div>Loading...</div>
   //       }
   //     </ul>
-  '/profile'>
+  // '/profile'>
   //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
       <Navbar />
       <Switch>
+        <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
-        <Route exact path='/profile' render={(routerprops) => <UserPage {...routerprops}  />}/>
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 
         <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>
