@@ -52,8 +52,8 @@ const SignUp = props => {
         alert(resp.message)
       } else {
         localStorage.token = resp.token
-        this.props.setCurrentUser(resp.user)
-        this.props.history.push(`/`)
+        props.setCurrentUser(resp.user)
+        props.history.push(`/`)
         }
     }
 
