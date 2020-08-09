@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import * as action from '../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 {/* <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
@@ -18,8 +18,17 @@ import {connect} from 'react-redux'
       props.logoutUser()
       props.removeCurrentToken()
       localStorage.removeItem("token")
+      props.history.push(`/login`)
     }
-    
+
+    const toUserPage = () => {
+      props.setShowUser(props.currentUser.id)
+      props.history.push(`users/${props.currentUser.id}`)
+      // props.history.push(`users/${props.currentUser.username.replace(/\s+/g, '')}`)
+    }
+
+  
+
 
      return (
        <>
@@ -30,10 +39,10 @@ import {connect} from 'react-redux'
           <Link to='/gamegram'>GameGram</Link>
           <Link to='/users'>Users</Link>
           <Link to='/signup'>Sign Up</Link>
-          {props.token && <Link to='/profile'>{props.currentUser.username} Page</Link>}
+          {props.token && <button onClick={toUserPage}>{props.currentUser.username} Page</button>}
           {
             props.token
-            ? <Link to='/login' onClick={logoutAction}>Logout</Link>
+            ? <button onClick={logoutAction}>Logout</button>
             : <Link to='/login'>Login</Link>
           } 
        </div>
@@ -46,7 +55,6 @@ import {connect} from 'react-redux'
  const mapStateToProps = state => {
   return {
     token: state.token,
-    games: state.games,
     currentUser: state.currentUser
   }
 }
@@ -56,9 +64,10 @@ const mapDispatchToProps = dispatch => {
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
     setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
     logoutUser: () => dispatch(action.logoutUser()),
-    removeCurrentToken: () => dispatch(action.removeCurrentToken())
+    removeCurrentToken: () => dispatch(action.removeCurrentToken()),
+    setShowUser: (userId) => dispatch(action.setShowUser(userId))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar))
 

@@ -53,7 +53,9 @@ const SignUp = props => {
       } else {
         localStorage.token = resp.token
         props.setCurrentUser(resp.user)
-        props.history.push(`/`)
+        props.setShowUser(resp.user.id)
+        props.history.push(`users/${resp.user.id}`)
+        // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
         }
     }
 
@@ -92,7 +94,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
-    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+    setShowUser: (userId) => dispatch(action.setShowUser(userId))
   }
 }
 

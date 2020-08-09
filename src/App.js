@@ -76,8 +76,9 @@ function App(props) {
       localStorage.token = resp.token
       props.setCurrentUser(resp.user)
       props.setCurrentToken(resp.token)
-      props.history.push(`/users/${resp.user.id}`)
-      // props.history.push(`users/${resp.user.username}`)
+      props.setShowUser(resp.user.id)
+      props.history.push(`users/${resp.user.id}`)
+      // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
 
@@ -169,8 +170,8 @@ const mapDispatchToProps = dispatch => {
     fetchGames: (games) => dispatch(action.fetchGames(games)),
     fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
-    setCurrentToken: (token) => dispatch(action.setCurrentToken(token))
-
+    setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+    setShowUser: (userId) => dispatch(action.setShowUser(userId))
   }
 }
 

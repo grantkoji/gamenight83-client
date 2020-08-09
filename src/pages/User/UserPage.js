@@ -1,107 +1,158 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import UserCard from './UserCard'
+import ReviewCard from '../Review/ReviewCard'
+import GamePhotoCard from '../GamePhoto/GamePhotoCard'
+import GameCard from '../Game/GameCard'
+import UserProfileCard from './UserProfileCard'
+import {connect} from 'react-redux'
 
 const UserPage = props => {
-
-
+  
+    
+    const { games, token, users, reviews, gamePhotos, currentUser, showUser} = props
+    let thisPageUser = users.find(user => user.id === showUser) 
+    // const {total_friends, username, name, id, profile_url, age, fav_games} = thisPageUser
+    let thisUserReviews = reviews.filter(review => review.user_id === showUser)
+    let thisUserGamePhotos = gamePhotos.filter(photo => photo.user_id === showUser)
+    let thisUserCreatedGames = games.filter(game => game.creator_id === showUser)
+   
+    
     const mutualFriends = () => {
-        if (props.total_friends && props.currentUser.total_friends && props.id !== props.currentUser.id) {
+        if (showUser === currentUser.id) {
+            return "You are on your own page"
+        } else if (thisPageUser.total_friends.length > 0 && currentUser.total_friends.length > 0) {
             let matchingArray = []
-            for (let i = 0; i < props.total_friends; i++) {           
-                if (props.currentUser.total_friends.includes(props.total_friends[i])) {
-                    matchingArray.push(props.total_friends[i])
+            for (let i = 0; i < thisPageUser.total_friends.length; i++) {  
+                if (currentUser.total_friends.some(friend => friend.username === thisPageUser.total_friends[i].username)) {
+                    matchingArray.push(thisPageUser.total_friends[i])
                 }
             }  
-            return matchingArray  
+            if (matchingArray.length) {
+                return matchingArray 
+                
+            } else {
+                return  null
+            }
         }
         else {
-            return []
+            return null
         }
     }
 
+    let mutualFriendsList = () => {
+        if (mutualFriends() == "You are on your own page") {
+            return null
+        } else if(mutualFriends() && mutualFriends() !== "You are on your own page") {
+            console.log(mutualFriends())
+            return (
+                <>
+                    <div> 
+                        <div>Mutual Friends:</div>
+                        <div>
+                            {mutualFriends().map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend}/>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    </>
+            )
+        } else {
+            return (
+                <div>No Mutual Friends Listed</div>
+            )
+        }
+    }
+    
+  
     return (
         <div>
-            <h1>{props.username}</h1>
-            {
-            props["profile_url"] === "" 
-            ? <img src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" alt="Question Mark" />
-            : <img src={props["profile_url"]} alt={props.username} />
-            }
-            <h3>{props.name}</h3>
-            {props.total_friends 
-                ?<>
-                    <h4>Friends:</h4>
+            {thisPageUser ? <UserProfileCard user={thisPageUser}/> : <div>Loading...</div>}
+            
+            {thisPageUser && thisPageUser.total_friends 
+                ?<div>
+                    <div>Friends:</div>
                     <div>
-                    {props.total_friends.map(friend => 
-                        <div>{friend.username}</div>
+                    {thisPageUser.total_friends.map(friend => 
+                        <div>
+                            <UserCard key={friend.id} {...friend}/>
+                        </div>
                     )}
                     </div>
-                </>
-                : <h3>No Friends Listed</h3>
-            }
-            {
-            mutualFriends() === []
-            ? <h3>No Mutual Friends Listed</h3>
-            :<> 
-                <h3>Mutual Friends:</h3>
-                <div>
-                    {mutualFriends().map(friend => 
-                        <div>{friend.username}</div>
-                    )}
                 </div>
-            </>
+                : <div>No Friends Listed</div>
             }
-            {props.reviews
-                ?<>
-                    <h4>Game Reviews:</h4>
+            <>
+            {thisPageUser 
+                ? mutualFriendsList()
+                : <div>Loading...</div>
+            }  
+            </>  
+            {thisUserReviews && thisUserReviews.length
+                ?<div>
+                    <div>Game Reviews:</div>
                     <div>
-                    {props.reviews.map(review => 
+                    {thisUserReviews.map(review => 
                         <div>
-                            <img src={review.game_photo} alt={review.game_title}/>
-                            <div>Game: {review.game_title}</div>
-                            <div>by {review.user_name}</div>
-                            <div>{review.num_stars}</div>
-                            <div>{review.content}</div>
+                           <ReviewCard key={review.id} {...review} />
                         </div>
                     )}
                     </div>
-                </>
-                : <h3>No Reviews Listed</h3>
+                </div>
+                : <div>No Reviews Listed</div>
             }
-            {props.game_photos
-                ?<>
-                    <h4>Game Photos:</h4>
+            {thisUserGamePhotos && thisUserGamePhotos.length
+                ?<div>
+                    <div>Game Photos:</div>
                     <div>
-                    {props.game_photos.map(photo => 
+                    {thisUserGamePhotos.map(photo => 
                         <div>
-                            <img src={photo["image_url"]} alt={photo.game_title} />
-                            <div>{photo.caption}</div>
-                            </div>
-                    )}
-                    </div>
-                </>
-                : <h3>No Game Photos Listed</h3>
-            }
-            {props.games
-                ?<>
-                    <h4>Posted Games:</h4>
-                    <div>
-                    {props.games.map(game => 
-                        <div>
-                            <img src={game["image_url"]} alt={game.title} />
-                            <div>{game.title}</div>
+                            <GamePhotoCard key={photo.id} {...photo} />
                         </div>
                     )}
                     </div>
-                </>
-                : <h3>No Games Posted</h3>
+                </div>
+                : <div>No Game Photos Listed</div>
             }
-
-
+            {thisUserCreatedGames && thisUserCreatedGames.length
+                ?<div>
+                    <div>Created Games:</div>
+                    <div>
+                    {thisUserCreatedGames.map(game => 
+                        <div>
+                                <GameCard key={game.id} {...game} />
+                        </div>
+                    )}
+                    </div>
+                </div>
+                : <div>No Games Posted</div>
+            }
         </div>
     )
 
 
 }
-
-
-export default UserPage
+const mapStateToProps = state => {
+    return {
+      token: state.token,
+      games: state.games,
+      users: state.users,
+      reviews: state.reviews,
+      gamePhotos: state.gamePhotos,
+      currentUser: state.currentUser,
+      showUser: state.showUser
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      setCurrentUser: (userId) => dispatch(action.setCurrentUser(userId)),
+      setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+      setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    }
+  }
+  
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserPage));

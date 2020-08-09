@@ -10,6 +10,8 @@ let fetchGames = games => ({type: 'FETCH_GAMES', payload: {value: games}})
 let fetchGamePhotos = gamePhotos => ({type: 'FETCH_GAME_PHOTOS', payload: {value: gamePhotos}})
 let setCurrentToken = token => ({type: 'SET_CURRENT_TOKEN', payload: {value: token}})
 let removeCurrentToken = () => ({type: 'REMOVE_CURRENT_TOKEN'})
+let setShowUser = (userId) => ({type: 'SET_SHOW_USER', payload: {value: userId}})
+
 
 export {
     setCurrentToken,
@@ -23,5 +25,6 @@ export {
     fetchUsers,
     fetchGames,
     fetchGamePhotos,
-    removeCurrentToken
+    removeCurrentToken,
+    setShowUser
 }
