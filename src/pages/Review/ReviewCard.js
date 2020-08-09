@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import * as action from '../../modules/actionCreators/actionCreators'
+import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
+
 
 const ReviewCard = props => {
     
@@ -22,8 +26,8 @@ const ReviewCard = props => {
     }
 
     const redirectToUser = () => {
-        console.log('user clicked')
-        // props.history.push('./games/:id')
+        props.setShowUser(props.user_id)
+        props.history.push(`/users/${props.user_id}`)
     }
 
     const renderBack = () => {  
@@ -54,4 +58,10 @@ const ReviewCard = props => {
     )  
 }
 
-export default ReviewCard
+const mapDispatchToProps = dispatch => {
+    return {
+      setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    }
+  }
+  
+  export default withRouter(connect(null, mapDispatchToProps)(ReviewCard));
