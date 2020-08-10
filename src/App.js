@@ -57,9 +57,16 @@ function App(props) {
       .then(r => r.json())
       .then(resp => handleResponse(resp))
     }
+
+    if (localStorage.gameId) {
+      props.setCurrentGame(parseInt(localStorage.gameId))
+    }
+
+
+
   },[])
 
-
+ 
 
   const handleResponse = (resp) => {
     if (resp.message) {
@@ -156,7 +163,8 @@ const mapDispatchToProps = dispatch => {
     fetchGamePhotos: (gamePhotos) => dispatch(action.fetchGamePhotos(gamePhotos)),
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
     setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
-    setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+    setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
   }
 }
 

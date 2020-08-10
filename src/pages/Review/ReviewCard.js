@@ -21,12 +21,13 @@ const ReviewCard = props => {
     }
 
     const redirectToGame = () => {
+        props.setCurrentGame(game_id)
+        localStorage.gameId = game_id
         props.history.push(`/games/${game_id}`)
     }
 
     const redirectToUser = () => {
         props.setShowUser(user_id)
-        props.setCurrentGame(game_id)
         props.history.push(`/users/${user_id}`)
         // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
     }

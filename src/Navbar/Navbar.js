@@ -18,6 +18,7 @@ import {connect} from 'react-redux'
       props.logoutUser()
       props.removeCurrentToken()
       localStorage.removeItem("token")
+      localStorage.removeItem("gameId")
       props.history.push(`/login`)
     }
 

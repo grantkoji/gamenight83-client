@@ -11,7 +11,8 @@ const GameCard = props => {
    
     const redirectToGame = () => {
         setCurrentGame(id)
-        props.history.push(`/games/${id}`)
+        localStorage.gameId = id
+        props.history.push(`games/${id}`)
     }
 
 

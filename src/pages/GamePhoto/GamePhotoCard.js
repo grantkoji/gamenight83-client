@@ -16,6 +16,7 @@ const GamePhotoCard = props => {
 
     const redirectToGame = () => {
         props.setCurrentGame(game_id)
+        localStorage.gameId = game_id
         props.history.push(`/games/${game_id}`)
     }
 
