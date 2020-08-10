@@ -54,6 +54,7 @@ const SignUp = props => {
         localStorage.token = resp.token
         props.setCurrentUser(resp.user)
         props.setShowUser(resp.user.id)
+        props.addUser(resp.user)
         props.history.push(`users/${resp.user.id}`)
         // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
         }
@@ -95,7 +96,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
     setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
-    setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+    addUser: (user) => dispatch(action.addUser(user))
   }
 }
 

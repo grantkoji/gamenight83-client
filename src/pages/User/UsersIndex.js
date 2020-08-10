@@ -1,19 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import UserCard from './UserCard'
-import UserPage from './UserPage'
+import SearchBarUsers from '../../Components/SearchBars/SearchBarUsers'
 
 const UsersIndex = props => {
+    const {users} = props
+    let [search, setSearch] = useState('')
+    let [searchType, setSearchType] = useState('username')
 
-
-        const {users} = props
+    let filteredUsers = () => {
+        if (users) {
+            if (searchType === 'username') {
+                return users.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
+            } else if (searchType === 'favGames') {
+                return users.filter(user => user.fav_games.toLowerCase().includes(search.toLowerCase()))
+            }
+        } 
+    }
+       
         return (
             <>
                 <h1>User Profiles:</h1>
                 <div>
+                    <SearchBarUsers search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                </div>
+                <div>
                     {  
                     users && users.length
-                    ? users.map(user => {
+                    ? filteredUsers().map(user => {
                         return (
                             <div>
                                 <UserCard key={user.id} {...user}/>

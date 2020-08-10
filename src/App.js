@@ -8,21 +8,13 @@ import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 import Login from './pages/Auth/Login'
 import SignUp from './pages/Auth/SignUp'
-// import UserPage from './pages/User/UserPage'
+import GamePage from './pages/Game/GamePage'
 import HomeGames from './pages/Game/HomeGames'
 import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
 import UserPage from './pages/User/UserPage'
-// import UsersProfileIndex from '/pages/User/UsersProfileIndex'
 
-//  / => games
-// /reviews => reviews page
-// users => users page 
-//gamegram => game_photos page
-//users/:username
-// /games/new
-//Navbar
 
 
 
@@ -82,14 +74,6 @@ function App(props) {
     }
   }
 
-  // state = {
-  //   user: {
-  //     id: 0,
-  //     username: "",
-  //     snacks: []
-  //   },
-  //   token: ""
-  // }
 
 
 
@@ -142,6 +126,7 @@ function App(props) {
       <Switch>
         <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
+        <Route exact path='/games/:id' render={(routerprops) => <GamePage {...routerprops}  />}/>  
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 
         <Route exact path='/login' render={(routerprops) => <Login {...routerprops}  />}/>

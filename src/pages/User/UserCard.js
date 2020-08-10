@@ -17,6 +17,7 @@ const UserCard= props => {
             ? <img src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" alt="Question Mark" />
             : <img src={props["profile_url"]} alt={props.username} />
             }
+            <div>Favorite Games: {props.fav_games}</div>
             <button onClick={redirectToUserPage}>Visit {props.username}</button>
            
         </div>

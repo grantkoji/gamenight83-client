@@ -38,7 +38,7 @@ import {connect} from 'react-redux'
           <Link to='/reviews'>Reviews</Link>
           <Link to='/gamegram'>GameGram</Link>
           <Link to='/users'>Users</Link>
-          <Link to='/signup'>Sign Up</Link>
+          {!props.token && <Link to='/signup'>Sign Up</Link>}
           {props.token && <button onClick={toUserPage}>{props.currentUser.username} Page</button>}
           {
             props.token

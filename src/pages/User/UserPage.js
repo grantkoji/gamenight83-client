@@ -16,8 +16,8 @@ const UserPage = props => {
     // const {total_friends, username, name, id, profile_url, age, fav_games} = thisPageUser
     let thisUserReviews = reviews.filter(review => review.user_id === showUser)
     let thisUserGamePhotos = gamePhotos.filter(photo => photo.user_id === showUser)
-    let thisUserCreatedGames = games.filter(game => game.creator_id === showUser)
-   
+    let thisUserCreatedGames =  games.filter(game => game.creator_id === showUser)
+
     
     const mutualFriends = () => {
         if (showUser === currentUser.id) {
@@ -70,7 +70,7 @@ const UserPage = props => {
   
     return (
         <div>
-            {thisPageUser ? <UserProfileCard user={thisPageUser}/> : <div>Loading...</div>}
+            {thisPageUser && <UserProfileCard user={thisPageUser}/>}
             
             {thisPageUser && thisPageUser.total_friends 
                 ?<div>
@@ -86,10 +86,7 @@ const UserPage = props => {
                 : <div>No Friends Listed</div>
             }
             <>
-            {thisPageUser 
-                ? mutualFriendsList()
-                : <div>Loading...</div>
-            }  
+            {thisPageUser && mutualFriendsList()}  
             </>  
             {thisUserReviews && thisUserReviews.length
                 ?<div>

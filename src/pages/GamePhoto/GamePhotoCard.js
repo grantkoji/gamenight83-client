@@ -15,13 +15,14 @@ const GamePhotoCard = props => {
 
 
     const redirectToGame = () => {
-        console.log('game clicked')
-        // props.history.push('./games/:id')
+        props.setCurrentGame(game_id)
+        props.history.push(`/games/${game_id}`)
     }
 
     const redirectToUser = () => {
         props.setShowUser(props.user_id)
         props.history.push(`/users/${props.user_id}`)
+        // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
     }
 
     const renderFront = () => {
@@ -65,7 +66,8 @@ const GamePhotoCard = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      setShowUser: (userId) => dispatch(action.setShowUser(userId))
+      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+      setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
     }
   }
   
