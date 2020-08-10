@@ -28,8 +28,8 @@ const ReviewCard = props => {
 
     const redirectToUser = () => {
         props.setShowUser(user_id)
-        props.history.push(`/users/${user_id}`)
-        // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
+        // props.history.push(`/users/${user_id}`)
+        props.history.push(`/users/${user_name.replace(/\s+/g, '')}`)
     }
 
     const renderBack = () => {  

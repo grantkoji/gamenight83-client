@@ -1,7 +1,5 @@
 let setCurrentUser = user => ({type: 'SET_CURRENT_USER', payload: {value: user}})
-let setCurrentGamePhoto = photo => ({type: 'SET_CURRENT_GAME_PHOTO', payload: {value: photo}})
 let setCurrentGame = gameId => ({type: 'SET_CURRENT_GAME', payload: {value: gameId}})
-let setCurrentReview = review => ({type: 'SET_CURRENT_REVIEW', payload: {value: review}})
 let setCurrentPlayedGame = playedGame => ({type: 'SET_CURRENT_PLAYED_GAME', payload: {value: playedGame}})
 let logoutUser = () => ({type: 'LOGOUT_USER'})
 let fetchReviews = reviews => ({type: 'FETCH_REVIEWS', payload: {value: reviews}})
@@ -12,14 +10,16 @@ let setCurrentToken = token => ({type: 'SET_CURRENT_TOKEN', payload: {value: tok
 let removeCurrentToken = () => ({type: 'REMOVE_CURRENT_TOKEN'})
 let setShowUser = (userId) => ({type: 'SET_SHOW_USER', payload: {value: userId}})
 let addUser = user => ({type: 'ADD_USER', payload: {value: user}})
+let addReview = review => ({type: 'ADD_REVIEW', payload: {value: review}})
+let addGamePhoto = photo => ({type: 'ADD_GAME_PHOTO', payload: {value: photo}})
+let addPhotoLike = photoId => ({type: 'ADD_PHOTO_LIKE', payload: {value: photoId}})
+let addGame = game => ({type: 'ADD_NEW_GAME', payload: {value: game}})
 
 export {
     setCurrentToken,
     setCurrentGame,
     setCurrentUser,
     setCurrentPlayedGame,
-    setCurrentGamePhoto,
-    setCurrentReview,
     logoutUser, 
     fetchReviews,
     fetchUsers,
@@ -27,5 +27,9 @@ export {
     fetchGamePhotos,
     removeCurrentToken,
     setShowUser, 
-    addUser
+    addUser, 
+    addReview,
+    addGamePhoto,
+    addPhotoLike,
+    addGame
 }

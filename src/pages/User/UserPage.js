@@ -6,6 +6,8 @@ import ReviewCard from '../Review/ReviewCard'
 import GamePhotoCard from '../GamePhoto/GamePhotoCard'
 import GameCard from '../Game/GameCard'
 import UserProfileCard from './UserProfileCard'
+import AddReviewForm from '../../Components/Forms/AddReviewForm'
+import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import {connect} from 'react-redux'
 
 const UserPage = props => {
@@ -71,23 +73,33 @@ const UserPage = props => {
     return (
         <div>
             {thisPageUser && <UserProfileCard user={thisPageUser}/>}
-            
-            {thisPageUser && thisPageUser.total_friends 
-                ?<div>
-                    <div>Friends:</div>
-                    <div>
-                    {thisPageUser.total_friends.map(friend => 
+            <div>
+            { token && currentUser.id === showUser
+                ? <> 
+                <div>Post a Game Review: </div>
+                <div><AddReviewForm /></div>
+                </>
+                : null
+            }  
+          </div>
+            <div>
+                {thisPageUser && thisPageUser.total_friends 
+                    ?<div>
+                        <div>Friends:</div>
                         <div>
-                            <UserCard key={friend.id} {...friend}/>
+                        {thisPageUser.total_friends.map(friend => 
+                            <div>
+                                <UserCard key={friend.id} {...friend}/>
+                            </div>
+                        )}
                         </div>
-                    )}
                     </div>
-                </div>
-                : <div>No Friends Listed</div>
-            }
-            <>
+                    : <div>No Friends Listed</div>
+                }
+            </div>
+            <div>
             {thisPageUser && mutualFriendsList()}  
-            </>  
+            </div>  
             {thisUserReviews && thisUserReviews.length
                 ?<div>
                     <div>Game Reviews:</div>

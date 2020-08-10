@@ -14,6 +14,7 @@ import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
 import UserPage from './pages/User/UserPage'
+import CreateNewGame from './pages/Game/CreateNewGame'
 
 
 
@@ -76,8 +77,8 @@ function App(props) {
       props.setCurrentUser(resp.user)
       props.setCurrentToken(resp.token)
       props.setShowUser(resp.user.id)
-      props.history.push(`users/${resp.user.id}`)
-      // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
 
@@ -131,8 +132,9 @@ function App(props) {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
+        <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
+        <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops}  />}/> 
         <Route exact path='/games/:id' render={(routerprops) => <GamePage {...routerprops}  />}/>  
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 

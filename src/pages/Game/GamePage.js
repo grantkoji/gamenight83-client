@@ -4,7 +4,8 @@ import * as action from '../../modules/actionCreators/actionCreators'
 import ReviewOnGamePage from '../Review/ReviewOnGamePage'
 import GamePhotoCard from '../GamePhoto/GamePhotoCard'
 import GameProfileCard from './GameProfileCard'
-import GamePageReviewForm from '../../Components/Forms/GamePageReviewForm'
+import AddReviewForm from '../../Components/Forms/AddReviewForm'
+import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import {connect} from 'react-redux'
 
 const GamePage = props => {
@@ -19,7 +20,7 @@ const GamePage = props => {
     }
     const {title, description, creator_id, min_num_players, max_num_players, min_age, id,
        instructions_and_rules, link_to_game_website, game_category, creator_username  } = thisPageGame
-
+       
     return (
         <div>
           <div>
@@ -28,8 +29,15 @@ const GamePage = props => {
           <div>
             { token 
             && <> 
-              <div>Post a Game Review: </div>
-              <div><GamePageReviewForm /></div>
+              <div>Post a Review for {thisPageGame.title}: </div>
+              <div><AddReviewForm thisGame={currentGame}/></div>
+              </>}  
+          </div>
+          <div>
+            { token 
+            && <> 
+              <div>Post a Photo for {thisPageGame.title}: </div>
+              <div><AddGamePhotoForm thisGame={currentGame}/></div>
               </>}  
           </div>
           <div>

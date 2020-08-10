@@ -10,8 +10,8 @@ const ReviewOnGamePage = props => {
 
     const redirectToUser = () => {
         props.setShowUser(user_id)
-        props.history.push(`/users/${user_id}`)
-        // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
+        // props.history.push(`/users/${user_id}`)
+        props.history.push(`/users/${props.username.replace(/\s+/g, '')}`)
     }
      
         return (

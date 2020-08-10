@@ -37,8 +37,8 @@ const Login = props => {
       props.setCurrentToken(resp.token)
       props.setCurrentUser(resp.user)
       props.setShowUser(resp.user.id)
-      props.history.push(`users/${resp.user.id}`)
-      // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
   

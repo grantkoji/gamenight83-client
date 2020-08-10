@@ -55,8 +55,8 @@ const SignUp = props => {
         props.setCurrentUser(resp.user)
         props.setShowUser(resp.user.id)
         props.addUser(resp.user)
-        props.history.push(`users/${resp.user.id}`)
-        // props.history.push(`users/${resp.user.username.replace(/\s+/g, '')}`)
+        // props.history.push(`users/${resp.user.id}`)
+        props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
         }
     }
 

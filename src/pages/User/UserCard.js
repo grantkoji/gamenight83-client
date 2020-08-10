@@ -7,8 +7,8 @@ const UserCard= props => {
 
     const redirectToUserPage = () => {
         props.setShowUser(props.id)
-        props.history.push(`/users/${props.id}`)
-        // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
+        // props.history.push(`/users/${props.id}`)
+        props.history.push(`/users/${props.username.replace(/\s+/g, '')}`)
     }
 
     return (

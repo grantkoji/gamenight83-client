@@ -2,14 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import * as action from '../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-{/* <Route exact path='/users/:id' render={(routerprops) => <UserPage {...routerprops}  />}/> 
-<Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
-<Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
-<Route exact path='/gamegram' render={(routerprops) => <GameGramIndex {...routerprops} />} /> 
-<Route exact path='/login' render={(routerprops) => <Auth {...routerprops} />}/>
-<Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
-<Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
-<Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/> */}
+
 
  
  const Navbar = props => {
@@ -24,8 +17,8 @@ import {connect} from 'react-redux'
 
     const toUserPage = () => {
       props.setShowUser(props.currentUser.id)
-      props.history.push(`users/${props.currentUser.id}`)
-      // props.history.push(`users/${props.currentUser.username.replace(/\s+/g, '')}`)
+      // props.history.push(`users/${props.currentUser.id}`)
+      props.history.push(`users/${props.currentUser.username.replace(/\s+/g, '')}`)
     }
 
   

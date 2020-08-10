@@ -5,13 +5,37 @@ import {connect} from 'react-redux'
 
 const GamePhotoCard = props => {
     let [toggleFront, setToggleFront] = useState(true);
-    const {id, game_title, user_name, user_id, game_id, caption, likes} = props
+    const {id, game_title, user_name, user_id, game_id, caption, likes, addPhotoLike} = props
     
 
 
     const addLike = () => {
-        console.log('like added')
+        handleGamePatchFetch()
+       
     }
+
+    const handleGamePatchFetch = () => {
+        fetch(`http://localhost:3001/api/v1/game_photos/${id}`, {
+            method: "PATCH",
+            headers: {
+            "content-type": "application/json"
+            },
+            body: JSON.stringify({
+            likes: parseInt(likes) + 1
+            })
+        })
+        .then(r => r.json())
+        .then(resp => handleResponse(resp))
+      }
+  
+      const handleResponse = (resp) => {
+        if (resp.message) {
+          alert(resp.message)
+        } else {
+            addPhotoLike(id)
+        }
+      }
+  
 
 
     const redirectToGame = () => {
@@ -22,8 +46,8 @@ const GamePhotoCard = props => {
 
     const redirectToUser = () => {
         props.setShowUser(props.user_id)
-        props.history.push(`/users/${props.user_id}`)
-        // props.history.push(`users/${props.username.replace(/\s+/g, '')}`)
+        // props.history.push(`/users/${props.user_id}`)
+        props.history.push(`/users/${user_name.replace(/\s+/g, '')}`)
     }
 
     const renderFront = () => {
@@ -68,7 +92,9 @@ const GamePhotoCard = props => {
 const mapDispatchToProps = dispatch => {
     return {
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
-      setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
+      setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId)),
+      addPhotoLike: (photoId) => dispatch(action.addPhotoLike(photoId))
+      
     }
   }
   

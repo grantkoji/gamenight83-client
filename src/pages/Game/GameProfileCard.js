@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as action from '../../modules/actionCreators/actionCreators'
 
@@ -19,32 +19,11 @@ const GameProfileCard = props => {
  
     const redirectToUser = () => {
         props.setShowUser(creator_id)
-        props.history.push(`users/${creator_id}`)
+        // props.history.push(`/users/${creator_id}`)
+        props.history.push(`/users/${creator_username.replace(/\s+/g, '')}`)
     }
-    // redirectToTarget = () => {
-    //     this.props.history.push(`/target`)
-    //   }
-    //   render () {
-    //     return (
-    //        <div>
-    //         {this.renderRedirect()}
-    //         <button onClick={this.redirectToTarget}>Redirect</button>
-    //        </div>   
-    //     )
-    //   }
-    //   state = {
-    //     redirect: false
-    //   }
 
-    //   let [redirect, setRedirect] = useState(false)
-
-    //   const renderRedirect = () => {
-    //     if (redirect) {
-    //       return <Redirect to=`/users/{creator_id}` />
-    //     }
-    //   }
-
-
+ 
     return (
         <div>
             <div>

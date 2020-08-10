@@ -4,6 +4,8 @@ const games = (state=[], action) => {
     switch(action.type){
         case 'FETCH_GAMES': 
             return action.payload.value
+        case 'ADD_NEW_GAME':
+            return [...state, action.payload.value]
         default:
             return state
     }
