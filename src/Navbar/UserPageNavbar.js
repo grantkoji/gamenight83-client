@@ -10,13 +10,13 @@ import {connect} from 'react-redux'
         <div>
             <button name="photos" onClick={handleView}>Photos</button>
             <button name="reviews" onClick={handleView}>Reviews</button>
+            <button name="gamesCreated" onClick={handleView}>Games Created</button>
             <button name="friends" onClick={handleView}>Friends</button>
             {
             currentUser.id === showUser 
-            ? <button name="games" onClick={handleView}>Games</button>
+            ? <button name="games" onClick={handleView}>Post a Photo or Review</button>
             : <button name='mutualFriends' onClick={handleView}>Mutual Friends</button>
             }
-            <button name="gamesCreated" onClick={handleView}>Games Created</button>
        </div>
        </>
      )

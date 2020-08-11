@@ -62,24 +62,24 @@ const ProfileDisplayGames = props => {
         if (postType === "instructions") {
             return (
                 <div>
-                    <div>To Post a Photo or Review</div>
+                    <div>To Post a Game Review or Photo</div>
                     <div>Search the Games Listed Below</div>
-                    <div>Below the Game Photos, You Will Find Buttons</div>
-                    <div>When You Click a Button, a Form Will Appear</div>
-                    <div>In the Place of These Instructions</div>
+                    <div>Below their Pictures, You Will Find Buttons</div>
+                    <div>To Post a Photo or Write a Review</div>
+                    <div>When Clicked, a Form Will Appear in the Place of These Instructions</div>
                 </div>
           ) 
         } else if (postType === "review") {
             return (
                 <div>
-                    <div>Add a Review for {thisGameTitle}:</div>
+                    <div>Write a Review for {thisGameTitle}:</div>
                     <AddReviewForm thisGame={thisGameId}/>
                 </div>
             )  
         } else if (postType === "photo") {
             return (
                 <div>
-                    <div>Add a Photo for {thisGameTitle}:</div>
+                    <div>Post a Photo for {thisGameTitle}:</div>
                     <AddGamePhotoForm thisGame={thisGameId}/>
                 </div>
             )  

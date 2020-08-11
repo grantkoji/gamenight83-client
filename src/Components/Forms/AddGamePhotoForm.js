@@ -48,10 +48,10 @@ const AddGamePhotoForm = props => {
 
     return (
       <form onSubmit={handleSubmit}>
-        <label htmlFor="imageUrl">Photo Url:</label>
-        <input type="text" autoComplete="off" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
-        <label htmlFor="caption">Photo Caption:</label>
-        <input type="textarea" autoComplete="off" name="caption" value={caption} onChange={(e) => setCaption(e.target.value)}/>
+        <label htmlFor="imageUrl">Photo Url:</label><br/>
+        <input type="text" autoComplete="off" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/><br />
+        <label htmlFor="caption">Photo Caption:</label><br />
+        <input type="textarea" autoComplete="off" name="caption" value={caption} onChange={(e) => setCaption(e.target.value)}/><br />
         <button type="Submit">Submit</button>
       </form>
     );
