@@ -83,51 +83,6 @@ function App(props) {
   }
 
 
-
-
-
-  // renderForm = (routerProps) => {
-  //   if(routerProps.location.pathname === "/login"){
-  //     return <Login
-  //      handleResponse={this.handleResponse}
-  //     />
-  //   } else if (routerProps.location.pathname === "/register") {
-  //     return <SignUp
-  //        handleResponse={this.handleResponse}
-  //     />
-  //   }
-  // }
-
-
-
-  // const renderProfile = (routerProps) => {
-  //   if (this.state.token) {
-  //     return <UserPage user={this.state.user} token={this.state.token} addNewSnack={this.addNewSnack}/>
-  //   } else {
-  //     this.props.history.push("/login")
-  //   }
-  // }
-
-  // <Navbar class="container" />
-  // <Switch>
- 
-  //   <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
-  //   <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex {...routerprops} />}/>
-  
-  
-  //   <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops} />}/>
-  //   <Route exact path='/:id' render={(routerprops) => <GamePage {...routerprops} />}/>
-  
-  // </Switch>
-  // <ul>
-  //       {props.games
-
-  //       props.games.map(game => <li>{game.title}</li>)
-  //       : <div>Loading...</div>
-  //       }
-  //     </ul>
-  // '/profile'>
-  //  this.props.history.push(`/users/${userData.id}`) 
   return (
     <div className="App">
       <Navbar />

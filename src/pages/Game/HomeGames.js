@@ -19,11 +19,11 @@ const HomeGames = props => {
         if (games) {
             let gamesFiltered = [...games]
             if (searchType === 'username') {
-                gamesFiltered = games.filter(game => game.creator_username.toLowerCase().includes(search.toLowerCase()))
+                gamesFiltered = gamesFiltered.filter(game => game.creator_username.toLowerCase().includes(search.toLowerCase()))
             } else if (searchType === 'gameCategory') {
-                gamesFiltered = games.filter(game => game.game_category.toLowerCase().includes(search.toLowerCase()))
+                gamesFiltered = gamesFiltered.filter(game => game.game_category.toLowerCase().includes(search.toLowerCase()))
             } else if (searchType === 'gameTitle') {
-                gamesFiltered = games.filter(game => game.title.toLowerCase().includes(search.toLowerCase()))
+                gamesFiltered = gamesFiltered.filter(game => game.title.toLowerCase().includes(search.toLowerCase()))
             }
             if (typeNumPlayers === "withNumPlayers") {
                 gamesFiltered = gamesFiltered.filter(game => game.max_num_players >= parseInt(numPlayers) && 
