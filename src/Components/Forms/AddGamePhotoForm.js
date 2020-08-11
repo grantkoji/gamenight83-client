@@ -43,7 +43,7 @@ const AddGamePhotoForm = props => {
       }
     }
 
-    console.log(thisGame, caption, imageUrl)
+  
   
 
     return (

@@ -6,9 +6,20 @@ import {connect} from 'react-redux'
 
 const GameUserCard = props => {
     
-    const {title, min_age, min_num_players, max_num_players, id, setCurrentGame} = props
-    
-   
+    const {title, setThisGameId, setThisGameTitle, setPostType, id, setCurrentGame} = props
+                             
+    const handlePhoto = () => {
+        setThisGameId(id)
+        setThisGameTitle(title)
+        setPostType('photo')
+    }
+
+    const handleReview = () => {
+        setThisGameId(id)
+        setThisGameTitle(title)
+        setPostType('review')
+    }
+
     const redirectToGame = () => {
         setCurrentGame(id)
         localStorage.gameId = id
@@ -20,9 +31,9 @@ const GameUserCard = props => {
         <div>
             <img src={props["image_url"]} alt={title} />
             <div>{title}</div>
-            <button>Post a Photo</button>
-            <button>Write a Review</button>
-            <button onClick={redirectToGame}>Game: {title}</button>
+            <button onClick={handlePhoto}>Post a Photo</button>
+            <button onClick={handleReview}>Write a Review</button><br/>
+            <button onClick={redirectToGame}>Visit Page for {title}</button>
         </div>
     )
 }

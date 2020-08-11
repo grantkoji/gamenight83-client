@@ -30,7 +30,12 @@ const ProfileDisplayGames = props => {
     let [numPlayers, setNumPlayers] = useState(0)
     let [typeMinAge, setTypeMinAge] = useState('noMinAge')
     let [minAge, setMinAge] = useState(0)
-
+    //Below three hooks will be used to set the type of 
+    //post - review or photo - as well as the title and id
+    //of the game that the user will write a post or review on
+    let [postType, setPostType] = useState('instructions')
+    let [thisGameId, setThisGameId] = useState(null)
+    let [thisGameTitle, setThisGameTitle] = useState(null)
 
     let filteredGames = () => {
         if (games && thisUserCreatedGames.length) {
@@ -53,9 +58,40 @@ const ProfileDisplayGames = props => {
         } 
     }
 
+    const postedReviewOrPhoto = () => {
+        if (postType === "instructions") {
+            return (
+                <div>
+                    <div>To Post a Photo or Review</div>
+                    <div>Search the Games Listed Below</div>
+                    <div>Below the Game Photos, You Will Find Buttons</div>
+                    <div>When You Click a Button, a Form Will Appear</div>
+                    <div>In the Place of These Instructions</div>
+                </div>
+          ) 
+        } else if (postType === "review") {
+            return (
+                <div>
+                    <div>Add a Review for {thisGameTitle}:</div>
+                    <AddReviewForm thisGame={thisGameId}/>
+                </div>
+            )  
+        } else if (postType === "photo") {
+            return (
+                <div>
+                    <div>Add a Photo for {thisGameTitle}:</div>
+                    <AddGamePhotoForm thisGame={thisGameId}/>
+                </div>
+            )  
+        }
+    }
+
     return (
         <div>
             <div className="container6">
+                <div>
+                    {postedReviewOrPhoto()}
+                </div>
                 <div>
                     <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                 </div>
@@ -71,13 +107,20 @@ const ProfileDisplayGames = props => {
                         setMinAge={setMinAge}  
                     />
                 </div>
+ 
                 <div>
                     {games && games.length 
                     ? <div> 
                         <div>Select a Game to Post a Photo or Write a Review:</div>
                         <div>{filteredGames().map(game => 
                             <div>
-                                <GameUserCard key={game.id} {...game} />
+                                <GameUserCard 
+                                    key={game.id} 
+                                    {...game} 
+                                    setThisGameId={setThisGameId}
+                                    setThisGameTitle={setThisGameTitle}
+                                    setPostType={setPostType}
+                                />
                             </div>
                         )}
                         </div>
