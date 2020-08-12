@@ -25,18 +25,65 @@ import {connect} from 'react-redux'
 const UserPage = props => {
   
     
-    const { games, token, users, reviews, gamePhotos, currentUser, showUser} = props
-    let thisPageUser = users.find(user => user.id === showUser) 
+    const { games, token, users, reviews, gamePhotos, currentUser, showUser, setCurrentUser} = props
+    let thisPageUser = users.find(user => user.id === showUser)
     // const {total_friends, username, name, id, profile_url, age, fav_games} = thisPageUser
     let thisUserReviews = reviews.filter(review => review.user_id === showUser)
     let thisUserGamePhotos = gamePhotos.filter(photo => photo.user_id === showUser)
     let thisUserCreatedGames = games.filter(game => game.creator_id === showUser)
-
+    // let updatedCurrentUser = users.find(user => user.id === currentUser.id)
+    // let currentUserFRSent = updatedCurrentUser.friend_requests_sent
+    // let currentUserFRReceived = updatedCurrentUser.friend_requests_received
     let [view, setView] = useState('photos')
+//     # Friend Requests
+//   has_many :friendship_requests
+//   has_many :requests, :through => :friendships
+//   has_many :inverse_friendship_requests, :class_name => "FriendshipRequest", :foreign_key => "request_id"
+//   has_many :inverse_requests, :through => :inverse_friendship_requests, :source => :user
+    // const currentUserFriendshipStatus = () => {
+    //     if (thisPageUser.total_friends.some(friend => friend.id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <div>You are Friends</div>
+    //                 <button>Click to Unfriend</button>
+    //             </div>
+    //         )
+    //     } else if (thisPageUser.friend_requests_sent.some(friendRequest => friendRequest.request_id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <button>Click to Accept Friend Request</button>
+    //             </div>
+    //         )
+    //     } else if (thisPageUser.friend_requests_received.some(fr => fr.id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <div>Friendship Requested</div>
+    //                 <button>Click to Cancel</button>
+    //             </div>
+    //         )
+    //     } else {
+    //         return(
+    //             <div>
+    //                 <button>Click to Request Friendship</button>
+    //             </div>
+    //         )
+    //     }
+    // }
+//     attributes :id, :request_name, :user_id, :request_id, :user_name
+//     if (currentUserFRReceived.some(fr => ))
+//     create_table "friendship_requests", force: :cascade do |t|
+//     t.integer "user_id"
+//     t.integer "request_id"
+//   end
 
+//   create_table "friendships", force: :cascade do |t|
+//     t.integer "user_id"
+//     t.integer "friend_id"
+//   end
     const handleView = e => {
         setView(e.target.name)
     }
+    
     
     const mutualFriends = () => {
         if (thisPageUser.total_friends.length > 0 && currentUser.total_friends.length > 0) {
@@ -178,7 +225,29 @@ const UserPage = props => {
 
 
 
-
+    const requestFriendship = () => {
+        fetch('http://localhost:3001/api/v1/friendship_requests', {
+            method: "POST",
+            headers: {
+            "content-type": "application/json",
+            "Authorization": token
+            },
+            body: JSON.stringify({
+            request_id: showUser
+            })
+        })
+        .then(r => r.json())
+        .then(resp => handleResponse(resp))
+    }
+  
+      const handleResponse = (resp) => {
+        if (resp.message) {
+          alert(resp.message)
+        } else {
+          alert(`Friend Request Sent!`)
+        }
+      }
+    
 
 
 
@@ -187,6 +256,7 @@ const UserPage = props => {
   
     return (
         <div>
+            {currentUser.id !== showUser && <button onClick={requestFriendship}>Request Friendship</button>}
             {thisPageUser && <UserProfileCard user={thisPageUser}/>}
             <div>
                 <UserPageNavbar handleView={handleView} />
@@ -216,7 +286,7 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
-      setCurrentUser: (userId) => dispatch(action.setCurrentUser(userId)),
+      setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
       setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
       setShowUser: (userId) => dispatch(action.setShowUser(userId))
     }

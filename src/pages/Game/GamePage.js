@@ -9,7 +9,7 @@ import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import {connect} from 'react-redux'
 
 const GamePage = props => {
-    const { games, token, users, reviews, gamePhotos, currentUser, currentGame} = props
+    const { games, token, users, reviews, gamePhotos, currentGame} = props
     let thisPageReviews = reviews.filter(review => review.game_id === currentGame)
     let thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
     let thisPageGame = games.find(game => game.id === currentGame)  
@@ -89,7 +89,6 @@ const mapStateToProps = state => {
       users: state.users,
       reviews: state.reviews,
       gamePhotos: state.gamePhotos,
-      currentUser: state.currentUser,
       showUser: state.showUser,
       currentGame: state.currentGame
     }
@@ -97,7 +96,6 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
-      setCurrentUser: (userId) => dispatch(action.setCurrentUser(userId)),
       setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
       setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))

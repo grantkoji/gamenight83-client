@@ -47,6 +47,14 @@ function App(props) {
 
     requests.fetchAllGamePhotos()
     .then(gamePhotoData => props.fetchGamePhotos(gamePhotoData))
+
+    // requests.fetchAllFriendships()
+    // .then(friendshipData => props.fetchFriendships(friendshipData))
+
+    // requests.fetchAllFriendshipRequests()
+    // .then(frData => props.fetchFriendshipRequests(frData))
+
+    
     
     if (localStorage.token) {
 
@@ -81,7 +89,7 @@ function App(props) {
       props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
-
+  console.log(props.friendshipRequests, props.friendships)
 
   return (
     <div className="App">
@@ -108,7 +116,9 @@ const mapStateToProps = state => {
     users: state.users,
     reviews: state.reviews,
     gamePhotos: state.gamePhotos,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    friendships: state.friendships,
+    friendshipRequests: state.friendshipRequests
   }
 }
 
@@ -121,7 +131,9 @@ const mapDispatchToProps = dispatch => {
     setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
     setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
     setShowUser: (userId) => dispatch(action.setShowUser(userId)),
-    setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
+    setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId)),
+    fetchFriendships: (friendships) => dispatch(action.fetchFriendships(friendships)),
+    fetchFriendshipRequests: (fRequests) => dispatch(action.fetchFriendshipRequests(fRequests))
   }
 }
 

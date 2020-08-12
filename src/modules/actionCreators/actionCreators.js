@@ -14,6 +14,12 @@ let addReview = review => ({type: 'ADD_REVIEW', payload: {value: review}})
 let addGamePhoto = photo => ({type: 'ADD_GAME_PHOTO', payload: {value: photo}})
 let addPhotoLike = photoId => ({type: 'ADD_PHOTO_LIKE', payload: {value: photoId}})
 let addGame = game => ({type: 'ADD_NEW_GAME', payload: {value: game}})
+let fetchFriendshipRequests = fr => ({type: 'FETCH_FRIENDSHIP_REQUESTS', payload: {value: fr}})
+let fetchFriendships = friendships => ({type: 'FETCH_FRIENDSHIPS', payload: {value: friendships}})
+let addFriendshipRequest = fr => ({type: 'ADD_FRIENDSHIP_REQUEST', payload: {value: fr}})
+let addFriendship = friendship => ({type: 'ADD_FRIENDSHIP', payload: {value: friendship}})
+let removeFriendshipRequest = frId => ({type: 'REMOVE_FRIENDSHIP_REQUEST', payload: {value: frId}})
+
 
 export {
     setCurrentToken,
@@ -25,11 +31,16 @@ export {
     fetchUsers,
     fetchGames,
     fetchGamePhotos,
+    fetchFriendshipRequests,
+    fetchFriendships,
     removeCurrentToken,
     setShowUser, 
     addUser, 
     addReview,
     addGamePhoto,
     addPhotoLike,
-    addGame
+    addGame,
+    addFriendshipRequest,
+    removeFriendshipRequest,
+    addFriendship
 }

@@ -156,7 +156,7 @@ const msp = state => {
   
   const mdp = dispatch => {
     return {
-      setCurrentUser: (userId) => dispatch(action.setCurrentUser(userId)),
+      setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
       setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
       setShowUser: (userId) => dispatch(action.setShowUser(userId))
     }

@@ -21,6 +21,7 @@ import {connect} from 'react-redux'
       props.history.push(`users/${props.currentUser.username.replace(/\s+/g, '')}`)
     }
 
+
   
 
 

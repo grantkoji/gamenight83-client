@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+/* 
+Drag and grid will give me CSS absolute position coordinates for 
+certain containers I've made 
+Put those absolute positions i nto a class CSS
+And then name the features in my front end after the class name of where 
+I want them to be picture
+
+drag and drop 
+
+All CSS absolute position
+
+B/c they exist in CSS structures
+They inherit from class they style
+
+Row column card type formation. 
+I can have them in a row and one can come to the front if you hover over input
+For long enough 
+
+Row .map 
+<Col md={4}/>
+  Card 
+    Card.img 
+    Card.title
+    Card.body
+STYLE COLUMN MEDIUM 4/SMALL 2 ...small is breakpoint
+  going to give me 4 in my row 
+
+Row
+  <Col md={6}/>  <Col md={3}/> <Col md={3} />
+  Row              Row           Row 
+    Col              Col          Col
+      Card             Card         Card */
