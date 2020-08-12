@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
 
 const UserDisplayPhotos = props => {
     const {
-        mutualFriendsList,
+        mutualFriends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -59,12 +59,29 @@ const UserDisplayPhotos = props => {
             return filteredGamePhotos
         }  
     }
-//     <div class="ui grid">
-//   <div class="four wide column"></div>
-//   <div class="four wide column"></div>
-//   <div class="four wide column"></div>
-//   <div class="four wide column"></div>
-// </div>
+    let mutualFriendsList = () => {
+        if(mutualFriends) {
+            return (
+                <>
+                    <div> 
+                        <div>Mutual Friends:</div>
+                        <div>
+                            {mutualFriends.map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend}/>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    </>
+            )
+        } else {
+            return (
+                <div>No Mutual Friends Listed</div>
+            )
+        }
+    }
+
     return (
         <div>
             <div className="ui grid">

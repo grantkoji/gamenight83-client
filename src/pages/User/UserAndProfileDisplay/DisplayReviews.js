@@ -16,7 +16,7 @@ import UserProfileCard from '../UserProfileCard'
 
 const UserDisplayReviews= props => {
     const {
-        mutualFriendsList,
+        mutualFriends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -51,6 +51,29 @@ const UserDisplayReviews= props => {
             }
             return reviewsFiltered
         } 
+    }
+
+    let mutualFriendsList = () => {
+        if(mutualFriends) {
+            return (
+                <>
+                    <div> 
+                        <div>Mutual Friends:</div>
+                        <div>
+                            {mutualFriends.map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend}/>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    </>
+            )
+        } else {
+            return (
+                <div>No Mutual Friends Listed</div>
+            )
+        }
     }
 
     return (

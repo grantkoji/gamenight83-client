@@ -12,17 +12,16 @@ const ReviewOnGamePage = props => {
     const redirectToUser = () => {
         props.setShowUser(user_id)
         // props.history.push(`/users/${user_id}`)
-        props.history.push(`/users/${props.username.replace(/\s+/g, '')}`)
+        props.history.push(`/users/${props.user_name.replace(/\s+/g, '')}`)
     }
      
         return (
             <div>
                 <div>
-                    <div>by: {user_name}</div>
+                    <div onClick={redirectToUser}>by: {user_name}</div>
                     <ReactStars count={5} value={num_stars} size={18}/>
                     <div>{content}</div>
                 </div>
-                <button onClick={redirectToUser}>Visit {user_name}</button>
             </div>
         ) 
 }

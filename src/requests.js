@@ -32,10 +32,11 @@ export const fetchAllGamePhotos = () => fetch(gamePhotosURL)
 .catch(catchError)
 
 
-// export const fetchAllFriendshipRequests = () => fetch(friendshipsURL)
-// .then(parseData)
-// .catch(catchError)
+export const fetchAllFriendshipRequests = () => fetch(friendshipRequestsURL)
+.then(parseData)
+.catch(catchError)
 
-// export const fetchAllFriendships = () => fetch(friendshipRequestsURL)
-// .then(parseData)
-// .catch(catchError)
+
+export const fetchAllFriendships = () => fetch(friendshipsURL)
+.then(parseData)
+.catch(catchError)

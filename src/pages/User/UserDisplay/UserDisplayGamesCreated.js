@@ -16,7 +16,7 @@ import UserProfileCard from '../UserProfileCard'
 
 const UserDisplayGamesCreated = props => {
     const {
-        mutualFriendsList,
+        mutualFriends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -53,6 +53,29 @@ const UserDisplayGamesCreated = props => {
             }
             return gamesFiltered
         } 
+    }
+
+    let mutualFriendsList = () => {
+        if(mutualFriends) {
+            return (
+                <>
+                    <div> 
+                        <div>Mutual Friends:</div>
+                        <div>
+                            {mutualFriends.map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend}/>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    </>
+            )
+        } else {
+            return (
+                <div>No Mutual Friends Listed</div>
+            )
+        }
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import UserCard from './UserCard'
@@ -26,50 +26,117 @@ import {connect} from 'react-redux'
 const UserPage = props => {
   
     
-    const { games, token, users, reviews, gamePhotos, currentUser, showUser, setCurrentUser} = props
+    const { games, 
+            token, 
+            users, 
+            reviews, 
+            gamePhotos, 
+            currentUser, 
+            showUser, 
+            setCurrentUser, 
+            friendships,
+            friendshipRequests} = props
+    
     let thisPageUser = users.find(user => user.id === showUser)
     // const {total_friends, username, name, id, profile_url, age, fav_games} = thisPageUser
     let thisUserReviews = reviews.filter(review => review.user_id === showUser)
     let thisUserGamePhotos = gamePhotos.filter(photo => photo.user_id === showUser)
     let thisUserCreatedGames = games.filter(game => game.creator_id === showUser)
+    
+    let currentUserInitFriendships = friendships.filter(friend => friend.user_id === currentUser.id || friend.friend_id === currentUser.id)
+    let thisUserOutgoingRequested = friendshipRequests.filter(fr => fr.user_id === showUser)
+    let thisUserIncomingRequested = friendshipRequests.filter(fr => fr.request_id === showUser)
+    let currentUserOutgoingFriendsRequested = friendshipRequests.filter(fr => fr.user_id === currentUser.id)
+    let currentUserIncomingFriendsRequested = friendshipRequests.filter(fr => fr.request_id === currentUser.id)
+    let mutualFriendMatches = null
+    let thisUserInitFriendships = friendships.filter(friend => friend.user_id === showUser || friend.friend_id === showUser)
+
+       
+    
+   
+            let currentUserFriends = []
+            if (currentUser && currentUserInitFriendships.length) {
+                currentUserInitFriendships.forEach(friendship => {
+                    if (friendship.user_id === currentUser.id) {
+                        if (currentUserFriends.length > 0 && currentUserFriends.some(user => user.id === friendship.friend_id) === false) {
+                            currentUserFriends.push(users.find(user => user.id === friendship.friend_id))
+                        }
+                    } else {
+                        if (currentUserFriends.length > 0 && currentUserFriends.some(user => user.id === friendship.user_id) === false) {
+                            currentUserFriends.push(users.find(user => user.id === friendship.user_id))
+                        }
+                    }
+                })
+            }
+
+            console.log(currentUserFriends)
+           
+        
+
+   
+    // let userFriendsRequested = (userInitFriendRequests) => {
+    //     if (userInitFriendRequests && userInitFriendRequests.length) {
+    //         let frUsers = []
+    //         userInitFriendRequests.forEach(fr => {
+    //             if (fr.user_id === thisPageUser.id) {
+    //                 if (!frUsers.some(user => user.id === fr.request_id)) {
+    //                     frUsers.push(users.find(user => user.id === fr.request_id))
+    //                 }
+    //             } else {
+    //                 if (!frUsers.some(user => user.id === fr.user_id)) {
+    //                     frUsers.push(users.find(user => user.id === fr.user_id))
+    //                 }
+    //             }
+    //         })
+    //         if (frUsers.length) {
+    //             return frUsers
+    //         } else {
+    //             return null
+    //         }       
+    //     } else {
+    //         return null
+    //     }
+    // }
+    
     // let updatedCurrentUser = users.find(user => user.id === currentUser.id)
     // let currentUserFRSent = updatedCurrentUser.friend_requests_sent
     // let currentUserFRReceived = updatedCurrentUser.friend_requests_received
+    
     let [view, setView] = useState('photos')
 //     # Friend Requests
 //   has_many :friendship_requests
 //   has_many :requests, :through => :friendships
 //   has_many :inverse_friendship_requests, :class_name => "FriendshipRequest", :foreign_key => "request_id"
 //   has_many :inverse_requests, :through => :inverse_friendship_requests, :source => :user
-    // const currentUserFriendshipStatus = () => {
-    //     if (thisPageUser.total_friends.some(friend => friend.id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <div>You are Friends</div>
-    //                 <button>Click to Unfriend</button>
-    //             </div>
-    //         )
-    //     } else if (thisPageUser.friend_requests_sent.some(friendRequest => friendRequest.request_id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <button>Click to Accept Friend Request</button>
-    //             </div>
-    //         )
-    //     } else if (thisPageUser.friend_requests_received.some(fr => fr.id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <div>Friendship Requested</div>
-    //                 <button>Click to Cancel</button>
-    //             </div>
-    //         )
-    //     } else {
-    //         return(
-    //             <div>
-    //                 <button>Click to Request Friendship</button>
-    //             </div>
-    //         )
-    //     }
-    // }
+    const currentUserFriendshipStatus = () => {
+        if (thisPageUser.total_friends.some(friend => friend.id === currentUser.id)) {
+            return (
+                <div>
+                    <div>You are Friends</div>
+                    <button>Click to Unfriend</button>
+                </div>
+            )
+        } else if (thisPageUser.friend_requests_sent.some(friendRequest => friendRequest.request_id === currentUser.id)) {
+            return (
+                <div>
+                    <button>Click to Accept Friend Request</button>
+                </div>
+            )
+        } else if (thisPageUser.friend_requests_received.some(fr => fr.id === currentUser.id)) {
+            return (
+                <div>
+                    <div>Friendship Requested</div>
+                    <button>Click to Cancel</button>
+                </div>
+            )
+        } else {
+            return(
+                <div>
+                    <button>Click to Request Friendship</button>
+                </div>
+            )
+        }
+    }
 //     attributes :id, :request_name, :user_id, :request_id, :user_name
 //     if (currentUserFRReceived.some(fr => ))
 //     create_table "friendship_requests", force: :cascade do |t|
@@ -85,17 +152,18 @@ const UserPage = props => {
         setView(e.target.name)
     }
     
-    
-    const mutualFriends = () => {
-        if (thisPageUser.total_friends.length > 0 && currentUser.total_friends.length > 0) {
+  
+    const mutualFriends = (thisUserFriends, showUserFriends) => {
+      if (thisUserFriends && thisUserFriends.length && showUserFriends && showUserFriends.length) {
             let matchingArray = []
-            for (let i = 0; i < thisPageUser.total_friends.length; i++) {  
-                if (currentUser.total_friends.some(friend => friend.username === thisPageUser.total_friends[i].username)) {
-                    matchingArray.push(thisPageUser.total_friends[i])
+            thisUserFriends.forEach(tUFriend => {
+                if (showUserFriends.some(friend => friend.id === tUFriend.id)) {
+                    matchingArray.push(tUFriend)
                 }
-            }  
+            })
             if (matchingArray.length) {
                 return matchingArray 
+                
                 
             } else {
                 return  null
@@ -105,36 +173,26 @@ const UserPage = props => {
             return null
         }
     }
+    
+    useEffect(() => {
+        
+        // mutualFriendMatches = mutualFriends(userFriends(thisUserInitFriendships, showUser), userFriends(currentUserInitFriendships, currentUser.id))
+        // let i = userFriends(thisUserInitFriendships, showUser)
+        thisUserInitFriendships = "changed"
+  
 
-    let mutualFriendsList = () => {
-        if(mutualFriends()) {
-            return (
-                <>
-                    <div> 
-                        <div>Mutual Friends:</div>
-                        <div>
-                            {mutualFriends().map(friend => 
-                                <div>
-                                    <UserCard key={friend.id} {...friend}/>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    </>
-            )
-        } else {
-            return (
-                <div>No Mutual Friends Listed</div>
-            )
-        }
-    }
+    }, [showUser])
+  
 
-
+ 
+   
     const renderChangingShowCards = () => {
+       
         if (view === 'photos' && currentUser.id !== showUser) {
+
             return (
                 <UserDisplayPhotos 
-                    mutualFriendsList={mutualFriendsList}
+                    mutualFriends={mutualFriendMatches}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
                     thisUserGamePhotos={thisUserGamePhotos}
@@ -155,7 +213,7 @@ const UserPage = props => {
         else if (view === 'reviews') {
             return (
                 <DisplayReviews 
-                    mutualFriendsList={mutualFriendsList}
+                    mutualFriends={mutualFriendMatches}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
                     thisUserGamePhotos={thisUserGamePhotos}
@@ -174,7 +232,7 @@ const UserPage = props => {
         } else if (view === 'friends' && currentUser.id !== showUser) {
             return (
            <UserDisplayFriends
-                mutualFriendsList={mutualFriendsList}
+                mutualFriends={mutualFriendMatches}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
@@ -194,7 +252,7 @@ const UserPage = props => {
        else if (view === 'mutualFriends' ) {
             return (
             <UserDisplayMutualFriends 
-                mutualFriends={mutualFriends()}
+                mutualFriends={mutualFriendMatches}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
@@ -205,7 +263,7 @@ const UserPage = props => {
         else if (view === "gamesCreated" && currentUser.id !== showUser) {
             return (
            <UserDisplayGamesCreated
-                mutualFriendsList={mutualFriendsList}
+                mutualFriends={mutualFriendMatches}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
@@ -256,8 +314,8 @@ const UserPage = props => {
     
   
     return (
-        <>
-            <Container fluid>
+        <>{ token 
+            ? <Container fluid>
                 <Row>
                     <Col xs={2} id='sidebar-wrapper'>
                         <UserPageNavbar handleView={handleView} requestFriendship={requestFriendship}/>
@@ -269,6 +327,11 @@ const UserPage = props => {
                     </Col>
                 </Row>        
             </Container>
+            : <> 
+                <h1>You Must Be Logged into an Account</h1>
+                <h1>to Access User Pages </h1>
+            </>
+        }
         </>
     )
 
@@ -282,7 +345,9 @@ const mapStateToProps = state => {
       reviews: state.reviews,
       gamePhotos: state.gamePhotos,
       currentUser: state.currentUser,
-      showUser: state.showUser
+      showUser: state.showUser,
+      friendshipRequests: state.friendshipRequests,
+      friendships: state.friendships
     }
   }
   
