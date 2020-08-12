@@ -2,7 +2,8 @@
 import React, { useState, Component } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 const Login = props => {
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
@@ -44,14 +45,25 @@ const Login = props => {
   
 
     return (
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label htmlFor="username">Username:</label>
-        <input type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-        <label htmlFor="password">Password:</label>
-        <input type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-        <button type="Submit">Submit</button>
-      </form>
+     
+        
+              <form className="ui form" onSubmit={handleSubmit}>
+              <h3 class="ui dividing header">Login</h3>
+                <div class="fields">
+                  <div className="sixteen wide field">
+                  <label htmlFor="username">Username:</label>
+                  <input className="form-input" type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                  </div>
+                </div>
+                <div class="fields">
+                  <div className="sixteen wide field">
+                    <label htmlFor="password">Password:</label>
+                    <input className="form-input" type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  </div>
+                </div>
+                <Button variant="outline-info" type="submit">Submit</Button>
+              </form>
+      
     );
   
 

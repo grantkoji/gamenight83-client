@@ -9,6 +9,7 @@ import SearchBarPhotos from '../../../Components/SearchBars/SearchBarPhotos'
 import FilterPhotosByLikes from '../../../Components/Filters/FilterPhotosByLikes';
 import SortPhotos from '../../../Components/Sort/SortPhotos';
 import {connect} from 'react-redux'
+import UserProfileCard from '../UserProfileCard'
 
 const ProfileDisplayPhotos = props => {
     const {
@@ -56,6 +57,7 @@ const ProfileDisplayPhotos = props => {
 
     return (
     <div>
+        {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
         <div className="container6">
             <div>
                 <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>

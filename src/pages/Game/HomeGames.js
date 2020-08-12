@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import GameCard from './GameCard'
 import SearchBarGames from '../../Components/SearchBars/SearchBarGames'
 import FilterGamesByNum from '../../Components/Filters/FilterGamesByNum'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 const HomeGames = props => {
     const {games} = props
@@ -56,18 +58,20 @@ const HomeGames = props => {
                         setMinAge={setMinAge}  
                     />
                 </div>
-                <div>
-                    {  
-                    games && games.length
-                    ? filteredGames().map(game => {
-                        return (
-                            <div>
-                                <GameCard key={game.id} {...game} />
-                            </div>
-                        )
-                    })
-                    : "Loading..."}
-                </div>
+                <Container fluid>
+                    <Row>
+                        {  
+                        games && games.length
+                        ? filteredGames().map(game => {
+                            return (
+                              
+                                    <GameCard key={game.id} {...game} />
+                             
+                            )
+                        })
+                        : "Loading..."}
+                    </Row>
+                </Container>
             </>
         )
     

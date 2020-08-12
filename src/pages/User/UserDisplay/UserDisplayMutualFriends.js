@@ -5,7 +5,7 @@ import ReviewCard from '../../Review/ReviewCard'
 import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
 import SearchBarUsers from '../../../Components/SearchBars/SearchBarUsers'
-
+import UserProfileCard from '../UserProfileCard'
 
 
 const UserDisplayMutualFriends = props => {
@@ -51,6 +51,7 @@ const UserDisplayMutualFriends = props => {
 
     return (
         <div>
+            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             <div className="container6">
                 <div>
                     <SearchBarUsers 

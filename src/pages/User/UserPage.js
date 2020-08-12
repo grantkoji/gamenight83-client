@@ -5,7 +5,7 @@ import UserCard from './UserCard'
 import ReviewCard from '../Review/ReviewCard'
 import GamePhotoCard from '../GamePhoto/GamePhotoCard'
 import GameCard from '../Game/GameCard'
-import UserProfileCard from './UserProfileCard'
+
 import AddReviewForm from '../../Components/Forms/AddReviewForm'
 import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import UserPageNavbar from '../../Navbar/UserPageNavbar'
@@ -20,6 +20,7 @@ import UserDisplayMutualFriends from './UserDisplay/UserDisplayMutualFriends'
 import UserDisplayGamesCreated from './UserDisplay/UserDisplayGamesCreated'
 import UserDisplayPhotos from './UserDisplay/UserDisplayPhotos'
 import UserDisplayFriends from './UserDisplay/UserDisplayFriends'
+import {Container, Row, Col, Card } from 'react-bootstrap';
 import {connect} from 'react-redux'
 
 const UserPage = props => {
@@ -255,19 +256,20 @@ const UserPage = props => {
     
   
     return (
-        <div>
-            {currentUser.id !== showUser && <button onClick={requestFriendship}>Request Friendship</button>}
-            {thisPageUser && <UserProfileCard user={thisPageUser}/>}
-            <div>
-                <UserPageNavbar handleView={handleView} />
-            </div>
-            <div>
-                {renderChangingShowCards()}
-            </div>
-            
-            
-           
-        </div>
+        <>
+            <Container fluid>
+                <Row>
+                    <Col xs={2} id='sidebar-wrapper'>
+                        <UserPageNavbar handleView={handleView} requestFriendship={requestFriendship}/>
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">   
+                        <div>
+                            {renderChangingShowCards()}
+                        </div>
+                    </Col>
+                </Row>        
+            </Container>
+        </>
     )
 
 

@@ -11,7 +11,7 @@ import GameUserCard from '../../Game/GameUserCard'
 import SearchBarGames from '../../../Components/SearchBars/SearchBarGames'
 import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum'
 import {connect} from 'react-redux'
-
+import UserProfileCard from '../UserProfileCard'
 
 
 const UserDisplayGamesCreated = props => {
@@ -57,6 +57,7 @@ const UserDisplayGamesCreated = props => {
 
     return (
         <div>
+            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             <div className="container6">
                 <div>
                     <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>

@@ -3,6 +3,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
 const GameCard = props => {
     
@@ -15,16 +17,25 @@ const GameCard = props => {
         props.history.push(`/games/${id}`)
     }
 
-
+// overflow: hidden 
+// Can have it be a certian size anything over it hid it
+// min height min width
+// height auto width auto
+// Set min width and min height to the speific level that you want
+// go to w3 schools and search for image sizing
     return (
-        <div>
-            <img src={props["image_url"]} alt={title} />
-            <div>{title}</div>
-            <div>Minimum # Players: {min_num_players}</div>
-            <div>Maximum # Players: {max_num_players}</div>
-            <div>Minimum Age: {min_age}</div>
-            <button onClick={redirectToGame}>Game: {title}</button>
-        </div>
+        <Col md={4}>
+            <Card>
+                <Card.Img className='images' src={props["image_url"]} alt={title} />
+                <Card.Title>{title}</Card.Title>
+                <Card.Body>
+                <div>Minimum # Players: {min_num_players}</div>
+                <div>Maximum # Players: {max_num_players}</div>
+                <div>Minimum Age: {min_age}</div>
+                <button onClick={redirectToGame}>Game: {title}</button>
+                </Card.Body>
+            </Card>
+        </Col>
     )
 }
 

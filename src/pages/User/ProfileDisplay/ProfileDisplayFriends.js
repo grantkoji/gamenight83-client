@@ -7,6 +7,7 @@ import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
 import SearchBarUsers from '../../../Components/SearchBars/SearchBarUsers'
 import {connect} from 'react-redux'
+import UserProfileCard from '../UserProfileCard'
 
 const ProfileDisplayFriends = props => {
     const {
@@ -31,6 +32,7 @@ const ProfileDisplayFriends = props => {
 
     return (
     <div>
+        {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
         <div className="container6">
             <div>
                 <SearchBarUsers 

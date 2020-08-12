@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import rootReducer from './modules/reducers/reducers'
+import 'semantic-ui-css/semantic.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 let store = createStore(
         rootReducer,

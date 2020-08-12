@@ -11,7 +11,7 @@ import GameUserCard from '../../Game/GameUserCard'
 import SearchBarReviews from '../../../Components/SearchBars/SearchBarReviews'
 import FilterReviewsByStars from '../../../Components/Filters/FilterReviewsByStars'
 import {connect} from 'react-redux'
-
+import UserProfileCard from '../UserProfileCard'
 
 
 const UserDisplayReviews= props => {
@@ -55,6 +55,7 @@ const UserDisplayReviews= props => {
 
     return (
         <div>
+            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             <div className="container6">
                 <div>
                     <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>

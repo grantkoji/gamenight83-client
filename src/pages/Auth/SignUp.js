@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import Button from 'react-bootstrap/Button'
 
 const SignUp = props => {
 
@@ -63,23 +64,39 @@ const SignUp = props => {
    
     return (
       <div>
-        <div>
-          <h1>Sign Up</h1>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-          <label htmlFor="password">Password:</label>
-          <input type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input type="password" autoComplete="off" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-          <label htmlFor="name">Name:</label>
-          <input type="text" autoComplete="off" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
-          <label htmlFor="favGames">Favorite Games:</label>
-          <input type="text" autoComplete="off" name="favGames" value={favGames} onChange={(e) => setFavGames(e.target.value)}/>
-          <label htmlFor="age">Age:</label>
-          <input type="number" autoComplete="off" name="age" value={age} onChange={(e) => setAge(e.target.value)}/>
-          <button type="Submit">Submit</button>
+        <form className="ui form" onSubmit={handleSubmit}>
+        <h3 class="ui dividing header">Sign Up</h3>
+          <div className="fields">
+            <div className="eight wide field">
+              <label htmlFor="username">Username:</label>
+              <input type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            </div>
+            <div className="eight wide field">
+              <label htmlFor="name">Name:</label>
+              <input type="text" autoComplete="off" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+           </div>
+          </div>
+          <div className="fields">
+            <div className="eight wide field">
+              <label htmlFor="password">Password:</label>
+              <input type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            </div>
+            <div className="eight wide field">
+                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <input type="password" autoComplete="off" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+            </div>
+          </div>
+            <div className="fields">
+              <div className="ten wide field">
+                <label htmlFor="favGames">Favorite Games:</label>
+                <input type="text" autoComplete="off" name="favGames" value={favGames} onChange={(e) => setFavGames(e.target.value)}/>
+              </div>
+              <div className="six wide field">
+                <label htmlFor="age">Age:</label>
+                <input type="number" autoComplete="off" name="age" value={age} onChange={(e) => setAge(e.target.value)}/>
+              </div>
+            </div>
+          <Button variant="outline-info" type="submit">Submit</Button>
         </form>
       </div>
     );

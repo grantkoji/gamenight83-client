@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 const AddReviewForm = props => {
     const {token, thisGame} = props
