@@ -6,19 +6,19 @@ import {connect} from 'react-redux'
 
 const ReviewCard = props => {
     
-    let [toggleFront, setToggleFront] = useState(true);
+    // let [toggleFront, setToggleFront] = useState(true);
     const {game_photo, game_title, user_name, num_stars, content, id, user_id, game_id} = props
 
-    const renderFront = () => {
-        return (
-            <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-                <img src={game_photo} alt={game_title}/>
-                <div>by: {user_name}</div>
-                <div>{num_stars}</div>
-            </div>
-        )
+    // const renderFront = () => {
+    //     return (
+    //         <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
+    //             <img src={game_photo} alt={game_title}/>
+    //             <div>by: {user_name}</div>
+    //             <div>{num_stars}</div>
+    //         </div>
+    //     )
 
-    }
+    // }
 
     const redirectToGame = () => {
         props.setCurrentGame(game_id)
@@ -32,31 +32,35 @@ const ReviewCard = props => {
         props.history.push(`/users/${user_name.replace(/\s+/g, '')}`)
     }
 
-    const renderBack = () => {  
-        return (
-            <div>
-                <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-                    <div>Review:</div>
-                    <div>Game: {game_title}</div>
-                    <div>by: {user_name}</div>
-                    <div>{num_stars}</div>
-                    <div>{content}</div>
-                </div>
-                <button onClick={redirectToGame}>Go to {game_title}</button>
-                <button onClick={redirectToUser}>Visit {user_name}</button>
-            </div>
-        )
-    }
+  
+    // const renderBack = () => {  
+    //     return (
+    //         <div>
+              
+                
+    //         </div>
+    //     )
+    // }
 
 
 
 
     return (
-        <div>
-            {toggleFront
-            ? renderFront()
-            : renderBack()}
-        </div>
+        <div className="ui card">
+            <div className="image">
+                <img src={game_photo} alt={game_title}/>
+            </div>
+            <div className="content">
+                <a className="header" onClick={redirectToGame}>{game_title}</a>
+                <span className="date" onClick={redirectToUser}>by {user_name}</span>
+            </div> 
+            <div className="description">
+                <div>{content}</div>
+            </div>
+            <div className="extra content">
+                <div>{num_stars}</div>
+            </div>  
+        </div>   
     )  
 }
 

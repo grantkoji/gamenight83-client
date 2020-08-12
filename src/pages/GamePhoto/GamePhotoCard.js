@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 const GamePhotoCard = props => {
-    let [toggleFront, setToggleFront] = useState(true);
+    // let [toggleFront, setToggleFront] = useState(true);
     const {id, game_title, user_name, user_id, game_id, caption, likes, addPhotoLike} = props
     
 
@@ -50,39 +50,51 @@ const GamePhotoCard = props => {
         props.history.push(`/users/${user_name.replace(/\s+/g, '')}`)
     }
 
-    const renderFront = () => {
-        return (
-            <div>
-                <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-                    <img src={props["image_url"]} alt={game_title} />
-                </div>
-                <button onClick={addLike}>❤️ {likes}</button>
-            </div>
-        )
+    // const renderFront = () => {
+    //     return (
+    //         <div>
+    //             <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
+    //                 <img src={props["image_url"]} alt={game_title} />
+    //             </div>
+               
+    //         </div>
+    //     )
 
-    }
+    // }
 
-    const renderBack = () => {  
+//     <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
+//     <img src={props["image_url"]} alt={game_title} />
+//     <div>{caption}</div>
+//     <button onClick={redirectToGame}>Game: {game_title}</button>
+//     <button onClick={redirectToUser}>By {user_name}</button>
+// </div>
+
+
+
+
+
+
         return (  
-            <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-                <img src={props["image_url"]} alt={game_title} />
-                <div>{caption}</div>
-                <button onClick={redirectToGame}>Game: {game_title}</button>
-                <button onClick={redirectToUser}>By {user_name}</button>
-            </div>
+            <div class="ui card">
+                <div className="image">
+                 <img src={props["image_url"]} alt={game_title} />
+                </div>
+                <div className="content">
+                    <a className="header" onClick={redirectToUser}>{user_name}</a>
+                    <div className="meta">
+                        <span className="date" onClick={redirectToGame}>{game_title}</span>
+                    </div>
+                </div>
+                 
+                 <div className="description">
+                    <div>{caption}</div>
+                 </div>
+                <div className="extra content">
+                 <button onClick={addLike}>❤️ {likes}</button>
+                 </div>  
+            </div>   
         )
-    }
-
-
-
-
-    return (
-        <div>
-            {toggleFront
-            ? renderFront()
-            : renderBack()}
-        </div>
-    )  
+    
 
 
 

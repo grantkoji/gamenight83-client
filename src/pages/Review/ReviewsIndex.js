@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import ReviewCard from './ReviewCard'
 import SearchBarReviews from '../../Components/SearchBars/SearchBarReviews'
 import FilterReviewsByStars from '../../Components/Filters/FilterReviewsByStars'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 const ReviewsIndex = props => {
 
  
@@ -51,16 +52,20 @@ const ReviewsIndex = props => {
                     />
                 </div>
                 <div>
-                    {  
-                    reviews && reviews.length
-                    ? filteredReviews().map(review => {
-                        return (
-                            <div>
-                               <ReviewCard key={review.id} {...review}/>
-                            </div>
-                        )
-                    })
-                    : "Loading..."}
+                    <Container fluid>
+                        <Row>
+                            {  
+                            reviews && reviews.length
+                            ? filteredReviews().map(review => {
+                                return (
+                                    <div>
+                                    <ReviewCard key={review.id} {...review}/>
+                                    </div>
+                                )
+                            })
+                            : "Loading..."}
+                        </Row>
+                    </Container>
                 </div>
             </>
         )

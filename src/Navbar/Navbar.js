@@ -34,10 +34,10 @@ import {connect} from 'react-redux'
           <Link to='/gamegram'>GameGram</Link>
           <Link to='/users'>Users</Link>
           {!props.token && <Link to='/signup'>Sign Up</Link>}
-          {props.token && <button onClick={toUserPage}>{props.currentUser.username} Page</button>}
+          {props.token && <Link onClick={toUserPage}>{props.currentUser.username} Page</Link>}
           {
             props.token
-            ? <button onClick={logoutAction}>Logout</button>
+            ? <Link to='/login' onClick={logoutAction}>Logout</Link>
             : <Link to='/login'>Login</Link>
           } 
        </div>

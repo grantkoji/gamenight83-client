@@ -58,20 +58,22 @@ const HomeGames = props => {
                         setMinAge={setMinAge}  
                     />
                 </div>
-                <Container fluid>
-                    <Row>
-                        {  
-                        games && games.length
-                        ? filteredGames().map(game => {
-                            return (
-                              
-                                    <GameCard key={game.id} {...game} />
-                             
-                            )
-                        })
-                        : "Loading..."}
-                    </Row>
-                </Container>
+                <div className="index">
+                    <Container fluid>
+                        <Row>
+                            {  
+                            games && games.length
+                            ? filteredGames().map(game => {
+                                return (
+                                
+                                        <GameCard key={game.id} {...game} />
+                                
+                                )
+                            })
+                            : "Loading..."}
+                        </Row>
+                    </Container>
+                </div>
             </>
         )
     

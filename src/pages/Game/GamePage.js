@@ -20,62 +20,71 @@ const GamePage = props => {
     }
     const {title, description, creator_id, min_num_players, max_num_players, min_age, id,
        instructions_and_rules, link_to_game_website, game_category, creator_username  } = thisPageGame
-       
+  //      <div class="ui grid">
+  // <div class="four wide column"></div>
+  // <div class="four wide column"></div>
+  // <div class="four wide column"></div>
     return (
         <div>
           <div>
             <GameProfileCard thisPageGame={thisPageGame} />
           </div>
-          <div>
-            { token 
-            && <> 
-              <div>Post a Review for {thisPageGame.title}: </div>
-              <div><AddReviewForm thisGame={currentGame}/></div>
-              </>}  
-          </div>
-          <div>
-            { token 
-            && <> 
-              <div>Post a Photo for {thisPageGame.title}: </div>
-              <div><AddGamePhotoForm thisGame={currentGame}/></div>
-              </>}  
-          </div>
-          <div>
-            {
-              thisPageReviews && thisPageReviews.length
-              ? <div>
-                  <div>
-                  {reviews && thisPageReviews.length 
-                    ? <div>Game Review Average: {thisGameReviewAverage()}</div>
-                    : null}
-                  </div>      
-                  <div>Number of Reviews: {thisPageReviews.length}</div>
-                  <div>
-                  {thisPageReviews.map(review => 
-                      <div>
-                          <ReviewOnGamePage key={review.id} {...review} />
-                      </div>
-                  )}
-                  </div>
+          <div className="ui grid">
+            <div className="five wide column">
+              <div>
+                { token 
+                && <> 
+                  <div>Post a Review for {thisPageGame.title}: </div>
+                  <div><AddReviewForm thisGame={currentGame}/></div>
+                  </>}  
               </div>
-              : null
-            }
-        </div>
-        <div>
-        {
-          thisPageGamePhotos && thisPageGamePhotos.length
-            ?<div>
-                <div>Game Photos:</div>
-                <div>
-                {thisPageGamePhotos.map(photo => 
-                    <div>
-                        <GamePhotoCard key={photo.id} {...photo} />
-                    </div>
-                )}
-                </div>
+              <div>
+                { token 
+                && <> 
+                  <div>Post a Photo for {thisPageGame.title}: </div>
+                  <div><AddGamePhotoForm thisGame={currentGame}/></div>
+                  </>}  
+              </div>
             </div>
-            : <div>No Game Photos Listed</div>
-        }
+            <div className="six wide column">
+              {
+                thisPageGamePhotos && thisPageGamePhotos.length
+                  ?<div>
+                      <div>Game Photos:</div>
+                      <div>
+                      {thisPageGamePhotos.map(photo => 
+                          <div>
+                              <GamePhotoCard key={photo.id} {...photo} />
+                          </div>
+                      )}
+                      </div>
+                  </div>
+                  : <div>No Game Photos Listed</div>
+              }
+          </div>
+         
+            <div className="five wide column">
+              {
+                thisPageReviews && thisPageReviews.length
+                ? <div>
+                    <div>
+                    {reviews && thisPageReviews.length 
+                      ? <div>Game Review Average: {thisGameReviewAverage()}</div>
+                      : null}
+                    </div>      
+                    <div>Number of Reviews: {thisPageReviews.length}</div>
+                    <div>
+                    {thisPageReviews.map(review => 
+                        <div>
+                            <ReviewOnGamePage key={review.id} {...review} />
+                        </div>
+                    )}
+                    </div>
+                </div>
+                : null
+              }
+          
+              </div>
         </div>
       </div>
     )

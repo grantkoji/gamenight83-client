@@ -4,6 +4,8 @@ import GamePhotoCard from './GamePhotoCard'
 import SearchBarPhotos from '../../Components/SearchBars/SearchBarPhotos'
 import FilterPhotosByLikes from '../../Components/Filters/FilterPhotosByLikes';
 import SortPhotos from '../../Components/Sort/SortPhotos';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 const GamePhotosIndex = props => {
 
@@ -63,16 +65,20 @@ const GamePhotosIndex = props => {
                     <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
                 </div>
                 <div>
-                    {  
-                    gamePhotos && gamePhotos.length
-                    ? gamePhotosFiltered().map(photo => {
-                        return (
-                            <div>
-                                <GamePhotoCard key={photo.id} {...photo} />
-                            </div>
-                        )
-                    })
-                    : "Loading..."}
+                    <Container fluid>
+                        <Row>
+                            {  
+                            gamePhotos && gamePhotos.length
+                            ? gamePhotosFiltered().map(photo => {
+                                return (
+                                    <div>
+                                        <GamePhotoCard key={photo.id} {...photo} />
+                                    </div>
+                                )
+                            })
+                            : "Loading..."}
+                        </Row>
+                    </Container>
                 </div>
             </>
         )

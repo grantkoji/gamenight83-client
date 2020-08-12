@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import UserCard from './UserCard'
 import SearchBarUsers from '../../Components/SearchBars/SearchBarUsers'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+
 
 const UsersIndex = props => {
     const {users} = props
@@ -25,16 +28,20 @@ const UsersIndex = props => {
                     <SearchBarUsers search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                 </div>
                 <div>
-                    {  
-                    users && users.length
-                    ? filteredUsers().map(user => {
-                        return (
-                            <div>
-                                <UserCard key={user.id} {...user}/>
-                            </div>
-                        )       
-                    })
-                    : "Loading..."}
+                <Container fluid>
+                    <Row>
+                        {  
+                        users && users.length
+                        ? filteredUsers().map(user => {
+                            return (
+                                <div>
+                                    <UserCard key={user.id} {...user}/>
+                                </div>
+                            )       
+                        })
+                        : "Loading..."}
+                    </Row>
+                </Container>
                 </div>
             </>
         )

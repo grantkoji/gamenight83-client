@@ -24,6 +24,7 @@ const GameProfileCard = props => {
     }
 
  
+    
     return (
         <div>
             <div>
