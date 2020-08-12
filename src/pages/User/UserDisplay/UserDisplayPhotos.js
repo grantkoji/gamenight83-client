@@ -59,26 +59,37 @@ const UserDisplayPhotos = props => {
             return filteredGamePhotos
         }  
     }
-
+//     <div class="ui grid">
+//   <div class="four wide column"></div>
+//   <div class="four wide column"></div>
+//   <div class="four wide column"></div>
+//   <div class="four wide column"></div>
+// </div>
     return (
         <div>
-            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-            <div className="container6">
-                <div>
-                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
-                    <FilterPhotosByLikes
-                        typeLikesFilter={typeLikesFilter}
-                        setTypeLikesFilter={setTypeLikesFilter}
-                        numLikes={numLikes}
-                        setNumLikes={setNumLikes}
-                    />
-                </div>
-                <div>
-                    <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
-                </div>
-                <div>
+            <div className="ui grid">
+                <div className="six wide column">
+                    <div>
+                        <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    </div>
+                    <div>
+                        <FilterPhotosByLikes
+                            typeLikesFilter={typeLikesFilter}
+                            setTypeLikesFilter={setTypeLikesFilter}
+                            numLikes={numLikes}
+                            setNumLikes={setNumLikes}
+                        />
+                    </div>
+                    <div>
+                        <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                    </div>
+                </div>   
+                <div className="ten wide column">>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                 </div>
+            </div>
+            <div className="ui grid">
+                <div className="eight wide column">
                     {thisUserGamePhotos && thisUserGamePhotos.length
                     ?<div>
                         <div>Game Photos:</div>
@@ -93,9 +104,9 @@ const UserDisplayPhotos = props => {
                     : <div>No Game Photos Listed</div>
                     }
                 </div>
-            </div>
-            <div className="container3">
-                <div>
+    
+                <div className="four wide column">
+                    
                     {thisUserCreatedGames && thisUserCreatedGames.length
                     ?<div>
                         <div>Created Games:</div>
@@ -109,8 +120,6 @@ const UserDisplayPhotos = props => {
                     </div>
                     : <div>No Games Posted</div>
                     }
-                </div>
-                <div>
                     {thisUserReviews && thisUserReviews.length
                         ?<div>
                             <div>Game Reviews:</div>
@@ -124,31 +133,31 @@ const UserDisplayPhotos = props => {
                         </div>
                         : <div>No Reviews Listed</div>
                     }
-                </div>       
-            </div>
-            <div className="container3">
-                <div>
-                    {thisPageUser && mutualFriendsList()}  
-                </div>  
-                <div>
-                    {thisPageUser && thisPageUser.total_friends 
-                        ?<div>
-                            <div>Friends:</div>
-                            <div>
-                            {thisPageUser.total_friends.map(friend => 
-                                <div>
-                                    <UserCard key={friend.id} {...friend}/>
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                            : <div>No Friends Listed</div>
-                        }
+                      
                 </div>
-                
+                <div className="four wide column">
+                    <div>
+                        {thisPageUser && mutualFriendsList()}  
+                    </div>  
+                    <div>
+                        {thisPageUser && thisPageUser.total_friends 
+                            ?<div>
+                                <div>Friends:</div>
+                                <div>
+                                {thisPageUser.total_friends.map(friend => 
+                                    <div>
+                                        <UserCard key={friend.id} {...friend}/>
+                                    </div>
+                                )}
+                                </div>
+                            </div>
+                                : <div>No Friends Listed</div>
+                            }
+                    </div>
+                </div>
             </div>
         </div>
-        )
+  )
 
 }
 

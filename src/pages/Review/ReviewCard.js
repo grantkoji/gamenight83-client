@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
+import ReactStars from 'react-rating-stars-component'
 
 
 const ReviewCard = props => {
@@ -58,7 +59,7 @@ const ReviewCard = props => {
                 <div>{content}</div>
             </div>
             <div className="extra content">
-                <div>{num_stars}</div>
+                <ReactStars count={5} value={num_stars} size={18}/>
             </div>  
         </div>   
     )  

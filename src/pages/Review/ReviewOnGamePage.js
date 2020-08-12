@@ -2,6 +2,7 @@ import React from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
+import ReactStars from "react-rating-stars-component";
 
 const ReviewOnGamePage = props => {
     
@@ -18,7 +19,7 @@ const ReviewOnGamePage = props => {
             <div>
                 <div>
                     <div>by: {user_name}</div>
-                    <div>{num_stars}</div>
+                    <ReactStars count={5} value={num_stars} size={18}/>
                     <div>{content}</div>
                 </div>
                 <button onClick={redirectToUser}>Visit {user_name}</button>

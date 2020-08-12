@@ -4,6 +4,7 @@ import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import ReactStars from "react-rating-stars-component";
 
 const AddReviewForm = props => {
     const {token, thisGame} = props
@@ -42,12 +43,20 @@ const AddReviewForm = props => {
         alert("Thank you for posting your review!")
       }
     }
-  
 
+    const ratingChanged = (newRating) => {
+      setNumStars(newRating);
+    };
+  
+    // <label htmlFor="numStars">Number of Stars:</label><br/>
+    // <input type="number" autoComplete="off" name="numStars" value={numStars} onChange={(e) => setNumStars(e.target.value)}/><br/>
     return (
       <form onSubmit={handleSubmit}>
-        <label htmlFor="numStars">Number of Stars:</label><br/>
-        <input type="number" autoComplete="off" name="numStars" value={numStars} onChange={(e) => setNumStars(e.target.value)}/><br/>
+         <ReactStars
+            count={5}
+            onChange={ratingChanged}
+            size={18}
+          />
         <label htmlFor="content">Review Content:</label><br/>
         <input type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
         <button type="Submit">Submit</button>
