@@ -38,6 +38,8 @@ const FriendshipRequest = props => {
         props.setCurrentUserIncomingFR(newUserIncomingFR)
         removeFriendshipRequest(id)
         requests.fetchRemoveFriendshipRequest(id)
+
+        {currentUser.friend_requests_received 
     }
     return(
         <div class="ui cards">
@@ -69,7 +71,8 @@ const FriendshipRequest = props => {
 const mapStateToProps = state => {
     return {
         token: state.token,
-        users: state.users
+        users: state.users,
+        currentUser: state.currentUser
     }
 }
 

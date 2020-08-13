@@ -1,0 +1,738 @@
+import React, {useState, useEffect} from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import UserCard from './UserCard'
+import ReviewCard from '../Review/ReviewCard'
+import GamePhotoCard from '../GamePhoto/GamePhotoCard'
+import GameCard from '../Game/GameCard'
+
+import AddReviewForm from '../../Components/Forms/AddReviewForm'
+import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
+import UserPageNavbar from '../../Navbar/UserPageNavbar'
+import DisplayReviews from './UserAndProfileDisplay/DisplayReviews'
+
+import ProfileDisplayGames from './ProfileDisplay/ProfileDisplayGames'
+import ProfileDisplayFriendRequests from './ProfileDisplay/ProfileDisplayFriendRequests'
+import ProfileDisplayGamesCreated from './ProfileDisplay/ProfileDisplayGamesCreated'
+import ProfileDisplayPhotos from './ProfileDisplay/ProfileDisplayPhotos'
+import ProfileDisplayFriends from './ProfileDisplay/ProfileDisplayFriends'
+
+import UserDisplayMutualFriends from './UserDisplay/UserDisplayMutualFriends'
+import UserDisplayGamesCreated from './UserDisplay/UserDisplayGamesCreated'
+import UserDisplayPhotos from './UserDisplay/UserDisplayPhotos'
+import UserDisplayFriends from './UserDisplay/UserDisplayFriends'
+import {Container, Row, Col, Card } from 'react-bootstrap';
+import {connect} from 'react-redux'
+
+const UserPage = props => {
+  
+    
+    const { games, 
+            token, 
+            users, 
+            reviews, 
+            gamePhotos, 
+            currentUser, 
+            showUser, 
+            setCurrentUser, 
+            friendships,
+            friendshipRequests} = props
+
+
+    
+        //thisUser is showUser
+        //currentUser is user who is signed into website
+    let [thisPageUser, setThisPageUser] = useState({})
+    let [thisUserReviews, setThisUserReviews] = useState([])
+    let [thisUserGamePhotos, setThisUserGamePhotos] = useState([])
+    let [thisUserCreatedGames, setThisUserCreatedGames] = useState([])
+    let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+    let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
+    let [currentUserFriends, setCurrentUserFriends] = useState([])
+    let [thisUserFriends, setThisUserFriends] = useState([])
+    let [mutualFriends, setMutualFriends] = useState([])
+    let [view, setView] = useState('photos')
+    
+
+    useEffect(() => {
+        setThisPageUser(users.find(user => user.id === showUser))
+        setThisUserReviews(reviews.filter(review => review.user_id === showUser))
+        setThisUserGamePhotos(gamePhotos.filter(photo => photo.user_id === showUser))
+        setThisUserCreatedGames(games.filter(game => game.creator_id === showUser))
+        setCurrentUserOutgoingFR(friendshipRequests.filter(fr => fr.user_id === currentUser.id))
+        setCurrentUserIncomingFR(friendshipRequests.filter(fr => fr.request_id === currentUser.id))
+        let currentUserInitFriendships = friendships.filter(friend => friend.user_id === currentUser.id || friend.friend_id === currentUser.id)
+        let thisUserInitFriendships = friendships.filter(friend => friend.user_id === showUser || friend.friend_id === showUser)
+        
+        let cUserFriends = []
+            if (currentUser && users.length && currentUserInitFriendships.length) {
+                currentUserInitFriendships.forEach(friendship => {
+                    if (friendship.user_id === currentUser.id) {
+                        if (cUserFriends.length === 0) {
+                            cUserFriends.push(users.find(user => user.id === friendship.friend_id))
+                        }
+                        else if (cUserFriends.length > 0 && cUserFriends.some(user => user.id === friendship.friend_id) === false) {
+                            cUserFriends.push(users.find(user => user.id === friendship.friend_id))
+                        }
+                    } else if (friendship.friend_id === currentUser.id){
+                        if (cUserFriends.length === 0) {
+                            cUserFriends.push(users.find(user => user.id === friendship.user_id))
+                        }
+                        else if (cUserFriends.length > 0 && cUserFriends.some(user => user.id === friendship.user_id) === false) {
+                            cUserFriends.push(users.find(user => user.id === friendship.user_id))
+                        }
+                    }
+                })
+            }
+        setCurrentUserFriends(cUserFriends)
+
+        
+
+        let tUserFriends = []
+            if (showUser && users.length && thisUserInitFriendships.length) {
+                thisUserInitFriendships.forEach(friendship => {
+                    if (friendship.user_id === showUser) {
+                        if (tUserFriends.length === 0) {
+                            tUserFriends.push(users.find(user => user.id === friendship.friend_id))
+                        }
+                        else if (tUserFriends.length > 0 && tUserFriends.some(user => user.id === friendship.friend_id) === false) {
+                            tUserFriends.push(users.find(user => user.id === friendship.friend_id))
+                        }
+                    } else if (friendship.friend_id === showUser) {
+                        if (tUserFriends.length === 0) {
+                            tUserFriends.push(users.find(user => user.id === friendship.user_id))
+                        } else if (tUserFriends.length > 0 && tUserFriends.some(user => user.id === friendship.user_id) === false) {
+                            tUserFriends.push(users.find(user => user.id === friendship.user_id))
+                        }
+                    }
+                })
+            }
+        setThisUserFriends(tUserFriends)
+            console.log(tUserFriends)
+        let mFriends = []
+        tUserFriends.forEach(tUserFriend => {
+            if (cUserFriends.some(friend => friend.id === tUserFriend.id)) {
+                mFriends.push(tUserFriend)
+            }
+        })
+
+        setMutualFriends(mFriends)
+        
+        
+    }, [showUser, users])
+  
+    
+  
+       
+    
+   
+    
+           
+        
+
+   
+  
+    
+    // let updatedCurrentUser = users.find(user => user.id === currentUser.id)
+    // let currentUserFRSent = updatedCurrentUser.friend_requests_sent
+    // let currentUserFRReceived = updatedCurrentUser.friend_requests_received
+    
+   
+//     # Friend Requests
+//   has_many :friendship_requests
+//   has_many :requests, :through => :friendships
+//   has_many :inverse_friendship_requests, :class_name => "FriendshipRequest", :foreign_key => "request_id"
+//   has_many :inverse_requests, :through => :inverse_friendship_requests, :source => :user
+    // const currentUserFriendshipStatus = () => {
+    //     if (thisPageUser.total_friends.some(friend => friend.id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <div>You are Friends</div>
+    //                 <button>Click to Unfriend</button>
+    //             </div>
+    //         )
+    //     } else if (thisPageUser.friend_requests_sent.some(friendRequest => friendRequest.request_id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <button>Click to Accept Friend Request</button>
+    //             </div>
+    //         )
+    //     } else if (thisPageUser.friend_requests_received.some(fr => fr.id === currentUser.id)) {
+    //         return (
+    //             <div>
+    //                 <div>Friendship Requested</div>
+    //                 <button>Click to Cancel</button>
+    //             </div>
+    //         )
+    //     } else {
+    //         return(
+    //             <div>
+    //                 <button>Click to Request Friendship</button>
+    //             </div>
+    //         )
+    //     }
+    // }
+//     attributes :id, :request_name, :user_id, :request_id, :user_name
+//     if (currentUserFRReceived.some(fr => ))
+//     create_table "friendship_requests", force: :cascade do |t|
+//     t.integer "user_id"
+//     t.integer "request_id"
+//   end
+
+//   create_table "friendships", force: :cascade do |t|
+//     t.integer "user_id"
+//     t.integer "friend_id"
+//   end
+    const handleView = e => {
+        setView(e.target.name)
+    }
+    
+  
+  
+
+   
+    const renderChangingShowCards = () => {
+       
+        if (view === 'photos' && currentUser.id !== showUser) {
+
+            return (
+                <UserDisplayPhotos 
+                    friends={thisUserFriends}
+                    mutualFriends={mutualFriends}
+                    thisPageUser={thisPageUser}
+                    thisUserReviews={thisUserReviews}
+                    thisUserGamePhotos={thisUserGamePhotos}
+                    thisUserCreatedGames={thisUserCreatedGames}
+                />
+            )
+        }  else if (view === 'photos' && currentUser.id === showUser) {
+            return (
+                <ProfileDisplayPhotos 
+                    friends={currentUserFriends}
+                    thisPageUser={thisPageUser}
+                    thisUserReviews={thisUserReviews}
+                    thisUserGamePhotos={thisUserGamePhotos}
+                    thisUserCreatedGames={thisUserCreatedGames}
+                />
+            )
+        } 
+        
+        else if (view === 'reviews' && currentUser.id !== showUser) {
+            return (
+                <DisplayReviews 
+                    friends={thisUserFriends}
+                    mutualFriends={mutualFriends}
+                    thisPageUser={thisPageUser}
+                    thisUserReviews={thisUserReviews}
+                    thisUserGamePhotos={thisUserGamePhotos}
+                    thisUserCreatedGames={thisUserCreatedGames}
+                />
+            )
+        } else if (view === 'reviews' && currentUser.id === showUser) {
+            return (
+                <DisplayReviews 
+                    friends={currentUserFriends}
+                    mutualFriends={mutualFriends}
+                    thisPageUser={thisPageUser}
+                    thisUserReviews={thisUserReviews}
+                    thisUserGamePhotos={thisUserGamePhotos}
+                    thisUserCreatedGames={thisUserCreatedGames}
+                />
+            )
+        } else if (view === 'games') {
+             return (
+            <ProfileDisplayGames 
+                friends={currentUserFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+            />
+             )
+        } else if (view === 'friends' && currentUser.id !== showUser) {
+            return (
+           <UserDisplayFriends
+                friends={thisUserFriends}
+                mutualFriends={mutualFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+           />
+            )
+       } else if (view === 'friends' && currentUser.id === showUser) {
+        return (
+            <ProfileDisplayFriends
+                    friends={currentUserFriends}
+                    thisPageUser={thisPageUser}
+                    thisUserReviews={thisUserReviews}
+                    thisUserGamePhotos={thisUserGamePhotos}
+                    thisUserCreatedGames={thisUserCreatedGames}
+            />
+        )
+        } 
+       else if (view === 'mutualFriends' ) {
+            return (
+            <UserDisplayMutualFriends 
+                friends={thisUserFriends}
+                mutualFriends={mutualFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+            />
+        )
+        } 
+        else if (view === "gamesCreated" && currentUser.id !== showUser) {
+            return (
+           <UserDisplayGamesCreated
+                friends={thisUserFriends}
+                mutualFriends={mutualFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+           />
+            )
+        }  else if (view === "gamesCreated" && currentUser.id === showUser) {
+            return (
+           <ProfileDisplayGamesCreated
+                friends={currentUserFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+           />
+            )
+        } else if (view ==="seeFriendRequests") {
+            return (
+                <ProfileDisplayFriendRequests
+                setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}
+                setCurrentUserIncomingFR={setCurrentUserIncomingFR}
+                setCurrentUserFriends={setCurrentUserFriends}
+                friends={currentUserFriends}
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+                outgoingFR={currentUserOutgoingFR}
+                incomingFR={currentUserIncomingFR}
+                currentUserFriends={currentUserFriends}
+                
+                />  
+            )
+        } 
+    }
+
+
+
+    const requestFriendship = () => {
+        fetch('http://localhost:3001/api/v1/friendship_requests', {
+            method: "POST",
+            headers: {
+            "content-type": "application/json",
+            "Authorization": token
+            },
+            body: JSON.stringify({
+            request_id: showUser
+            })
+        })
+        .then(r => r.json())
+        .then(resp => handleResponse(resp))
+    }
+  
+      const handleResponse = (resp) => {
+        if (resp.message) {
+          alert(resp.message)
+        } else {
+          alert(`Friend Request Sent!`)
+        }
+      }
+    
+
+
+
+    //   <div>{thisUserFriends && thisUserFriends.length ? thisUserFriends.map(friend => <div>{friend.username}</div>) : null}</div>
+    
+
+       // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+          // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+    // let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
+    // let [currentUserFriends, setCurrentUserFriends] = useState([])
+    return (
+        <>
+            {
+             token 
+            ? <Container fluid>
+                <Row>
+                    <Col xs={2} id='sidebar-wrapper'>
+                        <UserPageNavbar 
+                            handleView={handleView} 
+                            currentUserOutgoingFR={currentUserOutgoingFR}
+                            setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}
+                            currentUserIncomingFR={currentUserIncomingFR}
+                            setCurrentUserIncomingFR={setCurrentUserIncomingFR}
+                            currentUserFriends={currentUserFriends}
+                            setCurrentUserFriends={setCurrentUserFriends}
+                        />
+                    </Col>
+                    <Col xs={10} id="page-content-wrapper">   
+                        <div>
+                            {renderChangingShowCards()}
+                        </div>
+                    </Col>
+                </Row>        
+            </Container>
+            : <> 
+                <h1>You Must Be Logged into an Account</h1>
+                <h1>to Access User Pages </h1>
+            </>
+        } 
+        </>
+    )
+
+
+}
+const mapStateToProps = state => {
+    return {
+      token: state.token,
+      games: state.games,
+      users: state.users,
+      reviews: state.reviews,
+      gamePhotos: state.gamePhotos,
+      currentUser: state.currentUser,
+      showUser: state.showUser,
+      friendshipRequests: state.friendshipRequests,
+      friendships: state.friendships
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+      setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+      setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    }
+  }
+  
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserPage));
+
+
+  import React, {useState} from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../../modules/actionCreators/actionCreators'
+import UserCard from '../UserCard'
+import ReviewCard from '../../Review/ReviewCard'
+import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
+import GameCard from '../../Game/GameCard'
+import FriendshipRequest from '../../Friend/FriendshipRequest'
+import SentFriendshipRequest from '../../Friend/SentFriendshipRequest'
+
+import {connect} from 'react-redux'
+import UserProfileCard from '../UserProfileCard'
+
+const ProfileDisplayFriendRequests = props => {
+    const {
+        friends,
+        thisPageUser,
+        thisUserReviews,
+        thisUserGamePhotos,
+        thisUserCreatedGames,
+        outgoingFR,
+        incomingFR,
+        setCurrentUserOutgoingFR,
+        setCurrentUserIncomingFR,
+        setCurrentUserFriends,
+        currentUserFriends
+    } = props
+    
+    let [search, setSearch] = useState('')
+    let [searchType, setSearchType] = useState('gameTitle')
+    let [typeNumPlayers, setTypeNumPlayers] = useState('noNumPlayers')
+    let [numPlayers, setNumPlayers] = useState(0)
+    let [typeMinAge, setTypeMinAge] = useState('noMinAge')
+    let [minAge, setMinAge] = useState(0)
+    //Below three hooks will be used to set the type of 
+    //post - review or photo - as well as the title and id
+    //of the game that the user will write a post or review on
+    let [postType, setPostType] = useState('instructions')
+    let [thisGameId, setThisGameId] = useState(null)
+    let [thisGameTitle, setThisGameTitle] = useState(null)
+
+    
+
+    return (
+        <div>
+            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+            <div className="container6">
+                <div>
+                    {incomingFR && incomingFR.length 
+                    ? <div>
+                        {incomingFR.map(inFR => <FriendshipRequest 
+                                                key={inFR.id}
+                                                id={inFR.id}
+                                                name={inFR.user_name} 
+                                                url={inFR.user_photo} 
+                                                userId={inFR.user_id}
+                                                setCurrentUserIncomingFR={setCurrentUserIncomingFR}
+                                                setCurrentUserFriends={setCurrentUserFriends}
+                                                currentUserIncomingFR={incomingFR}
+                                                currentUserFriends={currentUserFriends}
+                                                />) }
+                    </div>
+                    : <div>No Inbound Friend Requests</div>}
+                </div>
+                <div>
+                    {outgoingFR && outgoingFR.length 
+                    ? <div>
+                        {outgoingFR.map(outFR => <SentFriendshipRequest 
+                                                    key={outFR.id} 
+                                                    id={outFR.id}
+                                                    name={outFR.request_name} 
+                                                    url={outFR.request_photo} 
+                                                    userId={outFR.request_id}
+                                                    setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}      
+                                                    currentUserOutgoingFR={outgoingFR}
+                                                    /> )}
+                    </div>
+                    : <div>No Friend Requests Pending</div>}
+                </div>
+               
+            </div>
+            <div className="container3">
+                <div>
+                {thisUserGamePhotos && thisUserGamePhotos.length
+                    ?<div>
+                        <div>Game Photos:</div>
+                        <div>
+                        {thisUserGamePhotos.map(photo => 
+                            <div>
+                                <GamePhotoCard key={photo.id} {...photo} />
+                            </div>
+                        )}
+                        </div>
+                    </div>
+                    : <div>No Game Photos Listed</div>
+                }
+                </div>
+                <div>
+                    {thisUserCreatedGames && thisUserCreatedGames.length
+                    ?<div>
+                        <div>Created Games:</div>
+                        <div>
+                            {thisUserCreatedGames.map(game => 
+                                <div>
+                                        <GameCard key={game.id} {...game} />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    : <div>No Games Posted</div>
+                    }
+                </div>
+            </div>
+            <div className="container3">
+                <div>
+                    {friends && friends.length
+                        ?<div>
+                            <div>Friends:</div>
+                            <div>
+                            {friends.map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend}/>
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                            : <div>No Friends Listed</div>
+                        }
+                </div>
+                <div>
+                {thisUserReviews && thisUserReviews.length
+                    ?<div>
+                        <div>Game Reviews:</div>
+                        <div>
+                        {thisUserReviews.map(review => 
+                            <div>
+                            <ReviewCard key={review.id} {...review} />
+                            </div>
+                        )}
+                        </div>
+                    </div>
+                    : <div>No Reviews Listed</div>
+                }
+                </div>
+            </div>
+        </div>
+        )
+
+}
+
+
+const msp = state => {
+    return {
+      token: state.token,
+      games: state.games,
+      users: state.users,
+      reviews: state.reviews,
+      gamePhotos: state.gamePhotos,
+      currentUser: state.currentUser,
+      showUser: state.showUser
+    }
+  }
+  
+  const mdp = dispatch => {
+    return {
+      setCurrentUser: (user) => dispatch(action.setCurrentUser(user)),
+      setCurrentToken: (token) => dispatch(action.setCurrentToken(token)),
+      setShowUser: (userId) => dispatch(action.setShowUser(userId))
+    }
+  }
+
+export default withRouter(connect(msp, mdp)(ProfileDisplayFriendRequests))
+
+
+
+import React from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
+import * as requests from '../../requests'
+
+const SentFriendshipRequest = props => {
+    const{name, url, userId, setShowUser, id, removeFriendshipRequest} = props
+    
+    const redirectToUserPage = () => {
+        setShowUser(userId)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${name.replace(/\s+/g, '')}`)
+    }
+  
+    const cancelFriendRequest = () => {
+        let newUserOutgoingFR = props.currentUserOutgoingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserOutgoingFR(newUserOutgoingFR)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+    }
+    return(
+        <div class="ui cards">
+            <div class="card">
+                <div class="content">
+                    {url !== '' &&
+                    <img class="right floated mini ui image" src={url} />}
+                    {url === '' &&
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    <div class="header" onClick={redirectToUserPage}>
+                        {name}
+                    </div>
+                    <div class="description">
+                        You sent a friend request to {name}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic red button" onClick={cancelFriendRequest}>Cancel Request</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    )
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+      removeFriendshipRequest: (id) => dispatch(action.removeFriendshipRequest(id))
+    }
+  }
+
+export default withRouter(connect(null, mapDispatchToProps)(SentFriendshipRequest))
+
+
+
+import React from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
+import * as requests from '../../requests'
+
+const FriendshipRequest = props => {
+    
+
+
+    const{name, url, userId, setShowUser, id, token, addFriendship, removeFriendshipRequest, users} = props
+
+    const redirectToUserPage = () => {
+    setShowUser(userId)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${name.replace(/\s+/g, '')}`)
+
+    }
+   
+  
+ 
+
+    const acceptFriendRequest = () => {
+        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserIncomingFR(newUserIncomingFR)
+        let newFriend = users.find(user => user.id === userId)
+        let newCurrentUserFriends= [...props.currentUserFriends, newFriend]
+        props.setCurrentUserFriends(newCurrentUserFriends)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+        requests.fetchPostAddFriendship(userId, token)
+        .then(friendship => addFriendship(friendship))
+    }
+
+    const declineFriendRequest = () => {
+        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserIncomingFR(newUserIncomingFR)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+    }
+    return(
+        <div class="ui cards">
+            <div class="card">
+                <div class="content">
+                    {url !== '' &&
+                    <img class="right floated mini ui image" src={url} />}
+                    {url === '' &&
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    <div class="header" onClick={redirectToUserPage}>
+                        {name}
+                    </div>
+                    <div class="description">
+                        {name} wants to add you as a friend
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic green button" onClick={acceptFriendRequest}>Approve</div>
+                        <div class="ui basic red button" onClick={declineFriendRequest}>Decline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    )
+}
+
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        users: state.users
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+      addFriendship: (friendship) => dispatch(action.addFriendship(friendship)),
+      removeFriendshipRequest: (frId) => dispatch(action.removeFriendshipRequest(frId))
+
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FriendshipRequest))

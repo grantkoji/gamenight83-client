@@ -11,7 +11,6 @@ import UserProfileCard from '../UserProfileCard'
 
 const ProfileDisplayFriends = props => {
     const {
-        friends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -22,11 +21,11 @@ const ProfileDisplayFriends = props => {
     let [search, setSearch] = useState('')
 
     let filteredUsers = () => {
-        if (friends && friends.length) {
+        if (currentUser.total_friends && currentUser.total_friends.length) {
             if (searchType === 'username') {
-                return friends.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
+                return currentUser.total_friends.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
             } else if (searchType === 'favGames') {
-                return friends.filter(user => user.fav_games.toLowerCase().includes(search.toLowerCase()))
+                return currentUser.total_friends.filter(user => user.fav_games.toLowerCase().includes(search.toLowerCase()))
             }
         } 
     }
@@ -43,7 +42,7 @@ const ProfileDisplayFriends = props => {
                     setSearch={setSearch}
                 />
             </div>
-            {friends && friends.length
+            {currentUser.total_friends && currentUser.total_friends.length
             ?<div>
                 <div>Friends:</div>
                 <div>

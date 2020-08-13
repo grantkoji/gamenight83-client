@@ -17,7 +17,6 @@ import UserProfileCard from '../UserProfileCard'
 const UserDisplayGamesCreated = props => {
     const {
         mutualFriends,
-        friends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -151,11 +150,11 @@ const UserDisplayGamesCreated = props => {
                     {thisPageUser && mutualFriendsList()}  
                 </div>  
                 <div>
-                    {friends && friends.length
+                    {thisPageUser.total_friends && thisPageUser.total_friends.length
                         ?<div>
                             <div>Friends:</div>
                             <div>
-                            {friends.map(friend => 
+                            {thisPageUser.total_friends.map(friend => 
                                 <div>
                                     <UserCard key={friend.id} {...friend}/>
                                 </div>

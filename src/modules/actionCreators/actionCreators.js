@@ -17,9 +17,14 @@ let addGame = game => ({type: 'ADD_NEW_GAME', payload: {value: game}})
 let fetchFriendshipRequests = fr => ({type: 'FETCH_FRIENDSHIP_REQUESTS', payload: {value: fr}})
 let fetchFriendships = friendships => ({type: 'FETCH_FRIENDSHIPS', payload: {value: friendships}})
 let addFriendshipRequest = fr => ({type: 'ADD_FRIENDSHIP_REQUEST', payload: {value: fr}})
-let addFriendship = friendship => ({type: 'ADD_FRIENDSHIP', payload: {value: friendship}})
-let removeFriendshipRequest = frId => ({type: 'REMOVE_FRIENDSHIP_REQUEST', payload: {value: frId}})
-
+// let addFriendship = friendship => ({type: 'ADD_FRIENDSHIP', payload: {value: friendship}})
+// let removeFriendshipRequest = frId => ({type: 'REMOVE_FRIENDSHIP_REQUEST', payload: {value: frId}})
+let addFriendRequest = (frId, userReceive, userSent) => ({type: 'ADD_FRIEND_REQUEST', payload: {frId: frId, userReceive: userReceive, userSent: userSent}})
+// let addFriendRequestSent = (frId, user) => ({type: 'ADD_FRIEND_REQUEST_SENT', payload: {frId: frId, user_id: user_id}})
+// let removeFriendRequestReceived = (frId, user_id) => ({type: 'REMOVE_FRIEND_REQUEST_RECEIVED', payload: {frId: frId, user_id: user_id}})
+let removeFriendRequest = (frId, userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {frId: frId, userReceiveId: userReceiveId, userSentId: userSentId}})
+let addFriendshipTwoUsers = (user1, user2) => ({type: 'ADD_ACCEPTED_FRIENDSHIP', payload: {user1: user1, user2: user2}})
+let removeFriendshipTwoUsers = (user1, user2) => ({type: 'REMOVE_FRIENDSHIP', payload: {user1: user1, user2: user2}})
 
 export {
     setCurrentToken,
@@ -41,6 +46,10 @@ export {
     addPhotoLike,
     addGame,
     addFriendshipRequest,
-    removeFriendshipRequest,
-    addFriendship
+    // removeFriendshipRequest,
+    // addFriendship
+    addFriendRequest,
+    removeFriendRequest,
+    addFriendshipTwoUsers,
+    removeFriendshipTwoUsers 
 }

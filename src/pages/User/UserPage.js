@@ -46,16 +46,17 @@ const UserPage = props => {
     let [thisUserReviews, setThisUserReviews] = useState([])
     let [thisUserGamePhotos, setThisUserGamePhotos] = useState([])
     let [thisUserCreatedGames, setThisUserCreatedGames] = useState([])
-    let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
-    let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
-    let [currentUserFriends, setCurrentUserFriends] = useState([])
-    let [thisUserFriends, setThisUserFriends] = useState([])
+    // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+    // let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
+    // let [currentUserFriends, setCurrentUserFriends] = useState([])
+    // let [thisUserFriends, setThisUserFriends] = useState([])
     let [mutualFriends, setMutualFriends] = useState([])
     let [view, setView] = useState('photos')
     
 
     useEffect(() => {
-        setThisPageUser(users.find(user => user.id === showUser))
+        let thisPUser = users.find(user => user.id === showUser)
+        setThisPageUser(thisPUser)
         setThisUserReviews(reviews.filter(review => review.user_id === showUser))
         setThisUserGamePhotos(gamePhotos.filter(photo => photo.user_id === showUser))
         setThisUserCreatedGames(games.filter(game => game.creator_id === showUser))
@@ -63,59 +64,17 @@ const UserPage = props => {
         setCurrentUserIncomingFR(friendshipRequests.filter(fr => fr.request_id === currentUser.id))
         let currentUserInitFriendships = friendships.filter(friend => friend.user_id === currentUser.id || friend.friend_id === currentUser.id)
         let thisUserInitFriendships = friendships.filter(friend => friend.user_id === showUser || friend.friend_id === showUser)
-        
-        let cUserFriends = []
-            if (currentUser && users.length && currentUserInitFriendships.length) {
-                currentUserInitFriendships.forEach(friendship => {
-                    if (friendship.user_id === currentUser.id) {
-                        if (cUserFriends.length === 0) {
-                            cUserFriends.push(users.find(user => user.id === friendship.friend_id))
-                        }
-                        else if (cUserFriends.length > 0 && cUserFriends.some(user => user.id === friendship.friend_id) === false) {
-                            cUserFriends.push(users.find(user => user.id === friendship.friend_id))
-                        }
-                    } else if (friendship.friend_id === currentUser.id){
-                        if (cUserFriends.length === 0) {
-                            cUserFriends.push(users.find(user => user.id === friendship.user_id))
-                        }
-                        else if (cUserFriends.length > 0 && cUserFriends.some(user => user.id === friendship.user_id) === false) {
-                            cUserFriends.push(users.find(user => user.id === friendship.user_id))
-                        }
-                    }
-                })
-            }
-        setCurrentUserFriends(cUserFriends)
-
-        
-
-        let tUserFriends = []
-            if (showUser && users.length && thisUserInitFriendships.length) {
-                thisUserInitFriendships.forEach(friendship => {
-                    if (friendship.user_id === showUser) {
-                        if (tUserFriends.length === 0) {
-                            tUserFriends.push(users.find(user => user.id === friendship.friend_id))
-                        }
-                        else if (tUserFriends.length > 0 && tUserFriends.some(user => user.id === friendship.friend_id) === false) {
-                            tUserFriends.push(users.find(user => user.id === friendship.friend_id))
-                        }
-                    } else if (friendship.friend_id === showUser) {
-                        if (tUserFriends.length === 0) {
-                            tUserFriends.push(users.find(user => user.id === friendship.user_id))
-                        } else if (tUserFriends.length > 0 && tUserFriends.some(user => user.id === friendship.user_id) === false) {
-                            tUserFriends.push(users.find(user => user.id === friendship.user_id))
-                        }
-                    }
-                })
-            }
-        setThisUserFriends(tUserFriends)
-            console.log(tUserFriends)
+       
         let mFriends = []
-        tUserFriends.forEach(tUserFriend => {
-            if (cUserFriends.some(friend => friend.id === tUserFriend.id)) {
+        if (thisPUser.total_friends && thisPUser.total_friends.length && currentUser.total_friends.length) {
+            thisPUser.total_friends.forEach(tUserFriend => {
+            if (currentUser.total_friends.some(friend => friend.id === tUserFriend.id)) {
                 mFriends.push(tUserFriend)
             }
         })
 
+    }
+            console.log(mFriends)
         setMutualFriends(mFriends)
         
         
@@ -190,16 +149,6 @@ const UserPage = props => {
   
   
 
-    // let [thisPageUser, setThisPageUser] = useState({})
-    // let [thisUserReviews, setThisUserReviews] = useState([])
-    // let [thisUserGamePhotos, setThisUserGamePhotos] = useState([])
-    // let [thisUserCreatedGames, setThisUserCreatedGames] = useState([])
-    // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
-    // let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
-    // let [currentUserFriends, setCurrentUserFriends] = useState([])
-    // let [thisUserFriends, setThisUserFriends] = useState([])
-    // let [mutualFriends, setMutualFriends] = useState([])
-    // let [view, setView] = useState('photos')
    
     const renderChangingShowCards = () => {
        
@@ -207,7 +156,6 @@ const UserPage = props => {
 
             return (
                 <UserDisplayPhotos 
-                    friends={thisUserFriends}
                     mutualFriends={mutualFriends}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
@@ -218,7 +166,6 @@ const UserPage = props => {
         }  else if (view === 'photos' && currentUser.id === showUser) {
             return (
                 <ProfileDisplayPhotos 
-                    friends={currentUserFriends}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
                     thisUserGamePhotos={thisUserGamePhotos}
@@ -230,7 +177,6 @@ const UserPage = props => {
         else if (view === 'reviews' && currentUser.id !== showUser) {
             return (
                 <DisplayReviews 
-                    friends={thisUserFriends}
                     mutualFriends={mutualFriends}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
@@ -241,7 +187,6 @@ const UserPage = props => {
         } else if (view === 'reviews' && currentUser.id === showUser) {
             return (
                 <DisplayReviews 
-                    friends={currentUserFriends}
                     mutualFriends={mutualFriends}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
@@ -252,7 +197,6 @@ const UserPage = props => {
         } else if (view === 'games') {
              return (
             <ProfileDisplayGames 
-                friends={currentUserFriends}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
@@ -262,7 +206,6 @@ const UserPage = props => {
         } else if (view === 'friends' && currentUser.id !== showUser) {
             return (
            <UserDisplayFriends
-                friends={thisUserFriends}
                 mutualFriends={mutualFriends}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
@@ -273,7 +216,6 @@ const UserPage = props => {
        } else if (view === 'friends' && currentUser.id === showUser) {
         return (
             <ProfileDisplayFriends
-                    friends={currentUserFriends}
                     thisPageUser={thisPageUser}
                     thisUserReviews={thisUserReviews}
                     thisUserGamePhotos={thisUserGamePhotos}
@@ -284,7 +226,6 @@ const UserPage = props => {
        else if (view === 'mutualFriends' ) {
             return (
             <UserDisplayMutualFriends 
-                friends={thisUserFriends}
                 mutualFriends={mutualFriends}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
@@ -296,7 +237,6 @@ const UserPage = props => {
         else if (view === "gamesCreated" && currentUser.id !== showUser) {
             return (
            <UserDisplayGamesCreated
-                friends={thisUserFriends}
                 mutualFriends={mutualFriends}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
@@ -307,7 +247,6 @@ const UserPage = props => {
         }  else if (view === "gamesCreated" && currentUser.id === showUser) {
             return (
            <ProfileDisplayGamesCreated
-                friends={currentUserFriends}
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
@@ -316,18 +255,11 @@ const UserPage = props => {
             )
         } else if (view ==="seeFriendRequests") {
             return (
-                <ProfileDisplayFriendRequests
-                setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}
-                setCurrentUserIncomingFR={setCurrentUserIncomingFR}
-                setCurrentUserFriends={setCurrentUserFriends}
-                friends={currentUserFriends}
+                <ProfileDisplayFriendRequests 
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}
                 thisUserCreatedGames={thisUserCreatedGames}
-                outgoingFR={currentUserOutgoingFR}
-                incomingFR={currentUserIncomingFR}
-                currentUserFriends={currentUserFriends}
                 
                 />  
             )
@@ -364,7 +296,11 @@ const UserPage = props => {
 
     //   <div>{thisUserFriends && thisUserFriends.length ? thisUserFriends.map(friend => <div>{friend.username}</div>) : null}</div>
     
-  
+
+       // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+          // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
+    // let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
+    // let [currentUserFriends, setCurrentUserFriends] = useState([])
     return (
         <>
             {
@@ -372,7 +308,15 @@ const UserPage = props => {
             ? <Container fluid>
                 <Row>
                     <Col xs={2} id='sidebar-wrapper'>
-                        <UserPageNavbar handleView={handleView} requestFriendship={requestFriendship}/>
+                        <UserPageNavbar 
+                            handleView={handleView} 
+                            currentUserOutgoingFR={currentUserOutgoingFR}
+                            setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}
+                            currentUserIncomingFR={currentUserIncomingFR}
+                            setCurrentUserIncomingFR={setCurrentUserIncomingFR}
+                            currentUserFriends={currentUserFriends}
+                            setCurrentUserFriends={setCurrentUserFriends}
+                        />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">   
                         <div>
