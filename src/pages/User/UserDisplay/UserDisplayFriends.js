@@ -22,7 +22,7 @@ const UserDisplayFriends = props => {
     let [search, setSearch] = useState('')
 
     let filteredUsers = () => {
-        if (thisPageUser.total_friends && thisPageUser.total_friends.length) {
+        if (thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length) {
             if (searchType === 'username') {
                 return thisPageUser.total_friends.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
             } else if (searchType === 'favGames') {
@@ -68,7 +68,7 @@ const UserDisplayFriends = props => {
                     setSearch={setSearch}
                 />
             </div>
-            {thisPageUser.total_friends && thisPageUser.total_friends.length
+            {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
             ?<div>
                 <div>Friends:</div>
                 <div>

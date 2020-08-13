@@ -14,14 +14,15 @@ const ProfileDisplayFriends = props => {
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
-        thisUserCreatedGames
+        thisUserCreatedGames,
+        currentUser
     } = props
   
     let [searchType, setSearchType] = useState('username')
     let [search, setSearch] = useState('')
 
     let filteredUsers = () => {
-        if (currentUser.total_friends && currentUser.total_friends.length) {
+        if (currentUser && currentUser.total_friends && currentUser.total_friends.length) {
             if (searchType === 'username') {
                 return currentUser.total_friends.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
             } else if (searchType === 'favGames') {
@@ -42,7 +43,7 @@ const ProfileDisplayFriends = props => {
                     setSearch={setSearch}
                 />
             </div>
-            {currentUser.total_friends && currentUser.total_friends.length
+            {currentUser && currentUser.total_friends && currentUser.total_friends.length
             ?<div>
                 <div>Friends:</div>
                 <div>

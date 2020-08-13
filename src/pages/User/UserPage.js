@@ -33,10 +33,9 @@ const UserPage = props => {
             reviews, 
             gamePhotos, 
             currentUser, 
-            showUser, 
-            setCurrentUser, 
-            friendships,
-            friendshipRequests} = props
+            showUser,
+            setCurrentUser
+        } = props
 
 
     
@@ -52,96 +51,35 @@ const UserPage = props => {
     // let [thisUserFriends, setThisUserFriends] = useState([])
     let [mutualFriends, setMutualFriends] = useState([])
     let [view, setView] = useState('photos')
-    
 
     useEffect(() => {
+        console.log('parent hit')
         let thisPUser = users.find(user => user.id === showUser)
+    
+        if (currentUser && users && users.length) {
+            let currentUserReset = users.find(user => user.id === currentUser.id)
+            setCurrentUser(currentUserReset)
+        }
         setThisPageUser(thisPUser)
         setThisUserReviews(reviews.filter(review => review.user_id === showUser))
         setThisUserGamePhotos(gamePhotos.filter(photo => photo.user_id === showUser))
         setThisUserCreatedGames(games.filter(game => game.creator_id === showUser))
-        setCurrentUserOutgoingFR(friendshipRequests.filter(fr => fr.user_id === currentUser.id))
-        setCurrentUserIncomingFR(friendshipRequests.filter(fr => fr.request_id === currentUser.id))
-        let currentUserInitFriendships = friendships.filter(friend => friend.user_id === currentUser.id || friend.friend_id === currentUser.id)
-        let thisUserInitFriendships = friendships.filter(friend => friend.user_id === showUser || friend.friend_id === showUser)
-       
         let mFriends = []
-        if (thisPUser.total_friends && thisPUser.total_friends.length && currentUser.total_friends.length) {
+        if (thisPUser && thisPUser.total_friends.length && currentUser && currentUser.total_friends.length) {
             thisPUser.total_friends.forEach(tUserFriend => {
             if (currentUser.total_friends.some(friend => friend.id === tUserFriend.id)) {
                 mFriends.push(tUserFriend)
             }
         })
 
-    }
-            console.log(mFriends)
-        setMutualFriends(mFriends)
-        
-        
+    } 
+        setMutualFriends(mFriends)  
     }, [showUser, users])
-  
-    
-  
-       
-    
-   
-    
-           
-        
 
-   
   
     
-    // let updatedCurrentUser = users.find(user => user.id === currentUser.id)
-    // let currentUserFRSent = updatedCurrentUser.friend_requests_sent
-    // let currentUserFRReceived = updatedCurrentUser.friend_requests_received
-    
-   
-//     # Friend Requests
-//   has_many :friendship_requests
-//   has_many :requests, :through => :friendships
-//   has_many :inverse_friendship_requests, :class_name => "FriendshipRequest", :foreign_key => "request_id"
-//   has_many :inverse_requests, :through => :inverse_friendship_requests, :source => :user
-    // const currentUserFriendshipStatus = () => {
-    //     if (thisPageUser.total_friends.some(friend => friend.id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <div>You are Friends</div>
-    //                 <button>Click to Unfriend</button>
-    //             </div>
-    //         )
-    //     } else if (thisPageUser.friend_requests_sent.some(friendRequest => friendRequest.request_id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <button>Click to Accept Friend Request</button>
-    //             </div>
-    //         )
-    //     } else if (thisPageUser.friend_requests_received.some(fr => fr.id === currentUser.id)) {
-    //         return (
-    //             <div>
-    //                 <div>Friendship Requested</div>
-    //                 <button>Click to Cancel</button>
-    //             </div>
-    //         )
-    //     } else {
-    //         return(
-    //             <div>
-    //                 <button>Click to Request Friendship</button>
-    //             </div>
-    //         )
-    //     }
-    // }
-//     attributes :id, :request_name, :user_id, :request_id, :user_name
-//     if (currentUserFRReceived.some(fr => ))
-//     create_table "friendship_requests", force: :cascade do |t|
-//     t.integer "user_id"
-//     t.integer "request_id"
-//   end
+  
 
-//   create_table "friendships", force: :cascade do |t|
-//     t.integer "user_id"
-//     t.integer "friend_id"
-//   end
     const handleView = e => {
         setView(e.target.name)
     }
@@ -292,15 +230,6 @@ const UserPage = props => {
       }
     
 
-
-
-    //   <div>{thisUserFriends && thisUserFriends.length ? thisUserFriends.map(friend => <div>{friend.username}</div>) : null}</div>
-    
-
-       // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
-          // let [currentUserOutgoingFR, setCurrentUserOutgoingFR] = useState([])
-    // let [currentUserIncomingFR, setCurrentUserIncomingFR] = useState([])
-    // let [currentUserFriends, setCurrentUserFriends] = useState([])
     return (
         <>
             {
@@ -310,12 +239,6 @@ const UserPage = props => {
                     <Col xs={2} id='sidebar-wrapper'>
                         <UserPageNavbar 
                             handleView={handleView} 
-                            currentUserOutgoingFR={currentUserOutgoingFR}
-                            setCurrentUserOutgoingFR={setCurrentUserOutgoingFR}
-                            currentUserIncomingFR={currentUserIncomingFR}
-                            setCurrentUserIncomingFR={setCurrentUserIncomingFR}
-                            currentUserFriends={currentUserFriends}
-                            setCurrentUserFriends={setCurrentUserFriends}
                         />
                     </Col>
                     <Col xs={10} id="page-content-wrapper">   
@@ -358,3 +281,4 @@ const mapStateToProps = state => {
   }
   
   export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserPage));
+  

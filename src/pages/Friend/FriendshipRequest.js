@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
@@ -9,51 +9,69 @@ const FriendshipRequest = props => {
     
 
 
-    const{name, url, userId, setShowUser, id, token, addFriendship, removeFriendshipRequest, users} = props
+    const{userId, setShowUser, id, token, addFriendshipTwoUsers, removeFriendRequest, users, currentUser} = props
+
+    let [requestedFRUser, setRequestedFRUser] = useState({})
+    useEffect(()=> {
+        let thisRequestedFRUser = users.find(user => user.id === userId)
+        setRequestedFRUser(thisRequestedFRUser)
+    }, [])
+
+    useEffect(()=> {
+        let thisRequestedFRUser = users.find(user => user.id === userId)
+        setRequestedFRUser(thisRequestedFRUser)
+    }, [users, userId])
 
     const redirectToUserPage = () => {
     setShowUser(userId)
       // props.history.push(`users/${resp.user.id}`)
-      props.history.push(`/users/${name.replace(/\s+/g, '')}`)
+      props.history.push(`/users/${requestedFRUser.username.replace(/\s+/g, '')}`)
 
     }
-   
-  
- 
 
     const acceptFriendRequest = () => {
-        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
-        props.setCurrentUserIncomingFR(newUserIncomingFR)
-        let newFriend = users.find(user => user.id === userId)
-        let newCurrentUserFriends= [...props.currentUserFriends, newFriend]
-        props.setCurrentUserFriends(newCurrentUserFriends)
-        removeFriendshipRequest(id)
-        requests.fetchRemoveFriendshipRequest(id)
+        let addedFriendUser = users.find(user => user.id === userId)
+        removeFriendRequest(currentUser.id, userId)
+        let sentCurrentUser = {
+                                id: currentUser.id, 
+                                name: currentUser.name, 
+                                username: currentUser.username, 
+                                age: currentUser.age, 
+                                fav_games: currentUser.fav_games, 
+                                profile_url: currentUser.profile_url
+                            }
+        let receivedCurrentUser = {
+                                    id: addedFriendUser.id, 
+                                    name: addedFriendUser.name, 
+                                    username: addedFriendUser.username, 
+                                    age: addedFriendUser.age, 
+                                    fav_games: addedFriendUser.fav_games, 
+                                    profile_url: addedFriendUser.profile_url}
+        
+        addFriendshipTwoUsers(sentCurrentUser, receivedCurrentUser)
         requests.fetchPostAddFriendship(userId, token)
-        .then(friendship => addFriendship(friendship))
+        requests.fetchRemoveFriendshipRequest(id)
     }
 
     const declineFriendRequest = () => {
-        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
-        props.setCurrentUserIncomingFR(newUserIncomingFR)
-        removeFriendshipRequest(id)
+        removeFriendRequest(currentUser.id, userId)
         requests.fetchRemoveFriendshipRequest(id)
-
-        {currentUser.friend_requests_received 
     }
     return(
         <div class="ui cards">
             <div class="card">
                 <div class="content">
-                    {url !== '' &&
-                    <img class="right floated mini ui image" src={url} />}
-                    {url === '' &&
-                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    {requestedFRUser && requestedFRUser["profile_url"] && requestedFRUser["profile_url"] !== '' ?
+                    <img class="right floated mini ui image" src={requestedFRUser["profile_url"]} />
+                    : null}
+                    {requestedFRUser && requestedFRUser["profile_url"] && requestedFRUser["profile_url"] === '' ?
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />
+                    : null}    
                     <div class="header" onClick={redirectToUserPage}>
-                        {name}
+                    {requestedFRUser && requestedFRUser.username ? requestedFRUser.username : null}
                     </div>
                     <div class="description">
-                        {name} wants to add you as a friend
+                    {requestedFRUser && requestedFRUser.username ? requestedFRUser.username : null} wants to add you as a friend
                     </div>
                 </div>
                 <div class="extra content">
@@ -79,10 +97,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
-      addFriendship: (friendship) => dispatch(action.addFriendship(friendship)),
-      removeFriendshipRequest: (frId) => dispatch(action.removeFriendshipRequest(frId))
-
+      addFriendshipTwoUsers: (user1, user2) => dispatch(action.addFriendshipTwoUsers(user1, user2)),
+      removeFriendRequest: (userReceiveId, userSentId) => dispatch(action.removeFriendRequest(userReceiveId, userSentId))
     }
   }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FriendshipRequest))
+
+
+// let addFriendRequest = (frId, userReceiveId, userSent) => ({type: 'ADD_FRIEND_REQUEST', payload: {frId: frId, userReceiveId: userReceiveId, userSent: userSent}})
+// // let addFriendRequestSent = (frId, user) => ({type: 'ADD_FRIEND_REQUEST_SENT', payload: {frId: frId, user_id: user_id}})
+// // let removeFriendRequestReceived = (frId, user_id) => ({type: 'REMOVE_FRIEND_REQUEST_RECEIVED', payload: {frId: frId, user_id: user_id}})
+// let removeFriendRequest = (userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {userReceiveId: userReceiveId, userSentId: userSentId}})
+// let addFriendshipTwoUsers = (user1, user2) => ({type: 'ADD_ACCEPTED_FRIENDSHIP', payload: {user1: user1, user2: user2}})
+// let removeFriendshipTwoUsers = (user1Id, user2Id) => ({type: 'REMOVE_FRIENDSHIP', payload: {user1Id: user1Id, user2Id: user2Id}})

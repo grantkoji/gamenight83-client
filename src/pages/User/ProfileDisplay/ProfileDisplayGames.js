@@ -20,6 +20,7 @@ const ProfileDisplayGames = props => {
         thisUserReviews,
         thisUserGamePhotos,
         thisUserCreatedGames,
+        currentUser,
         games, 
         token
     } = props
@@ -163,7 +164,7 @@ const ProfileDisplayGames = props => {
             </div>
             <div className="container3">
                 <div>
-                    {currentUser.total_friends && currentUser.total_friends.length
+                    {currentUser && currentUser.total_friends && currentUser.total_friends.length
                         ?<div>
                             <div>Friends:</div>
                             <div>

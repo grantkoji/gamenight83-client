@@ -99,7 +99,7 @@ const UserDisplayMutualFriends = props => {
             </div>
             <div className="container3">
                 <div>
-                    {thisPageUser.total_friends && thisPageUser.total_friends.length
+                    {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
                         ?<div>
                             <div>Friends:</div>
                             <div>

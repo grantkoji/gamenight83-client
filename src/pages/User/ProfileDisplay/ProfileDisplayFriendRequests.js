@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../../modules/actionCreators/actionCreators'
 import UserCard from '../UserCard'
@@ -16,7 +16,10 @@ const ProfileDisplayFriendRequests = props => {
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
-        thisUserCreatedGames
+        thisUserCreatedGames,
+        currentUser, 
+        users,
+        setCurrentUser
     } = props
     
     let [search, setSearch] = useState('')
@@ -31,34 +34,40 @@ const ProfileDisplayFriendRequests = props => {
     let [postType, setPostType] = useState('instructions')
     let [thisGameId, setThisGameId] = useState(null)
     let [thisGameTitle, setThisGameTitle] = useState(null)
+    let [trueFalse, setTrueFalse] = useState(true)
 
-    
+    useEffect(()=> {
+        console.log('hit')
+        if (currentUser && users && users.length) {
+            let currentUserReset = users.find(user => user.id === currentUser.id)
+            setCurrentUser(currentUserReset)
+        }
+    }, [users])
+
+
+    console.log(currentUser.friend_requests_sent)
 
     return (
         <div>
             {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             <div className="container6">
                 <div>
-                    {currentUser.friend_requests_received && currentUser.friend_requests_received.length 
+                    {currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.length 
                     ? <div>
                         {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
                                                 key={inFR.id}
-                                                id={inFR.id}
-                                                name={inFR.user_name} 
-                                                url={inFR.user_photo} 
+                                                id={inFR.id} 
                                                 userId={inFR.user_id}
                                                 />) }
                     </div>
                     : <div>No Inbound Friend Requests</div>}
                 </div>
                 <div>
-                    {currentUser.friend_requests_sent && currentUser.friend_requests_sent.length 
+                    {currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.length 
                     ? <div>
                         {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
                                                     key={outFR.id} 
                                                     id={outFR.id}
-                                                    name={outFR.request_name} 
-                                                    url={outFR.request_photo} 
                                                     userId={outFR.request_id}
                                                     /> )}
                     </div>
@@ -100,7 +109,7 @@ const ProfileDisplayFriendRequests = props => {
             </div>
             <div className="container3">
                 <div>
-                    {currentUser.total_friends && currentUser.total_friends.length
+                    {currentUser && currentUser.total_friends && currentUser.total_friends.length
                         ?<div>
                             <div>Friends:</div>
                             <div>

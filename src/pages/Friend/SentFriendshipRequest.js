@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
 import * as requests from '../../requests'
 
 const SentFriendshipRequest = props => {
-    const{name, url, userId, setShowUser, id, removeFriendshipRequest} = props
+    const{name, userId, setShowUser, id, removeFriendRequest, currentUser, users} = props
+    let [requestedFRUser, setRequestedFRUser] = useState({})
+    useEffect(()=> {
+        let thisRequestedFRUser = users.find(user => user.id === userId)
+        setRequestedFRUser(thisRequestedFRUser)
+    }, [])
+
+    useEffect(()=> {
+        let thisRequestedFRUser = users.find(user => user.id === userId)
+        setRequestedFRUser(thisRequestedFRUser)
+        console.log(thisRequestedFRUser["profile_url"])
+    }, [users, userId])
     
     const redirectToUserPage = () => {
         setShowUser(userId)
@@ -14,24 +25,25 @@ const SentFriendshipRequest = props => {
     }
   
     const cancelFriendRequest = () => {
-        let newUserOutgoingFR = props.currentUserOutgoingFR.filter(fr => fr.id !== id)
-        props.setCurrentUserOutgoingFR(newUserOutgoingFR)
-        removeFriendshipRequest(id)
+        removeFriendRequest(userId, currentUser.id,)
         requests.fetchRemoveFriendshipRequest(id)
     }
+
     return(
         <div class="ui cards">
             <div class="card">
                 <div class="content">
-                    {url !== '' &&
-                    <img class="right floated mini ui image" src={url} />}
-                    {url === '' &&
-                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    {requestedFRUser && requestedFRUser["profile_url"] && requestedFRUser["profile_url"] !== '' ?
+                    <img class="right floated mini ui image" src={requestedFRUser["profile_url"]} />
+                    : null}
+                    {requestedFRUser && requestedFRUser["profile_url"] && requestedFRUser["profile_url"] === '' ?
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />
+                    : null}    
                     <div class="header" onClick={redirectToUserPage}>
-                        {name}
+                        {requestedFRUser && requestedFRUser.username ? requestedFRUser.username : null}
                     </div>
                     <div class="description">
-                        You sent a friend request to {name}
+                        You sent a friend request to {requestedFRUser && requestedFRUser.username ? requestedFRUser.username : null}
                     </div>
                 </div>
                 <div class="extra content">
@@ -46,11 +58,20 @@ const SentFriendshipRequest = props => {
 }
 
 
+
+const mapStateToProps = state => {
+    return {
+        currentUser: state.currentUser,
+        users: state.users
+        
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
-      removeFriendshipRequest: (id) => dispatch(action.removeFriendshipRequest(id))
+      removeFriendRequest: (userReceiveId, userSentId) => dispatch(action.removeFriendRequest(userReceiveId, userSentId))
     }
   }
 
-export default withRouter(connect(null, mapDispatchToProps)(SentFriendshipRequest))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SentFriendshipRequest))

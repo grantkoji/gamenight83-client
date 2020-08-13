@@ -1,21 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Nav} from 'react-bootstrap'
+import * as requests from '../requests'
  
  const UserPageNavbar = props => {
 
-    const {currentUser, showUser, handleView} = props
-    const requestFriendship = () => {
-
-    }
+    const {currentUser, showUser, handleView, token} = props
+ 
      return (
        <>
         <Nav className='col-md-12 d-none d-md-block bg-light sidebar'>
-          {currentUser.id !== showUser && 
-          <Nav.Item> 
-                <Nav.Link name="requestFriendship" onClick={requestFriendship}>Request Friendship</Nav.Link>
-            </Nav.Item>
-          }
           {currentUser.id === showUser &&
             <Nav.Item> 
                 <Nav.Link name="seeFriendRequests" onClick={handleView}>Friendship Requests</Nav.Link>
@@ -52,9 +46,11 @@ import {Nav} from 'react-bootstrap'
  const mapStateToProps = state => {
     return {
       currentUser: state.currentUser,
-      showUser: state.showUser
+      showUser: state.showUser,
+      token: state.token
     }
   }
+
 
 export default connect(mapStateToProps)(UserPageNavbar)
 

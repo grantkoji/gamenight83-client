@@ -48,11 +48,11 @@ function App(props) {
     requests.fetchAllGamePhotos()
     .then(gamePhotoData => props.fetchGamePhotos(gamePhotoData))
 
-    requests.fetchAllFriendships()
-    .then(friendshipData => props.fetchFriendships(friendshipData))
+    // requests.fetchAllFriendships()
+    // .then(friendshipData => props.fetchFriendships(friendshipData))
 
-    requests.fetchAllFriendshipRequests()
-    .then(frData => props.fetchFriendshipRequests(frData))
+    // requests.fetchAllFriendshipRequests()
+    // .then(frData => props.fetchFriendshipRequests(frData))
 
     
     

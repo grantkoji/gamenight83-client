@@ -736,3 +736,157 @@ const mapDispatchToProps = dispatch => {
   }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FriendshipRequest))
+
+
+import React from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
+import * as requests from '../../requests'
+
+const FriendshipRequest = props => {
+    
+
+
+    const{name, url, userId, setShowUser, id, token, addFriendship, removeFriendshipRequest, users} = props
+
+    const redirectToUserPage = () => {
+    setShowUser(userId)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${name.replace(/\s+/g, '')}`)
+
+    }
+   
+  
+ 
+
+    const acceptFriendRequest = () => {
+        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserIncomingFR(newUserIncomingFR)
+        let newFriend = users.find(user => user.id === userId)
+        let newCurrentUserFriends= [...props.currentUserFriends, newFriend]
+        props.setCurrentUserFriends(newCurrentUserFriends)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+        requests.fetchPostAddFriendship(userId, token)
+        .then(friendship => addFriendship(friendship))
+    }
+
+    const declineFriendRequest = () => {
+        let newUserIncomingFR = props.currentUserIncomingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserIncomingFR(newUserIncomingFR)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+
+        {currentUser.friend_requests_received 
+    }
+    return(
+        <div class="ui cards">
+            <div class="card">
+                <div class="content">
+                    {url !== '' &&
+                    <img class="right floated mini ui image" src={url} />}
+                    {url === '' &&
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    <div class="header" onClick={redirectToUserPage}>
+                        {name}
+                    </div>
+                    <div class="description">
+                        {name} wants to add you as a friend
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic green button" onClick={acceptFriendRequest}>Approve</div>
+                        <div class="ui basic red button" onClick={declineFriendRequest}>Decline</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    )
+}
+
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        users: state.users,
+        currentUser: state.currentUser
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+      addFriendship: (user1, user2) => dispatch(action.addFriendship(user1, user2)),
+      removeFriendshipRequest: (frId, userReceiveId, userSentId) => dispatch(action.removeFriendshipRequest(frId))
+
+    }
+  }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FriendshipRequest))
+
+let addFriendRequest = (frId, userReceive, userSent) => ({type: 'ADD_FRIEND_REQUEST', payload: {frId: frId, userReceive: userReceive, userSent: userSent}})
+// let addFriendRequestSent = (frId, user) => ({type: 'ADD_FRIEND_REQUEST_SENT', payload: {frId: frId, user_id: user_id}})
+// let removeFriendRequestReceived = (frId, user_id) => ({type: 'REMOVE_FRIEND_REQUEST_RECEIVED', payload: {frId: frId, user_id: user_id}})
+let removeFriendRequest = (frId, userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {frId: frId, userReceiveId: userReceiveId, userSentId: userSentId}})
+let addFriendshipTwoUsers = (user1, user2) => ({type: 'ADD_ACCEPTED_FRIENDSHIP', payload: {user1: user1, user2: user2}})
+let removeFriendshipTwoUsers = (user1, user2) => ({type: 'REMOVE_FRIENDSHIP', payload: {user1: user1, user2: user2}})
+
+import React from 'react';
+import { withRouter } from 'react-router-dom'
+import * as action from '../../modules/actionCreators/actionCreators'
+import {connect} from 'react-redux'
+import * as requests from '../../requests'
+// removeFriendshipRequest(id, currentUser.id, userId)
+// requests.fetchRemoveFriendshipRequest(id)
+const SentFriendshipRequest = props => {
+    const{name, url, userId, setShowUser, id, removeFriendshipRequest} = props
+    
+    const redirectToUserPage = () => {
+        setShowUser(userId)
+      // props.history.push(`users/${resp.user.id}`)
+      props.history.push(`/users/${name.replace(/\s+/g, '')}`)
+    }
+  
+    const cancelFriendRequest = () => {
+        let newUserOutgoingFR = props.currentUserOutgoingFR.filter(fr => fr.id !== id)
+        props.setCurrentUserOutgoingFR(newUserOutgoingFR)
+        removeFriendshipRequest(id)
+        requests.fetchRemoveFriendshipRequest(id)
+    }
+    return(
+        <div class="ui cards">
+            <div class="card">
+                <div class="content">
+                    {url !== '' &&
+                    <img class="right floated mini ui image" src={url} />}
+                    {url === '' &&
+                    <img class="right floated mini ui image" src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" />}    
+                    <div class="header" onClick={redirectToUserPage}>
+                        {name}
+                    </div>
+                    <div class="description">
+                        You sent a friend request to {name}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic red button" onClick={cancelFriendRequest}>Cancel Request</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    )
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
+      removeFriendshipRequest: (id) => dispatch(action.removeFriendshipRequest(id))
+    }
+  }
+
+export default withRouter(connect(null, mapDispatchToProps)(SentFriendshipRequest))

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import * as action from '../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import currentUser from '../modules/reducers/currentUser'
 
 
  
@@ -21,10 +22,6 @@ import {connect} from 'react-redux'
       props.history.push(`/users/${props.currentUser.username.replace(/\s+/g, '')}`)
     }
 
-
-  
-
-
      return (
        <>
         <div className="navbar">
@@ -34,7 +31,7 @@ import {connect} from 'react-redux'
           <Link to='/gamegram'>GameGram</Link>
           <Link to='/users'>Users</Link>
           {!props.token && <Link to='/signup'>Sign Up</Link>}
-          {props.token && <Link onClick={toUserPage}>{props.currentUser.username} Page</Link>}
+          {props.token && props.currentUser ? <Link onClick={toUserPage}>{props.currentUser.username} Page</Link> : null}
           {
             props.token
             ? <Link to='/login' onClick={logoutAction}>Logout</Link>
