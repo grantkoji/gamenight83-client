@@ -16,6 +16,7 @@ import {connect} from 'react-redux'
 const ProfileDisplayGamesCreated = props => {
     const {
         thisPageUser,
+        friends,
         thisUserReviews,
         thisUserGamePhotos,
         thisUserCreatedGames,
@@ -32,7 +33,7 @@ const ProfileDisplayGamesCreated = props => {
     
 
     let filteredGames = () => {
-        if (games && thisUserCreatedGames.length) {
+        if (games && thisUserCreatedGames && thisUserCreatedGames.length) {
             let gamesFiltered = thisUserCreatedGames
             if (searchType === 'username') {
                 gamesFiltered = gamesFiltered.filter(game => game.creator_username.toLowerCase().includes(search.toLowerCase()))
@@ -49,7 +50,7 @@ const ProfileDisplayGamesCreated = props => {
                 gamesFiltered = gamesFiltered.filter(game => game.min_age >= parseInt(minAge))
             }
             return gamesFiltered
-        } 
+        }  
     }
 
     return (
@@ -106,11 +107,11 @@ const ProfileDisplayGamesCreated = props => {
         </div>
         <div className="container3">
             <div>
-                {thisPageUser && thisPageUser.total_friends 
+                {friends && friends.length
                 ?<div>
                     <div>Friends:</div>
                     <div>
-                    {thisPageUser.total_friends.map(friend => 
+                    {friends.map(friend => 
                         <div>
                             <UserCard key={friend.id} {...friend}/>
                         </div>

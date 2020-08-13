@@ -105,5 +105,60 @@
 
 // }
 
+  // let userFriendsRequested = (userInitFriendRequests) => {
+    //     if (userInitFriendRequests && userInitFriendRequests.length) {
+    //         let frUsers = []
+    //         userInitFriendRequests.forEach(fr => {
+    //             if (fr.user_id === thisPageUser.id) {
+    //                 if (!frUsers.some(user => user.id === fr.request_id)) {
+    //                     frUsers.push(users.find(user => user.id === fr.request_id))
+    //                 }
+    //             } else {
+    //                 if (!frUsers.some(user => user.id === fr.user_id)) {
+    //                     frUsers.push(users.find(user => user.id === fr.user_id))
+    //                 }
+    //             }
+    //         })
+    //         if (frUsers.length) {
+    //             return frUsers
+    //         } else {
+    //             return null
+    //         }       
+    //     } else {
+    //         return null
+    //     }
+    // }
+
 
 // export default UserPage
+
+
+    // const mutualFriends = (thisUserFriends, showUserFriends) => {
+    //   if (thisUserFriends && thisUserFriends.length && showUserFriends && showUserFriends.length) {
+    //         let matchingArray = []
+    //         thisUserFriends.forEach(tUFriend => {
+    //             if (showUserFriends.some(friend => friend.id === tUFriend.id)) {
+    //                 matchingArray.push(tUFriend)
+    //             }
+    //         })
+    //         if (matchingArray.length) {
+    //             return matchingArray 
+                
+                
+    //         } else {
+    //             return  null
+    //         }
+    //     }
+    //     else {
+    //         return null
+    //     }
+    // }
+    
+    // useEffect(() => {
+        
+    //     // mutualFriendMatches = mutualFriends(userFriends(thisUserInitFriendships, showUser), userFriends(currentUserInitFriendships, currentUser.id))
+    //     // let i = userFriends(thisUserInitFriendships, showUser)
+    //     thisUserInitFriendships = "changed"
+  
+
+    // }, [showUser])

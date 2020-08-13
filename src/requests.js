@@ -40,3 +40,47 @@ export const fetchAllFriendshipRequests = () => fetch(friendshipRequestsURL)
 export const fetchAllFriendships = () => fetch(friendshipsURL)
 .then(parseData)
 .catch(catchError)
+
+export const fetchRemoveFriendshipRequest = (id) => fetch(`${friendshipRequestsURL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+    })
+    .catch(catchError)
+
+export const fetchRemoveFriendship = (id) => fetch(`${friendshipsURL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+    })
+    .catch(catchError)
+
+export const fetchPostAddFriendship = (user_id, token) => fetch(friendshipsURL, {
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+    },
+    body: JSON.stringify({
+        user_id: user_id
+    })
+
+})
+.then(parseData)
+.catch(catchError)
+
+export const fetchPostAddFRequest = (token, request_id) => fetch(friendshipRequestsURL, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": token
+    },
+    body: JSON.stringify({
+        request_id: request_id
+    })
+
+})
+.then(parseData)
+.catch(catchError)

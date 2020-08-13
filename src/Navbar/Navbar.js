@@ -18,7 +18,7 @@ import {connect} from 'react-redux'
     const toUserPage = () => {
       props.setShowUser(props.currentUser.id)
       // props.history.push(`users/${props.currentUser.id}`)
-      props.history.push(`users/${props.currentUser.username.replace(/\s+/g, '')}`)
+      props.history.push(`/users/${props.currentUser.username.replace(/\s+/g, '')}`)
     }
 
 

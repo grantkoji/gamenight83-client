@@ -16,6 +16,11 @@ import {Nav} from 'react-bootstrap'
                 <Nav.Link name="requestFriendship" onClick={requestFriendship}>Request Friendship</Nav.Link>
             </Nav.Item>
           }
+          {currentUser.id === showUser &&
+            <Nav.Item> 
+                <Nav.Link name="seeFriendRequests" onClick={handleView}>Friendship Requests</Nav.Link>
+            </Nav.Item>
+          }
             <Nav.Item> 
               <Nav.Link name="photos" onClick={handleView}>Photos</Nav.Link>
             </Nav.Item>

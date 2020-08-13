@@ -16,6 +16,7 @@ import {connect} from 'react-redux'
 const UserDisplayPhotos = props => {
     const {
         mutualFriends,
+        friends,
         thisPageUser,
         thisUserReviews,
         thisUserGamePhotos,
@@ -101,7 +102,7 @@ const UserDisplayPhotos = props => {
                         <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
                     </div>
                 </div>   
-                <div className="ten wide column">>
+                <div className="ten wide column">
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                  </div>
             </div>
@@ -157,11 +158,11 @@ const UserDisplayPhotos = props => {
                         {thisPageUser && mutualFriendsList()}  
                     </div>  
                     <div>
-                        {thisPageUser && thisPageUser.total_friends 
+                        {friends && friends.length
                             ?<div>
                                 <div>Friends:</div>
                                 <div>
-                                {thisPageUser.total_friends.map(friend => 
+                                {friends.map(friend => 
                                     <div>
                                         <UserCard key={friend.id} {...friend}/>
                                     </div>
