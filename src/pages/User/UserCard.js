@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -14,6 +14,11 @@ const UserCard = props => {
         props.history.push(`/users/${username.replace(/\s+/g, '')}`)
     }
 
+    useEffect(() => {
+        return () => {
+                return (<></>)
+            }
+      }, []);
     
      const endFriendship = () => {
          let friendshipInstance = friendships.find(friendship => friendship.user_id === id && friendship.friend_id === currentUser.id 
@@ -39,13 +44,23 @@ const UserCard = props => {
                 <div>Favorite Games: {fav_games}</div>
             </div>
             { 
-            props.location === "profileFriends" && 
+            props.status === "profileFriends" && 
                 <div class="extra content">
                     <a>
                         <i class="user icon"></i>
                             <div class="ui basic red button" onClick={endFriendship}>Remove Friendship</div>
                     </a>
                 </div>
+            }
+            {
+                props.status === 'index' && currentUser && currentUser.total_friends && currentUser.total_friends.some(fr => fr.id === id)
+                ?  <div class="extra content">
+                    <a>
+                        <i class="user icon"></i>
+                            You are Friends
+                    </a>
+                </div>
+                : null
             }
         </div>   
     )

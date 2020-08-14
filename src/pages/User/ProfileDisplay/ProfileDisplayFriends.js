@@ -49,7 +49,7 @@ const ProfileDisplayFriends = props => {
                 <div>
                 {filteredUsers().map(friend => 
                     <div>
-                        <UserCard key={friend.id} {...friend} location="profileFriends"/>
+                        <UserCard key={friend.id} {...friend} status="profileFriends"/>
                     </div>
                 )}
                 </div>

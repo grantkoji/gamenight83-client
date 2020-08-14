@@ -5,11 +5,11 @@ import * as requests from '../../requests'
 
 const UserProfileCard = props => {
     const {username, id, name, fav_games, age} = props.user
-    const {currentUser, addFriendRequest, token, friendships, fetchFriendships, removeFriendRequest, addFriendshipTwoUsers} = props
+    const {currentUser, addFriendRequest, token, users, removeFriendRequest, addFriendshipTwoUsers} = props
     
-    let [renderPage, setRenderPage] = useState('render')
+    let [renderPage, setRenderPage] = useState('loading')
     const acceptFriendship = () => {
-        let fRInstance = currentUser.friend_requests_received(fr => fr.user_id === id)
+        let fRInstance = currentUser.friend_requests_received.find(fr => fr.user_id === id)
         addFriendshipTwoUsers({
                                 id: currentUser.id,
                                 name: currentUser.name,
@@ -27,16 +27,34 @@ const UserProfileCard = props => {
                             })
         removeFriendRequest(currentUser.id, id)
         requests.fetchPostAddFriendship(id, token) 
-
         requests.fetchRemoveFriendshipRequest(fRInstance.id)
-        
-        
-     
     }
     
+    
+    useEffect(()=> {
+        // if (currentUser && currentUser.total_friends && currentUser.total_friends.some(userFr => userFr.id === id)) {
+        //     setRenderPage('youAreFriends')
+        // } else if (currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.some(fR => fR.request_id === id)) {
+        //     setRenderPage('friendshipPending')
+        // }  else if (currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.some(fR => fR.user_id === id)) {
+        //     setRenderPage('acceptFriendship')
+        // } else {
+        //     setRenderPage('requestFriendship')
+        // }
+    }, [])
+
     useEffect(() => {
-        setRenderPage('render')
-    }, [currentUser.friend_requests_received, currentUser.friend_requests_sent])
+        if (currentUser && currentUser.total_friends && currentUser.total_friends.some(userFr => userFr.id === id)) {
+            setRenderPage('youAreFriends')
+        } else if (currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.some(fR => fR.request_id === id)) {
+            setRenderPage('friendshipPending')
+        }  else if (currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.some(fR => fR.user_id === id)) {
+            setRenderPage('acceptFriendship')
+        } else {
+            setRenderPage('requestFriendship')
+        }
+        console.log(renderPage)
+    }, [id, users])
    
 
    
@@ -48,7 +66,7 @@ const UserProfileCard = props => {
  
    
     const renderBottom = () => {
-        if (currentUser && currentUser.total_friends && currentUser.total_friends.some(userFr => userFr.id === id)) {
+        if (renderPage === 'youAreFriends') {
             return (
                 <div class="extra content">
                     <a>
@@ -57,7 +75,7 @@ const UserProfileCard = props => {
                     </a>
                 </div>
             )
-        } else if (currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.some(fR => fR.request_id === id)) {
+        } else if (renderPage === 'friendshipPending') {
             return (
                 <div class="extra content">
                     <a>
@@ -66,7 +84,7 @@ const UserProfileCard = props => {
                     </a>
                 </div>
             )
-        } else if (currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.some(fR => fR.user_id === id)) {
+        } else if (renderPage === 'acceptFriendship') {
             return (
                 <div class="extra content" onClick={acceptFriendship}>
                     <a>
@@ -75,7 +93,7 @@ const UserProfileCard = props => {
                     </a>
                 </div>
             )
-        } else { 
+        } else if (renderPage === 'requestFriendship') { 
             return (
                 <div class="extra content" onClick={requestFriendship}>
                     <a>
@@ -84,12 +102,17 @@ const UserProfileCard = props => {
                     </a>
                 </div>
             )
+        } else {
+            return (
+                <>
+                </>
+            )
         }
     }
   
-
+    console.log(renderPage)
     return (
-    <>{ renderPage === 'render' &&
+    <>
         <div class="ui card">
             <div className="image">
                 { props["profile_url"] === "" 
@@ -112,7 +135,6 @@ const UserProfileCard = props => {
             ? renderBottom() : null}
             </>
         </div>
-    }
     </>   
     )
 }
@@ -122,7 +144,8 @@ const mapStateToProps = state => {
     return {
       currentUser: state.currentUser,
       friendships: state.friendships,
-      token: state.token
+      token: state.token,
+      users: state.users
     }
   }
   

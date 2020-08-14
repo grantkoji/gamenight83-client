@@ -55,6 +55,7 @@ export const fetchRemoveFriendship = (id) => fetch(`${friendshipsURL}/${id}`, {
         'Content-Type': 'application/json'
     }
     })
+    .then(parseData)
     .catch(catchError)
 
 export const fetchPostAddFriendship = (user_id, token) => fetch(friendshipsURL, {

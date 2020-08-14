@@ -40,7 +40,7 @@ const UserDisplayFriends = props => {
                         <div>
                             {mutualFriends.map(friend => 
                                 <div>
-                                    <UserCard key={friend.id} {...friend}/>
+                                    <UserCard key={friend.id} {...friend} status="visitor"/>
                                 </div>
                             )}
                         </div>

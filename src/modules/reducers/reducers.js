@@ -7,7 +7,7 @@ import currentToken from './currentToken'
 import showUser from './showUser'
 import currentGame from './currentGame'
 // import friendshipRequests from './friendshipRequests'
-// import friendships from './friendships'
+import friendships from './friendships'
 
 import {combineReducers} from 'redux'
 
@@ -19,9 +19,9 @@ const rootReducer = combineReducers({
     gamePhotos,
     token: currentToken,
     showUser,
-    currentGame
+    currentGame,
+    friendships
     // friendshipRequests,
-    // friendships
 })
 
 export default rootReducer

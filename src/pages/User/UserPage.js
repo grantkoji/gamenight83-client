@@ -53,7 +53,7 @@ const UserPage = props => {
     let [view, setView] = useState('photos')
 
     useEffect(() => {
-        console.log('parent hit')
+     
         let thisPUser = users.find(user => user.id === showUser)
     
         if (currentUser && users && users.length) {

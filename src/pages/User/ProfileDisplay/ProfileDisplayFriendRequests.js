@@ -37,15 +37,12 @@ const ProfileDisplayFriendRequests = props => {
     let [trueFalse, setTrueFalse] = useState(true)
 
     useEffect(()=> {
-        console.log('hit')
         if (currentUser && users && users.length) {
             let currentUserReset = users.find(user => user.id === currentUser.id)
             setCurrentUser(currentUserReset)
         }
     }, [users])
 
-
-    console.log(currentUser.friend_requests_sent)
 
     return (
         <div>
@@ -115,7 +112,7 @@ const ProfileDisplayFriendRequests = props => {
                             <div>
                             {currentUser.total_friends.map(friend => 
                                 <div>
-                                    <UserCard key={friend.id} {...friend} location="profile"/>
+                                    <UserCard key={friend.id} {...friend} status="profile"/>
                                 </div>
                             )}
                             </div>
