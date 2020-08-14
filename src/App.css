@@ -96,8 +96,17 @@
   align-items: center;
 }
 
+.reStar {
+    position: fixed;
+}
 
+.create-input-field {
+  text-align: center;
+}
 
+.game-card {
+  border-radius: 100px
+}
 /* sign ins as cards cause cards orgaanize themselves  */
 /* }
 Go in an edit width of box itself

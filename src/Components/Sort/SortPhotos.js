@@ -1,25 +1,28 @@
 
 
 import React from 'react';
+import { Dropdown, Menu, Input } from 'semantic-ui-react'
 
+const SortPhotos = (props) => {
+const options = [
+    { key: 0, text: 'No Photo Sort', value: "noSortPhotos" },
+    { key: 1, text: 'Most Likes', value: 'mostLikes' },
+    { key: 2, text: 'Least Likes', value: "leastLikes" },
+    { key: 3, text: 'Game Title', value: "gameTitle" },
+    { key: 4, text: 'Category', value: "gameCategory" }
+  ]
 
-const SortPhotos = props => {
-//add time stamp and have most recently made
     return (
-        <div>
-            <label>Sort Photos:</label>
-            <div>      
-                <select name="typeSortPhotos" value={props.typeSortPhotos} onChange={(e) => props.setTypeSortPhotos(e.target.value)}>
-                    <option selected value="noSortPhotos">No Photo Sort</option>
-                    <option value="mostLikes">Most Likes</option>
-                    <option value="leastLikes">Least Likes</option>
-                    <option value="gameTitle">Game Title</option>
-                    <option value="gameCategory">Game Category</option>
-                </select>
-            </div>
-        </div>
+    <div>
+        <Menu compact>
+            <Dropdown 
+                placeholder='Sort Photos by'
+                options={options} 
+                simple item 
+                onChange={(e, data) => props.setTypeSortPhotos(data.value)}/>
+        </Menu>
+    </div>
     )
-
 }
   
   export default SortPhotos;

@@ -13,7 +13,8 @@ const ReviewsIndex = props => {
         let [searchType, setSearchType] = useState('gameTitle')
         let [typeMinStars, setTypeMinStars] = useState('noMinStars')
         let [typeMaxStars, setTypeMaxStars] = useState('noMaxStars')
-    
+        let [numStars, setNumStars] = useState(0);
+   
 
     
         let filteredReviews = () => {
@@ -29,7 +30,7 @@ const ReviewsIndex = props => {
                     reviewsFiltered = reviewsFiltered.filter(review => review.game_category.toLowerCase().includes(search.toLowerCase()))
                 }
                 if (typeMinStars !== 'noMinStars') {
-                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(typeMinStars))
+                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(numStars))
                 }
                 if (typeMaxStars !== 'noMaxStars') {
                     reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) <= parseInt(typeMaxStars))
@@ -49,6 +50,8 @@ const ReviewsIndex = props => {
                         setTypeMinStars={setTypeMinStars}
                         typeMaxStars={typeMaxStars}
                         setTypeMaxStars={setTypeMaxStars}
+                        numStars={numStars}
+                        setNumStars={setNumStars}
                     />
                 </div>
                 <div>

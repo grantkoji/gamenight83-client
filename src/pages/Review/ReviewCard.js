@@ -59,7 +59,7 @@ const ReviewCard = props => {
                 <div>{content}</div>
             </div>
             <div className="extra content">
-                <ReactStars count={5} value={num_stars} size={18}/>
+                <ReactStars className="reStar" count={5} value={num_stars} size={18}/>
             </div>  
         </div>   
     )  

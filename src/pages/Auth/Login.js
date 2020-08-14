@@ -52,13 +52,13 @@ const Login = props => {
                 <div class="fields">
                   <div className="sixteen wide field">
                   <label htmlFor="username">Username:</label>
-                  <input className="form-input" type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                  <input className="form-input create-input-field'" type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                   </div>
                 </div>
                 <div class="fields">
                   <div className="sixteen wide field">
                     <label htmlFor="password">Password:</label>
-                    <input className="form-input" type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input className="form-input create-input-field'" type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </div>
                 </div>
                 <Button variant="outline-info" type="submit">Submit</Button>

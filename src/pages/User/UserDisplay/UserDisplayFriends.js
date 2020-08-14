@@ -70,7 +70,7 @@ const UserDisplayFriends = props => {
             </div>
             {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
             ?<div>
-                <div>Friends:</div>
+                <div>{thisPageUser.username} has {thisPageUser.total_friends.length} Friends</div>
                 <div>
                 {filteredUsers().map(friend => 
                     <div>

@@ -33,7 +33,7 @@ import { Dropdown, Menu, Input } from 'semantic-ui-react'
                 // </div> */}
 
 const FilterGamesByNum= props => {
-    let [dropdownText, setDropdownText] = useState('No Target Number of Players')
+    // let [dropdownText, setDropdownText] = useState('No Target Number of Players')
     const options = [
         { key: 1, text: 'No Target Number of Players', value: "noNumPlayers" },
         { key: 2, text: 'Set Target Number of Players', value: "withNumPlayers" },
@@ -54,7 +54,7 @@ const FilterGamesByNum= props => {
                     onChange={(e, data) => props.setTypeNumPlayers(data.value)}/>
             </Menu>
             <div class="ui input">
-                <input name="numPlayers" value={props.numPlayers} onChange={(e) => props.setNumPlayers(e.target.value)} />
+                <Input name="numPlayers" value={props.numPlayers} onChange={(e) => props.setNumPlayers(e.target.value)} />
             </div>
             <Menu compact>
                 <Dropdown 
@@ -64,7 +64,7 @@ const FilterGamesByNum= props => {
                     onChange={(e, data) => props.setTypeMinAge(data.value)}/>
             </Menu>
             <div class="ui input">
-                <input name="minAge" value={props.minAge} onChange={(e) => props.setMinAge(e.target.value)} />
+                <Input name="minAge" value={props.minAge} onChange={(e) => props.setMinAge(e.target.value)} />
             </div>
         </div>
     )

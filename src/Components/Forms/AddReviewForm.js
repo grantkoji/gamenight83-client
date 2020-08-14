@@ -43,7 +43,7 @@ const AddReviewForm = props => {
         alert("Thank you for posting your review!")
       }
     }
-
+   
     const ratingChanged = (newRating) => {
       setNumStars(newRating);
     };
@@ -58,7 +58,7 @@ const AddReviewForm = props => {
             size={18}
           />
         <label htmlFor="content">Review Content:</label><br/>
-        <input type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
+        <input className='create-input-field' type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
         <button type="Submit">Submit</button>
       </form>
     );

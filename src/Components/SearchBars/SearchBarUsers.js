@@ -1,18 +1,28 @@
 import React from 'react';
-
+import { Dropdown, Menu, Input } from 'semantic-ui-react'
 
 const SearchBarUsers= props => {
 
+    const options = [
+        { key: 1, text: 'Username', value: "username" },
+        { key: 2, text: 'Favorite Games', value: "favGames" }
+    ]
+
     return (
         <div>
-            <label>Search By</label>
-            <select name="searchType" value={props.searchType} onChange={(e) => props.setSearchType(e.target.value)}>        
-                <option selected value="username">Username:</option>
-                <option value="favGames">Favorite Games:</option>
-            </select>
-                <input name="search" value={props.search} onChange={(e) => props.setSearch(e.target.value)} />
+            <Menu compact>
+                <Dropdown 
+                    placeholder='Search By'
+                    options={options} 
+                    simple item 
+                    onChange={(e, data) => props.setSearchType(data.value)}/>
+            </Menu>
+             <div class="ui input">
+                <Input name="search" value={props.search} onChange={(e) => props.setSearch(e.target.value)} />
+            </div>
         </div>
     )
+
 
 }
   

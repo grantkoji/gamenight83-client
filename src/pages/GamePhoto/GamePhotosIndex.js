@@ -14,7 +14,7 @@ const GamePhotosIndex = props => {
     let [search, setSearch] = useState('')
     let [searchType, setSearchType] = useState('gameTitle')
     let [typeLikesFilter, setTypeLikesFilter] = useState('noLikesFilter')
-    let [numLikes, setNumLikes] = useState(0)
+    let [numLikes, setNumLikes] = useState('')
     let [typeSortPhotos, setTypeSortPhotos] = useState('noSortPhotos')
 //add time stamp to the gamesFilter and seeds so can have most recently posted photos
     let gamePhotosFiltered = () => {
@@ -29,9 +29,9 @@ const GamePhotosIndex = props => {
             } else if (searchType === 'gameCategory') {
                 filteredGamePhotos = filteredGamePhotos.filter(photo => photo.game_category.toLowerCase().includes(search.toLowerCase()))
             }
-            if (typeLikesFilter === 'minLikes') {
+            if (typeLikesFilter === 'minLikes' && numLikes !== '' ) {
                 filteredGamePhotos = filteredGamePhotos.filter(photo => photo.likes >= parseInt(numLikes))
-            } else if (typeLikesFilter === 'maxLikes') {
+            } else if (typeLikesFilter === 'maxLikes' && numLikes !== '') {
                 filteredGamePhotos = filteredGamePhotos.filter(photo => photo.likes <= parseInt(numLikes))
             }
             if (typeSortPhotos === 'mostLikes') {
