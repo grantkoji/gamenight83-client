@@ -66,7 +66,6 @@ export const fetchPostAddFriendship = (user_id, token) => fetch(friendshipsURL, 
     body: JSON.stringify({
         user_id: user_id
     })
-
 })
 .then(parseData)
 .catch(catchError)

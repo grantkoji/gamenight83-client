@@ -25,7 +25,7 @@ const SentFriendshipRequest = props => {
     }
   
     const cancelFriendRequest = () => {
-        removeFriendRequest(userId, currentUser.id,)
+        removeFriendRequest(userId, currentUser.id)
         requests.fetchRemoveFriendshipRequest(id)
     }
 

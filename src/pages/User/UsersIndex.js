@@ -35,7 +35,7 @@ const UsersIndex = props => {
                         ? filteredUsers().map(user => {
                             return (
                                 <div>
-                                    <UserCard key={user.id} {...user}/>
+                                    <UserCard key={user.id} {...user} location="index"/>
                                 </div>
                             )       
                         })

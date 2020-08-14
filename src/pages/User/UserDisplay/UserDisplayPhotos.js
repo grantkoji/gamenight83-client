@@ -130,7 +130,7 @@ const UserDisplayPhotos = props => {
                         <div>
                             {thisUserCreatedGames.map(game => 
                                 <div>
-                                        <GameCard key={game.id} {...game} />
+                                        <GameCard key={game.id} {...game} location="visitor"/>
                                 </div>
                             )}
                         </div>

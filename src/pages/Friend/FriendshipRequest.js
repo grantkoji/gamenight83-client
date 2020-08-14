@@ -28,7 +28,7 @@ const FriendshipRequest = props => {
       props.history.push(`/users/${requestedFRUser.username.replace(/\s+/g, '')}`)
 
     }
-
+    
     const acceptFriendRequest = () => {
         let addedFriendUser = users.find(user => user.id === userId)
         removeFriendRequest(currentUser.id, userId)
@@ -53,12 +53,15 @@ const FriendshipRequest = props => {
         requests.fetchRemoveFriendshipRequest(id)
     }
 
+    
+    // let removeFriendRequest = (userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {userReceiveId: userReceiveId, userSentId: userSentId}})
     const declineFriendRequest = () => {
         removeFriendRequest(currentUser.id, userId)
         requests.fetchRemoveFriendshipRequest(id)
     }
     return(
         <div class="ui cards">
+            { setRequestedFRUser && null}
             <div class="card">
                 <div class="content">
                     {requestedFRUser && requestedFRUser["profile_url"] && requestedFRUser["profile_url"] !== '' ?

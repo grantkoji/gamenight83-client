@@ -150,7 +150,7 @@ const UserDisplayReviews= props => {
                             <div>
                             {thisPageUser.total_friends.map(friend => 
                                 <div>
-                                    <UserCard key={friend.id} {...friend}/>
+                                    <UserCard key={friend.id} {...friend} location="review"/>
                                 </div>
                             )}
                             </div>

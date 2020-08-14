@@ -19,6 +19,24 @@
 //         },
 //user_id is same as the person who sent it
 //request_id is id of person who is receving
+// ],
+// "friend_requests_sent": [
+// {
+// "id": 27,
+// "user_id": 53,
+// "request_id": 83
+// },
+// {
+// "id": 46,
+// "user_id": 53,
+// "request_id": 84
+// },
+// {
+// "id": 47,
+// "user_id": 53,
+// "request_id": 86
+// let removeFriendRequest = (userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {userReceiveId: userReceiveId, userSentId: userSentId}})    
+// let addFriendRequest = (frId, userReceiveId, userSentId) => ({type: 'ADD_FRIEND_REQUEST', payload: {frId: frId, userReceiveId: userReceiveId, userSentId: userSentId}})
 const users = (state = [], action) => {
     switch(action.type){
         case 'FETCH_USERS': 
@@ -27,13 +45,21 @@ const users = (state = [], action) => {
             return [...state, action.payload.value]
         case 'ADD_FRIEND_REQUEST':
             let newFRUsers = state.map(user => {
-                if (user.id === action.payload.userSentId || user.id === action.payload.userReceiveId) {
+                if (user.id === action.payload.userSentId) {
                     let newUserFRSent = user.friend_requests_sent
                     newUserFRSent.push({
                                         id: action.payload.frId, 
                                         user_id: action.payload.userSentId,
                                         request_id: action.payload.userReceiveId})
                     user.friend_requests_sent = newUserFRSent
+                    return user
+                } else if (user.id === action.payload.userReceiveId) {
+                    let newUserFRReceive = user.friend_requests_received
+                    newUserFRReceive.push({
+                                        id: action.payload.frId, 
+                                        user_id: action.payload.userSentId,
+                                        request_id: action.payload.userReceiveId})
+                    user.friend_requests_received = newUserFRReceive
                     return user
                 } else {
                     return user
@@ -72,15 +98,15 @@ const users = (state = [], action) => {
                 }
             })
             return removedFriendUsers
-
     
+           
         case 'REMOVE_FRIEND_REQUEST':
             let removeFRUsers = state.map(user => {
-                if (user.id === action.payload.userReceiveId) {
-                    let removeFromUserReceiveFR = user.friend_requests_received.filter(frUser => frUser.id !== action.payload.userSentId)
+                if (user.friend_requests_received.some(fr => fr.request_id === action.payload.userReceiveId)) {
+                    let removeFromUserReceiveFR = user.friend_requests_received.filter(frUser => frUser.user_id !== action.payload.userSentId)
                     user.friend_requests_received = removeFromUserReceiveFR 
                     return user
-                } else if (user.id === action.payload.userSentId) {
+                } else if (user.friend_requests_sent.some(fr => fr.user_id === action.payload.userSentId)) {
                     let removeFromUserSentFR = user.friend_requests_sent.filter(frUser => frUser.request_id !== action.payload.userReceiveId)
                     user.friend_requests_sent = removeFromUserSentFR 
                     return user

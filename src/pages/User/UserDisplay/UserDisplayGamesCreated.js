@@ -156,7 +156,7 @@ const UserDisplayGamesCreated = props => {
                             <div>
                             {thisPageUser.total_friends.map(friend => 
                                 <div>
-                                    <UserCard key={friend.id} {...friend}/>
+                                    <UserCard key={friend.id} {...friend} location="visitor"/>
                                 </div>
                             )}
                             </div>
