@@ -14,11 +14,11 @@ const UserCard = props => {
         props.history.push(`/users/${username.replace(/\s+/g, '')}`)
     }
 
-    useEffect(() => {
-        return () => {
-                return (<></>)
-            }
-      }, []);
+    // useEffect(() => {
+    //     return () => {
+    //             return (<></>)
+    //         }
+    //   }, []);
     
      const endFriendship = () => {
          let friendshipInstance = friendships.find(friendship => friendship.user_id === id && friendship.friend_id === currentUser.id 
