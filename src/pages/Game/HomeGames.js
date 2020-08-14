@@ -11,9 +11,9 @@ const HomeGames = props => {
     let [search, setSearch] = useState('')
     let [searchType, setSearchType] = useState('gameTitle')
     let [typeNumPlayers, setTypeNumPlayers] = useState('noNumPlayers')
-    let [numPlayers, setNumPlayers] = useState(0)
+    let [numPlayers, setNumPlayers] = useState('')
     let [typeMinAge, setTypeMinAge] = useState('noMinAge')
-    let [minAge, setMinAge] = useState(0)
+    let [minAge, setMinAge] = useState('')
 
     
 
@@ -27,11 +27,11 @@ const HomeGames = props => {
             } else if (searchType === 'gameTitle') {
                 gamesFiltered = gamesFiltered.filter(game => game.title.toLowerCase().includes(search.toLowerCase()))
             }
-            if (typeNumPlayers === "withNumPlayers") {
+            if (typeNumPlayers === "withNumPlayers" && numPlayers !== '') {
                 gamesFiltered = gamesFiltered.filter(game => game.max_num_players >= parseInt(numPlayers) && 
                     game.min_num_players <= parseInt(numPlayers))
             } 
-            if (typeMinAge === 'withMinAge') {
+            if (typeMinAge === 'withMinAge' && minAge !== '') {
                 gamesFiltered = gamesFiltered.filter(game => game.min_age >= parseInt(minAge))
             }
             return gamesFiltered
