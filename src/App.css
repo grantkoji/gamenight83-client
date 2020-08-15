@@ -158,8 +158,18 @@
   /* margin-top: -130px; */
   margin-top: -10%;
 }
+.try-it {
+  font-family: 'Cedarville Cursive', cursive;
+}
+/* 
 
+body {
+  margin: 0;
 
+  font-family: 'Cedarville Cursive', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
 
 /* rgb (21, 25, 61)
 rgb (126, 189, 194) */
