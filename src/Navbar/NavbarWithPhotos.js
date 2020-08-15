@@ -61,19 +61,33 @@ import {connect} from 'react-redux'
         props.history.push('/login')
     }
 
+    const redirectToNewGame = () => {
+      props.history.push('/games/new')
+    }
 
+    const changePointer = (e) => {  
+      e.target.style.cursor = 'pointer'
+    }
 
+            
      return (
        <>
+       <div className='top-left-navbar'>
+       <img src={require('../images/createNewGame600.png')} className='top-left-nav-button' alt="Create New Game Button" onClick={redirectToNewGame} onMouseOver={changePointer} />
+       </div>
+       <div className='top-right-navbar'>
+            <img src={require('../images/schedule.png')} className='top-right-nav-button' alt="Game Schedule Button" onClick={redirectToNewGame} onMouseOver={changePointer} />
+       </div>
         <div className='photo-navbar'>
-            <img className='navbar-button'src="./reviewsIndex.png" alt="Reviews Index Button" onClick={redirectToReviews}/>
-            <img className='navbar-button'src="./usersIndex.png" alt="Users Index Button" onClick={redirectToUsers}/>
-            <img className='navbar-button'src="./photosIndex.png" alt="Photos Index Button" onClick={redirectToPhotos}/>
-            <img className='navbar-button'src="./gamesIndex.png" alt="Games Index Button" onClick={redirectToGames}/>
-            { currentUser ? <img className='navbar-button'src="./userShowPage.png" alt="User Show Page Button" onClick={toUserPage}/>
-            : <img className='navbar-button'src="./signup.png" alt="Sign Up Button" onClick={redirectToSignUp}/>}
-            { currentUser ? <img className='navbar-button'src="./logout.png" alt="Logout Button" onClick={logoutAction}/>
-            : <img className='navbar-button'src="./login.png" alt="Login Button" onClick={redirectToLogin}/>}
+            <img src={require('../images/reviewsIndex.png')} className='navbar-button' alt="Reviews Index Button" onClick={redirectToReviews} onMouseOver={changePointer} />
+            <img src={require('../images/usersIndex.png')} className='navbar-button' alt="Users Index Button" onClick={redirectToUsers} onMouseOver={changePointer}/>
+            <img src={require('../images/photosIndex.png')} className='navbar-button' alt="Photos Index Button" onClick={redirectToPhotos} onMouseOver={changePointer}/>
+            <img src={require('../images/gamesIndex.png')} className='navbar-button' alt="Games Index Button" onClick={redirectToGames} onMouseOver={changePointer} />
+            { currentUser ? 
+            <img src={require('../images/userShowPg.png')} className='navbar-button' alt="User Show Page Button" onClick={toUserPage} onMouseOver={changePointer} />
+            :<img src={require('../images/signup.png')} className='navbar-button' alt="Sign Up Button" onClick={redirectToSignUp} onMouseOver={changePointer} />}    
+            { currentUser ? <img src={require('../images/logoutButton.png')} className='navbar-button' alt="Logout Button" onClick={logoutAction} onMouseOver={changePointer} />
+            : <img src={require('../images/login300.png')} className='navbar-button' alt="Login Button" onClick={redirectToLogin} onMouseOver={changePointer}/>}
         </div>
        </>
      )

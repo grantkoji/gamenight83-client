@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import NavbarWithPhotos from './Navbar/NavbarWithPhotos'
+import Navbar from './Navbar/Navbar'
 import * as requests from './requests'
 import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
@@ -15,7 +16,7 @@ import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
 import UserPage from './pages/User/UserPage'
 import CreateNewGame from './pages/Game/CreateNewGame'
-
+// import gameBanner from './public/gameBanner.png'
 
 
 
@@ -90,13 +91,13 @@ function App(props) {
       props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
-  // <Navbar />
+ 
   // <NavbarWithPhotos />
-
+{/* <Navbar /> */}
   return (
     <div className="App">
-      <img src="./public/gameBanner.png" alt="Home banner" className='imageBanner'/>
-       
+      <img src={require('./images/gameBannerText.png')} className="imageBanner" alt="Home banner" />
+        <NavbarWithPhotos />
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 

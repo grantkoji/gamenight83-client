@@ -111,19 +111,55 @@
 .imageBanner {
   width: 100%;
 }
+
+
+.top-left-navbar {
+  display: flex;
+  justify-content: flex-start;
+}
+.top-left-nav-button {
+  vertical-align: middle;
+  border-style: none;
+  width: 15%;
+  display: flex;
+  /* margin-top: -130px; */
+  margin-top: -28%;
+  height: 60%
+}
+
+/* Pierson */
+.top-right-navbar {
+  display: flex;
+  justify-content: flex-end;
+}
+.top-right-nav-button {
+  vertical-align: middle;
+  border-style: none;
+  width: 15%;
+  display: flex;
+  /* margin-top: -130px; */
+  margin-top: -28%;
+  height: 60%
+}
+
+
+
+
+.photo-navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .navbar-button {
   vertical-align: middle;
   border-style: none;
   width: 15%;
   display: flex;
   /* margin-top: -130px; */
-  margin-top: -11%;
+  margin-top: -10%;
 }
 
-.photo-navbar {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 /* rgb (21, 25, 61)
 rgb (126, 189, 194) */
