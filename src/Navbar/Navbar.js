@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import * as action from '../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-import currentUser from '../modules/reducers/currentUser'
+
 
 
  

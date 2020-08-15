@@ -111,6 +111,19 @@
 .imageBanner {
   width: 100%;
 }
+.navbar-button {
+  vertical-align: middle;
+  border-style: none;
+  width: 15%;
+  display: flex;
+  /* margin-top: -130px; */
+  margin-top: -11%;
+}
+
+.photo-navbar {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* rgb (21, 25, 61)
 rgb (126, 189, 194) */

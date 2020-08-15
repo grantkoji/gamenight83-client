@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Route, Switch, withRouter } from 'react-router-dom'
-import Navbar from './Navbar/Navbar'
+import NavbarWithPhotos from './Navbar/NavbarWithPhotos'
 import * as requests from './requests'
 import * as action from './modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
@@ -34,6 +34,7 @@ import CreateNewGame from './pages/Game/CreateNewGame'
 // -> Game results page and change to add images or reviews for game.  
 
 function App(props) {
+  const {currentUser} = props
 
   useEffect(() => {
     requests.fetchAllGames()
@@ -89,12 +90,13 @@ function App(props) {
       props.history.push(`/users/${resp.user.username.replace(/\s+/g, '')}`)
     }
   }
-
+  // <Navbar />
+  // <NavbarWithPhotos />
 
   return (
     <div className="App">
-      <img src="./userPage.jpg" alt="banner" />
-      <Navbar />
+      <img src="./public/gameBanner.png" alt="Home banner" className='imageBanner'/>
+       
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
