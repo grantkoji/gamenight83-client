@@ -93,6 +93,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <img src='./public/gamesBanner.mp4' alt='Games Banner'/>
       <Navbar />
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
