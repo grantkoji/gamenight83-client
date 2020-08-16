@@ -38,10 +38,20 @@ const GameCard = props => {
 {/* <div className="meta">
 <span className="date" onClick={redirectToGame}>{game_title}</span>
 </div> */}
+// .div-of-photo {
+//     height: 280px;
+//     width: 100%;
+//   }
+  
+//   .game-photo-image {
+    // <div class="ui card" style={{height: "100%"}}>
+    // <div className='div-of-photo'>
+    //  <img src={props["image_url"]} className="image game-photo-image" alt={game_title} />
+    // </div>
     return (
-        <div className="ui card">
-            <div className="image">
-                <img src={props["image_url"]} alt={title}/>
+        <div className="ui card" style={{height: '100%'}}>
+            <div className="div-of-photo">
+                <img src={props["image_url"]} className='game-image' alt={title}/>
             </div>
             <div className="content">
                 <a className="header" onClick={redirectToGame}>{title}</a>

@@ -15,7 +15,7 @@ const Login = props => {
 
 
   const handleLoginSubmit = () => {
-    console.log("Login form has been submitted")
+
     fetch("http://localhost:3001/api/v1/user/login", {
       method: "POST",
       headers: {

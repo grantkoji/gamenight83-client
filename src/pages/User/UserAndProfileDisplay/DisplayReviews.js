@@ -9,10 +9,13 @@ import AddReviewForm from '../../../Components/Forms/AddReviewForm'
 import AddGamePhotoForm from '../../../Components/Forms/AddGamePhotoForm'
 import GameUserCard from '../../Game/GameUserCard'
 import SearchBarReviews from '../../../Components/SearchBars/SearchBarReviews'
-import FilterReviewsByStars from '../../../Components/Filters/FilterReviewsByStars'
+import FilterReviewsByMinStars from '../../../Components/Filters/FilterReviewsByMinStars'
+import FilterReviewsByMaxStars from '../../../Components/Filters/FilterReviewsByMaxStars'
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const UserDisplayReviews= props => {
     const {
@@ -29,7 +32,8 @@ const UserDisplayReviews= props => {
     let [searchType, setSearchType] = useState('gameTitle')
     let [typeMinStars, setTypeMinStars] = useState('noMinStars')
     let [typeMaxStars, setTypeMaxStars] = useState('noMaxStars')
-
+    let [minNumStars, setMinNumStars] = useState(0);
+    let [maxNumStars, setMaxNumStars] = useState(0);
 
     let filteredReviews = () => {
         if (thisUserReviews && thisUserReviews.length) {
@@ -44,10 +48,10 @@ const UserDisplayReviews= props => {
                 reviewsFiltered = reviewsFiltered.filter(review => review.game_category.toLowerCase().includes(search.toLowerCase()))
             }
             if (typeMinStars !== 'noMinStars') {
-                reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(typeMinStars))
+                reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(minNumStars))
             }
             if (typeMaxStars !== 'noMaxStars') {
-                reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) <= parseInt(typeMaxStars))
+                reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) <= parseInt(maxNumStars))
             }
             return reviewsFiltered
         } 
@@ -84,11 +88,15 @@ const UserDisplayReviews= props => {
                         <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
                     <div>
-                        <FilterReviewsByStars 
-                            typeMinStars={typeMinStars}
+                        <FilterReviewsByMinStars 
                             setTypeMinStars={setTypeMinStars}
-                            typeMaxStars={typeMaxStars}
+                            minNumStars={minNumStars}
+                            setMinNumStars={setMinNumStars} 
+                        /><br/>
+                        <FilterReviewsByMaxStars 
                             setTypeMaxStars={setTypeMaxStars}
+                            maxNumStars={maxNumStars}     
+                            setMaxNumStars={setMaxNumStars}
                         />
                     </div>
                 

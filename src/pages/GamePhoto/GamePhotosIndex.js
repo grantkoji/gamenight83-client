@@ -54,26 +54,24 @@ const GamePhotosIndex = props => {
                     <div>
                         <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
-                    <div>
+                    <div className='photos-sort-and-filter'>
                         <FilterPhotosByLikes
                             typeLikesFilter={typeLikesFilter}
                             setTypeLikesFilter={setTypeLikesFilter}
                             numLikes={numLikes}
                             setNumLikes={setNumLikes}
                         />
-                    </div>
-                    <div>
                         <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
                     </div>
                 </div>
                 <div>
                     <Container fluid>
-                        <Row>
+                        <Row className='justify-content-center'>
                             {  
                             gamePhotos && gamePhotos.length
                             ? gamePhotosFiltered().map(photo => {
                                 return (
-                                    <div>
+                                    <div className='index-photo-divider'>
                                         <GamePhotoCard key={photo.id} {...photo} />
                                     </div>
                                 )

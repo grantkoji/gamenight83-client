@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import ReviewCard from './ReviewCard'
 import SearchBarReviews from '../../Components/SearchBars/SearchBarReviews'
-import FilterReviewsByStars from '../../Components/Filters/FilterReviewsByStars'
+import FilterReviewsByMinStars from '../../Components/Filters/FilterReviewsByMinStars'
+import FilterReviewsByMaxStars from '../../Components/Filters/FilterReviewsByMaxStars'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 const ReviewsIndex = props => {
@@ -13,8 +14,9 @@ const ReviewsIndex = props => {
         let [searchType, setSearchType] = useState('gameTitle')
         let [typeMinStars, setTypeMinStars] = useState('noMinStars')
         let [typeMaxStars, setTypeMaxStars] = useState('noMaxStars')
-        let [numStars, setNumStars] = useState(0);
-   
+        let [minNumStars, setMinNumStars] = useState(0);
+        let [maxNumStars, setMaxNumStars] = useState(0);
+    
 
     
         let filteredReviews = () => {
@@ -30,10 +32,10 @@ const ReviewsIndex = props => {
                     reviewsFiltered = reviewsFiltered.filter(review => review.game_category.toLowerCase().includes(search.toLowerCase()))
                 }
                 if (typeMinStars !== 'noMinStars') {
-                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(numStars))
+                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) >= parseInt(minNumStars))
                 }
                 if (typeMaxStars !== 'noMaxStars') {
-                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) <= parseInt(typeMaxStars))
+                    reviewsFiltered = reviewsFiltered.filter(review => parseInt(review.num_stars) <= parseInt(maxNumStars))
                 }
                 return reviewsFiltered
             } 
@@ -46,25 +48,27 @@ const ReviewsIndex = props => {
                         <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
                     <div>
-                        <FilterReviewsByStars 
-                            typeMinStars={typeMinStars}
+                        <FilterReviewsByMinStars 
                             setTypeMinStars={setTypeMinStars}
-                            typeMaxStars={typeMaxStars}
+                            minNumStars={minNumStars}
+                            setMinNumStars={setMinNumStars} 
+                        /><br/>
+                        <FilterReviewsByMaxStars 
                             setTypeMaxStars={setTypeMaxStars}
-                            numStars={numStars}
-                            setNumStars={setNumStars}
+                            maxNumStars={maxNumStars}     
+                            setMaxNumStars={setMaxNumStars}
                         />
                     </div>
                 </div>
                 <div>
                     <Container fluid>
-                        <Row>
+                        <Row className='justify-content-center'>
                             {  
                             reviews && reviews.length
                             ? filteredReviews().map(review => {
                                 return (
-                                    <div>
-                                    <ReviewCard key={review.id} {...review}/>
+                                    <div className='index-review-divider'>
+                                        <ReviewCard key={review.id} {...review}/>
                                     </div>
                                 )
                             })

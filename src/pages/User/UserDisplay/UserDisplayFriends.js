@@ -8,6 +8,9 @@ import GameCard from '../../Game/GameCard'
 import SearchBarUsers from '../../../Components/SearchBars/SearchBarUsers'
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const UserDisplayFriends = props => {
     const {

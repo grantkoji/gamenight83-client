@@ -7,9 +7,11 @@ import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
 import FriendshipRequest from '../../Friend/FriendshipRequest'
 import SentFriendshipRequest from '../../Friend/SentFriendshipRequest'
-
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const ProfileDisplayFriendRequests = props => {
     const {

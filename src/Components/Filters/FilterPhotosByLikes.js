@@ -20,7 +20,7 @@ const FilterPhotosByLikes = props => {
                     onChange={(e, data) => props.setTypeLikesFilter(data.value)}/>
             </Menu>
             <div class="ui input">
-                <Input name="numLikes" value={props.numLikes} onChange={(e) => props.setNumLikes(e.target.value)} />
+                <Input name="numLikes" className='input-search' value={props.numLikes} onChange={(e) => props.setNumLikes(e.target.value)} />
             </div>
         </div>
     )

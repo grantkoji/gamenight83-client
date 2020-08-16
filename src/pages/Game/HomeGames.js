@@ -62,14 +62,14 @@ const HomeGames = props => {
                 </div>
                 <div className="index">
                     <Container fluid>
-                        <Row>
+                        <Row className='justify-content-center'>
                             {  
                             games && games.length
                             ? filteredGames().map(game => {
                                 return (
-                                
+                                    <div className='index-photo-divider'>
                                         <GameCard key={game.id} {...game} />
-                                
+                                    </div>
                                 )
                             })
                             : "Loading..."}

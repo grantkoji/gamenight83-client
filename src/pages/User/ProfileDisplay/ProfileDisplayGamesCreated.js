@@ -11,7 +11,9 @@ import AddGamePhotoForm from '../../../Components/Forms/AddGamePhotoForm'
 import SearchBarGames from '../../../Components/SearchBars/SearchBarGames'
 import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum'
 import {connect} from 'react-redux'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const ProfileDisplayGamesCreated = props => {
     const {
@@ -73,75 +75,75 @@ const ProfileDisplayGamesCreated = props => {
                 />
             </div>
         </div>
-        <div className='profile-page'>
-            <div className="profile-left-cards">
-                {
-                    thisUserGamePhotos && thisUserGamePhotos.length
-                    ?<div>
-                        <div>Game Photos:</div>
-                        <div>
-                        {thisUserGamePhotos.map(photo => 
+        <Container fluid>
+            <Row className='justify-content-center'>
+                <Col md={3}>
+                    {
+                        thisUserGamePhotos && thisUserGamePhotos.length
+                        ?<div>
+                            <div>Game Photos:</div>
                             <div>
-                                <GamePhotoCard key={photo.id} {...photo} />
-                            </div>
-                        )}
-                        </div>
-                    </div>
-                    : <div>No Game Photos Listed</div>
-                }
-              
-                {
-                    thisUserReviews && thisUserReviews.length
-                    ?<div>
-                        <div>Game Reviews:</div>
-                        <div>
-                        {thisUserReviews.map(review => 
-                            <div>
-                            <ReviewCard key={review.id} {...review} />
-                            </div>
-                        )}
-                        </div>
-                    </div>
-                    : <div>No Reviews Listed</div>
-                }
-            </div>
-            <div className="profile-center-cards">
-
-                {
-                    thisUserCreatedGames && thisUserCreatedGames.length
-                    ?<div>
-                        <div>Created Games:</div>
-                        <div>
-                            {filteredGames().map(game => 
+                            {thisUserGamePhotos.map(photo => 
                                 <div>
-                                        <GameCard key={game.id} {...game} />
+                                    <GamePhotoCard key={photo.id} {...photo} />
                                 </div>
                             )}
-                        </div>
-                    </div>
-                    : <div>No Games Posted</div>
-                }
-            
-            </div>
-            <div className="profile-right-cards">
-            
-                {
-                    currentUser && currentUser.total_friends && currentUser.total_friends.length
-                    ?<div>
-                        <div>Friends:</div>
-                        <div>
-                        {currentUser.total_friends.map(friend => 
-                            <div>
-                                <UserCard key={friend.id} {...friend} status="profile"/>
                             </div>
-                        )}
                         </div>
+                        : <div>No Game Photos Listed</div>
+                    }
+                
+                    {
+                        thisUserReviews && thisUserReviews.length
+                        ?<div>
+                            <div>Game Reviews:</div>
+                            <div>
+                            {thisUserReviews.map(review => 
+                                <div>
+                                <ReviewCard key={review.id} {...review} />
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        : <div>No Reviews Listed</div>
+                    }
+                </Col>
+                <Col md={6}>
+                    <div className="featured-on-user-page">
+                        {
+                            thisUserCreatedGames && thisUserCreatedGames.length
+                            ?<div>
+                                <div>Created Games:</div>
+                                <div>
+                                    {filteredGames().map(game => 
+                                        <div>
+                                                <GameCard key={game.id} {...game} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            : <div>No Games Posted</div>
+                        }
                     </div>
-                    : <div>No Friends Listed</div>
-                }
-            
-            </div>
-        </div>
+                </Col>
+                <Col md={3}>
+                    {
+                        currentUser && currentUser.total_friends && currentUser.total_friends.length
+                        ?<div>
+                            <div>Friends:</div>
+                            <div>
+                            {currentUser.total_friends.map(friend => 
+                                <div>
+                                    <UserCard key={friend.id} {...friend} status="profile"/>
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        : <div>No Friends Listed</div>
+                    }
+                </Col>
+            </Row>
+        </Container>
     </div>
     )
 

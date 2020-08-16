@@ -6,7 +6,9 @@ import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
 import SearchBarUsers from '../../../Components/SearchBars/SearchBarUsers'
 import UserProfileCard from '../UserProfileCard'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const UserDisplayMutualFriends = props => {
     const {

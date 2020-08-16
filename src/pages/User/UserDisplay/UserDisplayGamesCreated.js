@@ -12,7 +12,9 @@ import SearchBarGames from '../../../Components/SearchBars/SearchBarGames'
 import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum'
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const UserDisplayGamesCreated = props => {
     const {

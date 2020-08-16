@@ -9,6 +9,9 @@ import SearchBarPhotos from '../../../Components/SearchBars/SearchBarPhotos'
 import FilterPhotosByLikes from '../../../Components/Filters/FilterPhotosByLikes';
 import SortPhotos from '../../../Components/Sort/SortPhotos';
 import UserProfileCard from '../UserProfileCard'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import {connect} from 'react-redux'
 
 
@@ -90,23 +93,25 @@ const UserDisplayPhotos = props => {
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                  </div>
                 <div className='photos-search-bar'>
-                    <div>
+             
                         <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                    </div>
-                    <div>
+                  
+                    <div className='photos-sort-and-filter'>
                         <FilterPhotosByLikes
                             typeLikesFilter={typeLikesFilter}
                             setTypeLikesFilter={setTypeLikesFilter}
                             numLikes={numLikes}
                             setNumLikes={setNumLikes}
                         />
-                    </div>  
-                    <div>
                         <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
                     </div>
                 </div>
             </div>   
-         
+            <Container fluid>
+                    <Row className='justify-content-center'>
+
+                    </Row>
+            </Container>
             <div className='profile-page'>
                 <div className="profile-left-cards">
                     

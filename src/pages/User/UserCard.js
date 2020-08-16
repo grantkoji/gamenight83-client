@@ -28,13 +28,17 @@ const UserCard = props => {
          .then(updatedFriendships => fetchFriendships(updatedFriendships))
      }
   
+    
 
     return (
-        <div class="ui card">
-            <div className="image">
+        <div class="ui card" style={{height: "100%"}}>
+            <div className='div-of-photo'>
                 { props["profile_url"] === "" 
-                ? <img src="https://banner2.cleanpng.com/20180403/dje/kisspng-question-mark-computer-icons-clip-art-question-mark-5ac3de9116dec4.9390654415227859370937.jpg" alt="Question Mark" />
-                : <img src={props["profile_url"]} alt={username} />
+                ? <img src='https://img.pngio.com/3d-blue-questionmark-featuredcontent-question-mark-icon-3d-png-3d-question-mark-png-820_645.png'
+                    className='user-image'
+                    alt="Question Mark"                    
+                  />
+                : <img src={props["profile_url"]} className='user-image' alt={username} />
                 }
             </div>
             <div className="content">

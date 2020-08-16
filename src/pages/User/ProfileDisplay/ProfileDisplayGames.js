@@ -12,7 +12,9 @@ import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum'
 import GameUserCard from '../../Game/GameUserCard'
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const ProfileDisplayGames = props => {
     const {
@@ -112,100 +114,102 @@ const ProfileDisplayGames = props => {
  
                 
             </div>
-            <div className='profile-page'>
-                <div className="profile-left-cards">
-                    <div>
-                    {
-                        thisUserGamePhotos && thisUserGamePhotos.length
-                        ?<div>
-                            <div>Game Photos:</div>
-                            <div>
-                            {thisUserGamePhotos.map(photo => 
-                                <div>
-                                    <GamePhotoCard key={photo.id} {...photo} />
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Game Photos Listed</div>
-                    }
-                    </div>
-                    <div>
-                        {
-                            thisUserCreatedGames && thisUserCreatedGames.length
-                            ?<div>
-                                <div>Created Games:</div>
-                                <div>
-                                    {thisUserCreatedGames.map(game => 
+            <Container fluid>
+                <Row className='justify-content-center'>
+                    <Col md={3}>
+                        <div>
+                            {
+                                thisUserGamePhotos && thisUserGamePhotos.length
+                                ?<div>
+                                    <div>Game Photos:</div>
+                                    <div>
+                                    {thisUserGamePhotos.map(photo => 
                                         <div>
-                                                <GameCard key={game.id} {...game} />
+                                            <GamePhotoCard key={photo.id} {...photo} />
                                         </div>
                                     )}
-                                </div>
-                            </div>
-                            : <div>No Games Posted</div>
-                        }
-                    </div>
-                </div>
-                <div className="profile-center-cards">
-                    <div>
-                        {
-                            games && games.length 
-                            ? <div> 
-                                <div>Select a Game to Post a Photo or Write a Review:</div>
-                                <div>{filteredGames().map(game => 
-                                    <div>
-                                        <GameUserCard 
-                                            key={game.id} 
-                                            {...game} 
-                                            setThisGameId={setThisGameId}
-                                            setThisGameTitle={setThisGameTitle}
-                                            setPostType={setPostType}
-                                        />
                                     </div>
-                                )}
                                 </div>
-                            </div>
-                            : <div>No Games Listed</div>
-                        }
-                    </div>  
-                </div>
-                <div className="profile-right-cards">
-                <div>
-                    {
-                        currentUser && currentUser.total_friends && currentUser.total_friends.length
-                        ?<div>
-                            <div>Friends:</div>
-                            <div>
-                            {currentUser.total_friends.map(friend => 
-                                <div>
-                                    <UserCard key={friend.id} {...friend} status="profile"/>
-                                </div>
-                            )}
-                            </div>
+                                : <div>No Game Photos Listed</div>
+                            }
                         </div>
-                        : <div>No Friends Listed</div>
-                    }
-                </div>
-                    <div>
-                    {
-                        thisUserReviews && thisUserReviews.length
-                        ?<div>
-                            <div>Game Reviews:</div>
-                            <div>
-                            {thisUserReviews.map(review => 
-                                <div>
-                                <ReviewCard key={review.id} {...review} />
+                        <div>
+                            {
+                                thisUserCreatedGames && thisUserCreatedGames.length
+                                ?<div>
+                                    <div>Created Games:</div>
+                                    <div>
+                                        {thisUserCreatedGames.map(game => 
+                                            <div>
+                                                    <GameCard key={game.id} {...game} />
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            )}
-                            </div>
+                                : <div>No Games Posted</div>
+                            }
                         </div>
-                        : <div>No Reviews Listed</div>
-                    }
-                    </div>
-                </div>
-            </div>
-        </div>    
+                    </Col>
+                    <Col md={6}>
+                        <div>
+                            {
+                                games && games.length 
+                                ? <div> 
+                                    <div>Select a Game to Post a Photo or Write a Review:</div>
+                                    <div>{filteredGames().map(game => 
+                                        <div>
+                                            <GameUserCard 
+                                                key={game.id} 
+                                                {...game} 
+                                                setThisGameId={setThisGameId}
+                                                setThisGameTitle={setThisGameTitle}
+                                                setPostType={setPostType}
+                                            />
+                                        </div>
+                                    )}
+                                    </div>
+                                </div>
+                                : <div>No Games Listed</div>
+                            }
+                        </div>  
+                    </Col>
+                    <Col md={3}>
+                        <div>
+                            {
+                                currentUser && currentUser.total_friends && currentUser.total_friends.length
+                                ?<div>
+                                    <div>Friends:</div>
+                                    <div>
+                                    {currentUser.total_friends.map(friend => 
+                                        <div>
+                                            <UserCard key={friend.id} {...friend} status="profile"/>
+                                        </div>
+                                    )}
+                                    </div>
+                                </div>
+                                : <div>No Friends Listed</div>
+                            }
+                        </div>
+                        <div>
+                            {
+                                thisUserReviews && thisUserReviews.length
+                                ?<div>
+                                    <div>Game Reviews:</div>
+                                    <div>
+                                    {thisUserReviews.map(review => 
+                                        <div>
+                                        <ReviewCard key={review.id} {...review} />
+                                        </div>
+                                    )}
+                                    </div>
+                                </div>
+                                : <div>No Reviews Listed</div>
+                            }
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     )
 
 }

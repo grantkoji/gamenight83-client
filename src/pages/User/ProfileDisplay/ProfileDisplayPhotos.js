@@ -10,6 +10,10 @@ import FilterPhotosByLikes from '../../../Components/Filters/FilterPhotosByLikes
 import SortPhotos from '../../../Components/Sort/SortPhotos';
 import {connect} from 'react-redux'
 import UserProfileCard from '../UserProfileCard'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 
 const ProfileDisplayPhotos = props => {
     const {
@@ -63,91 +67,95 @@ const ProfileDisplayPhotos = props => {
             <div>
                 <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
             </div>
-            <div>
+            <div className='photos-sort-and-filter'>
                 <FilterPhotosByLikes
                     typeLikesFilter={typeLikesFilter}
                     setTypeLikesFilter={setTypeLikesFilter}
                     numLikes={numLikes}
                     setNumLikes={setNumLikes}
                 />
-            </div>
-            <div>
                 <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
             </div>
             
         </div>
-        <div className='profile-page'>
-            <div className="profile-left-cards">
-                <div>
-                    {
-                        thisUserCreatedGames && thisUserCreatedGames.length
-                        ?<div>
-                            <div>Created Games:</div>
-                            <div>
-                                {thisUserCreatedGames.map(game => 
+        <Container fluid>
+            <Row className='justify-content-center'>
+                <Col md={3}>
+                    <div>
+                        {
+                            thisUserCreatedGames && thisUserCreatedGames.length
+                            ?<div>
+                                <div>Created Games:</div>
+                                <div>
+                                    {thisUserCreatedGames.map(game => 
+                                        <div>
+                                                <GameCard key={game.id} {...game} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            : <div>No Games Posted</div>
+                        }
+                    </div>
+
+                </Col>
+
+                <Col md={6}>
+                    <div className='featured-on-user-page'>
+                        {
+                            thisUserGamePhotos && thisUserGamePhotos.length
+                            ?<div>
+                                <div>Game Photos:</div>
+                                <div>
+                                {gamePhotosFiltered().map(photo => 
                                     <div>
-                                            <GameCard key={game.id} {...game} />
+                                        <GamePhotoCard key={photo.id} {...photo} />
                                     </div>
                                 )}
-                            </div>
-                        </div>
-                        : <div>No Games Posted</div>
-                    }
-                </div>
-            </div>
-            <div className="profile-center-cards">
-                <div>
-                    {
-                        thisUserGamePhotos && thisUserGamePhotos.length
-                        ?<div>
-                            <div>Game Photos:</div>
-                            <div>
-                            {gamePhotosFiltered().map(photo => 
-                                <div>
-                                    <GamePhotoCard key={photo.id} {...photo} />
                                 </div>
-                            )}
                             </div>
-                        </div>
-                        : <div>No Game Photos Listed</div>
-                    }
-                </div>
-            </div>
-            <div className="profile-right-cards">
-                <div>
-                    {
-                        currentUser && currentUser.total_friends && currentUser.total_friends.length
-                        ?<div>
-                            <div>Friends:</div>
-                            <div>
-                            {currentUser.total_friends.map(friend => 
-                                <div>
-                                    <UserCard key={friend.id} {...friend} status="profile"/>
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Friends Listed</div>
-                    }
-                </div>
-                <div>
-                {
-                    thisUserReviews && thisUserReviews.length
-                    ?<div>
-                        <div>Game Reviews:</div>
-                        <div>
-                        {thisUserReviews.map(review => 
-                            <div>
-                            <ReviewCard key={review.id} {...review} />
-                            </div>
-                        )}
-                        </div>
+                            : <div>No Game Photos Listed</div>
+                        }
                     </div>
-                    : <div>No Reviews Listed</div>
-                }
-                </div>
-            </div>
-        </div>
+
+                </Col>
+
+                <Col md={3}>
+                    <div>
+                        {
+                            currentUser && currentUser.total_friends && currentUser.total_friends.length
+                            ?<div>
+                                <div>Friends:</div>
+                                <div>
+                                {currentUser.total_friends.map(friend => 
+                                    <div>
+                                        <UserCard key={friend.id} {...friend} status="profile"/>
+                                    </div>
+                                )}
+                                </div>
+                            </div>
+                            : <div>No Friends Listed</div>
+                        }
+                    </div>
+                    <div>
+                    {
+                        thisUserReviews && thisUserReviews.length
+                        ?<div>
+                            <div>Game Reviews:</div>
+                            <div>
+                            {thisUserReviews.map(review => 
+                                <div>
+                                <ReviewCard key={review.id} {...review} />
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        : <div>No Reviews Listed</div>
+                    }
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     </div>
     )
 
@@ -174,3 +182,78 @@ const msp = state => {
   }
   
   export default withRouter(connect(msp, mdp)(ProfileDisplayPhotos));
+
+
+
+//   <div className='profile-page'>
+//             <div className="profile-left-cards">
+//                 <div>
+//                     {
+//                         thisUserCreatedGames && thisUserCreatedGames.length
+//                         ?<div>
+//                             <div>Created Games:</div>
+//                             <div>
+//                                 {thisUserCreatedGames.map(game => 
+//                                     <div>
+//                                             <GameCard key={game.id} {...game} />
+//                                     </div>
+//                                 )}
+//                             </div>
+//                         </div>
+//                         : <div>No Games Posted</div>
+//                     }
+//                 </div>
+//             </div>
+//             <div className="profile-center-cards">
+//                 <div>
+//                     {
+//                         thisUserGamePhotos && thisUserGamePhotos.length
+//                         ?<div>
+//                             <div>Game Photos:</div>
+//                             <div>
+//                             {gamePhotosFiltered().map(photo => 
+//                                 <div>
+//                                     <GamePhotoCard key={photo.id} {...photo} />
+//                                 </div>
+//                             )}
+//                             </div>
+//                         </div>
+//                         : <div>No Game Photos Listed</div>
+//                     }
+//                 </div>
+//             </div>
+//             <div className="profile-right-cards">
+//                 <div>
+//                     {
+//                         currentUser && currentUser.total_friends && currentUser.total_friends.length
+//                         ?<div>
+//                             <div>Friends:</div>
+//                             <div>
+//                             {currentUser.total_friends.map(friend => 
+//                                 <div>
+//                                     <UserCard key={friend.id} {...friend} status="profile"/>
+//                                 </div>
+//                             )}
+//                             </div>
+//                         </div>
+//                         : <div>No Friends Listed</div>
+//                     }
+//                 </div>
+//                 <div>
+//                 {
+//                     thisUserReviews && thisUserReviews.length
+//                     ?<div>
+//                         <div>Game Reviews:</div>
+//                         <div>
+//                         {thisUserReviews.map(review => 
+//                             <div>
+//                             <ReviewCard key={review.id} {...review} />
+//                             </div>
+//                         )}
+//                         </div>
+//                     </div>
+//                     : <div>No Reviews Listed</div>
+//                 }
+//                 </div>
+//             </div>
+            // </div>

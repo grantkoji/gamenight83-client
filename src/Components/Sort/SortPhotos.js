@@ -14,9 +14,11 @@ const options = [
 
     return (
     <div>
+        <nbsp /><nbsp />
+        <label>Sort Photos</label><nbsp /><nbsp />
         <Menu compact>
             <Dropdown 
-                placeholder='Sort Photos by'
+                placeholder='Sort by'
                 options={options} 
                 simple item 
                 onChange={(e, data) => props.setTypeSortPhotos(data.value)}/>

@@ -289,6 +289,67 @@
 
 }
 
+.div-of-photo {
+  height: 280px;
+  width: 100%;
+}
+
+.game-photo-image {
+  float: left;
+  height: 280px; 
+  width: 100%;
+  object-fit: cover;
+}
+
+.ui.card {
+  max-height: 500px;
+  max-width: 300px;
+
+}
+
+.game-image {
+  float: left;
+  height: 100%; 
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.index-photo-divider {
+  margin: 10px;
+}
+
+.index-review-divider {
+  margin: 5px
+}
+
+.photos-sort-and-filter {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.user-image {
+  float: left;
+  height: 100%; 
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.input-search {
+  /* height: 42px; */
+
+  
+}
+
+.featured-on-user-page {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+
 /* 
 
 body {

@@ -29,12 +29,12 @@ const UsersIndex = props => {
                 </div>
                 <div>
                 <Container fluid>
-                    <Row>
+                    <Row className='justify-content-center'>
                         {  
                         users && users.length
                         ? filteredUsers().map(user => {
                             return (
-                                <div>
+                                <div className='index-photo-divider'>
                                     <UserCard key={user.id} {...user} status="index"/>
                                 </div>
                             )       
