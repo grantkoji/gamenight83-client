@@ -55,7 +55,7 @@ const FilterGamesByNum= props => {
             </Menu>
             <div class="ui input">
                 <Input name="numPlayers" value={props.numPlayers} onChange={(e) => props.setNumPlayers(e.target.value)} />
-            </div>
+            </div><br/>
             <Menu compact>
                 <Dropdown 
                     placeholder='Minimum Age of Players?'

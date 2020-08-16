@@ -84,8 +84,12 @@ const UserDisplayPhotos = props => {
 
     return (
         <div>
-            <div className="ui grid">
-                <div className="six wide column">
+            
+            <div>
+                <div className="ten wide column">
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                 </div>
+                <div className='photos-search-bar'>
                     <div>
                         <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
@@ -96,48 +100,32 @@ const UserDisplayPhotos = props => {
                             numLikes={numLikes}
                             setNumLikes={setNumLikes}
                         />
-                    </div>
+                    </div>  
                     <div>
                         <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
                     </div>
-                </div>   
-                <div className="ten wide column">
-                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-                 </div>
-            </div>
-            <div className="ui grid">
-                <div className="eight wide column">
-                    {thisUserGamePhotos && thisUserGamePhotos.length
-                    ?<div>
-                        <div>Game Photos:</div>
-                        <div>
-                        {gamePhotosFiltered().map(photo => 
-                            <div>
-                                <GamePhotoCard key={photo.id} {...photo} />
-                            </div>
-                        )}
-                        </div>
-                    </div>
-                    : <div>No Game Photos Listed</div>
-                    }
                 </div>
-    
-                <div className="four wide column">
+            </div>   
+         
+            <div className='profile-page'>
+                <div className="profile-left-cards">
                     
-                    {thisUserCreatedGames && thisUserCreatedGames.length
-                    ?<div>
-                        <div>Created Games:</div>
-                        <div>
-                            {thisUserCreatedGames.map(game => 
-                                <div>
-                                        <GameCard key={game.id} {...game} status="visitor"/>
-                                </div>
-                            )}
+                    {
+                        thisUserCreatedGames && thisUserCreatedGames.length
+                        ?<div>
+                            <div>Created Games:</div>
+                            <div>
+                                {thisUserCreatedGames.map(game => 
+                                    <div>
+                                            <GameCard key={game.id} {...game} status="visitor"/>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                    : <div>No Games Posted</div>
+                        : <div>No Games Posted</div>
                     }
-                    {thisUserReviews && thisUserReviews.length
+                    {
+                        thisUserReviews && thisUserReviews.length
                         ?<div>
                             <div>Game Reviews:</div>
                             <div>
@@ -151,13 +139,30 @@ const UserDisplayPhotos = props => {
                         : <div>No Reviews Listed</div>
                     }
                       
+                </div>'
+                <div className='profile-center-cards'>
+                    {
+                        thisUserGamePhotos && thisUserGamePhotos.length
+                        ?<div>
+                            <div>Game Photos:</div>
+                            <div>
+                            {gamePhotosFiltered().map(photo => 
+                                <div>
+                                    <GamePhotoCard key={photo.id} {...photo} />
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        : <div>No Game Photos Listed</div>
+                    }
                 </div>
-                <div className="four wide column">
+                <div className="profile-right-cards">
                     <div>
                         {thisPageUser && mutualFriendsList()}  
                     </div>  
                     <div>
-                        {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
+                        {
+                            thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
                             ?<div>
                                 <div>Friends:</div>
                                 <div>
@@ -169,7 +174,7 @@ const UserDisplayPhotos = props => {
                                 </div>
                             </div>
                                 : <div>No Friends Listed</div>
-                            }
+                        }
                     </div>
                 </div>
             </div>

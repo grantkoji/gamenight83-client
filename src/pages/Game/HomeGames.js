@@ -43,20 +43,22 @@ const HomeGames = props => {
         return (
             <>
                 <h1 className='try-it'>Welcome</h1>
-                <div>
-                    <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
-                    <FilterGamesByNum 
-                        typeNumPlayers={typeNumPlayers} 
-                        setTypeNumPlayers={setTypeNumPlayers}
-                        numPlayers={numPlayers}
-                        setNumPlayers={setNumPlayers} 
-                        typeMinAge={typeMinAge} 
-                        setTypeMinAge={setTypeMinAge}
-                        minAge={minAge}
-                        setMinAge={setMinAge}  
-                    />
+                <div className="games-search-bar">
+                    <div>
+                        <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    </div>
+                    <div>
+                        <FilterGamesByNum 
+                            typeNumPlayers={typeNumPlayers} 
+                            setTypeNumPlayers={setTypeNumPlayers}
+                            numPlayers={numPlayers}
+                            setNumPlayers={setNumPlayers} 
+                            typeMinAge={typeMinAge} 
+                            setTypeMinAge={setTypeMinAge}
+                            minAge={minAge}
+                            setMinAge={setMinAge}  
+                        />
+                    </div>
                 </div>
                 <div className="index">
                     <Container fluid>

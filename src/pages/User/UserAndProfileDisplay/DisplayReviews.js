@@ -78,90 +78,98 @@ const UserDisplayReviews= props => {
 
     return (
         <div>
-            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-            <div className="container6">
-                <div>
-                    <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
-                    <FilterReviewsByStars 
-                        typeMinStars={typeMinStars}
-                        setTypeMinStars={setTypeMinStars}
-                        typeMaxStars={typeMaxStars}
-                        setTypeMaxStars={setTypeMaxStars}
-                    />
-                </div>
-                <div>
-                    {thisUserReviews && thisUserReviews.length
-                        ?<div>
-                            <div>Game Reviews:</div>
-                            <div>
-                            {filteredReviews().map(review => 
-                                <div>
-                                <ReviewCard key={review.id} {...review} />
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Reviews Listed</div>
-                    }
-                </div>       
-            </div>
-            <div className="container3">
-                <div>
-                {thisUserGamePhotos && thisUserGamePhotos.length
-                    ?<div>
-                        <div>Game Photos:</div>
-                        <div>
-                        {thisUserGamePhotos.map(photo => 
-                            <div>
-                                <GamePhotoCard key={photo.id} {...photo} />
-                            </div>
-                        )}
-                        </div>
+                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                <div className='reviews-search-bar'>
+                    <div>
+                        <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
-                    : <div>No Game Photos Listed</div>
-                }
-                </div>
-                <div>
-                    {thisUserCreatedGames && thisUserCreatedGames.length
-                    ?<div>
-                        <div>Created Games:</div>
-                        <div>
-                            {thisUserCreatedGames.map(game => 
-                                <div>
-                                        <GameCard key={game.id} {...game} />
-                                </div>
-                            )}
-                        </div>
+                    <div>
+                        <FilterReviewsByStars 
+                            typeMinStars={typeMinStars}
+                            setTypeMinStars={setTypeMinStars}
+                            typeMaxStars={typeMaxStars}
+                            setTypeMaxStars={setTypeMaxStars}
+                        />
                     </div>
-                    : <div>No Games Posted</div>
-                    }
-                </div>
-            </div>
-            <div className="container3">
-                <div>
-                    {thisPageUser && mutualFriendsList()}  
-                </div>  
-                <div>
-                    {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
-                        ?<div>
-                            <div>Friends:</div>
-                            <div>
-                            {thisPageUser.total_friends.map(friend => 
-                                <div>
-                                    <UserCard key={friend.id} {...friend} status="review"/>
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                            : <div>No Friends Listed</div>
-                        }
-                </div>
                 
+                </div>
+            <div className='profile-page'>
+                <div className="profile-left-cards">
+                    <div>
+                    {
+                        thisUserGamePhotos && thisUserGamePhotos.length
+                        ?<div>
+                            <div>Game Photos:</div>
+                            <div>
+                            {thisUserGamePhotos.map(photo => 
+                                <div>
+                                    <GamePhotoCard key={photo.id} {...photo} />
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        : <div>No Game Photos Listed</div>
+                    }
+                    </div>
+                    <div>
+                        {
+                            thisUserCreatedGames && thisUserCreatedGames.length
+                            ?<div>
+                                <div>Created Games:</div>
+                                <div>
+                                    {thisUserCreatedGames.map(game => 
+                                        <div>
+                                                <GameCard key={game.id} {...game} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            : <div>No Games Posted</div>
+                        }
+                    </div>
+                </div>
+                <div className="profile-center-cards">
+                    <div>
+                        {
+                            thisUserReviews && thisUserReviews.length
+                            ?<div>
+                                <div>Game Reviews:</div>
+                                <div>
+                                {filteredReviews().map(review => 
+                                    <div>
+                                    <ReviewCard key={review.id} {...review} />
+                                    </div>
+                                )}
+                                </div>
+                            </div>
+                            : <div>No Reviews Listed</div>
+                        }
+                    </div>       
+                </div>
+                <div className="profile-right-cards">
+                    <div>
+                        {thisPageUser && mutualFriendsList()}  
+                    </div>  
+                    <div>
+                        {
+                            thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
+                            ?<div>
+                                <div>Friends:</div>
+                                <div>
+                                {thisPageUser.total_friends.map(friend => 
+                                    <div>
+                                        <UserCard key={friend.id} {...friend} status="review"/>
+                                    </div>
+                                )}
+                                </div>
+                            </div>
+                                : <div>No Friends Listed</div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-        )
+    )
 
 }
 

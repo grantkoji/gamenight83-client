@@ -63,7 +63,7 @@ const SignUp = props => {
 
    
     return (
-      <div>
+      <div className='signup-form'>
         <form className="ui form" onSubmit={handleSubmit}>
         <h3 class="ui dividing header">Sign Up</h3>
           <div className="fields">

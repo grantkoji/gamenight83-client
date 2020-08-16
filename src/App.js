@@ -15,7 +15,8 @@ import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
 import UserPage from './pages/User/UserPage'
-import CreateNewGame from './pages/Game/CreateNewGame'
+// import CreateNewGame from './pages/Game/CreateNewGame'
+import CreateGameForm from './Components/Forms/CreateGameForm'
 // import gameBanner from './public/gameBanner.png'
 
 
@@ -101,7 +102,7 @@ function App(props) {
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 
-        <Route exact path='/games/new' render={(routerprops) => <CreateNewGame {...routerprops}  />}/> 
+        <Route exact path='/games/new' render={(routerprops) => <CreateGameForm  {...routerprops}  />}/> 
         <Route exact path='/games/:id' render={(routerprops) => <GamePage {...routerprops}  />}/>  
         <Route exact path='/gamegram' render={(routerprops) => <GamePhotosIndex {...routerprops} />} /> 
         <Route exact path='/reviews' render={(routerprops) => <ReviewsIndex  {...routerprops} />} /> 

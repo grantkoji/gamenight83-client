@@ -46,23 +46,24 @@ const Login = props => {
 
     return (
      
-        
-              <form className="ui form" onSubmit={handleSubmit}>
-              <h3 class="ui dividing header">Login</h3>
-                <div class="fields">
-                  <div className="sixteen wide field">
-                  <label htmlFor="username">Username:</label>
-                  <input className="form-input create-input-field'" type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                  </div>
-                </div>
-                <div class="fields">
-                  <div className="sixteen wide field">
-                    <label htmlFor="password">Password:</label>
-                    <input className="form-input create-input-field'" type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                  </div>
-                </div>
-                <Button variant="outline-info" type="submit">Submit</Button>
-              </form>
+      <div className='login-form'>
+        <form className="ui form" onSubmit={handleSubmit}>
+        <h3 class="ui dividing header">Login</h3>
+          <div class="fields">
+            <div className="sixteen wide field">
+            <label htmlFor="username">Username:</label>
+            <input className="form-input create-input-field'" type="text" autoComplete="off" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            </div>
+          </div>
+          <div class="fields">
+            <div className="sixteen wide field">
+              <label htmlFor="password">Password:</label>
+              <input className="form-input create-input-field'" type="password" autoComplete="off" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            </div>
+          </div>
+          <Button variant="outline-info" type="submit">Submit</Button>
+        </form>
+      </div>
       
     );
   

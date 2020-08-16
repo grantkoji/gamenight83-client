@@ -53,7 +53,7 @@ const FilterReviewsByStars = props => {
                     options={optionsMin} 
                     simple item 
                     onChange={(e, data) => props.setTypeMinStars(data.value)}/>
-            </Menu>
+            </Menu><br/>
             <Label>Maximum Review Rating:</Label>
               <Menu compact>
                 <Dropdown 

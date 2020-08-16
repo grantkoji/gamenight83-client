@@ -50,19 +50,21 @@ const GamePhotosIndex = props => {
         return (
             <>
                 <h1>Welcome To Photos</h1>
-                <div>
-                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
-                    <FilterPhotosByLikes
-                        typeLikesFilter={typeLikesFilter}
-                        setTypeLikesFilter={setTypeLikesFilter}
-                        numLikes={numLikes}
-                        setNumLikes={setNumLikes}
-                    />
-                </div>
-                <div>
-                    <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                <div className='photos-search-bar'>
+                    <div>
+                        <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    </div>
+                    <div>
+                        <FilterPhotosByLikes
+                            typeLikesFilter={typeLikesFilter}
+                            setTypeLikesFilter={setTypeLikesFilter}
+                            numLikes={numLikes}
+                            setNumLikes={setNumLikes}
+                        />
+                    </div>
+                    <div>
+                        <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                    </div>
                 </div>
                 <div>
                     <Container fluid>

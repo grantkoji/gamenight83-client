@@ -35,7 +35,7 @@ const ProfileDisplayFriends = props => {
     <div>
         {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
         <div className="container6">
-            <div>
+            <div className='users-search-bar'>
                 <SearchBarUsers 
                     searchType={searchType} 
                     setSearchType={setSearchType}
@@ -43,67 +43,75 @@ const ProfileDisplayFriends = props => {
                     setSearch={setSearch}
                 />
             </div>
-            {currentUser && currentUser.total_friends && currentUser.total_friends.length
-            ?<div>
-                <div>You {currentUser.username} have {currentUser.total_friends.length} Friends</div>
-                <div>
-                {filteredUsers().map(friend => 
-                    <div>
-                        <UserCard key={friend.id} {...friend} status="profileFriends"/>
-                    </div>
-                )}
-                </div>
-            </div>
-            : <div>No Friends Listed</div>
-            }
         </div>
-        <div className="container3">
+        <div className='profile-page'>
+            <div className="profile-left-cards">
             <div>
-            {thisUserGamePhotos && thisUserGamePhotos.length
-                ?<div>
-                    <div>Game Photos:</div>
-                    <div>
-                    {thisUserGamePhotos.map(photo => 
+                {
+                    thisUserGamePhotos && thisUserGamePhotos.length
+                    ?<div>
+                        <div>Game Photos:</div>
                         <div>
-                            <GamePhotoCard key={photo.id} {...photo} />
-                        </div>
-                    )}
-                    </div>
-                </div>
-                : <div>No Game Photos Listed</div>
-            }
-            </div>
-            <div>
-                {thisUserCreatedGames && thisUserCreatedGames.length
-                ?<div>
-                    <div>Created Games:</div>
-                    <div>
-                        {thisUserCreatedGames.map(game => 
+                        {thisUserGamePhotos.map(photo => 
                             <div>
-                                    <GameCard key={game.id} {...game} />
+                                <GamePhotoCard key={photo.id} {...photo} />
                             </div>
                         )}
+                        </div>
                     </div>
+                    : <div>No Game Photos Listed</div>
+                }
                 </div>
-                : <div>No Games Posted</div>
+                <div>
+                    {
+                        thisUserCreatedGames && thisUserCreatedGames.length
+                        ?<div>
+                            <div>Created Games:</div>
+                            <div>
+                                {thisUserCreatedGames.map(game => 
+                                    <div>
+                                            <GameCard key={game.id} {...game} />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        : <div>No Games Posted</div>
+                    }
+                </div>
+            </div>
+            <div className="profile-center-cards">
+                {
+                    currentUser && currentUser.total_friends && currentUser.total_friends.length
+                    ?<div>
+                        <div>You {currentUser.username} have {currentUser.total_friends.length} Friends</div>
+                        <div>
+                        {filteredUsers().map(friend => 
+                            <div>
+                                <UserCard key={friend.id} {...friend} status="profileFriends"/>
+                            </div>
+                        )}
+                        </div>
+                    </div>
+                    : <div>No Friends Listed</div>
                 }
             </div>
-        </div>
-        <div className="container3">
+            <div className="profile-right-cards">
             <div>
-            {thisUserReviews && thisUserReviews.length
-                ?<div>
-                    <div>Game Reviews:</div>
-                    <div>
-                    {thisUserReviews.map(review => 
+                {
+                    thisUserReviews && thisUserReviews.length
+                    ?<div>
+                        <div>Game Reviews:</div>
                         <div>
-                        <ReviewCard key={review.id} {...review} />
+                        {thisUserReviews.map(review => 
+                            <div>
+                            <ReviewCard key={review.id} {...review} />
+                            </div>
+                        )}
                         </div>
-                    )}
                     </div>
-                </div>
-                : <div>No Reviews Listed</div>
-            }
+                    : <div>No Reviews Listed</div>
+                }
+            </div>
             </div>
         </div>
     </div>

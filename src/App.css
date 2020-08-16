@@ -102,10 +102,15 @@
 
 .create-input-field {
   text-align: center;
+  /* width: 100px;
+  height: 50px;
+  position:relative;
+  overflow: auto;  */
+
 }
 
 .game-card {
-  border-radius: 100px
+  border-radius: 100px;
 }
 
 .imageBanner {
@@ -161,6 +166,112 @@
 .try-it {
   font-family: 'Cedarville Cursive', cursive;
 }
+
+.profile-page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-left-cards {
+  vertical-align: middle;
+  width: 25%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile-center-cards {
+  vertical-align: middle;
+  width: 50%;
+  display: flex;
+}
+
+.profile-right-cards {
+  vertical-align: middle;
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+.new-game-form-parent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-game-form {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    width: 100%;
+    border: 5px rgba(21, 25, 61);
+    padding: 50px;
+    margin: 20px;
+}
+
+.login-form {
+  border: 5px rgba(21, 25, 61);
+  padding: 2% 27% 27% 20%;
+  margin: auto;
+}
+/* 
+.login-form {
+  border: 5px rgba(21, 25, 61);
+  padding: 50px 100px 0px 100px;
+  margin: auto;
+} */
+
+.signup-form {
+  border: 5px rgba(21, 25, 61);
+  padding: 2% 25% 25% 20%;
+  margin: auto;
+}
+
+.reviews-search-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: middle;
+    width: 100%;
+    border: 5px rgba(21, 25, 61);
+    padding: 20px;
+    margin: 20px;
+}
+
+.photos-search-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  border: 5px rgba(21, 25, 61);
+  padding: 20px;
+  margin: 20px;
+}
+
+.games-search-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  border: 5px rgba(21, 25, 61);
+  padding: 20px;
+  margin: 20px;
+}
+
+
+.users-search-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  border: 5px rgba(21, 25, 61);
+  padding: 20px;
+  margin: 20px;
+}
+
 /* 
 
 body {

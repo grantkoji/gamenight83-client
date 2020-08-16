@@ -41,18 +41,20 @@ const ReviewsIndex = props => {
         return (
             <>
                 <h1>Game Reviews</h1>
-                <div>
-                    <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
-                    <FilterReviewsByStars 
-                        typeMinStars={typeMinStars}
-                        setTypeMinStars={setTypeMinStars}
-                        typeMaxStars={typeMaxStars}
-                        setTypeMaxStars={setTypeMaxStars}
-                        numStars={numStars}
-                        setNumStars={setNumStars}
-                    />
+                <div className='reviews-search-bar'>
+                    <div>
+                        <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    </div>
+                    <div>
+                        <FilterReviewsByStars 
+                            typeMinStars={typeMinStars}
+                            setTypeMinStars={setTypeMinStars}
+                            typeMaxStars={typeMaxStars}
+                            setTypeMaxStars={setTypeMaxStars}
+                            numStars={numStars}
+                            setNumStars={setNumStars}
+                        />
+                    </div>
                 </div>
                 <div>
                     <Container fluid>
@@ -84,3 +86,20 @@ const mapStateToProps = state => {
   
   export default connect(mapStateToProps)(ReviewsIndex);
   
+
+//   <div>
+//   <Container fluid>
+//       <Row>
+//           {  
+//           reviews && reviews.length
+//           ? filteredReviews().map(review => {
+//               return (
+//                   <div>
+//                   <ReviewCard key={review.id} {...review}/>
+//                   </div>
+//               )
+//           })
+//           : "Loading..."}
+//       </Row>
+//   </Container>
+// </div>

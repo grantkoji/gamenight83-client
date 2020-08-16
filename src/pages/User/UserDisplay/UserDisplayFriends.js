@@ -60,7 +60,7 @@ const UserDisplayFriends = props => {
     <div>
         {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
         <div className="container6">
-            <div>
+            <div className='users-search-bar'>
                 <SearchBarUsers 
                     searchType={searchType} 
                     setSearchType={setSearchType}
@@ -68,58 +68,67 @@ const UserDisplayFriends = props => {
                     setSearch={setSearch}
                 />
             </div>
-            {thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
-            ?<div>
-                <div>{thisPageUser.username} has {thisPageUser.total_friends.length} Friends</div>
-                <div>
-                {filteredUsers().map(friend => 
-                    <div>
-                        <UserCard key={friend.id} {...friend} location="visitor"/>
-                    </div>
-                )}
-                </div>
-            </div>
-            : <div>No Friends Listed</div>
-            }
+           
         </div>
-        <div className="container3">
-            <div>
-            {thisUserGamePhotos && thisUserGamePhotos.length
-                ?<div>
-                    <div>Game Photos:</div>
-                    <div>
-                    {thisUserGamePhotos.map(photo => 
+
+        <div className='profile-page'>
+            <div className="profile-left-cards">
+                <div>
+                {
+                    thisUserGamePhotos && thisUserGamePhotos.length
+                    ?<div>
+                        <div>Game Photos:</div>
                         <div>
-                            <GamePhotoCard key={photo.id} {...photo} />
-                        </div>
-                    )}
-                    </div>
-                </div>
-                : <div>No Game Photos Listed</div>
-            }
-            </div>
-            <div>
-                {thisUserCreatedGames && thisUserCreatedGames.length
-                ?<div>
-                    <div>Created Games:</div>
-                    <div>
-                        {thisUserCreatedGames.map(game => 
+                        {thisUserGamePhotos.map(photo => 
                             <div>
-                                    <GameCard key={game.id} {...game} />
+                                <GamePhotoCard key={photo.id} {...photo} />
                             </div>
                         )}
+                        </div>
                     </div>
+                    : <div>No Game Photos Listed</div>
+                }
                 </div>
-                : <div>No Games Posted</div>
+                <div>
+                    {
+                        thisUserCreatedGames && thisUserCreatedGames.length
+                        ?<div>
+                            <div>Created Games:</div>
+                            <div>
+                                {thisUserCreatedGames.map(game => 
+                                    <div>
+                                            <GameCard key={game.id} {...game} />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        : <div>No Games Posted</div>
+                    }
+                </div>
+            </div>
+            <div className="profile-center-cards">
+                {
+                    thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
+                    ?<div>
+                        <div>{thisPageUser.username} has {thisPageUser.total_friends.length} Friends</div>
+                        <div>
+                        {filteredUsers().map(friend => 
+                            <div>
+                                <UserCard key={friend.id} {...friend} location="visitor"/>
+                            </div>
+                        )}
+                        </div>
+                    </div>
+                    : <div>No Friends Listed</div>
                 }
             </div>
-        </div>
-        <div className="container3">
+            <div className="profile-right-cards">
             <div>
                 {thisPageUser && mutualFriendsList()}  
             </div>  
             <div>
-            {thisUserReviews && thisUserReviews.length
+            {
+                thisUserReviews && thisUserReviews.length
                 ?<div>
                     <div>Game Reviews:</div>
                     <div>
@@ -133,9 +142,11 @@ const UserDisplayFriends = props => {
                 : <div>No Reviews Listed</div>
             }
             </div>
-      
+
+            </div>
         </div>
     </div>
+       
     )
 
 }
