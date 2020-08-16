@@ -118,11 +118,11 @@ const CreateGameForm = props => {
             <div className="fields">
                 <div className="eight wide field">
                   <label htmlFor="linkToGameWebsite">Link to Game Website or More Instructions:</label>
-                  <input className='create-input-field' type="text" autoComplete="off" name="linkToGameWebsite" value={linkToGameWebsite} onChange={(e) => setLinkToGameWebsite(e.target.value)}/>
+                  <input type="text" autoComplete="off" name="linkToGameWebsite" value={linkToGameWebsite} onChange={(e) => setLinkToGameWebsite(e.target.value)}/>
                 </div>
                 <div className="eight wide field">
                   <label htmlFor="imageUrl">Link to Photo of Game:</label>
-                  <input className='create-input-field' type="text" autoComplete="off" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
+                  <input type="text" autoComplete="off" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/>
                 </div>
               </div>
             <div className="fields">

@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-color: rgb(251, 251, 251);
+/* 237, 238, 240
+249, 249, 251,  */
+
 }
 
 .App-logo {
@@ -210,7 +214,8 @@
 }
 
 .login-form {
-  border: 5px rgba(21, 25, 61);
+  /* border: 5px rgba(21, 25, 61);
+  border-style: solid; */
   padding: 2% 27% 27% 20%;
   margin: auto;
 }
@@ -270,6 +275,18 @@
   border: 5px rgba(21, 25, 61);
   padding: 20px;
   margin: 20px;
+}
+
+.instructions-paragraph {
+  /* width: 75%;
+  margin: auto; */
+  
+  width: 750px;
+  height: 200px;
+  margin: auto;
+
+  overflow: auto;  
+
 }
 
 /* 

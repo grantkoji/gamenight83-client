@@ -80,7 +80,7 @@ import {connect} from 'react-redux'
        </div>
         <div className='photo-navbar'>
             <img src={require('../images/reviewsIndex.png')} className='navbar-button' alt="Reviews Index Button" onClick={redirectToReviews} onMouseOver={changePointer} />
-            <img src={require('../images/usersIndex.png')} className='navbar-button' alt="Users Index Button" onClick={redirectToUsers} onMouseOver={changePointer}/>
+            <img src={require('../images/usersIndex3.png')} className='navbar-button' alt="Users Index Button" onClick={redirectToUsers} onMouseOver={changePointer}/>
             <img src={require('../images/photosIndex.png')} className='navbar-button' alt="Photos Index Button" onClick={redirectToPhotos} onMouseOver={changePointer}/>
             <img src={require('../images/gamesIndex.png')} className='navbar-button' alt="Games Index Button" onClick={redirectToGames} onMouseOver={changePointer} />
             { currentUser ? 

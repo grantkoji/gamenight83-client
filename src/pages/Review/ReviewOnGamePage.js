@@ -14,11 +14,15 @@ const ReviewOnGamePage = props => {
         // props.history.push(`/users/${user_id}`)
         props.history.push(`/users/${props.user_name.replace(/\s+/g, '')}`)
     }
+
+    const changePointer = (e) => {  
+        e.target.style.cursor = 'pointer'
+    }
      
         return (
             <div>
                 <div>
-                    <div onClick={redirectToUser}>by: {user_name}</div>
+                    <div onClick={redirectToUser} onMouseOver={changePointer}>by: {user_name}</div>
                     <ReactStars count={5} value={num_stars} size={18}/>
                     <div>{content}</div>
                 </div>

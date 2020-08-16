@@ -50,6 +50,10 @@ const GamePhotoCard = props => {
         props.history.push(`/users/${user_name.replace(/\s+/g, '')}`)
     }
 
+    const changePointer = (e) => {  
+        e.target.style.cursor = 'pointer'
+      }
+
     // const renderFront = () => {
     //     return (
     //         <div>
@@ -82,7 +86,7 @@ const GamePhotoCard = props => {
                 <div className="content">
                     <a className="header" onClick={redirectToUser}>{user_name}</a>
                     <div className="meta">
-                        <span className="date" onClick={redirectToGame}>{game_title}</span>
+                        <span className="date" onClick={redirectToGame} onMouseOver={changePointer}>{game_title}</span>
                     </div>
                 </div>
                  

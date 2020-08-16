@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import ReviewOnGamePage from '../Review/ReviewOnGamePage'
@@ -18,75 +18,91 @@ const GamePage = props => {
       let ratingTotal = thisPageReviews.reduce((accumulator, review) => accumulator + review.num_stars, 0)
       return (ratingTotal / thisPageReviews.length).toFixed(2)
     }
-    const {title, description, creator_id, min_num_players, max_num_players, min_age, id,
-       instructions_and_rules, link_to_game_website, game_category, creator_username  } = thisPageGame
+
+    useEffect(() => {
+      thisPageReviews = reviews.filter(review => review.game_id === currentGame)
+      thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
+      thisPageGame = games.find(game => game.id === currentGame)  
+  }, [])
+
+    useEffect(() => {
+      thisPageReviews = reviews.filter(review => review.game_id === currentGame)
+      thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
+      thisPageGame = games.find(game => game.id === currentGame)  
+  }, [currentGame, games])
+
   //      <div class="ui grid">
   // <div class="four wide column"></div>
   // <div class="four wide column"></div>
   // <div class="four wide column"></div>
     return (
-        <div>
-          <div>
-            <GameProfileCard thisPageGame={thisPageGame} />
-          </div>
-          <div className="ui grid">
-            <div className="five wide column">
+        <>
+          {
+            thisPageGame
+            ? <div>
               <div>
-                { token 
-                && <> 
-                  <div>Post a Review for {thisPageGame.title}: </div>
-                  <div><AddReviewForm thisGame={currentGame}/></div>
-                  </>}  
+                <GameProfileCard thisPageGame={thisPageGame} />
               </div>
-              <div>
-                { token 
-                && <> 
-                  <div>Post a Photo for {thisPageGame.title}: </div>
-                  <div><AddGamePhotoForm thisGame={currentGame}/></div>
-                  </>}  
-              </div>
-            </div>
-            <div className="six wide column">
-              {
-                thisPageGamePhotos && thisPageGamePhotos.length
-                  ?<div>
-                      <div>Game Photos:</div>
-                      <div>
-                      {thisPageGamePhotos.map(photo => 
-                          <div>
-                              <GamePhotoCard key={photo.id} {...photo} />
-                          </div>
-                      )}
-                      </div>
+              <div className="ui grid">
+                <div className="five wide column">
+                  <div>
+                    { token 
+                    && <> 
+                      <div>Post a Review for {thisPageGame.title}: </div>
+                      <div><AddReviewForm thisGame={currentGame}/></div>
+                      </>}  
                   </div>
-                  : <div>No Game Photos Listed</div>
-              }
-          </div>
-         
-            <div className="five wide column">
-              {
-                thisPageReviews && thisPageReviews.length
-                ? <div>
-                    <div>
-                    {reviews && thisPageReviews.length 
-                      ? <div>Game Review Average: {thisGameReviewAverage()}</div>
-                      : null}
-                    </div>      
-                    <div>Number of Reviews: {thisPageReviews.length}</div>
-                    <div>
-                    {thisPageReviews.map(review => 
-                        <div>
-                            <ReviewOnGamePage key={review.id} {...review} />
-                        </div>
-                    )}
-                    </div>
+                  <div>
+                    { token 
+                    && <> 
+                      <div>Post a Photo for {thisPageGame.title}: </div>
+                      <div><AddGamePhotoForm thisGame={currentGame}/></div>
+                      </>}  
+                  </div>
                 </div>
-                : null
-              }
-          
+                <div className="six wide column">
+                  {
+                    thisPageGamePhotos && thisPageGamePhotos.length
+                      ?<div>
+                          <div>Game Photos:</div>
+                          <div>
+                          {thisPageGamePhotos.map(photo => 
+                              <div>
+                                  <GamePhotoCard key={photo.id} {...photo} />
+                              </div>
+                          )}
+                          </div>
+                      </div>
+                      : <div>No Game Photos Listed</div>
+                  }
               </div>
-        </div>
-      </div>
+            
+                <div className="five wide column">
+                  {
+                    thisPageReviews && thisPageReviews.length
+                    ? <div>
+                        <div>
+                        {reviews && thisPageReviews.length 
+                          ? <div>Game Review Average: {thisGameReviewAverage()}</div>
+                          : null}
+                        </div>      
+                        <div>Number of Reviews: {thisPageReviews.length}</div>
+                        <div>
+                        {thisPageReviews.map(review => 
+                            <div>
+                                <ReviewOnGamePage key={review.id} {...review} />
+                            </div>
+                        )}
+                        </div>
+                    </div>
+                    : null
+                  }
+              
+                  </div>
+            </div>
+          </div>
+        : <div>Loading...</div>}
+      </>
     )
 }
 
