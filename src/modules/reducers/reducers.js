@@ -6,6 +6,8 @@ import users from './users'
 import currentToken from './currentToken'
 import showUser from './showUser'
 import currentGame from './currentGame'
+import scheduledGames from './scheduledGames'
+import scheduledGamePlayers from './scheduledGamePlayers'
 // import friendshipRequests from './friendshipRequests'
 import friendships from './friendships'
 
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
     token: currentToken,
     showUser,
     currentGame,
-    friendships
+    friendships,
+    scheduledGames,
+    scheduledGamePlayers
     // friendshipRequests,
 })
 

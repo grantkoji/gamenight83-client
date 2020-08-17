@@ -25,6 +25,13 @@ let addFriendRequest = (frId, userReceiveId, userSentId) => ({type: 'ADD_FRIEND_
 let removeFriendRequest = (userReceiveId, userSentId) => ({type: 'REMOVE_FRIEND_REQUEST', payload: {userReceiveId: userReceiveId, userSentId: userSentId}})
 let addFriendshipTwoUsers = (user1, user2) => ({type: 'ADD_ACCEPTED_FRIENDSHIP', payload: {user1: user1, user2: user2}})
 let removeFriendshipTwoUsers = (user1Id, user2Id) => ({type: 'REMOVE_FRIENDSHIP', payload: {user1Id: user1Id, user2Id: user2Id}})
+let fetchScheduledGames = (scheduledGames) => ({type: 'FETCH_SCHEDULED_GAMES', payload: {value: scheduledGames}})
+let fetchScheduledGamePlayers = (scheduledGamePlayers) => ({type: 'FETCH_SCHEDULED_GAME_PLAYERS', payload: {value: scheduledGamePlayers}})
+let addScheduledGame = (scheduledGame) => ({type: 'ADD_SCHEDULED_GAME', payload: {value: scheduledGame}})
+let addScheduledGamePlayer = (scheduledGamePlayer) => ({type: 'ADD_SCHEDULED_GAME_PLAYER', payload: {value: scheduledGamePlayer}})
+let updateScheduledGame = (scheduledGame) => ({type: 'UPDATE_SCHEDULED_GAME', payload: {value: scheduledGame}})
+let removeScheduledGame = (scheduledGameId) => ({type: 'REMOVE_SCHEDULED_GAME', payload: {value: scheduledGameId}})
+let removeScheduledGamePlayer = (scheduledGamePlayerId) => ({type: 'REMOVE_SCHEDULED_GAME_PLAYER', payload: {value: scheduledGamePlayerId}})
 
 export {
     setCurrentToken,
@@ -51,5 +58,12 @@ export {
     addFriendRequest,
     removeFriendRequest,
     addFriendshipTwoUsers,
-    removeFriendshipTwoUsers 
+    removeFriendshipTwoUsers,
+    fetchScheduledGames,
+    addScheduledGame,
+    updateScheduledGame,
+    removeScheduledGame,
+    fetchScheduledGamePlayers,
+    addScheduledGamePlayer,
+    removeScheduledGamePlayer
 }
