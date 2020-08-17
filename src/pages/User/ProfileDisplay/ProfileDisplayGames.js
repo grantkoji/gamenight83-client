@@ -151,7 +151,7 @@ const ProfileDisplayGames = props => {
                         </div>
                     </Col>
                     <Col md={6}>
-                        <div>
+                        <div className='featured-on-user-page'>
                             {
                                 games && games.length 
                                 ? <div> 

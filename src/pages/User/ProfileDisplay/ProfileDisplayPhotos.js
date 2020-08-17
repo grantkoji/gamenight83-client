@@ -97,9 +97,7 @@ const ProfileDisplayPhotos = props => {
                             : <div>No Games Posted</div>
                         }
                     </div>
-
                 </Col>
-
                 <Col md={6}>
                     <div className='featured-on-user-page'>
                         {
@@ -117,9 +115,7 @@ const ProfileDisplayPhotos = props => {
                             : <div>No Game Photos Listed</div>
                         }
                     </div>
-
                 </Col>
-
                 <Col md={3}>
                     <div>
                         {

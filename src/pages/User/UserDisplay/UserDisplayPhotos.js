@@ -108,81 +108,78 @@ const UserDisplayPhotos = props => {
                 </div>
             </div>   
             <Container fluid>
-                    <Row className='justify-content-center'>
-
-                    </Row>
-            </Container>
-            <div className='profile-page'>
-                <div className="profile-left-cards">
-                    
-                    {
-                        thisUserCreatedGames && thisUserCreatedGames.length
-                        ?<div>
-                            <div>Created Games:</div>
-                            <div>
-                                {thisUserCreatedGames.map(game => 
-                                    <div>
-                                            <GameCard key={game.id} {...game} status="visitor"/>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        : <div>No Games Posted</div>
-                    }
-                    {
-                        thisUserReviews && thisUserReviews.length
-                        ?<div>
-                            <div>Game Reviews:</div>
-                            <div>
-                            {thisUserReviews.map(review => 
-                                <div>
-                                <ReviewCard key={review.id} {...review} />
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Reviews Listed</div>
-                    }
-                      
-                </div>'
-                <div className='profile-center-cards'>
-                    {
-                        thisUserGamePhotos && thisUserGamePhotos.length
-                        ?<div>
-                            <div>Game Photos:</div>
-                            <div>
-                            {gamePhotosFiltered().map(photo => 
-                                <div>
-                                    <GamePhotoCard key={photo.id} {...photo} />
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Game Photos Listed</div>
-                    }
-                </div>
-                <div className="profile-right-cards">
-                    <div>
-                        {thisPageUser && mutualFriendsList()}  
-                    </div>  
-                    <div>
+                <Row className='justify-content-center'>
+                    <Col md={3}>
                         {
-                            thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
+                            thisUserCreatedGames && thisUserCreatedGames.length
                             ?<div>
-                                <div>Friends:</div>
+                                <div>Created Games:</div>
                                 <div>
-                                {thisPageUser.total_friends.map(friend => 
+                                    {thisUserCreatedGames.map(game => 
+                                        <div>
+                                                <GameCard key={game.id} {...game} status="visitor"/>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            : <div>No Games Posted</div>
+                        }
+                        {
+                            thisUserReviews && thisUserReviews.length
+                            ?<div>
+                                <div>Game Reviews:</div>
+                                <div>
+                                {thisUserReviews.map(review => 
                                     <div>
-                                        <UserCard key={friend.id} {...friend}/>
+                                    <ReviewCard key={review.id} {...review} />
                                     </div>
                                 )}
                                 </div>
                             </div>
-                                : <div>No Friends Listed</div>
+                            : <div>No Reviews Listed</div>
                         }
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                    <Col md={6}>
+                        <div className='featured-on-user-page'>
+                            {
+                                thisUserGamePhotos && thisUserGamePhotos.length
+                                ?<div>
+                                    <div>Game Photos:</div>
+                                    <div>
+                                    {gamePhotosFiltered().map(photo => 
+                                        <div>
+                                            <GamePhotoCard key={photo.id} {...photo} />
+                                        </div>
+                                    )}
+                                    </div>
+                                </div>
+                                : <div>No Game Photos Listed</div>
+                            }
+                        </div>
+                    </Col>
+                    <Col md={3}>
+                        <div>
+                            {thisPageUser && mutualFriendsList()}  
+                        </div>  
+                        <div>
+                            {
+                                thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length
+                                ?<div>
+                                    <div>Friends:</div>
+                                    <div>
+                                    {thisPageUser.total_friends.map(friend => 
+                                        <div>
+                                            <UserCard key={friend.id} {...friend}/>
+                                        </div>
+                                    )}
+                                    </div>
+                                </div>
+                                    : <div>No Friends Listed</div>
+                            }
+                        </div>
+                    </Col>
+                </Row>
+            </Container> 
         </div>
   )
 
