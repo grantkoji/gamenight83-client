@@ -26,8 +26,12 @@ const GameUserCard = props => {
         localStorage.gameId = id
         props.history.push(`/games/${id}`)
     }
-
     
+    const handleSchedule = () => {
+        setThisGameId(id)
+        setThisGameTitle(title)
+        setPostType('scheduleGame')
+    }
 
     return (
         <div className="ui card">
@@ -39,10 +43,11 @@ const GameUserCard = props => {
             </div>
             <div className="description">
                 <Button variant="outline-info" onClick={handlePhoto}>Post a Photo</Button>
-                <Button variant="outline-info" onClick={handleReview}>Write a Review</Button><br/>
+                <Button variant="outline-info" onClick={handleReview}>Write a Review</Button>
             </div>
             <div className="extra content">
-                <Button variant='outline-info' onClick={redirectToGame}>Visit Page for {title}</Button>    
+                <Button variant='outline-info' onClick={redirectToGame}>Visit Game Page</Button>    
+                <Button variant='outline-info' onClick={handleSchedule}>Schedule Game</Button>    
             </div>  
     </div>  
     )

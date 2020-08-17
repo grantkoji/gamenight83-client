@@ -6,6 +6,7 @@ import ReviewCard from '../../Review/ReviewCard'
 import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
 import AddReviewForm from '../../../Components/Forms/AddReviewForm'
+import ScheduleGameForm from '../../../Components/Forms/ScheduleGameForm'
 import AddGamePhotoForm from '../../../Components/Forms/AddGamePhotoForm'
 import SearchBarGames from '../../../Components/SearchBars/SearchBarGames'
 import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum'
@@ -86,6 +87,13 @@ const ProfileDisplayGames = props => {
                     <AddGamePhotoForm thisGame={thisGameId}/>
                 </div>
             )  
+        } else if (postType === 'scheduleGame') {
+            return (
+                <div>
+                    <div>Schedule a Game:</div>
+                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
+                </div>
+            )
         }
     }
 

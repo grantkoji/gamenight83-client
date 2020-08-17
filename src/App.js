@@ -98,12 +98,6 @@ function App(props) {
 
   },[])
 
-  let [date, setDate] = useState('')
-
-  const handleInput = e => {
-    setDate(e.target.value)
-    console.log(e.target.value)
-  }
 
   const handleResponse = (resp) => {
     if (resp.message) {
@@ -126,7 +120,6 @@ function App(props) {
     <div className="App">
       <img src={require('./images/gameBannerText.png')} className="imageBanner" alt="Home banner" />
         <NavbarWithPhotos />
-        <input type="date" name='date' value={date} onChange={handleInput}/>
       <Switch>
         <Route exact path='/users/:username' render={(routerprops) => <UserPage {...routerprops}  />}/> 
         <Route exact path='/users' render={(routerprops) => <UsersIndex {...routerprops}  />}/> 

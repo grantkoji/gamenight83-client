@@ -213,6 +213,17 @@
     margin: 20px;
 }
 
+.schedule-game-form {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  border: 5px rgba(21, 25, 61);
+  padding: 5px 50px 10px 50px;
+  /* margin: 20px; */ 
+
+}
+
 .login-form {
   /* border: 5px rgba(21, 25, 61);
   border-style: solid; */
