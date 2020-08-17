@@ -7,6 +7,7 @@ const usersURL = `${localHost}/users`
 const gamePhotosURL = `${localHost}/game_photos`
 const friendshipsURL = `${localHost}/friendships`
 const friendshipRequestsURL = `${localHost}/friendship_requests`
+const scheduledGamesURL = `${localHost}/scheduled_games`
 const playedGamesURL = `${localHost}/played_games`
 // parse incoming data
 const parseData = response => response.json()
@@ -33,6 +34,10 @@ export const fetchAllGamePhotos = () => fetch(gamePhotosURL)
 
 
 export const fetchAllFriendshipRequests = () => fetch(friendshipRequestsURL)
+.then(parseData)
+.catch(catchError)
+
+export const fetchAllScheduledGames = () => fetch(scheduledGamesURL)
 .then(parseData)
 .catch(catchError)
 

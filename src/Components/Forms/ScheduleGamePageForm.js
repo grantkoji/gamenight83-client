@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import moment from 'moment'
 
-const ScheduleGameForm = props => {
+const ScheduleGamePageForm = props => {
     //pass down selectedGame...which has all attributes of instance
     const {token, currentUser, selectedGame, addScheduledGame, setShowUser, thisGameId, thisGameTitle} = props
     let [numVacancies, setNumVacancies] = useState(1)
@@ -163,6 +163,7 @@ const ScheduleGameForm = props => {
     //     <option value="12">12</option>
     // </select>
 
+  
 
     //  <select class="ui dropdown">
     //     <option value="AM">AM</option>
@@ -179,26 +180,32 @@ const ScheduleGameForm = props => {
     // <input type='time' name='time' value={time} onChange={timeHandleInput} />
     
     return (
-        <div className="schedule-game-form">
+        <div>
           <Form className="ui form" onSubmit={handleSubmit}>
             <h3 class="ui dividing header">Game Title: {thisGameTitle}</h3>
             <div className="fields">
-              <div className="five wide field">
+              <div className="sixteen wide field">
                 <label htmlFor="date">Date</label>
-                <input className='input-schedule-game' type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)}/>
+                <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)}/>
               </div>
-              <div className="four wide field">
-                <label htmlFor="time">Start Time</label>
-                <input className='input-schedule-game' type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)}/>
+            </div>
+            <div className="fields">
+                <div className="sixteen wide field">
+                    <label htmlFor="time">Start Time</label>
+                    <input type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)}/>
               </div>
-              <div className="four wide field">
+            </div>
+            <div className="fields">
+              <div className="sixteen wide field">
                 <label htmlFor="privacy">Game Availability</label>
                 <select class="ui dropdown input-schedule-game" name='privacy' value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
                   <option value="Public">Open to Public</option>
                   <option value="Friends">Friends only</option>
                 </select>
               </div>
-              <div className="three wide field">
+            </div>
+            <div className="fields">
+              <div className="sixteen wide field">
                 <label htmlFor="numVacancies">Vacant Spots</label>
                 <select class="ui dropdown input-schedule-game" name='numVacancies' value={numVacancies} onChange={(e) => setNumVacancies(e.target.value)}>
                   <option value="1">1</option>
@@ -256,6 +263,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ScheduleGameForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ScheduleGamePageForm));
 
 

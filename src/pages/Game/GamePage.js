@@ -6,6 +6,7 @@ import GamePhotoCard from '../GamePhoto/GamePhotoCard'
 import GameProfileCard from './GameProfileCard'
 import AddReviewForm from '../../Components/Forms/AddReviewForm'
 import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
+import ScheduleGamePageForm from '../../Components/Forms/ScheduleGamePageForm'
 import {connect} from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -48,23 +49,30 @@ const GamePage = props => {
                 </div>
                 <Container fluid>
                   <Row className='justify-content-center'>
-                    <Col md={2}>
+                    <Col md={3}>
+                      <div>
+                          { token 
+                          && <> 
+                            <div>Schedule a Game</div>
+                            <div><ScheduleGamePageForm thisGameId={currentGame} thisGameTitle={thisPageGame.title} /></div>
+                            </>}  
+                      </div>
                       <div>
                         { token 
                         && <> 
-                          <div>Post a Review for {thisPageGame.title}: </div>
+                          <div>Post a Review for {thisPageGame.title} </div>
                           <div><AddReviewForm thisGame={currentGame}/></div>
                           </>}  
                       </div>
                       <div>
                         { token 
                         && <> 
-                          <div>Post a Photo for {thisPageGame.title}: </div>
+                          <div>Post a Photo for {thisPageGame.title} </div>
                           <div><AddGamePhotoForm thisGame={currentGame}/></div>
                           </>}  
                       </div>
                     </Col>
-                    <Col md={8} >
+                    <Col md={7} >
                       {
                         thisPageGamePhotos && thisPageGamePhotos.length
                           ?<div>
