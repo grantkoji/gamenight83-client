@@ -65,6 +65,11 @@ import {connect} from 'react-redux'
       props.history.push('/games/new')
     }
 
+    const redirectToScheduledGames = () => {
+      props.history.push('/scheduledgames')
+    }
+
+
     const changePointer = (e) => {  
       e.target.style.cursor = 'pointer'
     }
@@ -76,7 +81,7 @@ import {connect} from 'react-redux'
        <img src={require('../images/createNewGame600.png')} className='top-left-nav-button' alt="Create New Game Button" onClick={redirectToNewGame} onMouseOver={changePointer} />
        </div>
        <div className='top-right-navbar'>
-            <img src={require('../images/schedule.png')} className='top-right-nav-button' alt="Game Schedule Button" onClick={redirectToNewGame} onMouseOver={changePointer} />
+            <img src={require('../images/schedule.png')} className='top-right-nav-button' alt="Game Schedule Button" onClick={redirectToScheduledGames} onMouseOver={changePointer} />
        </div>
         <div className='photo-navbar'>
             <img src={require('../images/reviewsIndex.png')} className='navbar-button' alt="Reviews Index Button" onClick={redirectToReviews} onMouseOver={changePointer} />
