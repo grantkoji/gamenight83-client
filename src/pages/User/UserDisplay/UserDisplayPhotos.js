@@ -122,7 +122,7 @@ const UserDisplayPhotos = props => {
                                     )}
                                 </div>
                             </div>
-                            : <div>No Games Posted</div>
+                            : <div>No Games Created</div>
                         }
                         {
                             thisUserReviews && thisUserReviews.length
@@ -136,7 +136,10 @@ const UserDisplayPhotos = props => {
                                 )}
                                 </div>
                             </div>
-                            : <div>No Reviews Listed</div>
+                            : <div>
+                                <br/><br/>
+                                <div>No Reviews Listed</div>
+                            </div>
                         }
                     </Col>
                     <Col md={6}>
@@ -160,6 +163,7 @@ const UserDisplayPhotos = props => {
                     <Col md={3}>
                         <div>
                             {thisPageUser && mutualFriendsList()}  
+                            <br/><br/>
                         </div>  
                         <div>
                             {

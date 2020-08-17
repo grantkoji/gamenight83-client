@@ -80,6 +80,9 @@ const UserDisplayReviews= props => {
         }
     }
 
+
+
+    
     return (
         <div>
                 {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
@@ -133,7 +136,10 @@ const UserDisplayReviews= props => {
                                         )}
                                     </div>
                                 </div>
-                                : <div>No Games Posted</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Games Created</div>
+                                </div>
                             }
                         </div>
                     </Col>
@@ -172,7 +178,10 @@ const UserDisplayReviews= props => {
                                     )}
                                     </div>
                                 </div>
-                                    : <div>No Friends Listed</div>
+                                    :<div>
+                                        <br/><br/>
+                                        <div>No Friends Listed</div>
+                                    </div>
                             }
                         </div>
                     </Col>

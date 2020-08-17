@@ -146,7 +146,10 @@ const ProfileDisplayGames = props => {
                                         )}
                                     </div>
                                 </div>
-                                : <div>No Games Posted</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Games Created</div>
+                                </div>
                             }
                         </div>
                     </Col>
@@ -203,7 +206,10 @@ const ProfileDisplayGames = props => {
                                     )}
                                     </div>
                                 </div>
-                                : <div>No Reviews Listed</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Reviews Listed</div>
+                                </div>
                             }
                         </div>
                     </Col>

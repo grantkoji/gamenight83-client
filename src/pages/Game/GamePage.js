@@ -7,6 +7,9 @@ import GameProfileCard from './GameProfileCard'
 import AddReviewForm from '../../Components/Forms/AddReviewForm'
 import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import {connect} from 'react-redux'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const GamePage = props => {
     const { games, token, users, reviews, gamePhotos, currentGame} = props
@@ -40,67 +43,67 @@ const GamePage = props => {
           {
             thisPageGame
             ? <div>
-              <div>
-                <GameProfileCard thisPageGame={thisPageGame} />
-              </div>
-              <div className="ui grid">
-                <div className="five wide column">
-                  <div>
-                    { token 
-                    && <> 
-                      <div>Post a Review for {thisPageGame.title}: </div>
-                      <div><AddReviewForm thisGame={currentGame}/></div>
-                      </>}  
-                  </div>
-                  <div>
-                    { token 
-                    && <> 
-                      <div>Post a Photo for {thisPageGame.title}: </div>
-                      <div><AddGamePhotoForm thisGame={currentGame}/></div>
-                      </>}  
-                  </div>
+                <div>
+                  <GameProfileCard thisPageGame={thisPageGame} />
                 </div>
-                <div className="six wide column">
-                  {
-                    thisPageGamePhotos && thisPageGamePhotos.length
-                      ?<div>
-                          <div>Game Photos:</div>
-                          <div>
-                          {thisPageGamePhotos.map(photo => 
-                              <div>
-                                  <GamePhotoCard key={photo.id} {...photo} />
-                              </div>
-                          )}
-                          </div>
+                <Container fluid>
+                  <Row className='justify-content-center'>
+                    <Col md={2}>
+                      <div>
+                        { token 
+                        && <> 
+                          <div>Post a Review for {thisPageGame.title}: </div>
+                          <div><AddReviewForm thisGame={currentGame}/></div>
+                          </>}  
                       </div>
-                      : <div>No Game Photos Listed</div>
-                  }
-              </div>
-            
-                <div className="five wide column">
-                  {
-                    thisPageReviews && thisPageReviews.length
-                    ? <div>
-                        <div>
-                        {reviews && thisPageReviews.length 
-                          ? <div>Game Review Average: {thisGameReviewAverage()}</div>
-                          : null}
-                        </div>      
-                        <div>Number of Reviews: {thisPageReviews.length}</div>
-                        <div>
-                        {thisPageReviews.map(review => 
+                      <div>
+                        { token 
+                        && <> 
+                          <div>Post a Photo for {thisPageGame.title}: </div>
+                          <div><AddGamePhotoForm thisGame={currentGame}/></div>
+                          </>}  
+                      </div>
+                    </Col>
+                    <Col md={8} >
+                      {
+                        thisPageGamePhotos && thisPageGamePhotos.length
+                          ?<div>
+                              <div>Game Photos:</div>
+                              <div className="parent-game-page-photos">
+                              {thisPageGamePhotos.map(photo => 
+                                  <div className="child-game-page-photo">
+                                      <GamePhotoCard key={photo.id} {...photo} />
+                                  </div>
+                              )}
+                              </div>
+                          </div>
+                          : <div>No Game Photos Listed</div>
+                      }
+                    </Col>
+                    <Col md={2}>
+                      {
+                        thisPageReviews && thisPageReviews.length
+                        ? <div>
                             <div>
-                                <ReviewOnGamePage key={review.id} {...review} />
+                            {reviews && thisPageReviews.length 
+                              ? <div>Game Review Average: {thisGameReviewAverage()}</div>
+                              : null}
+                            </div>      
+                            <div>Number of Reviews: {thisPageReviews.length}</div>
+                            <div>
+                            {thisPageReviews.map(review => 
+                                <div>
+                                    <ReviewOnGamePage key={review.id} {...review} />
+                                </div>
+                            )}
                             </div>
-                        )}
                         </div>
-                    </div>
-                    : null
-                  }
-              
-                  </div>
+                        : null
+                      }
+                    </Col>
+                  </Row>
+                </Container>            
             </div>
-          </div>
         : <div>Loading...</div>}
       </>
     )

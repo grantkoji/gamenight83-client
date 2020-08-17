@@ -105,7 +105,10 @@ const UserDisplayFriends = props => {
                                         )}
                                     </div>
                                 </div>
-                                : <div>No Games Posted</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Games Created</div>
+                                </div>
                             }
                         </div>
                     </Col>

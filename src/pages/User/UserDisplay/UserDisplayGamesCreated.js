@@ -132,7 +132,10 @@ const UserDisplayGamesCreated = props => {
                                     )}
                                     </div>
                                 </div>
-                                : <div>No Reviews Listed</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Reviews Listed</div>
+                                </div>
                             }
                         </div> 
                     </Col>
@@ -150,13 +153,14 @@ const UserDisplayGamesCreated = props => {
                                         )}
                                     </div>
                                 </div>
-                                : <div>No Games Posted</div>
+                                : <div>No Games Created</div>
                             }
                         </div>
                     </Col>
                     <Col md={3}>
                         <div>
                             {thisPageUser && mutualFriendsList()}  
+                            <br/><br/>
                         </div>  
                         <div>
                             {
@@ -171,7 +175,10 @@ const UserDisplayGamesCreated = props => {
                                     )}
                                     </div>
                                 </div>
-                                    : <div>No Friends Listed</div>
+                                    :<div>
+                                        <br/><br/>
+                                        <div>No Friends Listed</div>
+                                    </div>
                             }
                         </div>
                     </Col>

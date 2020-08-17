@@ -85,13 +85,15 @@ const ProfileDisplayFriendRequests = props => {
                                         )}
                                     </div>
                                 </div>
-                                : <div>No Games Posted</div>
+                                :<div>
+                                    <br/><br/>
+                                    <div>No Games Created</div>
+                                </div>
                             }
                         </div>
                     </Col>
                     <Col md={6}>
                         <div className='featured-on-user-page'>
-                            <div>
                                 {
                                     currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.length 
                                     ? <div>
@@ -101,10 +103,9 @@ const ProfileDisplayFriendRequests = props => {
                                                                 userId={inFR.user_id}
                                                                 />) }
                                     </div>
-                                    : <div>No Inbound Friend Requests</div>
+                                    : <div className='featured-on-user-page'>No Inbound Friend Requests</div>
                                 }
-                            </div>
-                            <div>
+                          
                                 {
                                     currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.length 
                                     ? <div>
@@ -114,9 +115,14 @@ const ProfileDisplayFriendRequests = props => {
                                                                     userId={outFR.request_id}
                                                                     /> )}
                                     </div>
-                                    : <div>No Friend Requests Pending</div>
+                                    :<>
+                                        <div>
+                                            <br/><br/>
+                                        </div>
+                                        <div className='featured-on-user-page'>No Friend Requests Pending</div>
+                                      </>
                                 }
-                            </div>
+                        
                         </div>
                     </Col>
                     <Col md={3}>
@@ -133,7 +139,7 @@ const ProfileDisplayFriendRequests = props => {
                                     )}
                                     </div>
                                 </div>
-                                : <div>No Friends Listed</div>
+                                :<div>No Friends Listed</div>
                             }
                         </div>
                         <div>
@@ -149,7 +155,10 @@ const ProfileDisplayFriendRequests = props => {
                                 )}
                                 </div>
                             </div>
-                            : <div>No Reviews Listed</div>
+                            :<div>
+                                <br/><br/>
+                                <div>No Reviews Listed</div>
+                            </div>
                         }
                         </div>
                     </Col>

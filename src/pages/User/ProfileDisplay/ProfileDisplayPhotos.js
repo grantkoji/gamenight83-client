@@ -94,8 +94,27 @@ const ProfileDisplayPhotos = props => {
                                     )}
                                 </div>
                             </div>
-                            : <div>No Games Posted</div>
+                            : <div>No Games Created</div>
                         }
+                    </div>
+                    <div>
+                    {
+                        thisUserReviews && thisUserReviews.length
+                        ?<div>
+                            <div>Game Reviews:</div>
+                            <div>
+                            {thisUserReviews.map(review => 
+                                <div>
+                                <ReviewCard key={review.id} {...review} />
+                                </div>
+                            )}
+                            </div>
+                        </div>
+                        :<div>
+                            <br/><br/>
+                            <div>No Reviews Listed</div>
+                        </div>
+                    }
                     </div>
                 </Col>
                 <Col md={6}>
@@ -132,22 +151,6 @@ const ProfileDisplayPhotos = props => {
                             </div>
                             : <div>No Friends Listed</div>
                         }
-                    </div>
-                    <div>
-                    {
-                        thisUserReviews && thisUserReviews.length
-                        ?<div>
-                            <div>Game Reviews:</div>
-                            <div>
-                            {thisUserReviews.map(review => 
-                                <div>
-                                <ReviewCard key={review.id} {...review} />
-                                </div>
-                            )}
-                            </div>
-                        </div>
-                        : <div>No Reviews Listed</div>
-                    }
                     </div>
                 </Col>
             </Row>
