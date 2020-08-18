@@ -23,6 +23,10 @@ import UserDisplayPhotos from './UserDisplay/UserDisplayPhotos'
 import UserDisplayFriends from './UserDisplay/UserDisplayFriends'
 import {Container, Row, Col, Card } from 'react-bootstrap';
 import {connect} from 'react-redux'
+import ProfileDisplaySGAsHost from './ProfileDisplay/ProfileDisplaySGAsHost'
+import ProfileDisplaySGAsPlayer from './ProfileDisplay/ProfileDisplaySGAsPlayer'
+import ProfileDisplaySGFriendsHost from './ProfileDisplay/ProfileDisplaySGFriendsHost'
+import ProfileDisplaySGFriendsPlayer from './ProfileDisplay/ProfileDisplaySGFriendsPlayer'
 
 const UserPage = props => {
   
@@ -194,6 +198,44 @@ const UserPage = props => {
         } else if (view ==="seeFriendRequests") {
             return (
                 <ProfileDisplayFriendRequests 
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+                
+                />  
+            )
+        } else if (view ==="seeMySGAsHost") {
+            return (
+                <ProfileDisplaySGAsHost 
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}   
+                />  
+            )
+        } else if (view ==="seeMySGAsPlayer") {
+            return (
+                <ProfileDisplaySGAsPlayer
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}
+                
+                />  
+            )
+        } else if (view ==="seeFriendSGAsHost") {
+            return (
+                <ProfileDisplaySGFriendsHost
+                thisPageUser={thisPageUser}
+                thisUserReviews={thisUserReviews}
+                thisUserGamePhotos={thisUserGamePhotos}
+                thisUserCreatedGames={thisUserCreatedGames}   
+                />  
+            )
+        } else if (view ==="seeFriendSGAsPlayer") {
+            return (
+                <ProfileDisplaySGFriendsPlayer
                 thisPageUser={thisPageUser}
                 thisUserReviews={thisUserReviews}
                 thisUserGamePhotos={thisUserGamePhotos}

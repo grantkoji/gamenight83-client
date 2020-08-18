@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import ScheduledGCIndex from './ScheduledGCIndex'
 import moment from 'moment'
-import scheduledGamePlayers from '../../modules/reducers/scheduledGamePlayers';
+
 
 
 const ScheduledGamesIndex = props => {
@@ -83,34 +83,6 @@ const ScheduledGamesIndex = props => {
         return gamesFiltered
     }
   
-//
-
-//   
-//       <Table.Row>
-//         <Table.Cell width={2}>Size</Table.Cell>
-//         <Table.Cell>1" x 2"</Table.Cell>
-//       </Table.Row>
-//       <Table.Row>
-//         <Table.Cell>Weight</Table.Cell>
-//         <Table.Cell>6 ounces</Table.Cell>
-//       </Table.Row>
-//       <Table.Row>
-//         <Table.Cell>Color</Table.Cell>
-//         <Table.Cell>Yellowish</Table.Cell>
-//       </Table.Row>
-//       <Table.Row>
-//         <Table.Cell>Odor</Table.Cell>
-//         <Table.Cell>Not Much Usually</Table.Cell>
-//       </Table.Row>
-//     </Table.Body>
-//   </Table>
-// </>
-{/* <h1 className='try-it'>Welcome</h1>
-<div className="games-search-bar">
-    <div>
-        <SearchBarScheduledGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-    </div>
-</div> */}
         
         return (
             <> 
@@ -146,7 +118,7 @@ const ScheduledGamesIndex = props => {
                             })}
                         </Row>
                     </Container>
-                    : "Loading..."} 
+                    : <div>No Scheduled Games Loaded</div>} 
                 </div>
             </>
         )
