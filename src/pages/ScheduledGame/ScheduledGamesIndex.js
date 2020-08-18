@@ -1,44 +1,84 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 
 import SearchBarScheduledGames from '../../Components/SearchBars/SearchBarScheduledGames'
 import { Divider, Header, Icon, Table } from 'semantic-ui-react'
-import ScheduledGC from './ScheduledGC'
+import ScheduledGCIndex from './ScheduledGCIndex'
+import moment from 'moment'
+import scheduledGamePlayers from '../../modules/reducers/scheduledGamePlayers';
 
 
 const ScheduledGamesIndex = props => {
-    const {scheduledGames} = props
+    const {scheduledGames, scheduleGamePlayers} = props
     let [search, setSearch] = useState('')
     let [searchType, setSearchType] = useState('gameTitle')
     let [typeNumPlayers, setTypeNumPlayers] = useState('noNumPlayers')
     let [numPlayers, setNumPlayers] = useState('')
     let [typeMinAge, setTypeMinAge] = useState('noMinAge')
     let [minAge, setMinAge] = useState('')
+    let [currentUnix, setCurrentUnix] = useState(0)
+    let [activeGamesType, setActiveGamesType] = useState('scheduledAndPending')
+    let [scheduledGamesFiltered, setScheduledGamesFiltered] = useState([])
+    useEffect(() => {
+        setCurrentUnix(moment().unix())
+        setScheduledGamesFiltered(scheduledGames)
+        const interval = setInterval(() => {
+            setCurrentUnix(moment().unix())
+          }, 60000)
+          return () => clearInterval(interval)
+    }, [])
+
+    useEffect(() => {
+        setScheduledGamesFiltered(scheduledGames)
+    }, [scheduledGames])
+
 
     
+    // {
+    //     "id": 1,
+    //     "host_id": 60,
+    //     "game_id": 60,
+    //     "unix": 15993933,
+    //     "num_vacancies": 5,
+    //     "status": "Scheduled",
+    //     "public_description": "try it",
+    //     "private_directions": "zoom like ",
+    //     "privacy": "Public",
+    //     "host": {
+    //     "id": 60,
+    //     "name": "Aurea Schneider",
+    //     "username": "Jimmy Valmer",
+       
+    //     },
+    //     "game": {
+    //     "id": 60,
+    //     "title": "Monopoly",
+    //     "game_category": "Zoom online or indoors"
+    //     }
+    'scheduledAnd4HoursAgo'
 
     let filteredGames = () => {
-        // if (games) {
-        //     let gamesFiltered = [...scheduledGames]
-        //     gamesFilter
-        //     if (searchType === 'username') {
-        //         gamesFiltered = gamesFiltered.filter(game => game.creator_username.toLowerCase().includes(search.toLowerCase()))
-        //     } else if (searchType === 'gameCategory') {
-        //         gamesFiltered = gamesFiltered.filter(game => game.game_category.toLowerCase().includes(search.toLowerCase()))
-        //     } else if (searchType === 'gameTitle') {
-        //         gamesFiltered = gamesFiltered.filter(game => game.title.toLowerCase().includes(search.toLowerCase()))
-        //     }
-        //     if (typeNumPlayers === "withNumPlayers" && numPlayers !== '') {
-        //         gamesFiltered = gamesFiltered.filter(game => game.max_num_players >= parseInt(numPlayers) && 
-        //             game.min_num_players <= parseInt(numPlayers))
-        //     } 
-        //     if (typeMinAge === 'withMinAge' && minAge !== '') {
-        //         gamesFiltered = gamesFiltered.filter(game => game.min_age >= parseInt(minAge))
-        //     }
-        //     return gamesFiltered
-        // } 
-        return [...scheduledGames]
-    
+        let gamesFiltered = scheduledGamesFiltered
+        gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0)
+        if (activeGamesType === 'scheduledAndPending') {
+            gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
+        } else if (activeGamesType === 'scheduledAndAnHourAgo') {
+            gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 3600) >= parseInt(currentUnix))
+        } else if (activeGamesType === 'scheduledAnd4HoursAgo') {
+            gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 14400) >= parseInt(currentUnix))
+        } else if (activeGamesType === 'scheduledAndADayAgo') {
+            gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 86400) >= parseInt(currentUnix))
+        } else if (activeGamesType === 'scheduledAndAWeekAgo') {
+            gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 604800) >= parseInt(currentUnix))
+        } 
+        if (searchType === 'username') {
+            gamesFiltered = gamesFiltered.filter(sg => sg.host.username.toLowerCase().includes(search.toLowerCase()))
+        } else if (searchType === 'gameCategory') {
+            gamesFiltered = gamesFiltered.filter(sg => sg.game.game_category.toLowerCase().includes(search.toLowerCase()))
+        } else if (searchType === 'gameTitle') {
+            gamesFiltered = gamesFiltered.filter(sg => sg.game.title.toLowerCase().includes(search.toLowerCase()))
+        }
+        return gamesFiltered
     }
   
 //
@@ -72,8 +112,6 @@ const ScheduledGamesIndex = props => {
         
         return (
             <> 
-            
-    
                  <div className="index">     
                     <Divider horizontal>
                         <Header as='h4'>
@@ -81,15 +119,26 @@ const ScheduledGamesIndex = props => {
                             Scheduled Games
                         </Header>
                     </Divider>
+                    <div>
+                        <SearchBarScheduledGames 
+                            search={search} 
+                            searchType={searchType} 
+                            setSearch={setSearch} 
+                            setSearchType={setSearchType}
+                        />
+                    </div>
+                    <div>
+                        <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
+                    </div>
                      {  
-                    scheduledGames && scheduledGames.length
+                    scheduledGames && scheduledGames.length && scheduledGamesFiltered && scheduledGamesFiltered.length
                     ? 
                     <Table definition>
                         <Table.Body>
                             {filteredGames().map(scheduledGame => {
                                 return (
                                     <div>
-                                        <ScheduledGC key={scheduledGame.id} {...scheduledGame} />
+                                        <ScheduledGCIndex key={scheduledGame.id} {...scheduledGame} />
                                     </div>
                                 )
                             })}
@@ -106,7 +155,8 @@ const ScheduledGamesIndex = props => {
 const mapStateToProps = state => {
     return {    
       games: state.games,
-      scheduledGames: state.scheduledGames
+      scheduledGames: state.scheduledGames,
+      scheduleGamePlayers: state.scheduleGamePlayers
     }
   }
   

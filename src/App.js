@@ -65,7 +65,10 @@ function App(props) {
 
     requests.fetchAllScheduledGames()
     .then(scheduledGameData => props.fetchScheduledGames(scheduledGameData))
-
+    
+    requests.fetchAllScheduledGamePlayers()
+    .then(scheduleGPData => props.fetchScheduledGamePlayers(scheduleGPData))
+     
     // requests.fetchAllFriendshipRequests()
     // .then(frData => props.fetchFriendshipRequests(frData))
 
@@ -166,7 +169,8 @@ const mapDispatchToProps = dispatch => {
     setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId)),
     fetchFriendships: (friendships) => dispatch(action.fetchFriendships(friendships)),
     fetchFriendshipRequests: (fRequests) => dispatch(action.fetchFriendshipRequests(fRequests)),
-    fetchScheduledGames: (scheduledGames) => dispatch(action.fetchScheduledGames(scheduledGames))
+    fetchScheduledGames: (scheduledGames) => dispatch(action.fetchScheduledGames(scheduledGames)),
+    fetchScheduledGamePlayers: (scheduledGamePlayers) => dispatch(action.fetchScheduledGamePlayers(scheduledGamePlayers))
   }
 }
 

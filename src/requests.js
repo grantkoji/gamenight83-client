@@ -9,6 +9,7 @@ const friendshipsURL = `${localHost}/friendships`
 const friendshipRequestsURL = `${localHost}/friendship_requests`
 const scheduledGamesURL = `${localHost}/scheduled_games`
 const playedGamesURL = `${localHost}/played_games`
+const scheduledGamePlayersURL = `${localHost}/scheduled_game_players`
 // parse incoming data
 const parseData = response => response.json()
 // error handler
@@ -43,6 +44,11 @@ export const fetchAllScheduledGames = () => fetch(scheduledGamesURL)
 
 
 export const fetchAllFriendships = () => fetch(friendshipsURL)
+.then(parseData)
+.catch(catchError)
+
+
+export const fetchAllScheduledGamePlayers = () => fetch(scheduledGamePlayersURL)
 .then(parseData)
 .catch(catchError)
 
@@ -89,3 +95,28 @@ export const fetchPostAddFRequest = (token, request_id) => fetch(friendshipReque
 })
 .then(parseData)
 .catch(catchError)
+
+
+// export const fetchPostCreateGamePlayer = (token, scheduledGameId) => fetch(scheduledGamePlayersURL, {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         "Authorization": token
+//     },
+//     body: JSON.stringify({
+//         scheduled_game_id: scheduledGameId
+//     })
+// })
+// .then(parseData)
+// .then(resp => console.log(resp))
+// .then(catchError)
+
+
+export const fetchRemoveGamePlayer = (id) => fetch(`${scheduledGamePlayersURL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+    })
+    .then(parseData)
+    .catch(catchError)

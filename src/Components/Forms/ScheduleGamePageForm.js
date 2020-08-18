@@ -115,6 +115,7 @@ const ScheduleGamePageForm = props => {
           game_id: thisGameId,
           unix: thisUnix, 
           num_vacancies: parseInt(numVacancies),
+          initial_vacant_spots: parseInt(numVacancies),
           status: "scheduled",
           public_description: publicDescription,
           private_directions: privateDirections,

@@ -1,0 +1,154 @@
+import React, {useState, useReducer, useEffect} from 'react';
+import {connect} from 'react-redux'
+import * as requests from '../../requests.js'
+import * as action from '../../modules/actionCreators/actionCreators'
+import { Icon, Table } from 'semantic-ui-react'
+import moment from 'moment'
+import {Button} from 'react-bootstrap'
+
+const ScheduledGCIndex = props => { 
+
+    const {token, id, game, currentUser, host, unix, num_vacancies, public_description, private_directions, privacy,
+      addScheduledGamePlayer, removeScheduledGamePlayer, scheduledGamePlayers, addVacancyToScheduledGame, removeVacancyFromScheduledGame} = props
+
+      let [playingThisGameId, setPlayingThisGameId] = useState(null)
+  
+
+    // game.title 
+    // game.category 
+    // game['image_url']
+    // host.username
+    // host["profile_url"]
+
+    // const showDetails = () => {
+    //   return (
+
+
+    //   )
+    // }
+    // 
+    useEffect(() => {
+      if (scheduledGamePlayers !== null && scheduledGamePlayers.length > 0) {
+        scheduledGamePlayers.forEach(sgp => {
+          if (sgp.scheduled_game_id === id && sgp.user_id === currentUser.id) {
+            setPlayingThisGameId(sgp.id)
+          }
+        })
+      } 
+    }, [])
+
+    useEffect(() => {
+      if (scheduledGamePlayers !== null && scheduledGamePlayers.length > 0) {
+        scheduledGamePlayers.forEach(sgp => {
+          if (sgp.scheduled_game_id === id && sgp.user_id === currentUser.id) {
+            setPlayingThisGameId(sgp.id)
+          }
+        })
+      } 
+    }, [scheduledGamePlayers])
+
+
+  
+
+    const leaveScheduledGame = () => {
+      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            num_vacancies: num_vacancies + 1
+        })
+      })
+      .then(res=>{
+        addVacancyToScheduledGame(id)
+        fetchRemovePlayer()
+      })
+      .catch(error=>alert(error)) 
+    }
+    
+    const fetchRemovePlayer = () => {
+      requests.fetchRemoveGamePlayer(playingThisGameId)
+        .then(data => {
+          removeScheduledGamePlayer(playingThisGameId)
+          setPlayingThisGameId(null)
+          alert('You have successfully canceled playing this game.')
+        })
+    }
+
+
+   const joinScheduledGame = () => {
+    if (num_vacancies <= 0) {
+      alert('Unfortunately, this game has filled its vacant spots.')
+    } else {
+      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            num_vacancies: num_vacancies - 1
+        })
+      })
+      .then(res=>{
+        removeVacancyFromScheduledGame(id)
+        fetchCreateNewGamePlayer()
+      })
+      .catch(error=>alert(error))
+      }
+    }
+
+    const fetchCreateNewGamePlayer = () => {
+      fetch('http://localhost:3001/api/v1/scheduled_game_players', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": token
+        },
+        body: JSON.stringify({
+            scheduled_game_id: id
+        })
+      })
+      .then(res=>res.json())
+      .then(dataGamePlayer => {
+        addScheduledGamePlayer(dataGamePlayer)
+        alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
+      })
+  }
+    return (
+      <Table.Row >
+        <Table.Cell >{moment.unix(unix).format('llll')}</Table.Cell>
+        <Table.Cell>{game.title}</Table.Cell>
+        <Table.Cell>Host: {host.username}</Table.Cell>
+        <Table.Cell>Spots: {num_vacancies}</Table.Cell>
+        <Table.Cell>Description: {public_description}</Table.Cell>
+        { playingThisGameId 
+        ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
+        : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
+        }
+      </Table.Row>
+   
+    )
+}
+
+
+
+
+const mapStateToProps = state => {
+    return {
+      token: state.token,
+      currentUser: state.currentUser,
+      scheduledGamePlayers: state.scheduledGamePlayers
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      addScheduledGamePlayer: (gamePlayer) => dispatch(action.addScheduledGamePlayer(gamePlayer)),
+      removeScheduledGamePlayer: (scheduledGamePlayerId) => dispatch(action.removeScheduledGamePlayer(scheduledGamePlayerId)),
+      addVacancyToScheduledGame: (id) => dispatch(action.addVacancyToScheduledGame(id)),
+      removeVacancyFromScheduledGame: (id) => dispatch(action.removeVacancyFromScheduledGame(id))
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ScheduledGCIndex)

@@ -16,6 +16,28 @@ const scheduledGames = (state=[], action) => {
         case 'REMOVE_SCHEDULED_GAME':
             let removedSGames= state.filter(schedGame => schedGame.id !== action.payload.value)
             return removedSGames
+        case 'ADD_VACANCY_TO_SG':
+            let vacancyAddedSGs = state.map(sg => {
+                if (sg.id === action.payload.value){
+                    let oldNum = sg.num_vacancies
+                    sg.num_vacancies = oldNum + 1
+                    return sg
+                } else {
+                    return sg
+                }
+            })
+            return vacancyAddedSGs
+        case 'REMOVE_VACANCY_FROM_SG':
+            let vacancyRemovedSGs =  state.map(sg => {
+                if (sg.id === action.payload.value){
+                    let oldNum = sg.num_vacancies
+                    sg.num_vacancies = oldNum - 1
+                    return sg
+                } else {
+                    return sg
+                }
+            })
+        return vacancyRemovedSGs
         default:
             return state
     }
