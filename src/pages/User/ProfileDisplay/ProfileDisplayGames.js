@@ -16,6 +16,7 @@ import UserProfileCard from '../UserProfileCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Divider, Header, Card } from 'semantic-ui-react'
 
 const ProfileDisplayGames = props => {
     const {
@@ -99,11 +100,20 @@ const ProfileDisplayGames = props => {
 
     return (
         <div>
-            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-            <div className="games-search-bar">
+
+            <div className='user-profile-container'>
+            <div className='user-profile-card'>
+                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+            </div>
+            <div className='profile-photos-search-bar'>  
                 <div>
                     {postedReviewOrPhoto()}
-                </div>
+                </div> 
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Games Created
+                    </Header>
+                </Divider>
                 <div>
                     <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                 </div>
@@ -119,12 +129,11 @@ const ProfileDisplayGames = props => {
                         setMinAge={setMinAge}  
                     />
                 </div>
- 
-                
             </div>
-            <Container fluid>
-                <Row className='justify-content-center'>
-                    <Col md={3}>
+        </div>
+            <Container >
+                <Row >
+                    <Col md={2} className='side-columns'>
                         <div>
                             {
                                 thisUserGamePhotos && thisUserGamePhotos.length
@@ -132,9 +141,9 @@ const ProfileDisplayGames = props => {
                                     <div>Game Photos:</div>
                                     <div>
                                     {thisUserGamePhotos.map(photo => 
-                                        <div>
+                
                                             <GamePhotoCard key={photo.id} {...photo} />
-                                        </div>
+                                   
                                     )}
                                     </div>
                                 </div>
@@ -145,13 +154,13 @@ const ProfileDisplayGames = props => {
                             {
                                 thisUserCreatedGames && thisUserCreatedGames.length
                                 ?<div>
-                                    <div>Created Games:</div>
-                                    <div>
-                                        {thisUserCreatedGames.map(game => 
-                                            <div>
-                                                    <GameCard key={game.id} {...game} />
-                                            </div>
-                                        )}
+
+                                    <div className='card-group-1'>
+                                       
+                                            {thisUserCreatedGames.map(game =>     
+                                                <GameCard key={game.id} {...game} />
+                                            )}
+                                      
                                     </div>
                                 </div>
                                 :<div>
@@ -161,14 +170,16 @@ const ProfileDisplayGames = props => {
                             }
                         </div>
                     </Col>
-                    <Col md={6}>
-                        <div className='featured-on-user-page'>
+                    <Col md={8}>
+                        <>
+                       
                             {
                                 games && games.length 
-                                ? <div> 
-                                    <div>Select a Game to Post a Photo or Write a Review:</div>
-                                    <div>{filteredGames().map(game => 
-                                        <div>
+                                ? 
+                                <>
+                                <Card.Group itemsPerRow={2}>
+                                    {filteredGames().map(game => 
+                                   
                                             <GameUserCard 
                                                 key={game.id} 
                                                 {...game} 
@@ -176,15 +187,17 @@ const ProfileDisplayGames = props => {
                                                 setThisGameTitle={setThisGameTitle}
                                                 setPostType={setPostType}
                                             />
-                                        </div>
+                                   
                                     )}
-                                    </div>
-                                </div>
+                                </Card.Group>
+                                
+                                </>
                                 : <div>No Games Listed</div>
                             }
-                        </div>  
+                        </>
+                       
                     </Col>
-                    <Col md={3}>
+                    <Col md={2} className='side-columns'>
                         <div>
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length
@@ -192,9 +205,9 @@ const ProfileDisplayGames = props => {
                                     <div>Friends:</div>
                                     <div>
                                     {currentUser.total_friends.map(friend => 
-                                        <div>
+                                     
                                             <UserCard key={friend.id} {...friend} status="profile"/>
-                                        </div>
+                                   
                                     )}
                                     </div>
                                 </div>
@@ -208,9 +221,9 @@ const ProfileDisplayGames = props => {
                                     <div>Game Reviews:</div>
                                     <div>
                                     {thisUserReviews.map(review => 
-                                        <div>
+                             
                                         <ReviewCard key={review.id} {...review} />
-                                        </div>
+                                     
                                     )}
                                     </div>
                                 </div>

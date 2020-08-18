@@ -13,6 +13,7 @@ import UserProfileCard from '../UserProfileCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Divider, Header } from 'semantic-ui-react'
 
 
 const ProfileDisplayPhotos = props => {
@@ -62,21 +63,31 @@ const ProfileDisplayPhotos = props => {
 
     return (
     <div>
-        {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-        <div className='photos-search-bar'>
-            <div>
-                <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+         <div className='user-profile-container'>
+            <div className='user-profile-card'>
+                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             </div>
-            <div className='photos-sort-and-filter'>
-                <FilterPhotosByLikes
-                    typeLikesFilter={typeLikesFilter}
-                    setTypeLikesFilter={setTypeLikesFilter}
-                    numLikes={numLikes}
-                    setNumLikes={setNumLikes}
-                />
-                <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+            <div className='profile-photos-search-bar'>   
+                <Divider horizontal>
+                        <Header as='h4'>
+                            Game Photos
+                        </Header>
+                    </Divider>
+                <div>
+                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                </div>
+                <div>
+                    <FilterPhotosByLikes
+                        typeLikesFilter={typeLikesFilter}
+                        setTypeLikesFilter={setTypeLikesFilter}
+                        numLikes={numLikes}
+                        setNumLikes={setNumLikes}
+                    />
+                </div>
+                <div>
+                    <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                </div>
             </div>
-            
         </div>
         <Container fluid>
             <Row className='justify-content-center'>

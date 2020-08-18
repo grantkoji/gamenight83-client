@@ -14,6 +14,7 @@ import {connect} from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Divider, Header } from 'semantic-ui-react'
 
 const ProfileDisplayGamesCreated = props => {
     const {
@@ -57,22 +58,31 @@ const ProfileDisplayGamesCreated = props => {
 
     return (
     <div>
-        {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-        <div className="games-search-bar">
-            <div>
-                <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+        <div className='user-profile-container'>
+            <div className='user-profile-card'>
+                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             </div>
-            <div>
-                <FilterGamesByNum 
-                    typeNumPlayers={typeNumPlayers} 
-                    setTypeNumPlayers={setTypeNumPlayers}
-                    numPlayers={numPlayers}
-                    setNumPlayers={setNumPlayers} 
-                    typeMinAge={typeMinAge} 
-                    setTypeMinAge={setTypeMinAge}
-                    minAge={minAge}
-                    setMinAge={setMinAge}  
-                />
+            <div className='profile-photos-search-bar'>   
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Games Created
+                    </Header>
+                </Divider>
+                <div>
+                    <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                </div>
+                <div>
+                    <FilterGamesByNum 
+                        typeNumPlayers={typeNumPlayers} 
+                        setTypeNumPlayers={setTypeNumPlayers}
+                        numPlayers={numPlayers}
+                        setNumPlayers={setNumPlayers} 
+                        typeMinAge={typeMinAge} 
+                        setTypeMinAge={setTypeMinAge}
+                        minAge={minAge}
+                        setMinAge={setMinAge}  
+                    />
+                </div>
             </div>
         </div>
         <Container fluid>

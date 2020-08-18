@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  /* background-color: rgb(251, 251, 251); */
   background-color: rgb(251, 251, 251);
 /* 237, 238, 240
 249, 249, 251,  */
@@ -39,6 +40,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer {
+  max-height: 40 px;
+  color:#007ea7;
+  text-align: center;
+  align-content: center;
+  background-image: linear-gradient(315deg, #D5FEFD 0%, #FFFCFF 74%)
+}
+
+.footer-right {
+  padding-left: 850px;
+  font-style: italic;
+}
+
+.scrolling-box {
+  background-color: #9ABBFE;
+  display: block;
+  width: 200px;
+  height: 380px;
+  padding: 1em;
+  overflow-y: scroll;
+  text-align: center;
+  border-radius: 15px;
 }
 
 .form-input {
@@ -349,11 +374,36 @@
   overflow: hidden;
 }
 
-.input-search {
-  /* height: 42px; */
-
-  
+.user-profile-container {
+  display: flex;
+  justify-content: center;
 }
+
+.user-profile-card {
+  margin: 7px;
+  /* align-self: flex-start; */  
+}
+
+.profile-photos-search-bar {
+  margin-top: 200px;
+  /* align-self: flex-end; */
+}
+
+.profile-gs-search-bar {
+  margin-top: 250px;
+
+}
+
+
+
+
+
+.search-bar-bottom {
+  margin-top:auto;
+}
+/* .input-search {
+  /* height: 42px; */
+/* } */
 
 .featured-on-user-page {
   display: flex;
@@ -382,7 +432,32 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.side-columns {
+  max-width: 25px;
+  min-width: 25px;
+}
+
+.ui.card.game-user-card {
+  width: 30%;
+}
+/* get rid of divs,ui.card.new-name {} */
+
+.column-featured {
+  width: 500px;
+}
+
+
 /* 
+
+
+
+
+Future refernce
+  width: auto;
+  height: auto;
+  max-width: 25%;
+  max-height: 25%;
 
 body {
   margin: 0;

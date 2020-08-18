@@ -140,8 +140,8 @@ const ScheduledGCIndex = props => {
             <div className="extra content">
                 <div>Spots: {num_vacancies} <span onClick={redirectToUserPage} onMouseOver={changePointer}>Host: {host.username}</span></div>
                 { playingThisGameId 
-                    ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
-                    : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
+                    ? <Button variant='outline-danger' size="sm" onClick={leaveScheduledGame}>Leave This Game</Button>
+                    : <Button variant='outline-info' size="sm" onClick={joinScheduledGame}>Join This Game</Button>
                 }
             </div>
         </div>

@@ -34,7 +34,7 @@ const GameUserCard = props => {
     }
 
     return (
-        <div className="ui card">
+        <div className="ui card game-user-card">
             <div className="image">
                 <img src={props["image_url"]} alt={title}/>
             </div>
@@ -42,12 +42,12 @@ const GameUserCard = props => {
                 <a className="header" onClick={redirectToGame}>{title}</a>
             </div>
             <div className="description">
-                <Button variant="outline-info" onClick={handlePhoto}>Post a Photo</Button>
-                <Button variant="outline-info" onClick={handleReview}>Write a Review</Button>
+                <Button variant="outline-info" size="sm" onClick={handlePhoto}>Post a Photo</Button>
+                <Button variant="outline-info" size="sm" onClick={handleReview}>Write a Review</Button>
             </div>
             <div className="extra content">
-                <Button variant='outline-info' onClick={redirectToGame}>Visit Game Page</Button>    
-                <Button variant='outline-info' onClick={handleSchedule}>Schedule Game</Button>    
+                <Button variant='outline-info' size="sm" onClick={redirectToGame}>Visit Game Page</Button>    
+                <Button variant='outline-info' size="sm" onClick={handleSchedule}>Schedule Game</Button>    
             </div>  
     </div>  
     )

@@ -125,13 +125,13 @@ const ScheduledGCFriendPlayer = props => {
       if (playingThisGameId) {
         return (
           <div>
-            <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
+            <Button variant='outline-danger' size="sm" onClick={leaveScheduledGame}>Leave This Game</Button>
           </div>
         )
       } else if (!playingThisGameId && num_vacancies > 0){
         return (
           <div>
-               <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
+               <Button variant='outline-info' size="sm" onClick={joinScheduledGame}>Join This Game</Button>
           </div>
         )
       }  else {

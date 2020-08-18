@@ -15,7 +15,7 @@ import Col from 'react-bootstrap/Col'
 
 import SearchBarScheduledGames from '../../../Components/SearchBars/SearchBarScheduledGames'
 import FilterScheduledGames from '../../../Components/Filters/FilterScheduledGames'
-import { Divider, Header, Icon } from 'semantic-ui-react'
+import { Divider, Header } from 'semantic-ui-react'
 import ScheduledGCFriendPlayer from '../../ScheduledGame/ScheduledGCFriendPlayer'
 import moment from 'moment'
 
@@ -78,31 +78,6 @@ const ProfileDisplaySGFriendsPlayer = props => {
             setScheduledGamesAsPlayer(gameAsPlayerArray)
         }
     }, [scheduledGames, scheduledGamePlayers, currentUser.total_friends])
-
-
-    
-    // {
-    //     "id": 1,
-    //     "host_id": 60,
-    //     "game_id": 60,
-    //     "unix": 15993933,
-    //     "num_vacancies": 5,
-    //     "status": "Scheduled",
-    //     "public_description": "try it",
-    //     "private_directions": "zoom like ",
-    //     "privacy": "Public",
-    //     "host": {
-    //     "id": 60,
-    //     "name": "Aurea Schneider",
-    //     "username": "Jimmy Valmer",
-       
-    //     },
-    //     "game": {
-    //     "id": 60,
-    //     "title": "Monopoly",
-    //     "game_category": "Zoom online or indoors"
-    //     }
-
     
 
     let filteredGames = () => {
@@ -132,18 +107,33 @@ const ProfileDisplaySGFriendsPlayer = props => {
   
 
 
-
-
-
-
-
     return (
         <div>
-            
-            <div className="container6">
-                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-               
+            <div className='user-profile-container'>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                </div>
+                <div className='profile-gs-search-bar'>  
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Scheduled Games
+                        </Header>
+                    </Divider>
+
+                    <div>
+                    <SearchBarScheduledGames 
+                        search={search} 
+                        searchType={searchType} 
+                        setSearch={setSearch} 
+                        setSearchType={setSearchType}
+                    />
+                    </div>
+                    <div>
+                        <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
+                    </div>
+                </div>
             </div>
+            
             <Container fluid>
                 <Row className='justify-content-center'>
                     <Col md={3}>
@@ -185,25 +175,7 @@ const ProfileDisplaySGFriendsPlayer = props => {
                     </Col>
                     <Col md={6}>
                         <div className='featured-on-user-page'>
-                        <> 
                             <div className="index">     
-                                <Divider horizontal>
-                                    <Header as='h4'>
-                                        <Icon name='schedule' />
-                                        Scheduled Games
-                                    </Header>
-                                </Divider>
-                                <div>
-                                    <SearchBarScheduledGames 
-                                        search={search} 
-                                        searchType={searchType} 
-                                        setSearch={setSearch} 
-                                        setSearchType={setSearchType}
-                                    />
-                                </div>
-                                <div>
-                                    <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
-                                </div>
                                 {  
                                 scheduledGames && scheduledGames.length && scheduledGamePlayers && scheduledGamePlayers.length && scheduledGamesAsPlayer && scheduledGamesAsPlayer.length
                                 ? 
@@ -220,7 +192,7 @@ const ProfileDisplaySGFriendsPlayer = props => {
                                 </Container>
                                 : <div>You Haven't Played Any Games</div>} 
                             </div>
-                        </>
+                     
                         
                         </div>
                     </Col>

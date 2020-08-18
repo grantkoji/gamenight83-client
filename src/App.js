@@ -13,6 +13,7 @@ import GamePage from './pages/Game/GamePage'
 import HomeGames from './pages/Game/HomeGames'
 import GamePhotosIndex from './pages/GamePhoto/GamePhotosIndex'
 import ScheduledGamesIndex from './pages/ScheduledGame/ScheduledGamesIndex'
+import Footer from './Footer/Footer'
 
 import ReviewsIndex from './pages/Review/ReviewsIndex'
 import UsersIndex from './pages/User/UsersIndex'
@@ -140,6 +141,9 @@ function App(props) {
         <Route exact path='/signup' render={(routerprops) => <SignUp {...routerprops} />}/>
         <Route exact path='/' render={(routerprops) => <HomeGames {...routerprops} />}/>
       </Switch>
+
+      <br/><br/><br/><br/><br/><br/><br/><br/>
+      <Footer />
     </div>
   );
 }

@@ -18,6 +18,7 @@ import FilterScheduledGames from '../../../Components/Filters/FilterScheduledGam
 import { Divider, Header, Icon } from 'semantic-ui-react'
 import ScheduledGCUser from '../../ScheduledGame/ScheduledGCUser'
 import moment from 'moment'
+import { CardColumns } from 'react-bootstrap';
 
 const ProfileDisplaySGAsPlayer = props => {
     const {
@@ -133,14 +134,33 @@ const ProfileDisplaySGAsPlayer = props => {
 
     return (
         <div>
-            
-            <div className="container6">
-                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-               
+            <div className='user-profile-container'>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                </div>
+                <div className='profile-gs-search-bar'>  
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Scheduled Games
+                        </Header>
+                    </Divider>
+
+                    <div>
+                    <SearchBarScheduledGames 
+                        search={search} 
+                        searchType={searchType} 
+                        setSearch={setSearch} 
+                        setSearchType={setSearchType}
+                    />
+                    </div>
+                    <div>
+                        <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
+                    </div>
+                </div>
             </div>
             <Container fluid>
                 <Row className='justify-content-center'>
-                    <Col md={3}>
+                    <Col md={2}>
                         <div>
                             {
                                 thisUserGamePhotos && thisUserGamePhotos.length
@@ -177,27 +197,9 @@ const ProfileDisplaySGAsPlayer = props => {
                             }
                         </div>
                     </Col>
-                    <Col md={6}>
+                    <Col md={8}>
                         <div className='featured-on-user-page'>
-                        <> 
                             <div className="index">     
-                                <Divider horizontal>
-                                    <Header as='h4'>
-                                        <Icon name='schedule' />
-                                        Scheduled Games
-                                    </Header>
-                                </Divider>
-                                <div>
-                                    <SearchBarScheduledGames 
-                                        search={search} 
-                                        searchType={searchType} 
-                                        setSearch={setSearch} 
-                                        setSearchType={setSearchType}
-                                    />
-                                </div>
-                                <div>
-                                    <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
-                                </div>
                                 {  
                                 scheduledGames && scheduledGames.length && scheduledGamePlayers && scheduledGamePlayers.length && scheduledGamesAsPlayer && scheduledGamesAsPlayer.length
                                 ? 
@@ -213,12 +215,10 @@ const ProfileDisplaySGAsPlayer = props => {
                                     </Row>
                                 </Container>
                                 : <div>You Haven't Played Any Games</div>} 
-                            </div>
-                        </>
-                        
+                            </div>                        
                         </div>
                     </Col>
-                    <Col md={3}>
+                    <Col md={2}>
                         <div>
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length
@@ -288,3 +288,5 @@ export default withRouter(connect(msp, mdp)(ProfileDisplaySGAsPlayer))
 
 
 
+// Can also set max width on a CardColumns. 
+// Can do minimum and max at the sameso a column won't go past that
