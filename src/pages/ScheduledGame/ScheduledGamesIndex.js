@@ -2,24 +2,24 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 
 import SearchBarScheduledGames from '../../Components/SearchBars/SearchBarScheduledGames'
-import { Divider, Header, Icon, Table } from 'semantic-ui-react'
+import FilterScheduledGames from '../../Components/Filters/FilterScheduledGames'
+import { Divider, Header, Icon } from 'semantic-ui-react'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 import ScheduledGCIndex from './ScheduledGCIndex'
 import moment from 'moment'
 import scheduledGamePlayers from '../../modules/reducers/scheduledGamePlayers';
 
 
 const ScheduledGamesIndex = props => {
-    const {scheduledGames, scheduleGamePlayers} = props
+    const {scheduledGames} = props
     let [search, setSearch] = useState('')
     let [searchType, setSearchType] = useState('gameTitle')
-    let [typeNumPlayers, setTypeNumPlayers] = useState('noNumPlayers')
-    let [numPlayers, setNumPlayers] = useState('')
-    let [typeMinAge, setTypeMinAge] = useState('noMinAge')
-    let [minAge, setMinAge] = useState('')
     let [currentUnix, setCurrentUnix] = useState(0)
     let [activeGamesType, setActiveGamesType] = useState('scheduledAndPending')
     let [scheduledGamesFiltered, setScheduledGamesFiltered] = useState([])
     useEffect(() => {
+        setActiveGamesType('scheduledAndPending')
         setCurrentUnix(moment().unix())
         setScheduledGamesFiltered(scheduledGames)
         const interval = setInterval(() => {
@@ -55,10 +55,11 @@ const ScheduledGamesIndex = props => {
     //     "title": "Monopoly",
     //     "game_category": "Zoom online or indoors"
     //     }
-    'scheduledAnd4HoursAgo'
+
+    
 
     let filteredGames = () => {
-        let gamesFiltered = scheduledGamesFiltered
+        let gamesFiltered = [...scheduledGamesFiltered]
         gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0)
         if (activeGamesType === 'scheduledAndPending') {
             gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
@@ -78,6 +79,7 @@ const ScheduledGamesIndex = props => {
         } else if (searchType === 'gameTitle') {
             gamesFiltered = gamesFiltered.filter(sg => sg.game.title.toLowerCase().includes(search.toLowerCase()))
         }
+        gamesFiltered.sort((a, b) => a.unix - b.unix)
         return gamesFiltered
     }
   
@@ -133,17 +135,17 @@ const ScheduledGamesIndex = props => {
                      {  
                     scheduledGames && scheduledGames.length && scheduledGamesFiltered && scheduledGamesFiltered.length
                     ? 
-                    <Table definition>
-                        <Table.Body>
+                    <Container fluid>
+                        <Row className='justify-content-center'>
                             {filteredGames().map(scheduledGame => {
                                 return (
-                                    <div>
+                                    <div className='index-review-divider'>
                                         <ScheduledGCIndex key={scheduledGame.id} {...scheduledGame} />
                                     </div>
                                 )
                             })}
-                        </Table.Body>
-                    </Table>
+                        </Row>
+                    </Container>
                     : "Loading..."} 
                 </div>
             </>

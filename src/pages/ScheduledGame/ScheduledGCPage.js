@@ -107,34 +107,26 @@ const ScheduledGCIndex = props => {
         props.history.push(`/users/${host.username.replace(/\s+/g, '')}`)
     }
 
-    const redirectToGame = () => {
-      props.setCurrentGame(game.id)
-      localStorage.gameId = game.id
-      props.history.push(`/games/${game.id}`)
-    }
-
     const changePointer = (e) => {  
-      e.target.style.cursor = 'pointer'
+        e.target.style.cursor = 'pointer'
     }
-    
 
     return (
-      <div className="ui cards" style={{height: "100%"}}>
-        <div className="card div-of-photo">
-            <div className="content">
-              <img className="right floated mini ui image" src={game.image_url}/>
-                <div className="header" onClick={redirectToGame} onMouseOver={changePointer}>
-                   {game.title}
+        <div class="ui cards">
+        <div class="card">
+            <div class="content">
+                <div class="header" onClick={redirectToUserPage} onMouseOver={changePointer}>
+                    Host: {host.username}
                 </div>
-                <div className="meta">
+                <div class="meta">
                     {moment.unix(unix).format('llll')}
                 </div>     
-                <div className="description">
-                    {public_description}
+                <div class="description">
+                    Description: {public_description}
                 </div>
             </div>
-            <div className="extra content">
-                <div>Spots: {num_vacancies} <span onClick={redirectToUserPage} onMouseOver={changePointer}>Host: {host.username}</span></div>
+            <div class="extra content">
+                <div>Spots: {num_vacancies}</div><br/>
                 { playingThisGameId 
                     ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
                     : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>

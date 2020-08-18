@@ -890,3 +890,26 @@ const mapDispatchToProps = dispatch => {
   }
 
 export default withRouter(connect(null, mapDispatchToProps)(SentFriendshipRequest))
+
+
+    // const renderFront = () => {
+    //     return (
+    //         <div>
+    //             <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
+    //                 <img src={props["image_url"]} alt={game_title} />
+    //             </div>
+               
+    //         </div>
+    //     )
+
+    // }
+
+//     <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
+//     <img src={props["image_url"]} alt={game_title} />
+//     <div>{caption}</div>
+//     <button onClick={redirectToGame}>Game: {game_title}</button>
+//     <button onClick={redirectToUser}>By {user_name}</button>
+// </div>
+
+
+{/* <div className="image" style={{ height: "200px" }}></div> */}

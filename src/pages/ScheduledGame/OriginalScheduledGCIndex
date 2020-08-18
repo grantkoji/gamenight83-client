@@ -2,7 +2,7 @@ import React, {useState, useReducer, useEffect} from 'react';
 import {connect} from 'react-redux'
 import * as requests from '../../requests.js'
 import * as action from '../../modules/actionCreators/actionCreators'
-import { withRouter } from 'react-router-dom'
+import { Icon, Table } from 'semantic-ui-react'
 import moment from 'moment'
 import {Button} from 'react-bootstrap'
 
@@ -10,11 +10,24 @@ const ScheduledGCIndex = props => {
 
     const {token, id, game, currentUser, host, unix, num_vacancies, public_description, private_directions, privacy,
       addScheduledGamePlayer, removeScheduledGamePlayer, scheduledGamePlayers, addVacancyToScheduledGame, 
-      removeVacancyFromScheduledGame, setShowUser, setCurrentGame} = props
+      removeVacancyFromScheduledGame, setShowUser} = props
 
       let [playingThisGameId, setPlayingThisGameId] = useState(null)
   
 
+    // game.title 
+    // game.category 
+    // game['image_url']
+    // host.username
+    // host["profile_url"]
+
+    // const showDetails = () => {
+    //   return (
+
+
+    //   )
+    // }
+    // 
     useEffect(() => {
       if (scheduledGamePlayers !== null && scheduledGamePlayers.length > 0) {
         scheduledGamePlayers.forEach(sgp => {
@@ -35,6 +48,8 @@ const ScheduledGCIndex = props => {
       } 
     }, [scheduledGamePlayers])
 
+
+  
 
     const leaveScheduledGame = () => {
       fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
@@ -101,47 +116,25 @@ const ScheduledGCIndex = props => {
         alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
       })
   }
-    const redirectToUserPage = () => {
-        setShowUser(host.id)
+
+  const redirectToUserPage = () => {
+    setShowUser(host.id)
         // props.history.push(`users/${resp.user.id}`)
-        props.history.push(`/users/${host.username.replace(/\s+/g, '')}`)
-    }
-
-    const redirectToGame = () => {
-      props.setCurrentGame(game.id)
-      localStorage.gameId = game.id
-      props.history.push(`/games/${game.id}`)
-    }
-
-    const changePointer = (e) => {  
-      e.target.style.cursor = 'pointer'
-    }
-    
-
+    props.history.push(`/users/${host.username.replace(/\s+/g, '')}`)
+  }
     return (
-      <div className="ui cards" style={{height: "100%"}}>
-        <div className="card div-of-photo">
-            <div className="content">
-              <img className="right floated mini ui image" src={game.image_url}/>
-                <div className="header" onClick={redirectToGame} onMouseOver={changePointer}>
-                   {game.title}
-                </div>
-                <div className="meta">
-                    {moment.unix(unix).format('llll')}
-                </div>     
-                <div className="description">
-                    {public_description}
-                </div>
-            </div>
-            <div className="extra content">
-                <div>Spots: {num_vacancies} <span onClick={redirectToUserPage} onMouseOver={changePointer}>Host: {host.username}</span></div>
-                { playingThisGameId 
-                    ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
-                    : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
-                }
-            </div>
-        </div>
-    </div> 
+      <Table.Row >
+        <Table.Cell >{moment.unix(unix).format('llll')}</Table.Cell>
+        <Table.Cell>{game.title}</Table.Cell>
+        <Table.Cell>Host: <span onClick={redirectToUserPage}>{host.username}</span></Table.Cell>
+        <Table.Cell>Spots: {num_vacancies}</Table.Cell>
+        <Table.Cell>Description: {public_description}</Table.Cell>
+        { playingThisGameId 
+        ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
+        : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
+        }
+      </Table.Row>
+   
     )
 }
 
@@ -162,8 +155,7 @@ const mapStateToProps = state => {
       removeScheduledGamePlayer: (scheduledGamePlayerId) => dispatch(action.removeScheduledGamePlayer(scheduledGamePlayerId)),
       addVacancyToScheduledGame: (id) => dispatch(action.addVacancyToScheduledGame(id)),
       removeVacancyFromScheduledGame: (id) => dispatch(action.removeVacancyFromScheduledGame(id)),
-      setShowUser: (userId) => dispatch(action.setShowUser(userId)),
-      setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
+      setShowUser: (userId) => dispatch(action.setShowUser(userId))
     }
   }
   

@@ -54,31 +54,6 @@ const GamePhotoCard = props => {
         e.target.style.cursor = 'pointer'
       }
 
-    // const renderFront = () => {
-    //     return (
-    //         <div>
-    //             <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-    //                 <img src={props["image_url"]} alt={game_title} />
-    //             </div>
-               
-    //         </div>
-    //     )
-
-    // }
-
-//     <div onClick={() => setToggleFront(prevtoggleFront => !prevtoggleFront)}>
-//     <img src={props["image_url"]} alt={game_title} />
-//     <div>{caption}</div>
-//     <button onClick={redirectToGame}>Game: {game_title}</button>
-//     <button onClick={redirectToUser}>By {user_name}</button>
-// </div>
-
-
-{/* <div className="image" style={{ height: "200px" }}></div> */}
-
-
-
-
         return (  
             <div class="ui card" style={{height: "100%"}}>
                 <div className='div-of-photo'>

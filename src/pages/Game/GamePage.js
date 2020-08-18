@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../modules/actionCreators/actionCreators'
 import ReviewOnGamePage from '../Review/ReviewOnGamePage'
@@ -7,38 +7,64 @@ import GameProfileCard from './GameProfileCard'
 import AddReviewForm from '../../Components/Forms/AddReviewForm'
 import AddGamePhotoForm from '../../Components/Forms/AddGamePhotoForm'
 import ScheduleGamePageForm from '../../Components/Forms/ScheduleGamePageForm'
+import FilterScheduledGames from '../../Components/Filters/FilterScheduledGames'
+import ScheduledGCPage from '../ScheduledGame/ScheduledGCPage'
 import {connect} from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import moment from 'moment'
 
 const GamePage = props => {
-    const { games, token, users, reviews, gamePhotos, currentGame} = props
+    const { games, token, users, reviews, gamePhotos, currentGame, scheduledGames} = props
     let thisPageReviews = reviews.filter(review => review.game_id === currentGame)
     let thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
     let thisPageGame = games.find(game => game.id === currentGame)  
+    let [activeGamesType, setActiveGamesType] = useState('scheduledAndPending')
+    let [currentUnix, setCurrentUnix] = useState(0)
+    let [scheduledGamesFiltered, setScheduledGamesFiltered] = useState([])
 
     const thisGameReviewAverage = () => {
       let ratingTotal = thisPageReviews.reduce((accumulator, review) => accumulator + review.num_stars, 0)
       return (ratingTotal / thisPageReviews.length).toFixed(2)
     }
-
     useEffect(() => {
       thisPageReviews = reviews.filter(review => review.game_id === currentGame)
       thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
       thisPageGame = games.find(game => game.id === currentGame)  
+      setScheduledGamesFiltered(scheduledGames)
+      setCurrentUnix(moment().unix())
+      const interval = setInterval(() => {
+        setCurrentUnix(moment().unix())
+      }, 60000)
+      return () => clearInterval(interval)
   }, [])
 
     useEffect(() => {
+    
       thisPageReviews = reviews.filter(review => review.game_id === currentGame)
       thisPageGamePhotos = gamePhotos.filter(photo => photo.game_id === currentGame)
       thisPageGame = games.find(game => game.id === currentGame)  
-  }, [currentGame, games])
+      setScheduledGamesFiltered(scheduledGames)
+  }, [currentGame, games, scheduledGames])
 
-  //      <div class="ui grid">
-  // <div class="four wide column"></div>
-  // <div class="four wide column"></div>
-  // <div class="four wide column"></div>
+    let filteredGames = () => {
+      let gamesFiltered = [...scheduledGamesFiltered]
+      gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0 && gs.game_id === currentGame)
+      if (activeGamesType === 'scheduledAndPending') {
+          gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
+      } else if (activeGamesType === 'scheduledAndAnHourAgo') {
+          gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 3600) >= parseInt(currentUnix))
+      } else if (activeGamesType === 'scheduledAnd4HoursAgo') {
+          gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 14400) >= parseInt(currentUnix))
+      } else if (activeGamesType === 'scheduledAndADayAgo') {
+          gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 86400) >= parseInt(currentUnix))
+      } else if (activeGamesType === 'scheduledAndAWeekAgo') {
+          gamesFiltered = gamesFiltered.filter(sg => (sg.unix + 604800) >= parseInt(currentUnix))
+      } 
+      gamesFiltered.sort((a, b) => a.unix - b.unix)
+      return gamesFiltered
+  }
     return (
         <>
           {
@@ -71,6 +97,28 @@ const GamePage = props => {
                           <div><AddGamePhotoForm thisGame={currentGame}/></div>
                           </>}  
                       </div>
+                      { token &&
+                      <>
+                        <div>
+                          <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
+                        </div>
+                        <div>
+                          {  
+                            scheduledGames && scheduledGames.length && scheduledGamesFiltered && scheduledGamesFiltered.length
+                            ? 
+                            <>
+                              <div>Scheduled Games for {thisPageGame.title}</div>
+                              {filteredGames().map(scheduledGame => {
+                                  return (
+                                      <div>
+                                          <ScheduledGCPage key={scheduledGame.id} {...scheduledGame} />
+                                      </div>
+                                  )
+                              })}
+                            </>
+                        : <div>"Loading..."</div>} 
+                        </div>
+                      </>}
                     </Col>
                     <Col md={7} >
                       {
@@ -126,7 +174,8 @@ const mapStateToProps = state => {
       reviews: state.reviews,
       gamePhotos: state.gamePhotos,
       showUser: state.showUser,
-      currentGame: state.currentGame
+      currentGame: state.currentGame,
+      scheduledGames: state.scheduledGames
     }
   }
   
