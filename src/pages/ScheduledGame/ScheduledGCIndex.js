@@ -37,29 +37,31 @@ const ScheduledGCIndex = props => {
 
 
     const leaveScheduledGame = () => {
-      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            num_vacancies: num_vacancies + 1
-        })
-      })
-      .then(res=>{
-        addVacancyToScheduledGame(id)
+      requests.fetchRemoveGamePlayer(playingThisGameId)
+      .then(data => {
+        removeScheduledGamePlayer(playingThisGameId)
+        setPlayingThisGameId(null)
         fetchRemovePlayer()
+        
       })
-      .catch(error=>alert(error)) 
     }
     
     const fetchRemovePlayer = () => {
-      requests.fetchRemoveGamePlayer(playingThisGameId)
-        .then(data => {
-          removeScheduledGamePlayer(playingThisGameId)
-          setPlayingThisGameId(null)
-          alert('You have successfully canceled playing this game.')
-        })
+      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          num_vacancies: num_vacancies + 1
+      })
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        addVacancyToScheduledGame(data)
+        alert('You have successfully canceled playing this game.')
+      })
+      .catch(error=>alert(error)) 
     }
 
 
@@ -67,6 +69,26 @@ const ScheduledGCIndex = props => {
     if (num_vacancies <= 0) {
       alert('Unfortunately, this game has filled its vacant spots.')
     } else {
+        fetch('http://localhost:3001/api/v1/scheduled_game_players', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              "Authorization": token
+          },
+          body: JSON.stringify({
+              scheduled_game_id: id
+          })
+        })
+        .then(res=>res.json())
+        .then(dataGamePlayer => {
+          addScheduledGamePlayer(dataGamePlayer)
+          fetchUpdateSGVacancies()
+          
+        })
+      }
+    }
+
+    const fetchUpdateSGVacancies = () => {
       fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
         method: 'PATCH',
         headers: {
@@ -76,30 +98,12 @@ const ScheduledGCIndex = props => {
             num_vacancies: num_vacancies - 1
         })
       })
-      .then(res=>{
-        removeVacancyFromScheduledGame(id)
-        fetchCreateNewGamePlayer()
-      })
-      .catch(error=>alert(error))
-      }
-    }
-
-    const fetchCreateNewGamePlayer = () => {
-      fetch('http://localhost:3001/api/v1/scheduled_game_players', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": token
-        },
-        body: JSON.stringify({
-            scheduled_game_id: id
-        })
-      })
       .then(res=>res.json())
-      .then(dataGamePlayer => {
-        addScheduledGamePlayer(dataGamePlayer)
+      .then(data=>{
+        removeVacancyFromScheduledGame(data)
         alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
       })
+      .catch(error=>alert(error))
   }
     const redirectToUserPage = () => {
         setShowUser(host.id)
@@ -160,8 +164,8 @@ const mapStateToProps = state => {
     return {
       addScheduledGamePlayer: (gamePlayer) => dispatch(action.addScheduledGamePlayer(gamePlayer)),
       removeScheduledGamePlayer: (scheduledGamePlayerId) => dispatch(action.removeScheduledGamePlayer(scheduledGamePlayerId)),
-      addVacancyToScheduledGame: (id) => dispatch(action.addVacancyToScheduledGame(id)),
-      removeVacancyFromScheduledGame: (id) => dispatch(action.removeVacancyFromScheduledGame(id)),
+      addVacancyToScheduledGame: (gs) => dispatch(action.addVacancyToScheduledGame(gs)),
+      removeVacancyFromScheduledGame: (gs) => dispatch(action.removeVacancyFromScheduledGame(gs)),
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
       setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
     }

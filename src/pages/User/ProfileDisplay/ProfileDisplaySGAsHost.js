@@ -82,7 +82,7 @@ const ProfileDisplaySGAsHost = props => {
 
     let filteredGames = () => {
         let gamesFiltered = [...scheduledGamesAsHost]
-        gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0)
+ 
         if (activeGamesType === 'scheduledAndPending') {
             gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
         } else if (activeGamesType === 'scheduledAndAnHourAgo') {

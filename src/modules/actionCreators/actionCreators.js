@@ -32,8 +32,8 @@ let addScheduledGamePlayer = (scheduledGamePlayer) => ({type: 'ADD_SCHEDULED_GAM
 let updateScheduledGame = (scheduledGame) => ({type: 'UPDATE_SCHEDULED_GAME', payload: {value: scheduledGame}})
 let removeScheduledGame = (scheduledGameId) => ({type: 'REMOVE_SCHEDULED_GAME', payload: {value: scheduledGameId}})
 let removeScheduledGamePlayer = (scheduledGamePlayerId) => ({type: 'REMOVE_SCHEDULED_GAME_PLAYER', payload: {value: scheduledGamePlayerId}})
-let addVacancyToScheduledGame = (sgId) => ({type: 'ADD_VACANCY_TO_SG', payload: {value: sgId}})
-let removeVacancyFromScheduledGame= (sgId) => ({type: 'REMOVE_VACANCY_FROM_SG', payload: {value: sgId}})
+let addVacancyToScheduledGame = (sg) => ({type: 'ADD_VACANCY_TO_SG', payload: {value: sg}})
+let removeVacancyFromScheduledGame= (sg) => ({type: 'REMOVE_VACANCY_FROM_SG', payload: {value: sg}})
 export {
     setCurrentToken,
     setCurrentGame,

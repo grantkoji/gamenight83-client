@@ -16,7 +16,7 @@ import Col from 'react-bootstrap/Col'
 import SearchBarScheduledGames from '../../../Components/SearchBars/SearchBarScheduledGames'
 import FilterScheduledGames from '../../../Components/Filters/FilterScheduledGames'
 import { Divider, Header, Icon } from 'semantic-ui-react'
-import ScheduledGCUser from '../../ScheduledGame/ScheduledGCUser'
+import ScheduledGCFriendPlayer from '../../ScheduledGame/ScheduledGCFriendPlayer'
 import moment from 'moment'
 
 const ProfileDisplaySGFriendsHost = props => {
@@ -64,13 +64,13 @@ const ProfileDisplaySGFriendsHost = props => {
                 })
             setScheduledGamesAsHost(friendHostArray)
         }
-    }, [scheduledGames])
+    }, [scheduledGames, currentUser.total_friends])
 
     
 
     let filteredGames = () => {
         let gamesFiltered = [...scheduledGamesAsHost]
-        gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0)
+   
         if (activeGamesType === 'scheduledAndPending') {
             gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
         } else if (activeGamesType === 'scheduledAndAnHourAgo') {
@@ -175,7 +175,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                         {filteredGames().map(scheduledGame => {
                                             return (
                                                 <div className='index-review-divider'>
-                                                    <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='friendAsHost' />
+                                                    <ScheduledGCFriendPlayer key={scheduledGame.id} {...scheduledGame} />
                                                 </div>
                                             )
                                         })}

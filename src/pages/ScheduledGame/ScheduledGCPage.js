@@ -37,6 +37,15 @@ const ScheduledGCIndex = props => {
 
 
     const leaveScheduledGame = () => {
+      requests.fetchRemoveGamePlayer(playingThisGameId)
+        .then(data => {
+          removeScheduledGamePlayer(playingThisGameId)
+          setPlayingThisGameId(null)
+          fetchRemovePlayerUpdateGS()
+        })
+    }
+    
+    const fetchRemovePlayerUpdateGS = () => {
       fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
         method: 'PATCH',
         headers: {
@@ -46,20 +55,13 @@ const ScheduledGCIndex = props => {
             num_vacancies: num_vacancies + 1
         })
       })
-      .then(res=>{
-        addVacancyToScheduledGame(id)
-        fetchRemovePlayer()
+      .then(res=>res.json())
+      .then(data=>{
+        addVacancyToScheduledGame(data)
+        alert('You have successfully canceled playing this game.')
+        
       })
       .catch(error=>alert(error)) 
-    }
-    
-    const fetchRemovePlayer = () => {
-      requests.fetchRemoveGamePlayer(playingThisGameId)
-        .then(data => {
-          removeScheduledGamePlayer(playingThisGameId)
-          setPlayingThisGameId(null)
-          alert('You have successfully canceled playing this game.')
-        })
     }
 
 
@@ -67,6 +69,25 @@ const ScheduledGCIndex = props => {
     if (num_vacancies <= 0) {
       alert('Unfortunately, this game has filled its vacant spots.')
     } else {
+        fetch('http://localhost:3001/api/v1/scheduled_game_players', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              "Authorization": token
+          },
+          body: JSON.stringify({
+              scheduled_game_id: id
+          })
+        })
+        .then(res=>res.json())
+        .then(dataGamePlayer => {
+          addScheduledGamePlayer(dataGamePlayer)
+          fetchUpdateSGVacancies()
+        })
+      }
+    }
+
+    const fetchUpdateSGVacancies = () => {
       fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
         method: 'PATCH',
         headers: {
@@ -76,30 +97,13 @@ const ScheduledGCIndex = props => {
             num_vacancies: num_vacancies - 1
         })
       })
-      .then(res=>{
-        removeVacancyFromScheduledGame(id)
-        fetchCreateNewGamePlayer()
+      .then(res=>res.json())
+      .then(data=>{
+        removeVacancyFromScheduledGame(data)
+        alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
+        
       })
       .catch(error=>alert(error))
-      }
-    }
-
-    const fetchCreateNewGamePlayer = () => {
-      fetch('http://localhost:3001/api/v1/scheduled_game_players', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": token
-        },
-        body: JSON.stringify({
-            scheduled_game_id: id
-        })
-      })
-      .then(res=>res.json())
-      .then(dataGamePlayer => {
-        addScheduledGamePlayer(dataGamePlayer)
-        alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
-      })
   }
     const redirectToUserPage = () => {
         setShowUser(host.id)
@@ -152,8 +156,8 @@ const mapStateToProps = state => {
     return {
       addScheduledGamePlayer: (gamePlayer) => dispatch(action.addScheduledGamePlayer(gamePlayer)),
       removeScheduledGamePlayer: (scheduledGamePlayerId) => dispatch(action.removeScheduledGamePlayer(scheduledGamePlayerId)),
-      addVacancyToScheduledGame: (id) => dispatch(action.addVacancyToScheduledGame(id)),
-      removeVacancyFromScheduledGame: (id) => dispatch(action.removeVacancyFromScheduledGame(id)),
+      addVacancyToScheduledGame: (sg) => dispatch(action.addVacancyToScheduledGame(sg)),
+      removeVacancyFromScheduledGame: (sg) => dispatch(action.removeVacancyFromScheduledGame(sg)),
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
       setCurrentGame: (gameId) => dispatch(action.setCurrentGame(gameId))
     }

@@ -6,11 +6,11 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import {Button} from 'react-bootstrap'
 
-const ScheduledGCUser = props => { 
+const ScheduledGCFriendPlayer = props => { 
 
     const {token, id, game, currentUser, host, unix, num_vacancies, public_description, private_directions, privacy,
       addScheduledGamePlayer, removeScheduledGamePlayer, scheduledGamePlayers, addVacancyToScheduledGame, 
-      removeVacancyFromScheduledGame, setShowUser, setCurrentGame, source, game_players} = props
+      removeVacancyFromScheduledGame, setShowUser, setCurrentGame, source, game_players, scheduledGames} = props
 
       let [playingThisGameId, setPlayingThisGameId] = useState(null)
   
@@ -33,20 +33,20 @@ const ScheduledGCUser = props => {
           }
         })
       } 
-    }, [scheduledGamePlayers])
+    }, [scheduledGamePlayers, scheduledGames])
 
 
     const leaveScheduledGame = () => {
-      requests.fetchRemoveGamePlayer(playingThisGameId)
+        requests.fetchRemoveGamePlayer(playingThisGameId)
         .then(data => {
           removeScheduledGamePlayer(playingThisGameId)
           setPlayingThisGameId(null)
           fetchRemovePlayer()
-        })
+        }) 
     }
     
     const fetchRemovePlayer = () => {
-      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
+        fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -60,49 +60,49 @@ const ScheduledGCUser = props => {
         addVacancyToScheduledGame(data)
         alert('You have successfully canceled playing this game.')
       })
-      .catch(error=>alert(error)) 
+      .catch(error=>alert(error))   
     }
 
 
    const joinScheduledGame = () => {
-    if (num_vacancies <= 0) {
-      alert('Unfortunately, this game has filled its vacant spots.')
-    } else {
-        fetch('http://localhost:3001/api/v1/scheduled_game_players', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              "Authorization": token
-          },
-          body: JSON.stringify({
-              scheduled_game_id: id
-          })
-        })
-        .then(res=>res.json())
-        .then(dataGamePlayer => {
-          addScheduledGamePlayer(dataGamePlayer)
-          fetchUpdateSGs()
-        })
-      }
+        if (num_vacancies <= 0) {
+            alert('Unfortunately, this game has filled its vacant spots.')
+        } else {
+                fetch('http://localhost:3001/api/v1/scheduled_game_players', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": token
+                },
+                body: JSON.stringify({
+                    scheduled_game_id: id
+                })
+            })
+            .then(res=>res.json())
+            .then(dataGamePlayer => {
+                addScheduledGamePlayer(dataGamePlayer)
+                fetchUpdateSGVacancies()  
+            })
+        }
     }
 
-    const fetchUpdateSGs = () => {
-      fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            num_vacancies: num_vacancies - 1
-        })
-      })
-      .then(res=>res.json())
-      .then(data=>{
-        removeVacancyFromScheduledGame(data)
-        alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')  
-      })
-      .catch(error=>alert(error))
-  }
+    const fetchUpdateSGVacancies = () => {
+        fetch(`http://localhost:3001/api/v1/scheduled_games/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                num_vacancies: num_vacancies - 1
+            })
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            removeVacancyFromScheduledGame(data)
+            alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
+          })
+          .catch(error=>alert(error))
+    }
 
     const redirectToUserPage = () => {
         setShowUser(host.id)
@@ -122,18 +122,21 @@ const ScheduledGCUser = props => {
     
     const sourceChange = () => {
 
-      if (source === 'profileAsPlayer') {
+      if (playingThisGameId) {
         return (
-          <>
-             { playingThisGameId 
-            ? <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
-            : <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
-          }
-          </>
+          <div>
+            <Button variant='outline-danger' onClick={leaveScheduledGame}>Leave This Game</Button>
+          </div>
         )
-      } else {
+      } else if (!playingThisGameId && num_vacancies > 0){
         return (
-          <div></div>
+          <div>
+               <Button variant='outline-info' onClick={joinScheduledGame}>Join This Game</Button>
+          </div>
+        )
+      }  else {
+        return (
+          <div>This Game Has Filled Its Vacancies</div>
         )
       }
 
@@ -152,7 +155,6 @@ const ScheduledGCUser = props => {
                 </div>     
                 <div className="description">
                     <div>Description: {public_description}</div>
-                    <div>Directions: {private_directions}</div>
                     { game_players && game_players.length 
                     ? <div>Signed Up - {game_players.map((gp, index) => {
                                         return (
@@ -181,7 +183,8 @@ const mapStateToProps = state => {
     return {
       token: state.token,
       currentUser: state.currentUser,
-      scheduledGamePlayers: state.scheduledGamePlayers
+      scheduledGamePlayers: state.scheduledGamePlayers,
+      scheduledGames: state.scheduledGames
     }
   }
   
@@ -196,4 +199,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ScheduledGCUser))
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ScheduledGCFriendPlayer))
