@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
+import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 const AddGamePhotoForm = props => {
     const {token, thisGame} = props
@@ -47,13 +48,17 @@ const AddGamePhotoForm = props => {
   
 
     return (
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="imageUrl">Photo Url:</label><br/>
-        <input className='create-input-field' type="text" autoComplete="off" name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/><br />
-        <label htmlFor="caption">Photo Caption:</label><br />
-        <input className='create-input-field' type="textarea" autoComplete="off" name="caption" value={caption} onChange={(e) => setCaption(e.target.value)}/><br />
-        <button type="Submit">Submit</button>
-      </form>
+      <div className='photo-form-container'>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+          <Form.Field label='Link to Photo' control="textarea" rows='1' name="imageUrl" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}/><br />
+          </Form.Group>
+          <Form.Group>    
+          <Form.Field label='Caption' control="textarea" rows='3' name="caption" value={caption} onChange={(e) => setCaption(e.target.value)}/><br />
+          </Form.Group>
+          <Button type="Submit" basic color='blue' size='tiny'>Submit</Button>
+        </Form>
+      </div>
     );
   
 
@@ -74,3 +79,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(AddGamePhotoForm);
 
 
+// className='create-input-field'

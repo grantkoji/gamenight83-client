@@ -2,10 +2,8 @@
 import React, { useState } from 'react';
 import * as action from '../../modules/actionCreators/actionCreators'
 import {connect} from 'react-redux'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import ReactStars from "react-rating-stars-component";
-
+import { Button, Form } from 'semantic-ui-react'
 const AddReviewForm = props => {
     const {token, thisGame} = props
     let [numStars, setNumStars] = useState(0);
@@ -52,7 +50,7 @@ const AddReviewForm = props => {
     // <input type="number" autoComplete="off" name="numStars" value={numStars} onChange={(e) => setNumStars(e.target.value)}/><br/>
     return (
       <div className="review-form-container">
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <div className='stars-on-form'>
             <ReactStars
               count={5}
@@ -60,10 +58,11 @@ const AddReviewForm = props => {
               size={18}
             />
             </div>
-          <label htmlFor="content">Review Content:</label><br/>
-          <input className='create-input-field' type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
-          <button type="Submit">Submit</button>
-        </form>
+          <Form.Group>
+            <Form.Field label='Review Content' control='textarea' rows='3' name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
+          </Form.Group>
+          <Button type="Submit" basic color='blue' size='tiny'>Submit</Button>
+        </Form>
       </div>
     );
   
@@ -85,3 +84,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(AddReviewForm);
 
 
+// className='create-input-field'

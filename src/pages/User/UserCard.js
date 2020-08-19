@@ -64,7 +64,11 @@ const UserCard = props => {
                             You are Friends
                     </a>
                 </div>
-                : null
+                : <div class="extra content">
+                    <a>
+                        <i class="user icon"></i>
+                    </a>
+                </div>
             }
         </div>   
     )

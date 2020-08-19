@@ -457,7 +457,14 @@
   justify-content: center;
 }
 .stars-on-form {
-  margin-left: 20%;
+  margin-left: 26%;
+}
+
+.photo-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
 }
 
 .child-game-page-photo{
