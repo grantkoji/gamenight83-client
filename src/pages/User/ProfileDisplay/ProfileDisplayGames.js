@@ -67,7 +67,7 @@ const ProfileDisplayGames = props => {
         if (postType === "instructions") {
             return (
                 <div>
-                    <div>To Post a Game Review or Photo</div>
+                    <div>To Schedule a Game, Post a Photo, Or Write a Review</div>
                     <div>Search the Games Listed Below</div>
                     <div>Below their Pictures, You Will Find Buttons</div>
                     <div>To Post a Photo or Write a Review</div>
@@ -79,6 +79,12 @@ const ProfileDisplayGames = props => {
                 <div>
                     <div>Write a Review for {thisGameTitle}:</div>
                     <AddReviewForm thisGame={thisGameId}/>
+                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Write a Review
+                        </Header>
+                    </Divider>
                 </div>
             )  
         } else if (postType === "photo") {
@@ -86,6 +92,12 @@ const ProfileDisplayGames = props => {
                 <div>
                     <div>Post a Photo for {thisGameTitle}:</div>
                     <AddGamePhotoForm thisGame={thisGameId}/>
+                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Post a Photo
+                        </Header>
+                    </Divider>
                 </div>
             )  
         } else if (postType === 'scheduleGame') {
@@ -93,6 +105,11 @@ const ProfileDisplayGames = props => {
                 <div>
                     <div>Schedule a Game:</div>
                     <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Schedule a Game
+                        </Header>
+                    </Divider>
                 </div>
             )
         }
@@ -102,35 +119,27 @@ const ProfileDisplayGames = props => {
         <div>
 
             <div className='user-profile-container'>
-            <div className='user-profile-card'>
-                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-            </div>
-            <div className='profile-photos-search-bar'>  
-                <div>
-                    {postedReviewOrPhoto()}
-                </div> 
-                <Divider horizontal>
-                    <Header as='h4'>
-                        Games Created
-                    </Header>
-                </Divider>
-                <div>
-                    <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div>
-                    <FilterGamesByNum 
-                        typeNumPlayers={typeNumPlayers} 
-                        setTypeNumPlayers={setTypeNumPlayers}
-                        numPlayers={numPlayers}
-                        setNumPlayers={setNumPlayers} 
-                        typeMinAge={typeMinAge} 
-                        setTypeMinAge={setTypeMinAge}
-                        minAge={minAge}
-                        setMinAge={setMinAge}  
-                    />
+                <div className='profile-photos-search-bar'>  
+                    <div>
+                        {postedReviewOrPhoto()}
+                    </div>
+                        <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>  
+                        <FilterGamesByNum 
+                            typeNumPlayers={typeNumPlayers} 
+                            setTypeNumPlayers={setTypeNumPlayers}
+                            numPlayers={numPlayers}
+                            setNumPlayers={setNumPlayers} 
+                            typeMinAge={typeMinAge} 
+                            setTypeMinAge={setTypeMinAge}
+                            minAge={minAge}
+                            setMinAge={setMinAge}  
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
             <Container >
                 <Row >
                     <Col md={2} className='side-columns'>

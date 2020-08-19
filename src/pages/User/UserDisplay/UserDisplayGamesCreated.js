@@ -82,12 +82,12 @@ const UserDisplayGamesCreated = props => {
 
     return (
         <div>
-            {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-            <div className="games-search-bar">
-                <div>
-                    <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+            <div className='user-profile-container'>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div>
+                <div className='profile-gs-search-bar'>  
+                    <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     <FilterGamesByNum 
                         typeNumPlayers={typeNumPlayers} 
                         setTypeNumPlayers={setTypeNumPlayers}

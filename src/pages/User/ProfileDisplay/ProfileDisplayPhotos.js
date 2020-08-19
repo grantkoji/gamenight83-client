@@ -72,21 +72,15 @@ const ProfileDisplayPhotos = props => {
                         <Header as='h4'>
                             Game Photos
                         </Header>
-                    </Divider>
-                <div>
-                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
+                    </Divider>    
+                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>      
                     <FilterPhotosByLikes
                         typeLikesFilter={typeLikesFilter}
                         setTypeLikesFilter={setTypeLikesFilter}
                         numLikes={numLikes}
                         setNumLikes={setNumLikes}
                     />
-                </div>
-                <div>
                     <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
-                </div>
             </div>
         </div>
         <Container fluid>

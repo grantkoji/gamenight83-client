@@ -68,10 +68,7 @@ const ProfileDisplayGamesCreated = props => {
                         Games Created
                     </Header>
                 </Divider>
-                <div>
                     <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                </div>
-                <div>
                     <FilterGamesByNum 
                         typeNumPlayers={typeNumPlayers} 
                         setTypeNumPlayers={setTypeNumPlayers}
@@ -82,7 +79,6 @@ const ProfileDisplayGamesCreated = props => {
                         minAge={minAge}
                         setMinAge={setMinAge}  
                     />
-                </div>
             </div>
         </div>
         <Container fluid>

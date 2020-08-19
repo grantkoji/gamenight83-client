@@ -87,26 +87,21 @@ const UserDisplayPhotos = props => {
 
     return (
         <div>
-            
-            <div>
-                <div className="ten wide column">
+             <div className='user-profile-container'>
+                <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-                 </div>
-                <div className='photos-search-bar'>
-             
-                        <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                  
-                    <div className='photos-sort-and-filter'>
-                        <FilterPhotosByLikes
-                            typeLikesFilter={typeLikesFilter}
-                            setTypeLikesFilter={setTypeLikesFilter}
-                            numLikes={numLikes}
-                            setNumLikes={setNumLikes}
-                        />
-                        <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
-                    </div>
                 </div>
-            </div>   
+                <div className='profile-photos-search-bar'>   
+                    <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    <FilterPhotosByLikes
+                        typeLikesFilter={typeLikesFilter}
+                        setTypeLikesFilter={setTypeLikesFilter}
+                        numLikes={numLikes}
+                        setNumLikes={setNumLikes}
+                    />
+                    <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                </div>
+            </div>
             <Container fluid>
                 <Row className='justify-content-center'>
                     <Col md={3}>

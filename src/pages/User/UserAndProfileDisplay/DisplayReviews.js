@@ -85,13 +85,18 @@ const UserDisplayReviews= props => {
     
     return (
         <div>
-                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-                <div className='reviews-search-bar'>
-                    <div>
-                        <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                    </div>
-                    <div>
-                        <FilterReviewsByMinStars 
+            <div className='user-profile-container'>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                </div>
+                <div className='profile-gs-search-bar'>  
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Scheduled Games
+                        </Header>
+                    </Divider>
+                    <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                    <FilterReviewsByMinStars 
                             setTypeMinStars={setTypeMinStars}
                             minNumStars={minNumStars}
                             setMinNumStars={setMinNumStars} 
@@ -101,9 +106,8 @@ const UserDisplayReviews= props => {
                             maxNumStars={maxNumStars}     
                             setMaxNumStars={setMaxNumStars}
                         />
-                    </div>
-                
                 </div>
+            </div>
             <Container fluid>
                 <Row className='justify-content-center'>
                     <Col md={3}>

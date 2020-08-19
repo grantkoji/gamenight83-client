@@ -47,11 +47,18 @@ const ProfileDisplayFriendRequests = props => {
 
 
     return (
-        <div>
-            
-            <div className="container6">
-                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-               
+        <div>       
+            <div className='user-profile-container'>
+                <div className='user-profile-card'>
+                    {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
+                </div>
+                <div className='profile-display-fr'>  
+                    <Divider horizontal>
+                        <Header as='h4'>
+                            Friend Requests
+                        </Header>
+                    </Divider>
+                </div>
             </div>
             <Container fluid>
                 <Row className='justify-content-center'>
@@ -103,12 +110,21 @@ const ProfileDisplayFriendRequests = props => {
                                                                 userId={inFR.user_id}
                                                                 />) }
                                     </div>
-                                    : <div className='featured-on-user-page'>No Inbound Friend Requests</div>
+                                    : <Divider horizontal>
+                                        <Header as='h4'>
+                                            No Inbound Friend Requests
+                                        </Header>
+                                    </Divider>
                                 }
                           
                                 {
                                     currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.length 
                                     ? <div>
+                                        <Divider horizontal>
+                                            <Header as='h4'>
+                                                Pending Friend Requests
+                                            </Header>
+                                        </Divider>
                                         {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
                                                                     key={outFR.id} 
                                                                     id={outFR.id}
@@ -116,10 +132,11 @@ const ProfileDisplayFriendRequests = props => {
                                                                     /> )}
                                     </div>
                                     :<>
-                                        <div>
-                                            <br/><br/>
-                                        </div>
-                                        <div className='featured-on-user-page'>No Friend Requests Pending</div>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                            No Friend Requests Pending
+                                        </Header>
+                                    </Divider>
                                       </>
                                 }
                         
@@ -130,35 +147,44 @@ const ProfileDisplayFriendRequests = props => {
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length
                                 ?<div>
-                                    <div>Friends:</div>
-                                    <div>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                            Listed Friends
+                                        </Header>
+                                    </Divider>           
                                     {currentUser.total_friends.map(friend => 
                                         <div>
                                             <UserCard key={friend.id} {...friend} status="profile"/>
                                         </div>
                                     )}
-                                    </div>
                                 </div>
-                                :<div>No Friends Listed</div>
+                                : <Divider horizontal>
+                                        <Header as='h4'>
+                                            No Friends Listed
+                                        </Header>
+                                    </Divider>
                             }
                         </div>
                         <div>
                         {
                             thisUserReviews && thisUserReviews.length
                             ?<div>
-                                <div>Game Reviews:</div>
-                                <div>
+                                <Divider horizontal>
+                                    <Header as='h4'>
+                                        Listed Reviews
+                                    </Header>
+                                </Divider>  
                                 {thisUserReviews.map(review => 
                                     <div>
                                     <ReviewCard key={review.id} {...review} />
                                     </div>
                                 )}
-                                </div>
                             </div>
-                            :<div>
-                                <br/><br/>
-                                <div>No Reviews Listed</div>
-                            </div>
+                            : <Divider horizontal>
+                                <Header as='h4'>
+                                    No Reviews Listed
+                                </Header>
+                            </Divider>
                         }
                         </div>
                     </Col>

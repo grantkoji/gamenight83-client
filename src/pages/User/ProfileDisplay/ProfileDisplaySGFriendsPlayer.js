@@ -119,18 +119,13 @@ const ProfileDisplaySGFriendsPlayer = props => {
                             Scheduled Games
                         </Header>
                     </Divider>
-
-                    <div>
                     <SearchBarScheduledGames 
                         search={search} 
                         searchType={searchType} 
                         setSearch={setSearch} 
                         setSearchType={setSearchType}
                     />
-                    </div>
-                    <div>
-                        <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
-                    </div>
+                    <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
                 </div>
             </div>
             

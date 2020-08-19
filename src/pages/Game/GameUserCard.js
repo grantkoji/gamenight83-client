@@ -33,8 +33,13 @@ const GameUserCard = props => {
         setPostType('scheduleGame')
     }
 
+    // <div className="ui card game-user-card">
+    // <div className="image">
+    //     <img src={props["image_url"]} alt={title}/>
+    // </div>
+
     return (
-        <div className="ui card game-user-card">
+        <div className="ui card">
             <div className="image">
                 <img src={props["image_url"]} alt={title}/>
             </div>

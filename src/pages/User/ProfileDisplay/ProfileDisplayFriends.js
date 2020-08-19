@@ -36,16 +36,25 @@ const ProfileDisplayFriends = props => {
 
     return (
     <div>
-        {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
-        <div className="container6">
-            <div className='users-search-bar'>
-                <SearchBarUsers 
-                    searchType={searchType} 
-                    setSearchType={setSearchType}
-                    search={search}
-                    setSearch={setSearch}
-                />
+         <div className='user-profile-container'>
+            <div className='user-profile-card'>
+                {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             </div>
+            <div className='profile-photos-search-bar'>   
+                <Divider horizontal>
+                    <Header as='h4'>
+                        Game Photos
+                    </Header>
+                </Divider>
+                <div className='users-search-bar'>
+                    <SearchBarUsers 
+                        searchType={searchType} 
+                        setSearchType={setSearchType}
+                        search={search}
+                        setSearch={setSearch}
+                    />
+                </div>
+            </div>               
         </div>
         <Container fluid>
             <Row className='justify-content-center'>
