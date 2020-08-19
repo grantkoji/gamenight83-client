@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { withRouter, Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as action from '../../modules/actionCreators/actionCreators'
+import { Divider, Header, Card } from 'semantic-ui-react'
 
 const GameProfileCard = props => {
     const {
@@ -37,27 +38,29 @@ const GameProfileCard = props => {
     //     </div>
     //   </div>
     // </div>
+    // 
+    // <Card image={props.thisPageGame["image_url"]}  alt={title}/>
     
     return (
-        <div>
-            <div>
-                <img src={props.thisPageGame["image_url"]} alt={title}/>
+      <>
+        <div className='game-profile-container'>
+            <div>   
+              <img className='game-show-photo' src={props.thisPageGame["image_url"]} alt={title}/>
             </div>
-            <div>
-              <div>{title}</div>
-              <div>{description}</div>
-              <div>Category: {game_category}</div>
-              <div>Minimum Players: {min_num_players} - Maximum Players: {max_num_players} - Age: {min_age}+</div>
+            <div className='game-profile-info'>
+                <div className='game-title-paragraph'>{title}</div>
+                <div className='description-paragraph'>{description}</div>
+                <div className='description-paragraph'>Category: {game_category}</div>
+                <div className='description-paragraph'>Minimum Players: {min_num_players} - Maximum Players: {max_num_players} - Age: {min_age}+</div>
+                <div className='description-paragraph'>Created by: <span onClick={redirectToUser} onMouseOver={changePointer}>{creator_username}</span></div>
+                <div className='description-paragraph'><a href={link_to_game_website}>Link to {title} website</a></div>
             </div>
-            <div>
-                Created by: <span onClick={redirectToUser} onMouseOver={changePointer}>{creator_username}</span>  -<nbsp /> <nbsp /> 
-                <a href={link_to_game_website}>Link to {title} website</a>
-            </div>
+        </div>
             <div>
                 <h4>Instructions and Rules:</h4>
                 <div className='instructions-paragraph'>{instructions_and_rules}</div>
           </div>
-        </div>
+      </>
     )
 
  }

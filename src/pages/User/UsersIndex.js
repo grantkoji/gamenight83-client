@@ -23,7 +23,7 @@ const UsersIndex = props => {
        
         return (
             <>
-                <h1>User Profiles:</h1>
+                   <h1 className='try-it'>User Profiles</h1>
                 <div className='users-search-bar'>
                     <SearchBarUsers search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                 </div>

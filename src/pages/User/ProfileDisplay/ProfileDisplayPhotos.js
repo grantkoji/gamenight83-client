@@ -126,7 +126,7 @@ const ProfileDisplayPhotos = props => {
                     </div>
                 </Col>
                 <Col md={6}>
-                    <div>
+                    <>
                         {
                             thisUserGamePhotos && thisUserGamePhotos.length
                             ? <> 
@@ -154,7 +154,7 @@ const ProfileDisplayPhotos = props => {
                                 </Header>
                             </Divider>
                         }
-                    </div>
+                    </>
                 </Col>
                 <Col md={3}>
                     <div>

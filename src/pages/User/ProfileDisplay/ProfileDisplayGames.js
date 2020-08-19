@@ -68,11 +68,11 @@ const ProfileDisplayGames = props => {
         if (postType === "instructions") {
             return (
                 <div>
-                    <div>To Schedule a Game, Post a Photo, Or Write a Review</div>
+                    <div>To Schedule a Game, Post a Photo, or Write a Review</div>
                     <div>Search the Games Listed Below</div>
-                    <div>Below their Pictures, You Will Find Buttons</div>
-                    <div>To Post a Photo or Write a Review</div>
-                    <div>When Clicked, a Form Will Appear in the Place of These Instructions</div>
+                    <div>Below their Photos, You will Find Buttons</div>
+                    <div>When Clicked</div>
+                    <div>Form will Appear in the Place of These Instructions</div>
                 </div>
           ) 
         } else if (postType === "review") {

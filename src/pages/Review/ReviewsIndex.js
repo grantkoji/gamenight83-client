@@ -42,7 +42,7 @@ const ReviewsIndex = props => {
         }
         return (
             <>
-                <h1>Game Reviews</h1>
+                <h1 className='try-it'>Game Reviews</h1>
                 <div className='reviews-search-bar'>
                     <div>
                         <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>

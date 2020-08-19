@@ -80,21 +80,34 @@ const GamePage = props => {
                       <div>
                           { token 
                           && <> 
-                            <div>Schedule a Game</div>
+                              <Divider horizontal>
+                                      <Header as='h3'>
+                                          Schedule a Game for {thisPageGame.title}
+                                      </Header>
+                                  </Divider>  
                             <div><ScheduleGamePageForm thisGameId={currentGame} thisGameTitle={thisPageGame.title} /></div>
                             </>}  
                       </div>
                       <div>
                         { token 
                         && <> 
-                          <div>Post a Review for {thisPageGame.title} </div>
+                            <Divider horizontal>
+                                  <Header as='h3'>
+                                      Post a Review for {thisPageGame.title}
+                                  </Header>
+                              </Divider>  
+                          
                           <div><AddReviewForm thisGame={currentGame}/></div>
                           </>}  
                       </div>
                       <div>
                         { token 
                         && <> 
-                          <div>Post a Photo for {thisPageGame.title} </div>
+                          <Divider horizontal>
+                                <Header as='h3'>
+                                  Post a Photo for {thisPageGame.title} 
+                                  </Header>
+                              </Divider>  
                           <div><AddGamePhotoForm thisGame={currentGame}/></div>
                           </>}  
                       </div>
@@ -108,7 +121,11 @@ const GamePage = props => {
                             scheduledGames && scheduledGames.length && scheduledGamesFiltered && scheduledGamesFiltered.length
                             ? 
                             <>
-                              <div>Scheduled Games for {thisPageGame.title}</div>
+                            <Divider horizontal>
+                              <Header as='h3'>
+                                Scheduled Games for {thisPageGame.title}
+                                  </Header>
+                              </Divider>  
                               {filteredGames().map(scheduledGame => {
                                   return (
                                       <div>
@@ -117,45 +134,65 @@ const GamePage = props => {
                                   )
                               })}
                             </>
-                        : <div>"Loading..."</div>} 
+                        : 
+                            <Divider horizontal>
+                              <Header as='h3'>
+                                  Loading...
+                                  </Header>
+                              </Divider>  
+                        } 
                         </div>
                       </>}
                     </Col>
-                    <Col md={7} >
+                    <Col md={6} >
                       {
                         thisPageGamePhotos && thisPageGamePhotos.length
-                          ?<div>
-                              <div>Game Photos:</div>
-                              <div className="parent-game-page-photos">
-                              {thisPageGamePhotos.map(photo => 
-                                  <div className="child-game-page-photo">
+                          ?<div><Divider horizontal>
+                                  <Header as='h3'>
+                                    Game Photos
+                                    </Header>
+                                </Divider> 
+                             
+                              { thisPageGamePhotos.length > 1
+                                ? <Card.Group itemsPerRow={2}>
+                                  {thisPageGamePhotos.map(photo => 
                                       <GamePhotoCard key={photo.id} {...photo} />
-                                  </div>
-                              )}
-                              </div>
+                                  )}
+                                  </Card.Group>
+                                : <Card.Group centered>
+                                  {thisPageGamePhotos.map(photo => 
+                                      <GamePhotoCard key={photo.id} {...photo} />
+                                  )}
+                                  </Card.Group>
+                            }
                           </div>
-                          : <div>No Game Photos Listed</div>
+                          :   <Divider horizontal>
+                              <Header as='h3'>
+                                 No Game Photos Listed
+                                  </Header>
+                              </Divider>  
                       }
                     </Col>
-                    <Col md={2}>
+                    <Col md={3}>
                       {
-                        thisPageReviews && thisPageReviews.length
+                        reviews && thisPageReviews && thisPageReviews.length
                         ? <div>
-                            <div>
-                            {reviews && thisPageReviews.length 
-                              ? <div>Game Review Average: {thisGameReviewAverage()}</div>
-                              : null}
-                            </div>      
-                            <div>Number of Reviews: {thisPageReviews.length}</div>
-                            <div>
+                             <Divider horizontal>
+                                <Header as='h3'>
+                                  Review Avg: {thisGameReviewAverage()} - Count: {thisPageReviews.length}
+                                </Header>
+                            </Divider>                           
                             {thisPageReviews.map(review => 
                                 <div>
                                     <ReviewOnGamePage key={review.id} {...review} />
                                 </div>
-                            )}
-                            </div>
+                            )}                      
                         </div>
-                        : null
+                        :   <Divider horizontal>
+                              <Header as='h3'>
+                                  No Game Reviews Listed
+                                  </Header>
+                              </Divider>  
                       }
                     </Col>
                   </Row>

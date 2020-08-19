@@ -87,23 +87,20 @@ const ScheduledGamesIndex = props => {
         return (
             <> 
                  <div className="index">     
-                    <Divider horizontal>
-                        <Header as='h4'>
-                            <Icon name='schedule' />
-                            Scheduled Games
-                        </Header>
-                    </Divider>
-                    <div>
-                        <SearchBarScheduledGames 
-                            search={search} 
-                            searchType={searchType} 
-                            setSearch={setSearch} 
-                            setSearchType={setSearchType}
-                        />
-                    </div>
-                    <div>
-                        <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
-                    </div>
+                        <h1 className='try-it'>Scheduled Games</h1>
+                        <div className='relocate-search-bars'>
+                            <div>
+                                <SearchBarScheduledGames 
+                                    search={search} 
+                                    searchType={searchType} 
+                                    setSearch={setSearch} 
+                                    setSearchType={setSearchType}
+                                />
+                            </div>
+                            <div>
+                                <FilterScheduledGames setActiveGamesType={setActiveGamesType}/>
+                            </div>
+                        </div>                  
                      {  
                     scheduledGames && scheduledGames.length && scheduledGamesFiltered && scheduledGamesFiltered.length
                     ? 

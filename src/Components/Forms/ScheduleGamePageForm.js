@@ -183,7 +183,6 @@ const ScheduleGamePageForm = props => {
     return (
         <div>
           <Form className="ui form" onSubmit={handleSubmit}>
-            <h3 class="ui dividing header">Game Title: {thisGameTitle}</h3>
             <div className="fields">
               <div className="sixteen wide field">
                 <label htmlFor="date">Date</label>
