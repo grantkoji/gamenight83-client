@@ -78,39 +78,36 @@ const ProfileDisplayGames = props => {
         } else if (postType === "review") {
             return (
                 <div>
-                    <div>Write a Review for {thisGameTitle}:</div>
-                    <AddReviewForm thisGame={thisGameId}/>
-                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
                     <Divider horizontal>
                         <Header as='h4'>
-                            Write a Review
+                            Write a Review for {thisGameTitle}
                         </Header>
                     </Divider>
+                    <AddReviewForm thisGame={thisGameId}/>
+                   
                 </div>
             )  
         } else if (postType === "photo") {
             return (
                 <div>
-                    <div>Post a Photo for {thisGameTitle}:</div>
-                    <AddGamePhotoForm thisGame={thisGameId}/>
-                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
-                    <Divider horizontal>
+                      <Divider horizontal>
                         <Header as='h4'>
-                            Post a Photo
+                            Post a Photo for {thisGameTitle}
                         </Header>
                     </Divider>
+                    <AddGamePhotoForm thisGame={thisGameId}/>
+                  
                 </div>
             )  
         } else if (postType === 'scheduleGame') {
             return (
                 <div>
-                    <div>Schedule a Game:</div>
-                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />
                     <Divider horizontal>
                         <Header as='h4'>
-                            Schedule a Game
+                            Schedule a Game for {thisGameTitle}
                         </Header>
                     </Divider>
+                    <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />   
                 </div>
             )
         }
@@ -123,8 +120,7 @@ const ProfileDisplayGames = props => {
                 <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div className='profile-photos-search-bar'>  
-                    <div>
+                <div className='profile-games-post-search'>  
                         {postedReviewOrPhoto()}
                         <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>  
                         <FilterGamesByNum 
@@ -137,7 +133,6 @@ const ProfileDisplayGames = props => {
                             minAge={minAge}
                             setMinAge={setMinAge}  
                         />
-                    </div>
                 </div>
             </div>
             <Container >

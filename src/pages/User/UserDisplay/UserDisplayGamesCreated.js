@@ -89,7 +89,7 @@ const UserDisplayGamesCreated = props => {
                 <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div className='profile-gs-search-bar'>  
+                <div className='profile-games-search-bar'>  
                     <Divider horizontal>
                         <Header as='h4'>
                             Search Games

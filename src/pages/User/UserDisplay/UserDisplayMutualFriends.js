@@ -77,7 +77,7 @@ const UserDisplayMutualFriends = props => {
                 <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div className='users-profile-search'>  
+                <div className='profile-users-search-bar'>  
                     <Divider horizontal>
                             <Header as='h4'>
                                 Search Mutual Friends

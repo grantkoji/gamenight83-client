@@ -51,16 +51,20 @@ const AddReviewForm = props => {
     // <label htmlFor="numStars">Number of Stars:</label><br/>
     // <input type="number" autoComplete="off" name="numStars" value={numStars} onChange={(e) => setNumStars(e.target.value)}/><br/>
     return (
-      <form onSubmit={handleSubmit}>
-         <ReactStars
-            count={5}
-            onChange={ratingChanged}
-            size={18}
-          />
-        <label htmlFor="content">Review Content:</label><br/>
-        <input className='create-input-field' type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
-        <button type="Submit">Submit</button>
-      </form>
+      <div className="review-form-container">
+        <form onSubmit={handleSubmit}>
+          <div className='stars-on-form'>
+            <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={18}
+            />
+            </div>
+          <label htmlFor="content">Review Content:</label><br/>
+          <input className='create-input-field' type="textarea" autoComplete="off" name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
+          <button type="Submit">Submit</button>
+        </form>
+      </div>
     );
   
 

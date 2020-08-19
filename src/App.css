@@ -385,17 +385,37 @@
 }
 
 .profile-photos-search-bar {
-  margin-top: 200px;
+  margin-top: 250px;
+  /* margin-top: 29%; */
   /* align-self: flex-end; */
 }
 
+
+
 .profile-gs-search-bar {
   margin-top: 250px;
+  /* margin-top:%; */
 
 }
 
+.profile-games-post-search {
+  margin-top: 18%;
+}
+
+.profile-review-search-bar {
+  /* margin-top: 21%; */
+  margin-top: 230px;
+}
 
 
+.profile-games-search-bar {
+  /* margin-top: 22% */
+  margin-top: 250px;
+}
+
+.profile-users-search-bar{
+  margin-top: 320px;
+}
 
 
 .search-bar-bottom {
@@ -411,6 +431,11 @@
   vertical-align: middle;
 }
 
+.current-user-photo-search {
+  margin-top: 250px;
+}
+
+
 /* .top-left-navbar {
   display: flex;
   justify-content: flex-start;
@@ -425,6 +450,15 @@
 /* .parent-game-page-photos {
 
 } */
+
+.review-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.stars-on-form {
+  margin-left: 20%;
+}
 
 .child-game-page-photo{
   display: flex;

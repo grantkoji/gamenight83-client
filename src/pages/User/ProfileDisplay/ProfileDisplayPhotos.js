@@ -67,7 +67,7 @@ const ProfileDisplayPhotos = props => {
             <div className='user-profile-card'>
                 {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             </div>
-            <div className='profile-photos-search-bar'>   
+            <div className='current-user-photo-search'>   
                 <Divider horizontal>
                         <Header as='h4'>
                             Search Game Photos

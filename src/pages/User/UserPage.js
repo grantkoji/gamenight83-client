@@ -78,7 +78,7 @@ const UserPage = props => {
 
     } 
         setMutualFriends(mFriends)  
-    }, [showUser, users])
+    }, [showUser, users, reviews, gamePhotos])
 
   
     

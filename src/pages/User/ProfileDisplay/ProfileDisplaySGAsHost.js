@@ -187,22 +187,14 @@ const ProfileDisplaySGAsHost = props => {
                                                 Hosted Games
                                             </Header>
                                         </Divider>
-                                        {   filteredGames() && filteredGames().length > 1
-                                            ?   <Card.Group itemsPerRow={2}>
+                                        <Card.Group centered>
                                                 {filteredGames().map(scheduledGame => {
                                                     return (
                                                             <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsHost' />
                                                     )
                                                 })}
-                                                </Card.Group>
-                                            :  <Card.Group centered>
-                                                {filteredGames().map(scheduledGame => {
-                                                    return (
-                                                            <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsHost' />
-                                                    )
-                                                })}
-                                                </Card.Group>
-                                        }
+                                        </Card.Group>
+                
                                     </>
                                     : <Divider horizontal>
                                         <Header as='h4'>
@@ -283,3 +275,19 @@ export default withRouter(connect(msp, mdp)(ProfileDisplaySGAsHost))
 
 
 
+// {   filteredGames() && filteredGames().length > 1
+//     ?   <Card.Group itemsPerRow={2}>
+//         {filteredGames().map(scheduledGame => {
+//             return (
+//                     <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsHost' />
+//             )
+//         })}
+//         </Card.Group>
+//     :  <Card.Group centered>
+//         {filteredGames().map(scheduledGame => {
+//             return (
+//                     <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsHost' />
+//             )
+//         })}
+//         </Card.Group>
+// }

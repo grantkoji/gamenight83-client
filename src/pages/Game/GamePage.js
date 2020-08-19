@@ -14,6 +14,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import moment from 'moment'
+import { Divider, Header, Card } from 'semantic-ui-react'
 
 const GamePage = props => {
     const { games, token, users, reviews, gamePhotos, currentGame, scheduledGames} = props

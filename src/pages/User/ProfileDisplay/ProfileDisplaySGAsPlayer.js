@@ -206,22 +206,13 @@ const ProfileDisplaySGAsPlayer = props => {
                                            Scheduled Games 
                                         </Header>
                                     </Divider>
-                                    {   filteredGames() && filteredGames().length > 1
-                                            ? <Card.Group itemsPerRow={2}>
-                                                {filteredGames().map(scheduledGame => {
-                                                    return (
-                                                            <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
-                                                    )
-                                                })}
-                                             </Card.Group>
-                                             : <Card.Group centered>
-                                                {filteredGames().map(scheduledGame => {
-                                                    return (
-                                                            <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
-                                                    )
-                                                })}
-                                             </Card.Group>
-                                    }
+                                    <Card.Group centered>
+                                    {filteredGames().map(scheduledGame => {
+                                        return (
+                                                <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+                                        )
+                                    })}
+                                    </Card.Group>  
                                 </>
                                 :  <Divider horizontal>
                                         <Header as='h4'>

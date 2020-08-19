@@ -41,10 +41,10 @@ const ProfileDisplayFriends = props => {
             <div className='user-profile-card'>
                 {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
             </div>
-            <div className='profile-photos-search-bar'>   
+            <div className='profile-users-search-bar'>   
                 <Divider horizontal>
                     <Header as='h4'>
-                        Search Game Photos
+                        Search Friends
                     </Header>
                 </Divider>
                 <div className='users-search-bar'>

@@ -89,7 +89,7 @@ const UserDisplayReviews= props => {
                 <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div className='profile-gs-search-bar'>  
+                <div className='profile-review-search-bar'>  
                     <Divider horizontal>
                         <Header as='h4'>
                             Search Reviews
@@ -165,11 +165,18 @@ const UserDisplayReviews= props => {
                                         </Header>
                                     </Divider>
                                     {filteredReviews() && filteredReviews().length > 1
-                                       ? <Card.Group itemsPerRow={2}>
+                                       ? 
+                                       <>
+                                       <div className='index-review-divider'>
+                                       <Card.Group itemsPerRow={2}>
                                             {filteredReviews().map(review => 
-                                                <ReviewCard key={review.id} {...review} />
+                                              
+                                                    <ReviewCard key={review.id} {...review} />
+                                    
                                             )}
                                         </Card.Group>
+                                        </div>
+                                        </>
                                         : <Card.Group centered>
                                             {filteredReviews().map(review => 
                                                 <ReviewCard key={review.id} {...review} />
