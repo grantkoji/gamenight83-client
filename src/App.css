@@ -434,8 +434,8 @@
 }
 
 .side-columns {
-  max-width: 25px;
-  min-width: 25px;
+  /* max-width: 25px;
+  min-width: 25px; */
 }
 
 .ui.card.game-user-card {

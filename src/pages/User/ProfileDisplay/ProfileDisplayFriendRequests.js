@@ -12,6 +12,7 @@ import UserProfileCard from '../UserProfileCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Divider, Header, Card } from 'semantic-ui-react'
 
 const ProfileDisplayFriendRequests = props => {
     const {
@@ -63,53 +64,74 @@ const ProfileDisplayFriendRequests = props => {
             <Container fluid>
                 <Row className='justify-content-center'>
                     <Col md={3}>
-                        <div>
+                        <>
                             {
                                 thisUserGamePhotos && thisUserGamePhotos.length
-                                ?<div>
-                                    <div>Game Photos:</div>
-                                    <div>
-                                    {thisUserGamePhotos.map(photo => 
-                                        <div>
+                                ?<>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                            Game Photos Listed
+                                        </Header>
+                                    </Divider>
+                                    {thisUserGamePhotos.map(photo =>        
                                             <GamePhotoCard key={photo.id} {...photo} />
-                                        </div>
                                     )}
-                                    </div>
-                                </div>
-                                : <div>No Game Photos Listed</div>
+                                </>
+                                : <Divider horizontal>
+                                        <Header as='h4'>
+                                            No Photos Listed
+                                        </Header>
+                                    </Divider>
                             }
-                        </div>
-                        <div>
+                       </>
+                       <>
                             {
                                 thisUserCreatedGames && thisUserCreatedGames.length
-                                ?<div>
-                                    <div>Created Games:</div>
-                                    <div>
+                                ?<>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                           Created Games
+                                        </Header>
+                                    </Divider>
                                         {thisUserCreatedGames.map(game => 
-                                            <div>
                                                     <GameCard key={game.id} {...game} />
-                                            </div>
                                         )}
-                                    </div>
-                                </div>
-                                :<div>
-                                    <br/><br/>
-                                    <div>No Games Created</div>
-                                </div>
+                                </>
+                                :<Divider horizontal>
+                                        <Header as='h4'>
+                                            No Games Created
+                                        </Header>
+                                    </Divider>
                             }
-                        </div>
+                        </>
                     </Col>
                     <Col md={6}>
-                        <div className='featured-on-user-page'>
+                        <div>
                                 {
                                     currentUser && currentUser.friend_requests_received && currentUser.friend_requests_received.length 
-                                    ? <div>
-                                        {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
+                                    ? <>
+                                        <Divider horizontal>
+                                            <Header as='h4'>
+                                                Inbound Friend Requests
+                                            </Header>
+                                        </Divider>
+                                       { currentUser.friend_requests_received.length > 1 
+                                       ?<Card.Group itemsPerRow={2}>
+                                            {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
                                                                 key={inFR.id}
                                                                 id={inFR.id} 
                                                                 userId={inFR.user_id}
                                                                 />) }
-                                    </div>
+                                        </Card.Group>
+                                        : <Card.Group centered>
+                                            {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
+                                                key={inFR.id}
+                                                id={inFR.id} 
+                                                userId={inFR.user_id}
+                                                />) }
+                                        </Card.Group>
+                                        }
+                                    </>
                                     : <Divider horizontal>
                                         <Header as='h4'>
                                             No Inbound Friend Requests
@@ -119,18 +141,29 @@ const ProfileDisplayFriendRequests = props => {
                           
                                 {
                                     currentUser && currentUser.friend_requests_sent && currentUser.friend_requests_sent.length 
-                                    ? <div>
+                                    ? <>
                                         <Divider horizontal>
                                             <Header as='h4'>
                                                 Pending Friend Requests
                                             </Header>
                                         </Divider>
-                                        {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
+                                        { currentUser.friend_requests_sent.length > 1 
+                                        ? <Card.Group itemsPerRow={2}>
+                                             {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
                                                                     key={outFR.id} 
                                                                     id={outFR.id}
                                                                     userId={outFR.request_id}
-                                                                    /> )}
-                                    </div>
+                                                                    />)}
+                                            </Card.Group>
+                                        : <Card.Group centered> 
+                                            {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
+                                                key={outFR.id} 
+                                                id={outFR.id}
+                                                userId={outFR.request_id}
+                                                /> )}
+                                         </Card.Group>
+                                        }
+                                    </>
                                     :<>
                                     <Divider horizontal>
                                         <Header as='h4'>
@@ -146,40 +179,35 @@ const ProfileDisplayFriendRequests = props => {
                         <div>
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length
-                                ?<div>
+                                ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Listed Friends
+                                            Friends
                                         </Header>
                                     </Divider>           
                                     {currentUser.total_friends.map(friend => 
-                                        <div>
-                                            <UserCard key={friend.id} {...friend} status="profile"/>
-                                        </div>
+                                            <UserCard key={friend.id} {...friend} status="profile"/>   
                                     )}
-                                </div>
+                                </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
                                             No Friends Listed
                                         </Header>
                                     </Divider>
                             }
-                        </div>
-                        <div>
                         {
                             thisUserReviews && thisUserReviews.length
-                            ?<div>
+                            ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
                                         Listed Reviews
                                     </Header>
                                 </Divider>  
                                 {thisUserReviews.map(review => 
-                                    <div>
+        
                                     <ReviewCard key={review.id} {...review} />
-                                    </div>
                                 )}
-                            </div>
+                            </>
                             : <Divider horizontal>
                                 <Header as='h4'>
                                     No Reviews Listed

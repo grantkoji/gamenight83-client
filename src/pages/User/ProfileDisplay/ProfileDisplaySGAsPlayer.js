@@ -15,7 +15,7 @@ import Col from 'react-bootstrap/Col'
 
 import SearchBarScheduledGames from '../../../Components/SearchBars/SearchBarScheduledGames'
 import FilterScheduledGames from '../../../Components/Filters/FilterScheduledGames'
-import { Divider, Header, Icon } from 'semantic-ui-react'
+import { Divider, Header, Card } from 'semantic-ui-react'
 import ScheduledGCUser from '../../ScheduledGame/ScheduledGCUser'
 import moment from 'moment'
 import { CardColumns } from 'react-bootstrap';
@@ -141,7 +141,7 @@ const ProfileDisplaySGAsPlayer = props => {
                 <div className='profile-gs-search-bar'>  
                     <Divider horizontal>
                         <Header as='h4'>
-                            Scheduled Games
+                            Scheduled Your Scheduled Games
                         </Header>
                     </Divider>
                     <SearchBarScheduledGames 
@@ -155,98 +155,122 @@ const ProfileDisplaySGAsPlayer = props => {
             </div>
             <Container fluid>
                 <Row className='justify-content-center'>
-                    <Col md={2}>
+                    <Col md={3}>
                         <div>
                             {
                                 thisUserGamePhotos && thisUserGamePhotos.length
-                                ?<div>
-                                    <div>Game Photos:</div>
-                                    <div>
+                                ?<>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                           Game Photos
+                                        </Header>
+                                    </Divider>
                                     {thisUserGamePhotos.map(photo => 
-                                        <div>
                                             <GamePhotoCard key={photo.id} {...photo} />
-                                        </div>
                                     )}
-                                    </div>
-                                </div>
-                                : <div>No Game Photos Listed</div>
+                                </>
+                                :  <Divider horizontal>
+                                        <Header as='h4'>
+                                           No Photos Listed
+                                        </Header>
+                                    </Divider>
                             }
-                        </div>
-                        <div>
                             {
                                 thisUserCreatedGames && thisUserCreatedGames.length
-                                ?<div>
-                                    <div>Created Games:</div>
-                                    <div>
-                                        {thisUserCreatedGames.map(game => 
-                                            <div>
-                                                    <GameCard key={game.id} {...game} />
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                                :<div>
-                                    <br/><br/>
-                                    <div>No Games Created</div>
-                                </div>
+                                ?<>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                           Created Games
+                                        </Header>
+                                    </Divider>
+                                    {thisUserCreatedGames.map(game => 
+                                        <GameCard key={game.id} {...game} />
+                                    )}
+                                </>
+                                :  <Divider horizontal>
+                                        <Header as='h4'>
+                                           No Games Created
+                                        </Header>
+                                    </Divider>
                             }
                         </div>
                     </Col>
-                    <Col md={8}>
-                        <div className='featured-on-user-page'>
-                            <div className="index">     
+                    <Col md={6}>
+                        <div>
+                              
                                 {  
                                 scheduledGames && scheduledGames.length && scheduledGamePlayers && scheduledGamePlayers.length && scheduledGamesAsPlayer && scheduledGamesAsPlayer.length
-                                ? 
-                                <Container fluid>
-                                    <Row className='justify-content-center'>
-                                        {filteredGames().map(scheduledGame => {
-                                            return (
-                                                <div className='index-review-divider'>
-                                                    <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
-                                                </div>
-                                            )
-                                        })}
-                                    </Row>
-                                </Container>
-                                : <div>You Haven't Played Any Games</div>} 
-                            </div>                        
+                                ? <>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                           Scheduled Games 
+                                        </Header>
+                                    </Divider>
+                                    {   filteredGames() && filteredGames().length > 1
+                                            ? <Card.Group itemsPerRow={2}>
+                                                {filteredGames().map(scheduledGame => {
+                                                    return (
+                                                            <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+                                                    )
+                                                })}
+                                             </Card.Group>
+                                             : <Card.Group centered>
+                                                {filteredGames().map(scheduledGame => {
+                                                    return (
+                                                            <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+                                                    )
+                                                })}
+                                             </Card.Group>
+                                    }
+                                </>
+                                :  <Divider horizontal>
+                                        <Header as='h4'>
+                                           No Games Scheduled
+                                        </Header>
+                                    </Divider>
+                                } 
                         </div>
                     </Col>
-                    <Col md={2}>
+                    <Col md={3}>
                         <div>
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length
-                                ?<div>
-                                    <div>Friends:</div>
-                                    <div>
+                                ?<>
+                                    <Divider horizontal>
+                                        <Header as='h4'>
+                                           Friends
+                                        </Header>
+                                    </Divider>
                                     {currentUser.total_friends.map(friend => 
                                         <div>
                                             <UserCard key={friend.id} {...friend} status="profile"/>
                                         </div>
                                     )}
-                                    </div>
-                                </div>
-                                :<div>No Friends Listed</div>
+                                    
+                                </>
+                                :  <Divider horizontal>
+                                        <Header as='h4'>
+                                           No Friends Listed
+                                        </Header>
+                                    </Divider>
                             }
-                        </div>
-                        <div>
                         {
                             thisUserReviews && thisUserReviews.length
-                            ?<div>
-                                <div>Game Reviews:</div>
-                                <div>
+                            ? <>
+                                <Divider horizontal>
+                                    <Header as='h4'>
+                                        Game Reviews
+                                    </Header>
+                                </Divider>
                                 {thisUserReviews.map(review => 
-                                    <div>
                                     <ReviewCard key={review.id} {...review} />
-                                    </div>
                                 )}
-                                </div>
-                            </div>
-                            :<div>
-                                <br/><br/>
-                                <div>No Reviews Listed</div>
-                            </div>
+                            </>
+                            : <Divider horizontal>
+                                <Header as='h4'>
+                                    No Reviews Listed
+                                </Header>
+                            </Divider>
                         }
                         </div>
                     </Col>

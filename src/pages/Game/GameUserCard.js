@@ -50,8 +50,7 @@ const GameUserCard = props => {
                 <Button variant="outline-info" size="sm" onClick={handlePhoto}>Post a Photo</Button>
                 <Button variant="outline-info" size="sm" onClick={handleReview}>Write a Review</Button>
             </div>
-            <div className="extra content">
-                <Button variant='outline-info' size="sm" onClick={redirectToGame}>Visit Game Page</Button>    
+            <div className="extra content"> 
                 <Button variant='outline-info' size="sm" onClick={handleSchedule}>Schedule Game</Button>    
             </div>  
     </div>  

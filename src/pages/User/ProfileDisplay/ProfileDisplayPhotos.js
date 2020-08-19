@@ -13,7 +13,7 @@ import UserProfileCard from '../UserProfileCard'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { Divider, Header } from 'semantic-ui-react'
+import { Divider, Header, Card } from 'semantic-ui-react'
 
 
 const ProfileDisplayPhotos = props => {
@@ -70,7 +70,7 @@ const ProfileDisplayPhotos = props => {
             <div className='profile-photos-search-bar'>   
                 <Divider horizontal>
                         <Header as='h4'>
-                            Game Photos
+                            Search Game Photos
                         </Header>
                     </Divider>    
                     <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>      
@@ -89,54 +89,70 @@ const ProfileDisplayPhotos = props => {
                     <div>
                         {
                             thisUserCreatedGames && thisUserCreatedGames.length
-                            ?<div>
-                                <div>Created Games:</div>
-                                <div>
+                            ?<>  
+                                <Divider horizontal>
+                                    <Header as='h4'>
+                                         Created Games
+                                    </Header>
+                                </Divider>
                                     {thisUserCreatedGames.map(game => 
-                                        <div>
                                                 <GameCard key={game.id} {...game} />
-                                        </div>
                                     )}
-                                </div>
-                            </div>
-                            : <div>No Games Created</div>
+                            </>
+                            :  <Divider horizontal>
+                                <Header as='h4'>
+                                   No Games Created
+                                </Header>
+                            </Divider>
                         }
-                    </div>
-                    <div>
                     {
                         thisUserReviews && thisUserReviews.length
-                        ?<div>
-                            <div>Game Reviews:</div>
-                            <div>
+                        ? <>
+                             <Divider horizontal>
+                                <Header as='h4'>
+                                   Game Reviews
+                                </Header>
+                            </Divider>
                             {thisUserReviews.map(review => 
-                                <div>
                                 <ReviewCard key={review.id} {...review} />
-                                </div>
                             )}
-                            </div>
-                        </div>
-                        :<div>
-                            <br/><br/>
-                            <div>No Reviews Listed</div>
-                        </div>
+                        </>
+                        :  <Divider horizontal>
+                                <Header as='h4'>
+                                   No Reviews Listed
+                                </Header>
+                            </Divider>
                     }
                     </div>
                 </Col>
                 <Col md={6}>
-                    <div className='featured-on-user-page'>
+                    <div>
                         {
                             thisUserGamePhotos && thisUserGamePhotos.length
-                            ?<div>
-                                <div>Game Photos:</div>
-                                <div>
-                                {gamePhotosFiltered().map(photo => 
-                                    <div>
-                                        <GamePhotoCard key={photo.id} {...photo} />
-                                    </div>
-                                )}
-                                </div>
-                            </div>
-                            : <div>No Game Photos Listed</div>
+                            ? <> 
+                                <Divider horizontal>
+                                    <Header as='h4'>
+                                        Game Photos
+                                    </Header>
+                                </Divider>
+                                { gamePhotosFiltered() && gamePhotosFiltered().length > 1
+                                    ?<Card.Group itemsPerRow={2}>
+                                       {gamePhotosFiltered().map(photo => 
+                                            <GamePhotoCard key={photo.id} {...photo} />
+                                        )}
+                                    </Card.Group>  
+                                    : <Card.Group centered>
+                                        {gamePhotosFiltered().map(photo => 
+                                            <GamePhotoCard key={photo.id} {...photo} />
+                                        )}
+                                        </Card.Group> 
+                            }
+                            </>
+                            :  <Divider horizontal>
+                                <Header as='h4'>
+                                   No Photos Listed
+                                </Header>
+                            </Divider>
                         }
                     </div>
                 </Col>
@@ -144,17 +160,23 @@ const ProfileDisplayPhotos = props => {
                     <div>
                         {
                             currentUser && currentUser.total_friends && currentUser.total_friends.length
-                            ?<div>
-                                <div>Friends:</div>
-                                <div>
+                            ?<>
+                                <Divider horizontal>
+                                    <Header as='h4'>
+                                        Friends
+                                    </Header>
+                                </Divider>
                                 {currentUser.total_friends.map(friend => 
                                     <div>
                                         <UserCard key={friend.id} {...friend} status="profile"/>
                                     </div>
-                                )}
-                                </div>
-                            </div>
-                            : <div>No Friends Listed</div>
+                                )}  
+                            </>
+                            :  <Divider horizontal>
+                                    <Header as='h4'>
+                                    No Friends Listed
+                                    </Header>
+                                </Divider>
                         }
                     </div>
                 </Col>
