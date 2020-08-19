@@ -83,7 +83,7 @@ const ProfileDisplayGamesCreated = props => {
         </div>
         <Container fluid>
             <Row className='justify-content-center'>
-                <Col md={3}>
+                <Col md={2}>
                     <div>
                     {
                         thisUserGamePhotos && thisUserGamePhotos.length
@@ -124,8 +124,8 @@ const ProfileDisplayGamesCreated = props => {
                     }
                     </div>
                 </Col>
-                <Col md={6}>
-                    <div className="featured-on-user-page">
+                <Col md={8}>
+                    <div >
                         {
                             thisUserCreatedGames && thisUserCreatedGames.length
                             ?<>
@@ -156,7 +156,7 @@ const ProfileDisplayGamesCreated = props => {
                         }
                     </div>
                 </Col>
-                <Col md={3}>
+                <Col md={2}>
                     <div>
                         {
                             currentUser && currentUser.total_friends && currentUser.total_friends.length

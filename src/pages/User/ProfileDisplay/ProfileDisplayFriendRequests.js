@@ -115,22 +115,14 @@ const ProfileDisplayFriendRequests = props => {
                                                 Inbound Friend Requests
                                             </Header>
                                         </Divider>
-                                       { currentUser.friend_requests_received.length > 1 
-                                       ?<Card.Group itemsPerRow={2}>
-                                            {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
-                                                                key={inFR.id}
-                                                                id={inFR.id} 
-                                                                userId={inFR.user_id}
-                                                                />) }
-                                        </Card.Group>
-                                        : <Card.Group centered>
+                                      <Card.Group centered>
                                             {currentUser.friend_requests_received.map(inFR => <FriendshipRequest 
                                                 key={inFR.id}
                                                 id={inFR.id} 
                                                 userId={inFR.user_id}
                                                 />) }
                                         </Card.Group>
-                                        }
+                                        
                                     </>
                                     : <Divider horizontal>
                                         <Header as='h4'>
@@ -147,22 +139,14 @@ const ProfileDisplayFriendRequests = props => {
                                                 Pending Friend Requests
                                             </Header>
                                         </Divider>
-                                        { currentUser.friend_requests_sent.length > 1 
-                                        ? <Card.Group itemsPerRow={2}>
-                                             {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
-                                                                    key={outFR.id} 
-                                                                    id={outFR.id}
-                                                                    userId={outFR.request_id}
-                                                                    />)}
-                                            </Card.Group>
-                                        : <Card.Group centered> 
+                                        <Card.Group centered> 
                                             {currentUser.friend_requests_sent.map(outFR => <SentFriendshipRequest 
                                                 key={outFR.id} 
                                                 id={outFR.id}
                                                 userId={outFR.request_id}
                                                 /> )}
                                          </Card.Group>
-                                        }
+                                        
                                     </>
                                     :<>
                                     <Divider horizontal>

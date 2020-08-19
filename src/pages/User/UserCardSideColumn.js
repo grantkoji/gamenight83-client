@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as requests from '../../requests'
 
-const UserCard = props => {
+const UserCardSideColumn = props => {
 
     const { currentUser, id, username, fav_games, removeFriendshipTwoUsers, fetchFriendships, friendships } = props
 
@@ -59,11 +59,11 @@ const UserCard = props => {
     
 
     return (
-        <div class="ui card" style={{height: "100%"}}>
+        <div class="ui card">
             <div className='div-of-photo'>
                 { props["profile_url"] === "" 
                 ? <img src='https://img.pngio.com/3d-blue-questionmark-featuredcontent-question-mark-icon-3d-png-3d-question-mark-png-820_645.png'
-                    className='user-image'
+                    className='card-side-column'
                     alt="Question Mark"                    
                   />
                 : <img src={props["profile_url"]} className='user-image' alt={username} />
@@ -97,6 +97,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
   
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserCard));
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserCardSideColumn));
   
 

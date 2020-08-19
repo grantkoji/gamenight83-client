@@ -19,6 +19,7 @@ import { Divider, Header, Card } from 'semantic-ui-react'
 import ScheduledGCUser from '../../ScheduledGame/ScheduledGCUser'
 import moment from 'moment'
 import { CardColumns } from 'react-bootstrap';
+import FilterGamesByNum from '../../../Components/Filters/FilterGamesByNum';
 
 const ProfileDisplaySGAsPlayer = props => {
     const {
@@ -195,6 +196,7 @@ const ProfileDisplaySGAsPlayer = props => {
                             }
                         </div>
                     </Col>
+    
                     <Col md={6}>
                         <div>
                               
@@ -206,13 +208,16 @@ const ProfileDisplaySGAsPlayer = props => {
                                            Scheduled Games 
                                         </Header>
                                     </Divider>
+                                
+                                  
                                     <Card.Group centered>
-                                    {filteredGames().map(scheduledGame => {
-                                        return (
-                                                <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
-                                        )
-                                    })}
-                                    </Card.Group>  
+                                        {filteredGames().map(scheduledGame => {
+                                            return (
+                                                    <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+                                            )
+                                        })}
+                                    </Card.Group>
+                                    
                                 </>
                                 :  <Divider horizontal>
                                         <Header as='h4'>
@@ -300,3 +305,23 @@ export default withRouter(connect(msp, mdp)(ProfileDisplaySGAsPlayer))
 
 // Can also set max width on a CardColumns. 
 // Can do minimum and max at the sameso a column won't go past that
+
+
+
+// {filteredGames().map && filteredGames().map.length > 1
+//     ?
+//     <Card.Group itemsPerRow={2}>
+//     {filteredGames().map(scheduledGame => {
+//         return (
+//                 <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+//         )
+//     })}
+//     </Card.Group> 
+//     :  <Card.Group centered>
+//     {filteredGames().map(scheduledGame => {
+//         return (
+//                 <ScheduledGCUser key={scheduledGame.id} {...scheduledGame} source='profileAsPlayer' />
+//         )
+//     })}
+//     </Card.Group> 
+// }

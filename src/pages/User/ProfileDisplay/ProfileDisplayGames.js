@@ -137,7 +137,7 @@ const ProfileDisplayGames = props => {
             </div>
             <Container >
                 <Row >
-                    <Col md={3} className='side-columns'>
+                    <Col md={2} className='side-columns'>
                         <div>
                             {
                                 thisUserGamePhotos && thisUserGamePhotos.length
@@ -179,7 +179,7 @@ const ProfileDisplayGames = props => {
                             }
                         </div>
                     </Col>
-                    <Col md={6}>
+                    <Col md={8}>
                         <div>
                             {
                                 games && games.length 
@@ -228,7 +228,7 @@ const ProfileDisplayGames = props => {
                             }
                         </div>
                     </Col>
-                    <Col md={3} className='side-columns'>
+                    <Col md={2} className='side-columns'>
                         <div>
                             {
                                 currentUser && currentUser.total_friends && currentUser.total_friends.length

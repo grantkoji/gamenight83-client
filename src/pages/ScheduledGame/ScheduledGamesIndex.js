@@ -60,7 +60,7 @@ const ScheduledGamesIndex = props => {
 
     let filteredGames = () => {
         let gamesFiltered = [...scheduledGamesFiltered]
-        gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0)
+        gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0 && gs.privacy !=="Friends")
         if (activeGamesType === 'scheduledAndPending') {
             gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
         } else if (activeGamesType === 'scheduledAndAnHourAgo') {

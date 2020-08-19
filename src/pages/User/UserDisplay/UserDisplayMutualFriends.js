@@ -93,7 +93,7 @@ const UserDisplayMutualFriends = props => {
             </div>
             <Container fluid>
                 <Row className='justify-content-center'>
-                    <Col md={3}>
+                    <Col md={2}>
                         <div>
                         {
                             thisUserGamePhotos && thisUserGamePhotos.length
@@ -134,12 +134,12 @@ const UserDisplayMutualFriends = props => {
                             }
                         </div>
                     </Col>
-                    <Col md={6}>
+                    <Col md={8}>
                         <div>
                             {thisPageUser && mutualFriendsList()}  
                         </div>  
                     </Col>
-                    <Col md={3}>
+                    <Col md={2}>
                         <div>
                             {
                                 thisPageUser && thisPageUser.total_friends && thisPageUser.total_friends.length

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../../modules/actionCreators/actionCreators'
 import UserCard from '../UserCard'
+import UserCardSideColumn from '../UserCardSideColumn'
 import ReviewCard from '../../Review/ReviewCard'
 import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
 import GameCard from '../../Game/GameCard'
@@ -85,7 +86,7 @@ const ProfileDisplayPhotos = props => {
         </div>
         <Container fluid>
             <Row className='justify-content-center'>
-                <Col md={3}>
+                <Col md={2}>
                     <div>
                         {
                             thisUserCreatedGames && thisUserCreatedGames.length
@@ -96,7 +97,7 @@ const ProfileDisplayPhotos = props => {
                                     </Header>
                                 </Divider>
                                     {thisUserCreatedGames.map(game => 
-                                                <GameCard key={game.id} {...game} />
+                                                <UserCardSideColumn key={game.id} {...game} />
                                     )}
                             </>
                             :  <Divider horizontal>
@@ -125,7 +126,7 @@ const ProfileDisplayPhotos = props => {
                     }
                     </div>
                 </Col>
-                <Col md={6}>
+                <Col md={8}>
                     <>
                         {
                             thisUserGamePhotos && thisUserGamePhotos.length
@@ -156,7 +157,7 @@ const ProfileDisplayPhotos = props => {
                         }
                     </>
                 </Col>
-                <Col md={3}>
+                <Col md={2}>
                     <div>
                         {
                             currentUser && currentUser.total_friends && currentUser.total_friends.length

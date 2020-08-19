@@ -183,7 +183,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                                     <ScheduledGCFriendPlayer key={scheduledGame.id} {...scheduledGame} />
                                                 )
                                             })}
-                                            </Card.Group>
+                                        </Card.Group>
 
                                     </>
                                 : <Divider horizontal>
@@ -266,3 +266,19 @@ export default withRouter(connect(msp, mdp)(ProfileDisplaySGFriendsHost))
 
 
 
+// { scheduledGamesAsHost.length > 1
+//     ?   <Card.Group itemsPerRow={2} >
+//         {filteredGames().map(scheduledGame => {
+//             return (
+//                 <ScheduledGCFriendPlayer key={scheduledGame.id} {...scheduledGame} />
+//             )
+//         })}
+//         </Card.Group>
+//       :  <Card.Group centered>
+//         {filteredGames().map(scheduledGame => {
+//             return (
+//                 <ScheduledGCFriendPlayer key={scheduledGame.id} {...scheduledGame} />
+//             )
+//         })}
+//         </Card.Group>
+//     }

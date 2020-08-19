@@ -530,8 +530,19 @@ iv className='photos-search-bar'>
   min-width: 25px; */
 }
 
+
 .ui.card.game-user-card {
-  width: 30%;
+  width: 10%;
+}
+
+.card-side-column {
+
+    float: left;
+    height: 100%; 
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+
 }
 /* get rid of divs,ui.card.new-name {} */
 
