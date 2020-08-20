@@ -56,7 +56,7 @@ const AddGamePhotoForm = props => {
           <Form.Group>    
           <Form.Field label='Caption' control="textarea" rows='3' name="caption" value={caption} onChange={(e) => setCaption(e.target.value)}/><br />
           </Form.Group>
-          <Button type="Submit" basic color='blue' size='tiny'>Submit</Button>
+          <Button type="Submit" basic color='grey' size='tiny'>Submit</Button>
         </Form>
       </div>
     );

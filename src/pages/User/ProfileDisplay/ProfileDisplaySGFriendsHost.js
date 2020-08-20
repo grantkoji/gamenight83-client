@@ -109,7 +109,7 @@ const ProfileDisplaySGFriendsHost = props => {
                 <div className='profile-gs-search-bar'>  
                     <Divider horizontal>
                         <Header as='h4'>
-                            Search Friends' Scheduled Games
+                        <span className='search-bar-font'>Search Friends' Scheduled Games </span> 
                         </Header>
                     </Divider>
                     <SearchBarScheduledGames 
@@ -130,7 +130,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Game Photos
+                                            <span className='search-bar-font'>Game Photos </span> 
                                         </Header>
                                     </Divider>  
                                     {thisUserGamePhotos.map(photo => 
@@ -139,7 +139,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 </> 
                                 :  <Divider horizontal>
                                         <Header as='h4'>
-                                            No Photos Listed
+                                            <span className='search-bar-font'>No Photos Listed </span> 
                                         </Header>
                                     </Divider>  
                             }
@@ -149,7 +149,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Created Games
+                                            <span className='search-bar-font'>Created Games </span> 
                                         </Header>
                                     </Divider>  
                                         {thisUserCreatedGames.map(game => 
@@ -160,7 +160,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 </>
                                 : <Divider horizontal>
                                     <Header as='h4'>
-                                        No Games Created
+                                        <span className='search-bar-font'> No Games Created </span> 
                                     </Header>
                                 </Divider>  
                             }
@@ -174,7 +174,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 scheduledGames && scheduledGames.length && scheduledGamesAsHost && scheduledGamesAsHost.length
                                 ?  <>  <Divider horizontal>
                                             <Header as='h4'>
-                                                Friends' Hosted Games
+                                            <span className='search-bar-font'> Friends' Hosted Games</span> 
                                             </Header>
                                         </Divider>
                                         <Card.Group centered>
@@ -188,7 +188,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                     </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
-                                           No Games Hosted By Friends
+                                        <span className='search-bar-font'> No Games Hosted By Friends</span> 
                                         </Header>
                                     </Divider>  
                                 }
@@ -201,7 +201,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 ? <>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Friends
+                                        <span className='search-bar-font'> Friends</span> 
                                         </Header>
                                     </Divider>  
                                     {currentUser.total_friends.map(friend => 
@@ -210,7 +210,7 @@ const ProfileDisplaySGFriendsHost = props => {
                                 </>
                                 :  <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friends Listed
+                                        <span className='search-bar-font'> No Friends Listed</span> 
                                         </Header>
                                     </Divider>  
                             }
@@ -219,7 +219,7 @@ const ProfileDisplaySGFriendsHost = props => {
                             ? <> 
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Game Reviews
+                                    <span className='search-bar-font'> Game Reviews</span> 
                                     </Header>
                                 </Divider>  
                                 {thisUserReviews.map(review => 
@@ -228,7 +228,7 @@ const ProfileDisplaySGFriendsHost = props => {
                             </>
                             : <Divider horizontal>
                                 <Header as='h4'>
-                                    No Reviews Listed
+                                <span className='search-bar-font'>No Reviews Listed </span> 
                                 </Header>
                             </Divider>  
                         }

@@ -67,20 +67,20 @@ const ProfileDisplayGames = props => {
     const postedReviewOrPhoto = () => {
         if (postType === "instructions") {
             return (
-                <div>
-                    <div>To Schedule a Game, Post a Photo, or Write a Review</div>
-                    <div>Search the Games Listed Below</div>
-                    <div>Below their Photos, You will Find Buttons</div>
-                    <div>When Clicked</div>
+                <div className='instructions-for-posting'>
+                    <div>To Schedule a Game, Post a Photo, or Write a </div>
+                    <div>Review, Search the Games Listed Below</div>
+                    <div>Below their Photos, You will Find Buttons.</div>
+                    <div>When Clicked, the Game's</div>
                     <div>Form will Appear in the Place of These Instructions</div>
                 </div>
           ) 
         } else if (postType === "review") {
             return (
-                <div>
+                <div className='post-review-users-change'>
                     <Divider horizontal>
                         <Header as='h4'>
-                            Write a Review for {thisGameTitle}
+                            <span className='search-bar-font'> Write a Review for {thisGameTitle}</span> 
                         </Header>
                     </Divider>
                     <AddReviewForm thisGame={thisGameId}/>
@@ -92,7 +92,7 @@ const ProfileDisplayGames = props => {
                 <div>
                       <Divider horizontal>
                         <Header as='h4'>
-                            Post a Photo for {thisGameTitle}
+                              <span className='search-bar-font'> Post a Photo for {thisGameTitle}</span> 
                         </Header>
                     </Divider>
                     <AddGamePhotoForm thisGame={thisGameId}/>
@@ -104,7 +104,7 @@ const ProfileDisplayGames = props => {
                 <div>
                     <Divider horizontal>
                         <Header as='h4'>
-                            Schedule a Game for {thisGameTitle}
+                             <span className='search-bar-font'> Schedule a Game for {thisGameTitle}</span> 
                         </Header>
                     </Divider>
                     <ScheduleGameForm thisGameId={thisGameId} thisGameTitle={thisGameTitle} />   
@@ -144,7 +144,7 @@ const ProfileDisplayGames = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Game Photos
+                                            <span className='search-bar-font'>Game Photos</span> 
                                         </Header>
                                     </Divider>
                                     {thisUserGamePhotos.map(photo => 
@@ -155,7 +155,7 @@ const ProfileDisplayGames = props => {
                                 </>
                                 : <Divider horizontal>
                                     <Header as='h4'>
-                                        No Photos Listed
+                                    <span className='search-bar-font'> No Photos Listed</span> 
                                     </Header>
                                 </Divider>
                             }
@@ -164,7 +164,7 @@ const ProfileDisplayGames = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                        Created Games
+                                        <span className='search-bar-font'> Created Games</span> 
                                         </Header>
                                     </Divider>
                                         {thisUserCreatedGames.map(game =>     
@@ -173,7 +173,7 @@ const ProfileDisplayGames = props => {
                                 </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Games Created 
+                                        <span className='search-bar-font'> No Games Created</span> 
                                         </Header>
                                     </Divider>
                             }
@@ -186,7 +186,7 @@ const ProfileDisplayGames = props => {
                                 ? 
                                 <>  <Divider horizontal>
                                         <Header as='h4'>
-                                            Listed Games
+                                        <span className='search-bar-font'>Listed Games </span> 
                                         </Header>
                                     </Divider>
                                     { filteredGames() && filteredGames().length > 1
@@ -221,7 +221,7 @@ const ProfileDisplayGames = props => {
                                 </>
                                 :<Divider horizontal>
                                         <Header as='h4'>
-                                            No Games Listed 
+                                        <span className='search-bar-font'> No Games Listed</span> 
                                         </Header>
                                     </Divider>
                                  
@@ -235,7 +235,7 @@ const ProfileDisplayGames = props => {
                                 ?<> 
                                 <Divider horizontal>
                                         <Header as='h4'>
-                                            Friends 
+                                        <span className='search-bar-font'>Friends </span> 
                                         </Header>
                                     </Divider>
                                     {currentUser.total_friends.map(friend => 
@@ -244,7 +244,7 @@ const ProfileDisplayGames = props => {
                                   </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friends Listed 
+                                        <span className='search-bar-font'> No Friends Listed</span> 
                                         </Header>
                                     </Divider>
                             }
@@ -254,7 +254,7 @@ const ProfileDisplayGames = props => {
                                 ?<> 
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Game Reviews
+                                        <span className='search-bar-font'> Game Reviews</span> 
                                         </Header>
                                     </Divider>
                                     {thisUserReviews.map(review => 
@@ -265,7 +265,7 @@ const ProfileDisplayGames = props => {
                                 </> 
                                 :<Divider horizontal>
                                         <Header as='h4'>
-                                            No Reviews Listed 
+                                        <span className='search-bar-font'>No Reviews Listed </span> 
                                         </Header>
                                     </Divider>
                             }

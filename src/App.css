@@ -46,13 +46,18 @@
   display: none;
 }
 
+.filter-user-page-container {
+  display: flex;
+  justify-content: center;
+}
+
 .user-profile-container {
   display: flex;
   justify-content: center;
   vertical-align: middle;
   /* max-height: 300px;
   min-height: 300px; */
-  margin-top: 5%
+  margin-top: 1%
 }
 
 .user-show-photo {
@@ -62,7 +67,20 @@
   object-fit: cover;
   image-rendering: crisp-edges;
 }
+.name-on-user-profile {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
+}
 
+
+
+.fav-game-user-card{
+  font-family: 'Enriqueta', serif; 
+}
+
+.fav-games-font {
+  font-family: 'Kalam', cursive;
+}
 .user-profile-username {
   max-width: 400px;
   font-size: 35px;
@@ -70,7 +88,14 @@
 }
 
 .user-profile-details {
-  max-width: 400px;
+  font-family: 'Special Elite', cursive;
+  max-width: 300px;
+  font-size: 15px;
+
+}
+.user-profile-details-fav-games {
+  font-family: 'Enriqueta', serif;
+  max-width: 300px;
   font-size: 15px;
 
 }
@@ -117,9 +142,29 @@
   font-family: 'Bangers', cursive;
 }
 
+.date.font-family {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+}
+
+.font-family-user-gp {
+  font-family: 'Chewy', cursive;
+  font-size: 23px;
+}
+
+.date.user-font {
+  font-family: 'Enriqueta', serif;
+
+}
+
+.game-title-card-link {
+  font-family: 'Bangers', cursive;
+}
+
 .description-paragraph {
   max-width: 400px;
   font-size: 15px;
+  font-family: 'Enriqueta', serif; 
 }
 
 .footer {
@@ -277,7 +322,8 @@ iv className='photos-search-bar'>
 }
 .try-it {
   font-family: 'Russo One', sans-serif;
-  margin-bottom: -1%
+  margin-bottom: -1%;
+  color: rgba(63, 109, 168);
 }
 
 .relocate-search-bars {
@@ -358,6 +404,15 @@ iv className='photos-search-bar'>
   margin: auto;
 }
 
+.user-review-divider {
+  margin: 3px;
+}
+
+.profile-display-fr {
+  margin-top: 100px;
+}
+
+
 .reviews-search-bar {
     display: flex;
     flex-direction: column;
@@ -366,7 +421,7 @@ iv className='photos-search-bar'>
     width: 100%;
     border: 5px rgba(21, 25, 61);
     padding: 20px;
-    margin: 20px;
+    margin-top: 16px;
 }
 
 .photos-search-bar {
@@ -403,6 +458,10 @@ iv className='photos-search-bar'>
   margin: 20px;
 }
 
+.instructions-header {
+  font-family: 'Fredericka the Great', cursive;
+}
+
 .instructions-paragraph {
   /* width: 75%;
   margin: auto; */
@@ -412,6 +471,7 @@ iv className='photos-search-bar'>
   margin: auto;
 
   overflow: auto;  
+  font-family: 'Inconsolata', monospace;
 
 }
 
@@ -474,37 +534,61 @@ iv className='photos-search-bar'>
   /* align-self: flex-start; */  
 }
 
+.filters-index-reviews {
+  display: flex;
+  justify-content: center;
+}
+
+.filters-index-individual-reviews {
+  margin: 10px;
+}
+
+.games-index-search-bar{
+  margin-top: 23px;
+  margin-bottom: 10px;
+}
+
+.post-review-users-change {
+  margin-bottom: 10px;
+}
+
 .profile-photos-search-bar {
   margin-top: 250px;
   /* margin-top: 29%; */
   /* align-self: flex-end; */
 }
 
-
+.profile-games-search-bar {
+  margin-top: 100px;
+}
 
 .profile-gs-search-bar {
-  margin-top: 250px;
+  margin-top: 100px;
   /* margin-top:%; */
 
 }
 
 .profile-games-post-search {
-  margin-top: 18%;
+  margin-top: 0px;
 }
 
 .profile-review-search-bar {
   /* margin-top: 21%; */
-  margin-top: 230px;
+  margin-top: 100px;
 }
 
+.instructions-for-posting{
+  margin-top: 50px;
+  font-family: 'Enriqueta', serif;
+}
 
-.profile-games-search-bar {
+.games-search-bar {
   /* margin-top: 22% */
   margin-top: 250px;
 }
 
 .profile-users-search-bar{
-  margin-top: 320px;
+  margin-top: 100px;
 }
 
 
@@ -522,7 +606,7 @@ iv className='photos-search-bar'>
 }
 
 .current-user-photo-search {
-  margin-top: 250px;
+  margin-top: 100px;
 }
 
 
@@ -589,6 +673,101 @@ iv className='photos-search-bar'>
   width: 500px;
 }
 
+/* fonts */
+.description.with-font {
+  font-family: 'Indie Flower', cursive;
+  font-size:18px;
+}
+
+.review-font {
+  font-family: 'Indie Flower', cursive;
+  font-size:20px;
+  
+}
+
+.user-font-review {
+  font-family: 'Enriqueta', serif;
+}
+
+.reviews-on-game-page {
+  margin: 4px;
+  border-style: double;
+}
+
+/* Photo */
+.caption-text {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 20px;
+}
+
+.username-on-game-page {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+}
+
+/* Game card */
+.game-title-on-card{
+  font-family: 'Marcellus SC', serif;
+  font-size: 20px;
+}
+
+/* Game Scheduled Card  */
+.desc-on-gs-card {
+  font-family: 'Enriqueta', serif;
+}
+
+.directions-on-gs-card {
+  font-family: 'Lateef', cursive;
+  font-size:17px;
+}
+
+.search-bar-font {
+  font-family: 'Marcellus SC', serif;
+  font-size: 16px;
+}
+
+.username-usercard-font {
+  /* font-family: 'Rye', cursive;
+   */
+
+   font-family: 'Aladin', cursive;
+   font-size: 24px;
+  }
+
+  .sort-photos-container {
+    /* display: flex;
+    justify-content: middle;
+    vertical-align: center; */
+  }
+  .sort-photos-label {
+    font-family: 'Marcellus SC', serif;
+    font-size: 18px;
+  }
+
+  .sort-photos-label-div {
+    margin-top: 5px;
+  }
+
+  .sort-photos-dropdown {
+    /* margin: 8px; */
+  }
+
+  .sort-reviews-label {
+    font-family: 'Marcellus SC', serif;
+    font-size: 16px;
+  }
+
+  .review-card-game-title {
+    font-family: 'Coustard', serif;
+  }
+
+  .sg-card-game-title {
+    font-family: 'Coustard', serif;
+  }
+
+  .user-page-navbar-font {
+    font-family: 'Coustard', serif;
+  }
 
 /* 
 

@@ -44,7 +44,7 @@ const ProfileDisplayFriends = props => {
             <div className='profile-users-search-bar'>   
                 <Divider horizontal>
                     <Header as='h4'>
-                        Search Friends
+                    <span className='search-bar-font'>Search Friends </span> 
                     </Header>
                 </Divider>
                 <div className='users-search-bar'>
@@ -66,7 +66,7 @@ const ProfileDisplayFriends = props => {
                             ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Game Photos Listed
+                                    <span className='search-bar-font'>Game Photos Listed </span> 
                                     </Header>
                                 </Divider>
                                 {thisUserGamePhotos.map(photo => 
@@ -78,7 +78,7 @@ const ProfileDisplayFriends = props => {
                             </>
                             :  <Divider horizontal>
                                     <Header as='h4'>
-                                        No Photos Listed
+                                    <span className='search-bar-font'> No Photos Listed</span> 
                                     </Header>
                                 </Divider>
                         }
@@ -87,7 +87,7 @@ const ProfileDisplayFriends = props => {
                             ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Created Games
+                                    <span className='search-bar-font'> Created Games</span> 
                                     </Header>
                                 </Divider>
                                     {thisUserCreatedGames.map(game => 
@@ -97,7 +97,7 @@ const ProfileDisplayFriends = props => {
                             </>
                             :  <Divider horizontal>
                                     <Header as='h4'>
-                                       No Games Created
+                                    <span className='search-bar-font'> No Games Created</span> 
                                     </Header>
                                 </Divider>
                         }
@@ -110,7 +110,7 @@ const ProfileDisplayFriends = props => {
                             ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        You have {currentUser.total_friends.length} Friends
+                                          <span className='search-bar-font'> You have {currentUser.total_friends.length} Friends</span> 
                                     </Header>
                                 </Divider>
                                 {filteredUsers().length > 1
@@ -128,7 +128,7 @@ const ProfileDisplayFriends = props => {
                             </>
                             :   <Divider horizontal>
                                     <Header as='h4'>
-                                        No Friends Listed
+                                    <span className='search-bar-font'> No Friends Listed</span> 
                                     </Header>
                                 </Divider>
                         }
@@ -141,7 +141,7 @@ const ProfileDisplayFriends = props => {
                         ?<>
                             <Divider horizontal>
                                 <Header as='h4'>
-                                    Game Reviews
+                                <span className='search-bar-font'>Game Reviews</span> 
                                 </Header>
                             </Divider>
                             {thisUserReviews.map(review => 
@@ -153,7 +153,7 @@ const ProfileDisplayFriends = props => {
                         </>
                         :  <Divider horizontal>
                                 <Header as='h4'>
-                                    No Reviews Listed
+                                <span className='search-bar-font'>No Reviews Listed</span>
                                 </Header>
                             </Divider>
                     }

@@ -47,17 +47,21 @@ const ReviewsIndex = props => {
                     <div>
                         <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>
-                    <div>
-                        <FilterReviewsByMinStars 
-                            setTypeMinStars={setTypeMinStars}
-                            minNumStars={minNumStars}
-                            setMinNumStars={setMinNumStars} 
-                        /><br/>
-                        <FilterReviewsByMaxStars 
-                            setTypeMaxStars={setTypeMaxStars}
-                            maxNumStars={maxNumStars}     
-                            setMaxNumStars={setMaxNumStars}
-                        />
+                    <div className='filters-index-reviews'>
+                        <div className='filters-index-individual-reviews'>
+                            <FilterReviewsByMinStars 
+                                setTypeMinStars={setTypeMinStars}
+                                minNumStars={minNumStars}
+                                setMinNumStars={setMinNumStars} 
+                            />
+                        </div>
+                        <div className='filters-index-individual-reviews'>
+                            <FilterReviewsByMaxStars 
+                                setTypeMaxStars={setTypeMaxStars}
+                                maxNumStars={maxNumStars}     
+                                setMaxNumStars={setMaxNumStars}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div>

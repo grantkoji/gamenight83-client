@@ -13,16 +13,19 @@ const options = [
   ]
 
     return (
-    <div>
-        <nbsp /><nbsp />
-        <label>Sort Photos</label><nbsp /><nbsp />
-        <Menu compact>
-            <Dropdown 
-                placeholder='Sort by'
-                options={options} 
-                simple item 
-                onChange={(e, data) => props.setTypeSortPhotos(data.value)}/>
-        </Menu>
+    <div className='sort-photos-container'>
+      <div className='sort-photos-label-div'>
+        <label className='sort-photos-label'>Sort Photos</label>
+        </div>
+        <div className='sort-photos-dropdown'>
+          <Menu compact>
+              <Dropdown 
+                  placeholder='Sort by'
+                  options={options} 
+                  simple item 
+                  onChange={(e, data) => props.setTypeSortPhotos(data.value)}/>
+          </Menu>
+        </div>
     </div>
     )
 }

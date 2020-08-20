@@ -128,13 +128,13 @@ const ScheduledGCIndex = props => {
             <div className="content">
               <img className="right floated mini ui image" src={game.image_url}/>
                 <div className="header" onClick={redirectToGame} onMouseOver={changePointer}>
-                   {game.title}
+                  <span className='sg-card-game-title'>{game.title}</span>
                 </div>
                 <div className="meta">
                     {moment.unix(unix).format('llll')}
                 </div>     
                 <div className="description">
-                    {public_description}
+                    <span className='desc-on-gs-card'>{public_description}</span>
                 </div>
             </div>
             <div className="extra content">

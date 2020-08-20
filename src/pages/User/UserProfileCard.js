@@ -63,6 +63,9 @@ const UserProfileCard = props => {
         .then(data => addFriendRequest(data.id, id, currentUser.id))
     }
 
+    const changePointer = (e) => {  
+        e.target.style.cursor = 'pointer'
+      }
  
    
     const renderBottom = () => {
@@ -87,7 +90,7 @@ const UserProfileCard = props => {
         } else if (renderPage === 'acceptFriendship') {
             return (
                 <div class="extra content" onClick={acceptFriendship}>
-                    <a>
+                    <a onMouseOver={changePointer}>
                         <i class="user icon"></i>
                             Accept Friendship
                     </a>
@@ -96,7 +99,7 @@ const UserProfileCard = props => {
         } else if (renderPage === 'requestFriendship') { 
             return (
                 <div class="extra content" onClick={requestFriendship}>
-                    <a>
+                    <a onMouseOver={changePointer}>
                         <i class="user icon"></i>
                             Request Friendship
                     </a>
@@ -130,10 +133,10 @@ const UserProfileCard = props => {
             </div>
            <div className='user-profile-info'>
                <div className='user-profile-username'>{username}</div>
-               <div className='user-profile-details'>{name}</div>
-               <div className='user-profile-details'>Favorite Games: {fav_games}</div>
+               <div className='name-on-user-profile'>{name}</div>
+               <div className='user-profile-details-fav-games'>Favorite Games: <span className='fav-games-font'>{fav_games}</span></div>
                <div className='user-profile-details'>Age: {age}</div>
-               <div className='user-profile-details'>
+               <div>
                 <>
                         { currentUser && id !== currentUser.id 
                         ? renderBottom() : null}

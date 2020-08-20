@@ -13,6 +13,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Divider, Header, Card } from 'semantic-ui-react'
+import SearchBarUsers from '../../../Components/SearchBars/SearchBarUsers'
 
 const ProfileDisplayFriendRequests = props => {
     const {
@@ -27,10 +28,7 @@ const ProfileDisplayFriendRequests = props => {
     
     let [search, setSearch] = useState('')
     let [searchType, setSearchType] = useState('gameTitle')
-    let [typeNumPlayers, setTypeNumPlayers] = useState('noNumPlayers')
-    let [numPlayers, setNumPlayers] = useState(0)
-    let [typeMinAge, setTypeMinAge] = useState('noMinAge')
-    let [minAge, setMinAge] = useState(0)
+ 
     //Below three hooks will be used to set the type of 
     //post - review or photo - as well as the title and id
     //of the game that the user will write a post or review on
@@ -47,6 +45,15 @@ const ProfileDisplayFriendRequests = props => {
     }, [users])
 
 
+    // let filteredUsers = () => {
+    //     if (currentUser && currentUser.total_friends && currentUser.total_friends.length) {
+    //         if (searchType === 'username') {
+    //             return currentUser.total_friends.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
+    //         } else if (searchType === 'favGames') {
+    //             return currentUser.total_friends.filter(user => user.fav_games.toLowerCase().includes(search.toLowerCase()))
+    //         }
+    //     } 
+    // }
     return (
         <div>       
             <div className='user-profile-container'>
@@ -56,9 +63,17 @@ const ProfileDisplayFriendRequests = props => {
                 <div className='profile-display-fr'>  
                     <Divider horizontal>
                         <Header as='h4'>
-                            Friend Requests
+                        <span className='search-bar-font'>Search Friend Requests</span>
                         </Header>
                     </Divider>
+                    <div className='users-search-bar'>
+                    <SearchBarUsers 
+                        searchType={searchType} 
+                        setSearchType={setSearchType}
+                        search={search}
+                        setSearch={setSearch}
+                    />
+                </div>
                 </div>
             </div>
             <Container fluid>
@@ -70,7 +85,7 @@ const ProfileDisplayFriendRequests = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Game Photos Listed
+                                        <span className='search-bar-font'>Game Photos Listed</span>
                                         </Header>
                                     </Divider>
                                     {thisUserGamePhotos.map(photo =>        
@@ -79,7 +94,7 @@ const ProfileDisplayFriendRequests = props => {
                                 </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Photos Listed
+                                        <span className='search-bar-font'>No Photos Listed</span>
                                         </Header>
                                     </Divider>
                             }
@@ -90,7 +105,7 @@ const ProfileDisplayFriendRequests = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                           Created Games
+                                        <span className='search-bar-font'>Created Games</span>
                                         </Header>
                                     </Divider>
                                         {thisUserCreatedGames.map(game => 
@@ -99,7 +114,7 @@ const ProfileDisplayFriendRequests = props => {
                                 </>
                                 :<Divider horizontal>
                                         <Header as='h4'>
-                                            No Games Created
+                                        <span className='search-bar-font'>No Games Created</span>
                                         </Header>
                                     </Divider>
                             }
@@ -112,7 +127,7 @@ const ProfileDisplayFriendRequests = props => {
                                     ? <>
                                         <Divider horizontal>
                                             <Header as='h4'>
-                                                Inbound Friend Requests
+                                            <span className='search-bar-font'>Inbound Friend Requests</span>
                                             </Header>
                                         </Divider>
                                       <Card.Group centered>
@@ -126,7 +141,7 @@ const ProfileDisplayFriendRequests = props => {
                                     </>
                                     : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Inbound Friend Requests
+                                        <span className='search-bar-font'>No Inbound Friend Requests</span>
                                         </Header>
                                     </Divider>
                                 }
@@ -136,7 +151,7 @@ const ProfileDisplayFriendRequests = props => {
                                     ? <>
                                         <Divider horizontal>
                                             <Header as='h4'>
-                                                Pending Friend Requests
+                                            <span className='search-bar-font'>Pending Friend Requests</span>
                                             </Header>
                                         </Divider>
                                         <Card.Group centered> 
@@ -151,7 +166,7 @@ const ProfileDisplayFriendRequests = props => {
                                     :<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friend Requests Pending
+                                        <span className='search-bar-font'>No Friend Requests</span>
                                         </Header>
                                     </Divider>
                                       </>
@@ -166,7 +181,7 @@ const ProfileDisplayFriendRequests = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Friends
+                                        <span className='search-bar-font'>Friends</span>
                                         </Header>
                                     </Divider>           
                                     {currentUser.total_friends.map(friend => 
@@ -175,7 +190,7 @@ const ProfileDisplayFriendRequests = props => {
                                 </>
                                 : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friends Listed
+                                        <span className='search-bar-font'>No Friends Listed</span>
                                         </Header>
                                     </Divider>
                             }
@@ -184,7 +199,7 @@ const ProfileDisplayFriendRequests = props => {
                             ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Listed Reviews
+                                    <span className='search-bar-font'>Listed Reviews</span>
                                     </Header>
                                 </Divider>  
                                 {thisUserReviews.map(review => 
@@ -194,7 +209,7 @@ const ProfileDisplayFriendRequests = props => {
                             </>
                             : <Divider horizontal>
                                 <Header as='h4'>
-                                    No Reviews Listed
+                                <span className='search-bar-font'>No Reviews Listed</span>
                                 </Header>
                             </Divider>
                         }

@@ -238,13 +238,13 @@ const ScheduleGamePageForm = props => {
                 <textarea className='overflow-auto' type="text" autoComplete="off" name="privateDirections" value={privateDirections} onChange={(e) => setPrivateDirections(e.target.value)}/><br/>
               </div>
             </div>
-            <Button variant="outline-info" type="submit">Submit</Button>
+            <Button basic color="grey" type="submit">Submit</Button>
           </Form>
       </div>
 
     );
   
-
+    // <Button variant="outline-info" type="submit">Submit</Button>
 }
 
 const mapStateToProps = state => {

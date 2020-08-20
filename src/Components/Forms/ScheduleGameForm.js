@@ -193,14 +193,14 @@ const ScheduleGameForm = props => {
                 <input className='input-schedule-game' type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)}/>
               </div>
               <div className="four wide field">
-                <label htmlFor="privacy">Game Availability</label>
+                <label htmlFor="privacy">Availability</label>
                 <select class="ui dropdown input-schedule-game" name='privacy' value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
                   <option value="Public">Open to Public</option>
                   <option value="Friends">Friends only</option>
                 </select>
               </div>
               <div className="three wide field">
-                <label htmlFor="numVacancies">Vacant Spots</label>
+                <label htmlFor="numVacancies">Vacancies</label>
                 <select class="ui dropdown input-schedule-game" name='numVacancies' value={numVacancies} onChange={(e) => setNumVacancies(e.target.value)}>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -232,13 +232,13 @@ const ScheduleGameForm = props => {
                 <textarea className='overflow-auto' type="text" autoComplete="off" name="privateDirections" value={privateDirections} onChange={(e) => setPrivateDirections(e.target.value)}/><br/>
               </div>
             </div>
-            <Button variant="outline-info" type="submit">Submit</Button>
+            <Button basic color='grey' type="submit">Submit</Button>
           </Form>
       </div>
 
     );
   
-
+    // <Button variant="outline-info" type="submit">Submit</Button>
 }
 
 const mapStateToProps = state => {

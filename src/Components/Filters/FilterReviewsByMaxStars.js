@@ -21,7 +21,9 @@ const FilterReviewsByMaxStars = props => {
     
     return (
         <div>
-            <label>Maximum Review Rating</label><nbsp /><nbsp />
+            <div>
+              <label className='sort-reviews-label'>Maximum Review Rating</label>
+            </div>
               <Menu compact>
                 <Dropdown 
                     placeholder='Number of Stars'

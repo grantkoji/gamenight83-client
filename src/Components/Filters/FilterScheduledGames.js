@@ -15,8 +15,10 @@ const FilterScheduledGames = props => {
       ]
     
     return (
-        <div>
-            <label>Set Game Schedule Visibility:</label><nbsp /><nbsp />
+        <div className='filter-sg-container'>
+            <div>
+            <label className='search-bar-font'>Set Game Schedule Visibility</label>
+            </div>
               <Menu compact>
                 <Dropdown 
                     placeholder='Default: Pending Games Only'

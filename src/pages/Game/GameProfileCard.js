@@ -52,12 +52,12 @@ const GameProfileCard = props => {
                 <div className='description-paragraph'>{description}</div>
                 <div className='description-paragraph'>Category: {game_category}</div>
                 <div className='description-paragraph'>Minimum Players: {min_num_players} - Maximum Players: {max_num_players} - Age: {min_age}+</div>
-                <div className='description-paragraph'>Created by: <span onClick={redirectToUser} onMouseOver={changePointer}>{creator_username}</span></div>
+                <div className='description-paragraph'>Created by: <span className='username-on-game-page' onClick={redirectToUser} onMouseOver={changePointer}>{creator_username}</span></div>
                 <div className='description-paragraph'><a href={link_to_game_website}>Link to {title} website</a></div>
             </div>
         </div>
             <div>
-                <h4>Instructions and Rules:</h4>
+                <h4 className='instructions-header'>Instructions and Rules:</h4>
                 <div className='instructions-paragraph'>{instructions_and_rules}</div>
           </div>
       </>

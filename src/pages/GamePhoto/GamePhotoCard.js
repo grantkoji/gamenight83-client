@@ -60,14 +60,14 @@ const GamePhotoCard = props => {
                  <img src={props["image_url"]} className="image game-photo-image" alt={game_title} />
                 </div>
                 <div className="content">
-                    <a className="header" onClick={redirectToUser}>{user_name}</a>
+                    <a className="header" onClick={redirectToUser}><span className='font-family-user-gp'>{user_name}</span></a>
                     <div className="meta">
-                        <span className="date" onClick={redirectToGame} onMouseOver={changePointer}>{game_title}</span>
+                        <span className="date font-family" onClick={redirectToGame} onMouseOver={changePointer}>{game_title}</span>
                     </div>
                 </div>
                  
                  <div className="description">
-                    <div>{caption}</div>
+                    <div className='caption-text'>{caption}</div>
                  </div>
                 <div className="extra content">
                  <button onClick={addLike}>❤️ {likes}</button>

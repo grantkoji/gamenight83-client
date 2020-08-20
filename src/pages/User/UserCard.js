@@ -70,10 +70,10 @@ const UserCard = props => {
                 }
             </div>
             <div className="content">
-                <a className="header" onClick={redirectToUserPage}>{username}</a>
+                <a className="header" onClick={redirectToUserPage}><span className='username-usercard-font'>{username}</span></a>
             </div>  
             <div className="description">
-                <div>Favorite Games: {fav_games}</div>
+                <div className='fav-game-user-card'>Favorite Games: {fav_games}</div>
             </div>
             <>{renderBottomOfCard()}</>
         </div>   

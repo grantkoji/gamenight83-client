@@ -43,7 +43,7 @@ const HomeGames = props => {
         return (
             <>
                 <h1 className='try-it'>Find a Game</h1>
-                <div className="games-search-bar">
+                <div className="games-index-search-bar">
                     <div>
                         <SearchBarGames search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
                     </div>

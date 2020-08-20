@@ -51,7 +51,7 @@ const GamePage = props => {
 
     let filteredGames = () => {
       let gamesFiltered = [...scheduledGamesFiltered]
-      gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0 && gs.game_id === currentGame)
+      gamesFiltered = gamesFiltered.filter(gs => gs.num_vacancies > 0 && gs.game_id === currentGame && gs.privacy !=="Friends")
       if (activeGamesType === 'scheduledAndPending') {
           gamesFiltered = gamesFiltered.filter(sg => sg.unix >= parseInt(currentUnix))
       } else if (activeGamesType === 'scheduledAndAnHourAgo') {
@@ -82,7 +82,7 @@ const GamePage = props => {
                           && <> 
                               <Divider horizontal>
                                       <Header as='h3'>
-                                          Schedule a Game for {thisPageGame.title}
+                                          <span className='search-bar-font'> Schedule a Game for {thisPageGame.title}</span> 
                                       </Header>
                                   </Divider>  
                             <div><ScheduleGamePageForm thisGameId={currentGame} thisGameTitle={thisPageGame.title} /></div>
@@ -93,7 +93,7 @@ const GamePage = props => {
                         && <> 
                             <Divider horizontal>
                                   <Header as='h3'>
-                                      Post a Review for {thisPageGame.title}
+                                     <span className='search-bar-font'>Post a Review for {thisPageGame.title}</span>
                                   </Header>
                               </Divider>  
                           
@@ -105,7 +105,7 @@ const GamePage = props => {
                         && <> 
                           <Divider horizontal>
                                 <Header as='h3'>
-                                  Post a Photo for {thisPageGame.title} 
+                                   <span className='search-bar-font'>Post a Photo for {thisPageGame.title}</span>
                                   </Header>
                               </Divider>  
                           <div><AddGamePhotoForm thisGame={currentGame}/></div>
@@ -123,7 +123,7 @@ const GamePage = props => {
                             <>
                             <Divider horizontal>
                               <Header as='h3'>
-                                Scheduled Games for {thisPageGame.title}
+                              <span className='search-bar-font'>Scheduled Games for {thisPageGame.title}</span>
                                   </Header>
                               </Divider>  
                               {filteredGames().map(scheduledGame => {
@@ -137,7 +137,7 @@ const GamePage = props => {
                         : 
                             <Divider horizontal>
                               <Header as='h3'>
-                                  Loading...
+                              <span className='search-bar-font'>Loading...</span>
                                   </Header>
                               </Divider>  
                         } 
@@ -149,7 +149,7 @@ const GamePage = props => {
                         thisPageGamePhotos && thisPageGamePhotos.length
                           ?<div><Divider horizontal>
                                   <Header as='h3'>
-                                    Game Photos
+                                  <span className='search-bar-font'>Game Photos</span>
                                     </Header>
                                 </Divider> 
                              
@@ -161,14 +161,16 @@ const GamePage = props => {
                                   </Card.Group>
                                 : <Card.Group centered>
                                   {thisPageGamePhotos.map(photo => 
+                                    
                                       <GamePhotoCard key={photo.id} {...photo} />
+                                    
                                   )}
                                   </Card.Group>
                             }
                           </div>
                           :   <Divider horizontal>
                               <Header as='h3'>
-                                 No Game Photos Listed
+                              <span className='search-bar-font'>No Game Photos Listed</span>
                                   </Header>
                               </Divider>  
                       }
@@ -179,7 +181,7 @@ const GamePage = props => {
                         ? <div>
                              <Divider horizontal>
                                 <Header as='h3'>
-                                  Review Avg: {thisGameReviewAverage()} - Count: {thisPageReviews.length}
+                                    <span className='search-bar-font'>Review Avg: {thisGameReviewAverage()} - Count: {thisPageReviews.length}</span>
                                 </Header>
                             </Divider>                           
                             {thisPageReviews.map(review => 
@@ -190,7 +192,7 @@ const GamePage = props => {
                         </div>
                         :   <Divider horizontal>
                               <Header as='h3'>
-                                  No Game Reviews Listed
+                              <span className='search-bar-font'>No Game Reviews Listed</span>
                                   </Header>
                               </Divider>  
                       }

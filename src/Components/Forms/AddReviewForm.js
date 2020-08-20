@@ -61,7 +61,7 @@ const AddReviewForm = props => {
           <Form.Group>
             <Form.Field label='Review Content' control='textarea' rows='3' name="content" value={content} onChange={(e) => setContent(e.target.value)}/><br/>
           </Form.Group>
-          <Button type="Submit" basic color='blue' size='tiny'>Submit</Button>
+          <Button type="Submit" basic color='grey' size='tiny'>Submit</Button>
         </Form>
       </div>
     );

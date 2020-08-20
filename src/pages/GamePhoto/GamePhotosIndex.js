@@ -52,14 +52,20 @@ const GamePhotosIndex = props => {
                 <h1 className='try-it'>Game Photos</h1>
 
                     <div className='photos-search-bar'>
+                        <div>
                         <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
+                        </div>
+                        <div>
                         <FilterPhotosByLikes
                             typeLikesFilter={typeLikesFilter}
                             setTypeLikesFilter={setTypeLikesFilter}
                             numLikes={numLikes}
                             setNumLikes={setNumLikes}
                         />
+                        </div>
+                        <div>
                         <SortPhotos typeSortPhotos={typeSortPhotos} setTypeSortPhotos={setTypeSortPhotos}/>
+                        </div>
                     </div>
 
                 <div>

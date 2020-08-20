@@ -17,7 +17,9 @@ const FilterReviewsByMinStars = props => {
     
     return (
         <div>
-            <label>Minimum Review Rating</label><nbsp /><nbsp />
+            <div>
+              <label className='sort-reviews-label'>Minimum Review Rating</label>
+            </div>
               <Menu compact>
                 <Dropdown 
                     placeholder='Number of Stars'

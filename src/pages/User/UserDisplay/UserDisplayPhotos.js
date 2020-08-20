@@ -68,7 +68,7 @@ const UserDisplayPhotos = props => {
                 <>
                      <Divider horizontal>
                         <Header as='h4'>
-                            Mutual Friends
+                        <span className='search-bar-font'>Mutual Friends</span>
                         </Header>
                     </Divider>
                             {mutualFriends.map(friend => 
@@ -80,7 +80,7 @@ const UserDisplayPhotos = props => {
             return (
                 <Divider horizontal>
                     <Header as='h4'>
-                        No Mutual Friends Listed
+                    <span className='search-bar-font'>No Mutual Friends</span>
                     </Header>
                 </Divider>
             )
@@ -93,10 +93,10 @@ const UserDisplayPhotos = props => {
                 <div className='user-profile-card'>
                     {thisPageUser && <UserProfileCard user={thisPageUser}/>} 
                 </div>
-                <div className='profile-photos-search-bar'> 
+                <div className='current-user-photo-search'> 
                     <Divider horizontal>
                         <Header as='h4'>
-                            Search Photos
+                        <span className='search-bar-font'>Search Photos</span>
                         </Header>
                     </Divider>
                     <SearchBarPhotos search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
@@ -117,7 +117,7 @@ const UserDisplayPhotos = props => {
                             ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Created Games
+                                    <span className='search-bar-font'>Created Games</span>
                                     </Header>
                                 </Divider>
                                     {thisUserCreatedGames.map(game => 
@@ -126,7 +126,7 @@ const UserDisplayPhotos = props => {
                             </>
                             :   <Divider horizontal>
                                     <Header as='h4'>
-                                        No Games Created
+                                    <span className='search-bar-font'>No Games Created</span>
                                     </Header>
                                 </Divider>
                         }
@@ -134,7 +134,7 @@ const UserDisplayPhotos = props => {
                             thisUserReviews && thisUserReviews.length
                             ?<> <Divider horizontal>
                                     <Header as='h4'>
-                                        Reviews
+                                    <span className='search-bar-font'>Reviews</span>
                                     </Header>
                                 </Divider>
                                 {thisUserReviews.map(review => 
@@ -143,7 +143,7 @@ const UserDisplayPhotos = props => {
                             </>
                             :  <Divider horizontal>
                                 <Header as='h4'>
-                                   No Reviews Listed
+                                <span className='search-bar-font'>No Reviews Listed</span>
                                 </Header>
                             </Divider>
                         }
@@ -155,7 +155,7 @@ const UserDisplayPhotos = props => {
                                 ?<>
                                 <Divider horizontal>
                                     <Header as='h4'>
-                                        Game Photos
+                                    <span className='search-bar-font'>Game Photos</span>
                                     </Header>
                                 </Divider>
                                 {gamePhotosFiltered() && gamePhotosFiltered().length > 1 
@@ -173,7 +173,7 @@ const UserDisplayPhotos = props => {
                                 </>
                                 :<Divider horizontal>
                                      <Header as='h4'>
-                                        No Photos Listed
+                                     <span className='search-bar-font'>No Photos Listed</span>
                                     </Header>
                                 </Divider>                            }
                         </div>
@@ -188,7 +188,7 @@ const UserDisplayPhotos = props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Friends
+                                        <span className='search-bar-font'>Friends</span>
                                         </Header>
                                     </Divider>
                                     {thisPageUser.total_friends.map(friend => 
@@ -197,7 +197,7 @@ const UserDisplayPhotos = props => {
                                 </>
                                 :  <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friends Listed
+                                        <span className='search-bar-font'>No Friends Listed</span>
                                         </Header>
                                     </Divider>
                             }

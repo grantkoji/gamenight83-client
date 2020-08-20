@@ -22,6 +22,7 @@ const UserDisplayReviews= props => {
         thisUserReviews,
         thisUserGamePhotos,
         thisUserCreatedGames,
+        currentUser,
         games, 
         token
     } = props
@@ -56,12 +57,12 @@ const UserDisplayReviews= props => {
     }
 
     let mutualFriendsList = () => {
-        if(mutualFriends) {
+        if(currentUser.id !== thisPageUser.id && mutualFriends) {
             return (
                 <>
                     <Divider horizontal>
                         <Header as='h4'>
-                            Mutual Friends
+                        <span className='search-bar-font'> Mutual Friends</span> 
                         </Header>
                     </Divider>
                     {mutualFriends.map(friend => 
@@ -69,13 +70,17 @@ const UserDisplayReviews= props => {
                     )}
                 </>
             )
-        } else {
+    } else if (currentUser.id !== thisPageUser.id) {
             return (
                 <Divider horizontal>
                     <Header as='h4'>
-                        No Mutual Friends Listed
+                    <span className='search-bar-font'>No Mutual Friends Listed</span> 
                     </Header>
                 </Divider>
+            )
+        } else {
+            return ( 
+                <></>
             )
         }
     }
@@ -92,20 +97,26 @@ const UserDisplayReviews= props => {
                 <div className='profile-review-search-bar'>  
                     <Divider horizontal>
                         <Header as='h4'>
-                            Search Reviews
+                        <span className='search-bar-font'>Search Reviews</span>
                         </Header>
                     </Divider>
                     <SearchBarReviews search={search} searchType={searchType} setSearch={setSearch} setSearchType={setSearchType}/>
-                    <FilterReviewsByMinStars 
-                            setTypeMinStars={setTypeMinStars}
-                            minNumStars={minNumStars}
-                            setMinNumStars={setMinNumStars} 
-                        /><br/>
-                        <FilterReviewsByMaxStars 
-                            setTypeMaxStars={setTypeMaxStars}
-                            maxNumStars={maxNumStars}     
-                            setMaxNumStars={setMaxNumStars}
-                        />
+                    <div className='filter-user-page-container'>
+                        <div className='user-review-divider'>
+                            <FilterReviewsByMinStars 
+                                    setTypeMinStars={setTypeMinStars}
+                                    minNumStars={minNumStars}
+                                    setMinNumStars={setMinNumStars} 
+                            />
+                        </div>
+                        <div className='user-review-divider'>
+                            <FilterReviewsByMaxStars 
+                                setTypeMaxStars={setTypeMaxStars}
+                                maxNumStars={maxNumStars}     
+                                setMaxNumStars={setMaxNumStars}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
             <Container fluid>
@@ -117,7 +128,7 @@ const UserDisplayReviews= props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Game Photos
+                                        <span className='search-bar-font'>Game Photos</span>
                                         </Header>
                                     </Divider>
                                     {thisUserGamePhotos.map(photo => 
@@ -126,7 +137,7 @@ const UserDisplayReviews= props => {
                                 </>
                                 : <Divider horizontal>
                                     <Header as='h4'>
-                                        No Photos Listed
+                                    <span className='search-bar-font'>No Photos Listed</span>
                                     </Header>
                                 </Divider>
                             }
@@ -137,7 +148,7 @@ const UserDisplayReviews= props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Created Games
+                                        <span className='search-bar-font'>Created Games</span>
                                         </Header>
                                     </Divider>
                                         {thisUserCreatedGames.map(game => 
@@ -148,7 +159,7 @@ const UserDisplayReviews= props => {
                                 </>
                                 :<Divider horizontal>
                                     <Header as='h4'>
-                                        No Games Created
+                                    <span className='search-bar-font'>No Games Created</span>
                                     </Header>
                                 </Divider>
                             }
@@ -161,7 +172,7 @@ const UserDisplayReviews= props => {
                                 ?<>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                            Reviews
+                                        <span className='search-bar-font'>Reviews</span>
                                         </Header>
                                     </Divider>
                                     {filteredReviews() && filteredReviews().length > 1
@@ -186,7 +197,7 @@ const UserDisplayReviews= props => {
                                 </>
                                 : <Divider horizontal>
                                     <Header as='h4'>
-                                        No Reviews Listed
+                                    <span className='search-bar-font'>No Reviews Listed</span>
                                     </Header>
                                 </Divider>
                             }
@@ -202,7 +213,7 @@ const UserDisplayReviews= props => {
                                 ? <>
                                     <Divider horizontal>
                                         <Header as='h4'>
-                                        Friends
+                                        <span className='search-bar-font'>Friends</span>
                                         </Header>
                                     </Divider>
                                     {thisPageUser.total_friends.map(friend => 
@@ -211,7 +222,7 @@ const UserDisplayReviews= props => {
                                 </>
                                     : <Divider horizontal>
                                         <Header as='h4'>
-                                            No Friends Listed
+                                        <span className='search-bar-font'>No Friends Listed</span>
                                         </Header>
                                     </Divider>
                             }

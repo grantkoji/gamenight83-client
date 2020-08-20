@@ -148,13 +148,13 @@ const ScheduledGCFriendPlayer = props => {
             <div className="content">
               <img className="right floated mini ui image" src={game.image_url}/>
                 <div className="header" onClick={redirectToGame} onMouseOver={changePointer}>
-                   {game.title}
+                  <span className='sg-card-game-title'>{game.title}</span>
                 </div>
                 <div className="meta">
                     {moment.unix(unix).format('llll')}
                 </div>     
                 <div className="description">
-                    <div>Description: {public_description}</div>
+                    <span className='desc-on-gs-card'>Description: {public_description}</span>
                     { game_players && game_players.length 
                     ? <div>Signed Up - {game_players.map((gp, index) => {
                                         return (

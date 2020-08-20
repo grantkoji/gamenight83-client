@@ -126,7 +126,7 @@ const ScheduledGCIndex = props => {
                     {moment.unix(unix).format('llll')}
                 </div>     
                 <div class="description">
-                    Description: {public_description}
+                    <span className='desc-on-gs-card'>Description: {public_description}</span>
                 </div>
             </div>
             <div class="extra content">

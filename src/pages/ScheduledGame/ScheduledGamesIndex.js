@@ -34,29 +34,6 @@ const ScheduledGamesIndex = props => {
 
 
     
-    // {
-    //     "id": 1,
-    //     "host_id": 60,
-    //     "game_id": 60,
-    //     "unix": 15993933,
-    //     "num_vacancies": 5,
-    //     "status": "Scheduled",
-    //     "public_description": "try it",
-    //     "private_directions": "zoom like ",
-    //     "privacy": "Public",
-    //     "host": {
-    //     "id": 60,
-    //     "name": "Aurea Schneider",
-    //     "username": "Jimmy Valmer",
-       
-    //     },
-    //     "game": {
-    //     "id": 60,
-    //     "title": "Monopoly",
-    //     "game_category": "Zoom online or indoors"
-    //     }
-
-    
 
     let filteredGames = () => {
         let gamesFiltered = [...scheduledGamesFiltered]

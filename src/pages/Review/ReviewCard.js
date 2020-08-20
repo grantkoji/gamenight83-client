@@ -42,14 +42,14 @@ const ReviewCard = props => {
     return (
         <div className="ui card" style={{height: "100%"}}>  
             <div className="content">
-                <a className="header" onClick={redirectToGame}>{game_title}
+                <a className="header" onClick={redirectToGame}><span className='review-card-game-title'>{game_title}</span>
                     <div class="right floated author">
                         <img class="ui avatar image" src={game_photo} alt={game_title}/>
                     </div>
                 </a>
-                <span className="date" onClick={redirectToUser} onMouseOver={changePointer}>by {user_name}</span>
+                <span className="date user-font" onClick={redirectToUser} onMouseOver={changePointer}>by {user_name}</span>
             </div> 
-            <div className="description">
+            <div className="description with-font">
                 <div style={{padding: '10px'}}>{content}</div>
             </div>
             <div className="extra content">

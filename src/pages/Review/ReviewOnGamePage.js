@@ -20,12 +20,10 @@ const ReviewOnGamePage = props => {
     }
      
         return (
-            <div>
-                <div>
-                    <div onClick={redirectToUser} onMouseOver={changePointer}>by: {user_name}</div>
+            <div className='reviews-on-game-page'>
+                    <div className='user-font-review' onClick={redirectToUser} onMouseOver={changePointer}>by: {user_name}</div>
                     <ReactStars count={5} value={num_stars} size={18}/>
-                    <div>{content}</div>
-                </div>
+                    <div className='review-font'>{content}</div>
             </div>
         ) 
 }

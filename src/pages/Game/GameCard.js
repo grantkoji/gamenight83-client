@@ -54,10 +54,10 @@ const GameCard = props => {
                 <img src={props["image_url"]} className='game-image' alt={title}/>
             </div>
             <div className="content">
-                <a className="header" onClick={redirectToGame}>{title}</a>
+                <a className="header"><div className='game-title-on-card' onClick={redirectToGame}>{title}</div></a>
             </div>
             <div className="description">
-                <div>{description}</div> 
+                <div className='fav-game-user-card'>{description}</div> 
             </div>
             <div className="extra content">
                 <div>Number of Players: {min_num_players} - {max_num_players} Ages: {min_age}+</div>
