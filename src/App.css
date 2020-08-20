@@ -46,6 +46,45 @@
   display: none;
 }
 
+.user-profile-container {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  /* max-height: 300px;
+  min-height: 300px; */
+  margin-top: 5%
+}
+
+.user-show-photo {
+  float: left;
+  height: 310px; 
+  width: 325px;
+  object-fit: cover;
+  image-rendering: crisp-edges;
+}
+
+.user-profile-username {
+  max-width: 400px;
+  font-size: 35px;
+  font-family: 'Bangers', cursive;
+}
+
+.user-profile-details {
+  max-width: 400px;
+  font-size: 15px;
+
+}
+
+.user-profile-info {
+  flex-direction: column;
+  justify-content: space-between;
+  vertical-align: middle;
+  align-content: center;
+  margin-top: 6%;
+  margin-left: 15px;
+}
+
+
 .game-profile-container {
   display: flex;
   justify-content: center;

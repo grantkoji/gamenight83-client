@@ -62,6 +62,8 @@ const ProfileDisplayPhotos = props => {
         }  
     }
 
+
+
     return (
     <div>
          <div className='user-profile-container'>

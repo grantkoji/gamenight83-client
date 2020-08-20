@@ -114,32 +114,36 @@ const UserProfileCard = props => {
  
     return (
     <>
-        <div class="ui card">
-            <div className="div-of-photo">
+         
+       <div className='user-profile-container'>
+           <div>    
                 { props.user["profile_url"] === "" 
                 ? <img src='https://www.pngitem.com/pimgs/m/179-1793088_blue-question-mark-question-mark-clipart-blue-question.png'
-                  className='user-image'
-                  alt="Question Mark" 
+                    className='user-show-photo'
+                    alt="Question Mark" 
                   />
-                : <img src={props.user["profile_url"]} className='user-image' alt={username} />
+                : <img src={props.user["profile_url"]} 
+                    className='user-show-photo'
+                    alt={username} 
+                />
                 }
             </div>
-            <div className="content">
-                <a className="header">{username}</a>
-                <div class="meta">
-                    <span class="date">{name}</span>
-                </div>
-            </div>  
-            <div className="description">
-                <div>Favorite Games: {fav_games}</div>
-                <div>Age: {age}</div>
-            </div>
-            <>
-            { currentUser && id !== currentUser.id 
-            ? renderBottom() : null}
-            </>
-        </div>
-    </>   
+           <div className='user-profile-info'>
+               <div className='user-profile-username'>{username}</div>
+               <div className='user-profile-details'>{name}</div>
+               <div className='user-profile-details'>Favorite Games: {fav_games}</div>
+               <div className='user-profile-details'>Age: {age}</div>
+               <div className='user-profile-details'>
+                <>
+                        { currentUser && id !== currentUser.id 
+                        ? renderBottom() : null}
+                    </>
+               </div>
+            
+           </div>
+       </div>         
+     </>
+
     )
 }
 
@@ -168,3 +172,36 @@ const mapStateToProps = state => {
   
   export default connect(mapStateToProps, mapDispatchToProps)(UserProfileCard);
   
+
+
+
+
+//   return (
+//     <>
+//         <div class="ui card">
+//             <div className="div-of-photo">
+//                 { props.user["profile_url"] === "" 
+//                 ? <img src='https://www.pngitem.com/pimgs/m/179-1793088_blue-question-mark-question-mark-clipart-blue-question.png' 
+//                   className='user-image'
+//                   alt="Question Mark" 
+//                   />
+//                 : <img src={props.user["profile_url"]} className='user-image' alt={username} />
+//                 }
+//             </div>
+//             <div className="content">
+//                 <a className="header">{username}</a>
+//                 <div class="meta">
+//                     <span class="date">{name}</span>
+//                 </div>
+//             </div>  
+//             <div className="description">
+//                 <div>Favorite Games: {fav_games}</div>
+//                 <div>Age: {age}</div>
+//             </div>
+//             <>
+//             { currentUser && id !== currentUser.id 
+//             ? renderBottom() : null}
+//             </>
+//         </div>
+//     </>   
+//     )
