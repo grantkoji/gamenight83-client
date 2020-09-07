@@ -137,7 +137,7 @@ const ScheduleGamePageForm = props => {
         setPublicDescription('')
         setPrivateDirections('')
         setPrivacy('Public')
-        alert(`Thank you for Scheduling your Game!`)
+        // alert(`Thank you for Scheduling your Game!`)
         addScheduledGame(resp)
         // setShowUser(currentUser.id)
         // props.history.push(`/users/${currentUser.username.replace(/\s+/g, '')}`)

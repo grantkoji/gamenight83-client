@@ -21,11 +21,22 @@ const UserCard = props => {
     //   }, []);
     
      const endFriendship = () => {
-         let friendshipInstance = friendships.find(friendship => friendship.user_id === id && friendship.friend_id === currentUser.id 
-                             || friendship.user_id === currentUser.id && friendship.friend_id === id )
+         console.log(id, currentUser.id)
+         let friendshipInstance = friendships.find(friendship => (friendship.user_id === id && friendship.friend_id === currentUser.id) 
+                             || (friendship.user_id === currentUser.id && friendship.friend_id === id ))
+                             console.log(friendshipInstance)
          removeFriendshipTwoUsers(id, currentUser.id)
-         requests.fetchRemoveFriendship(friendshipInstance.id)
-         .then(updatedFriendships => fetchFriendships(updatedFriendships))
+
+         fetch(`http://localhost:3001/api/v1/friendships/${friendshipInstance.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(r=>r.json())
+            .then(updatedFriendships => fetchFriendships(updatedFriendships))
+            .catch(error=>alert(error))
+      
      }
 
      const renderBottomOfCard = () => {

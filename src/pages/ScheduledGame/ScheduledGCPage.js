@@ -58,7 +58,7 @@ const ScheduledGCIndex = props => {
       .then(res=>res.json())
       .then(data=>{
         addVacancyToScheduledGame(data)
-        alert('You have successfully canceled playing this game.')
+        // alert('You have successfully canceled playing this game.')
         
       })
       .catch(error=>alert(error)) 
@@ -100,7 +100,7 @@ const ScheduledGCIndex = props => {
       .then(res=>res.json())
       .then(data=>{
         removeVacancyFromScheduledGame(data)
-        alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
+        // alert('You have successfully signed up for this game. Check your profile for more details from the Game Host.')
         
       })
       .catch(error=>alert(error))

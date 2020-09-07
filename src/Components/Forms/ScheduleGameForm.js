@@ -137,7 +137,7 @@ const ScheduleGameForm = props => {
         setPublicDescription('')
         setPrivateDirections('')
         setPrivacy('Public')
-        alert(`Thank you for Scheduling your Game!`)
+        // alert(`Thank you for Scheduling your Game!`)
         addScheduledGame(resp)
         // setShowUser(currentUser.id)
         // props.history.push(`/users/${currentUser.username.replace(/\s+/g, '')}`)
@@ -195,8 +195,8 @@ const ScheduleGameForm = props => {
               <div className="four wide field">
                 <label htmlFor="privacy">Availability</label>
                 <select class="ui dropdown input-schedule-game" name='privacy' value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
-                  <option value="Public">Open to Public</option>
-                  <option value="Friends">Friends only</option>
+                  <option value="Public">Public</option>
+                  <option value="Friends">Friends</option>
                 </select>
               </div>
               <div className="three wide field">

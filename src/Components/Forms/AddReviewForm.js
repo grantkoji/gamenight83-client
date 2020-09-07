@@ -38,7 +38,7 @@ const AddReviewForm = props => {
         props.addReview(resp)
         setNumStars(0)
         setContent('')
-        alert("Thank you for posting your review!")
+        // alert("Thank you for posting your review!")
       }
     }
    

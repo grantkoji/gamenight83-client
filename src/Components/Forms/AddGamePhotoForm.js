@@ -40,7 +40,7 @@ const AddGamePhotoForm = props => {
         props.addGamePhoto(resp)
         setImageUrl('')
         setCaption('')
-        alert(`Thank you for posting your Photo!`)
+        // alert(`Thank you for posting your Photo!`)
       }
     }
 

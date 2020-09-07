@@ -9,7 +9,7 @@ const FriendshipRequest = props => {
     
 
 
-    const{userId, setShowUser, id, token, addFriendshipTwoUsers, removeFriendRequest, users, currentUser} = props
+    const{userId, setShowUser, id, token, addFriendshipTwoUsers, removeFriendRequest, users, currentUser, addFriendship} = props
 
     let [requestedFRUser, setRequestedFRUser] = useState({})
     useEffect(()=> {
@@ -49,7 +49,19 @@ const FriendshipRequest = props => {
                                     profile_url: addedFriendUser.profile_url}
         
         addFriendshipTwoUsers(sentCurrentUser, receivedCurrentUser)
-        requests.fetchPostAddFriendship(userId, token)
+        
+       fetch('http://localhost:3001/api/v1/friendships', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify({
+                user_id: userId
+            })
+        })
+        .then(r=>r.json())
+        .then(data=>addFriendship(data))
         requests.fetchRemoveFriendshipRequest(id)
     }
 
@@ -101,7 +113,8 @@ const mapDispatchToProps = dispatch => {
     return {
       setShowUser: (userId) => dispatch(action.setShowUser(userId)),
       addFriendshipTwoUsers: (user1, user2) => dispatch(action.addFriendshipTwoUsers(user1, user2)),
-      removeFriendRequest: (userReceiveId, userSentId) => dispatch(action.removeFriendRequest(userReceiveId, userSentId))
+      removeFriendRequest: (userReceiveId, userSentId) => dispatch(action.removeFriendRequest(userReceiveId, userSentId)),
+      addFriendship: (friendship) => dispatch(action.addFriendship(friendship))
     }
   }
 

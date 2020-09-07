@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../../modules/actionCreators/actionCreators'
 import UserCard from '../UserCard'
@@ -45,6 +45,7 @@ const ProfileDisplayGames = props => {
 
     let filteredGames = () => {
         if (games && games.length) {
+
             let gamesFiltered = [...games]
             if (searchType === 'username') {
                 gamesFiltered = gamesFiltered.filter(game => game.creator_username.toLowerCase().includes(search.toLowerCase()))
@@ -61,8 +62,11 @@ const ProfileDisplayGames = props => {
                 gamesFiltered = gamesFiltered.filter(game => game.min_age >= parseInt(minAge))
             }
             return gamesFiltered
+
         } 
     }
+
+
 
     const postedReviewOrPhoto = () => {
         if (postType === "instructions") {
@@ -189,7 +193,7 @@ const ProfileDisplayGames = props => {
                                         <span className='search-bar-font'>Listed Games </span> 
                                         </Header>
                                     </Divider>
-                                    { filteredGames() && filteredGames().length > 1
+                                    { filteredGames().length > 1
                                         ?
                                             <Card.Group itemsPerRow={2}>
                                                 {filteredGames().map(game => 

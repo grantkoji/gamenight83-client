@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../../modules/actionCreators/actionCreators'
 import UserCard from '../UserCard'
@@ -33,7 +33,9 @@ const ProfileDisplayGamesCreated = props => {
     let [typeMinAge, setTypeMinAge] = useState('noMinAge')
     let [minAge, setMinAge] = useState('')
 
-    
+    useEffect(()=>{
+        console.log(thisUserCreatedGames)
+    }, [] )
 
     let filteredGames = () => {
         if (games && thisUserCreatedGames && thisUserCreatedGames.length) {
@@ -135,7 +137,7 @@ const ProfileDisplayGamesCreated = props => {
                                     </Header>
                                 </Divider>
 
-                                { filteredGames() && filteredGames().length > 1 
+                                { filteredGames().length > 1 
                                     ?<Card.Group itemsPerRow={2}>
                                         {filteredGames().map(game => 
                                             <GameCard key={game.id} {...game} />

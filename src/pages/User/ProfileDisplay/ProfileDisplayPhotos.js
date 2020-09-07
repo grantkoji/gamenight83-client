@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import { withRouter } from 'react-router-dom'
 import * as action from '../../../modules/actionCreators/actionCreators'
 import UserCard from '../UserCard'
-import UserCardSideColumn from '../UserCardSideColumn'
 import ReviewCard from '../../Review/ReviewCard'
 import GamePhotoCard from '../../GamePhoto/GamePhotoCard'
-import GameCard from '../../Game/GameCard'
+import GameUserCard from '../../Game/GameUserCard'
 import SearchBarPhotos from '../../../Components/SearchBars/SearchBarPhotos'
 import FilterPhotosByLikes from '../../../Components/Filters/FilterPhotosByLikes';
 import SortPhotos from '../../../Components/Sort/SortPhotos';
@@ -97,7 +96,7 @@ const ProfileDisplayPhotos = props => {
                                     </Header>
                                 </Divider>
                                     {thisUserCreatedGames.map(game => 
-                                                <UserCardSideColumn key={game.id} {...game} />
+                                                <GameUserCard  key={game.id} {...game} />
                                     )}
                             </>
                             :  <Divider horizontal>

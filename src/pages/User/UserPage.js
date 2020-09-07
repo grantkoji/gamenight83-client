@@ -57,7 +57,7 @@ const UserPage = props => {
     let [view, setView] = useState('photos')
 
     useEffect(() => {
-     
+        
         let thisPUser = users.find(user => user.id === showUser)
     
         if (currentUser && users && users.length) {
@@ -78,7 +78,7 @@ const UserPage = props => {
 
     } 
         setMutualFriends(mFriends)  
-    }, [showUser, users, reviews, gamePhotos])
+    }, [showUser, users, reviews, games, gamePhotos])
 
   
     
