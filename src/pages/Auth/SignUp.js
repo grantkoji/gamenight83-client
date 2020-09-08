@@ -11,6 +11,7 @@ const SignUp = props => {
     let [name, setName] = useState('');
     let [favGames, setFavGames] = useState('');
     let [age, setAge] = useState('');
+    let [profileURL, setProfileURL] = useState('');
 
 
     const handleSubmit = (e) => {
@@ -41,7 +42,8 @@ const SignUp = props => {
         password,
         name,
         age: parseInt(age),
-        fav_games: favGames
+        fav_games: favGames,
+        profile_url: profileURL
       })
     })
       .then(r => r.json())
@@ -94,6 +96,12 @@ const SignUp = props => {
               <div className="six wide field">
                 <label htmlFor="age">Age:</label>
                 <input className='create-input-field' type="number" autoComplete="off" name="age" value={age} onChange={(e) => setAge(e.target.value)}/>
+              </div>
+            </div>
+            <div className="fields">
+              <div className="sixteen wide field">
+                <label htmlFor="profileURL">Profile URL:</label>
+                <input className='create-input-field' type="text" autoComplete="off" name="profileURL" value={profileURL} onChange={(e) => setProfileURL(e.target.value)}/>
               </div>
             </div>
           <Button variant="outline-info" type="submit">Submit</Button>
