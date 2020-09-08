@@ -1,92 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+QuaranTeams is an application that was built as a social network for users to share social distancing COVID-19 safe games. Users can friend other users, create games, post photos, and write reviews. Users can also "host" games, by scheduling a date and time and inviting either their friends or the general public to join. 
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-DraftProjector
 DraftProjector is an application that was built to assist a user with budgeting for a fantasy football auction draft. Users will also find team specific news related to their selected favorite team on the home page, after they've logged in. The default case will be NFL news.
 
 To Start
 Please follow the steps below to ensure the API's are on the proper ports.
 
-First, start the rails API: (Link to Backend Repo: https://github.com/steveneross94/draft-projecter-backend)
+First, start the rails API: (Link to Backend Repo: https://github.com/grantkoji/GameNight83--backend)
 
-cd draft-projecter-backend
+In terminal:
+cd GameNight83--backend
 bundle
+rails db:create
 rails db:migrate
 rails db:seed
 rails s -p 3001
-Next, follow these steps before running npm start
+Next, follow these steps before running npm start in this front end.
 
-cd draft-projecter-frontend/draft-projecter
+cd gamenight83-client
 npm install
 npm start
-External Resources for Access
-You'll need to sign up for news api key (https://newsapi.org/). You will also have to run a gem install for figaro (https://github.com/laserlemon/figaro) and follow the steps to place the API key in the proper .env file
-
-In doing so, you'll need to remove the following from .gitignore Ignore application configuration /config/application.yml
